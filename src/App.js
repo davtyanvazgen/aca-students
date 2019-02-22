@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Button } from "reactstrap";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from "./components/header/index";
+import SignIn from "./components/authentication/signin";
+import SignUp from "./components/authentication/signup";
+import Home from "./components/home/index";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Hello </h1>
-        <h1>Davit Ashot Hrant Smbat Vazgen</h1>
-        <Button color="warning">Let's start</Button>
+      <div>
+        <Router>
+          <>
+            <Header />
+            {/* <Switch> */}
+            <Route exact path="/" component={Home} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            {/* </Switch> */}
+          </>
+        </Router>
       </div>
     );
   }
