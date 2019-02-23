@@ -1,24 +1,12 @@
 import React from "react";
-// import "./styles.css";
+import "../styles/style.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function Signup(props) {
   return (
     <>
-      <div
-        className="container"
-        style={{
-          width: "350px",
-          margin: "80px auto",
-          border: "1px solid grey",
-          borderRadius: "5px ",
-          backgroundColor: "#F4F4F4"
-        }}
-      >
-        <div
-          className="miniContainer"
-          style={{ width: "300px", margin: "20px auto" }}
-        >
+      <div id="container">
+        <div className="miniContainer">
           <Form>
             <FormGroup>
               <Label>Name</Label>

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/header/index";
 import SignIn from "./components/authentication/signin";
 import SignUp from "./components/authentication/signup";
-import Home from "./components/home/index";
+import Main from "./components/main";
 
 class App extends Component {
   render() {
@@ -13,11 +13,11 @@ class App extends Component {
         <Router>
           <>
             <Header />
-            {/* <Switch> */}
-            <Route exact path="/" component={Home} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            {/* </Switch> */}
+            <Switch>
+              <Route path="/signin" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/" component={Main} />
+            </Switch>
           </>
         </Router>
       </div>
