@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./style.css";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import FireManager from "../../firebase/FireManager";
 import { v1 } from "uuid";
 import Cource from "./cource";
+import AddForm from "./form";
 
 export default class AddCource extends Component {
   state = {
@@ -31,16 +31,24 @@ export default class AddCource extends Component {
       name: this.state.newCource,
       id: v1()
     };
-    FireManager.addCource(newCource).then(() => {
-      let cources = this.state.cources;
-      this.setState({
-        cources: [...cources, newCource]
+    FireManager.addCource(newCource)
+      .then(() => {
+        const cources = this.state.cources;
+        this.setState({
+          cources: [...cources, newCource]
+        });
+      })
+      .catch(err => {
+        this.setState({ addCourceError: err && err.message });
       });
-      this.setState({ newCource: "" });
-    });
+
+    this.setState({ newCource: "" });
   };
 
   removeCource = cource => {
+    FireManager.removeCource(cource).catch(err => {
+      this.setState({ removeCourceError: err && err.message });
+    });
     const oldCources = this.state.cources;
     const newCources = oldCources.filter(el => el.id !== cource.id);
     this.setState({
@@ -55,19 +63,11 @@ export default class AddCource extends Component {
       <>
         <div id="container">
           <div className="miniContainer">
-            <Form>
-              <FormGroup>
-                <Label for="examplePassword">Add new cource</Label>
-                <Input
-                  type="text"
-                  value={newCource}
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <Button color="success" block onClick={this.addNewCource}>
-                Add
-              </Button>
-            </Form>
+            <AddForm
+              value={newCource}
+              handleChange={this.handleChange}
+              addNewCource={this.addNewCource}
+            />
           </div>
         </div>
         <h1>Current cources</h1>
