@@ -3,56 +3,7 @@ import "./style.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import FireManager from "../../firebase/FireManager";
 import { v1 } from "uuid";
-
-// export default class AddCource extends Component {
-//   state = {
-//     cources: [],
-//     getCourcesError: ""
-//   };
-
-// componentDidMount() {
-//   FireManager.getCources()
-//     .then(querySnapshot => {
-//       this.setState({ cources: querySnapshot.docs.map(doc => doc.data()) });
-//     })
-//     .catch(err => {
-//       this.setState({ getCourcesError: err.message });
-//     });
-// }
-
-//   addNewCource() {
-//     FireManager.addCource("php");
-//   }
-
-//   render() {
-// const { cources } = this.state;
-// const currentCources = cources.map(cource => (
-//   //revise key
-//   <h3 key={cource.name}>{cource.name}</h3>
-// ));
-
-//     return (
-//       <>
-//         <h1>Current cources</h1>
-//         {currentCources}
-//         <div id="container">
-//           <button onClick={() => alert()}>click</button>
-//           <div className="miniContainer">
-//             <Form>
-//               <FormGroup>
-//                 <Label for="examplePassword">Add new cource</Label>
-//                 <Input type="text" />
-//               </FormGroup>
-//               <Button color="success" block onClick={this.addNewCource}>
-//                 Add
-//               </Button>
-//             </Form>
-//           </div>
-//         </div>
-//       </>
-//     );
-//   }
-// }
+import Cource from "./cource";
 
 export default class AddCource extends Component {
   state = {
@@ -75,32 +26,30 @@ export default class AddCource extends Component {
     this.setState({ newCource: event.target.value });
   };
 
-  handleSubmit = event => {
-    alert("A name was submitted: " + this.state.newCource);
-    event.preventDefault();
+  addNewCource = () => {
+    const newCource = {
+      name: this.state.newCource,
+      id: v1()
+    };
+    FireManager.addCource(newCource).then(() => {
+      let cources = this.state.cources;
+      this.setState({
+        cources: [...cources, newCource]
+      });
+      this.setState({ newCource: "" });
+    });
+  };
+
+  removeCource = cource => {
+    const oldCources = this.state.cources;
+    const newCources = oldCources.filter(el => el.id !== cource.id);
+    this.setState({
+      cources: newCources
+    });
   };
 
   render() {
-    const { cources } = this.state;
-    const currentCources = cources.map(cource => (
-      //revise key
-      <h3 key={cource.name}>{cource.name}</h3>
-    ));
-
-    const addNewCource = () => {
-      const newCource = {
-        name: this.state.newCource,
-        id: v1()
-      };
-
-      FireManager.addCource(newCource).then(() => {
-        let cources = this.state.cources;
-        this.setState({
-          cources: [...cources, newCource.name]
-        });
-        this.setState({ newCource: "" });
-      });
-    };
+    const { cources, newCource } = this.state;
 
     return (
       <>
@@ -111,18 +60,24 @@ export default class AddCource extends Component {
                 <Label for="examplePassword">Add new cource</Label>
                 <Input
                   type="text"
-                  value={this.state.newCource}
+                  value={newCource}
                   onChange={this.handleChange}
                 />
               </FormGroup>
-              <Button color="success" block onClick={addNewCource}>
+              <Button color="success" block onClick={this.addNewCource}>
                 Add
               </Button>
             </Form>
           </div>
         </div>
         <h1>Current cources</h1>
-        {currentCources}
+        {cources.map(cource => (
+          <Cource
+            key={cource.id}
+            cource={cource}
+            removeCource={this.removeCource}
+          />
+        ))}
       </>
     );
   }

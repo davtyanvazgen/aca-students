@@ -6,7 +6,15 @@ export default class FireManager {
     return firestore()
       .collection("cources")
       .doc(cource.id)
-      .set({ name: cource.name });
+      .set(cource);
+  }
+
+  //REMOVE COURCE
+  static removeCource(cource) {
+    return firestore()
+      .collection("cources")
+      .doc(cource.id)
+      .delete();
   }
 
   static getStudents() {
