@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink as RRNavLink } from "react-router-dom";
 import { Button, ButtonGroup, Navbar, Nav, NavLink } from "reactstrap";
+import Buttons from "./buttonsGroup";
 
 export default function Header() {
   return (
@@ -9,6 +10,8 @@ export default function Header() {
         <NavLink to="/" className="text-light" tag={RRNavLink}>
           ACA students list
         </NavLink>
+
+        <Buttons />
 
         <Nav className="ml-auto" navbar>
           <ButtonGroup>

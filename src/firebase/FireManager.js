@@ -1,23 +1,12 @@
 import { firestore } from "firebase";
 
 export default class FireManager {
-  static getStudent(studentId) {
-    const ref = firestore()
-      .collection("students")
-      .doc(studentId);
-
-    return ref
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          return doc.data();
-        } else {
-          console.error("No such student!");
-        }
-      })
-      .catch(function(error) {
-        console.error("Error getting student:", error);
-      });
+  //ADD NEW COURCE
+  static addCource(cource) {
+    return firestore()
+      .collection("cources")
+      .doc(cource.id)
+      .set({ name: cource.name });
   }
 
   static getStudents() {

@@ -5,6 +5,7 @@ import Header from "./components/header/index";
 import SignIn from "./components/authentication/signin";
 import SignUp from "./components/authentication/signup";
 import Main from "./components/main";
+import AddCouce from "./components/cources/addNewCource";
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Switch>
               <Route path="/signin" component={SignIn} />
               <Route path="/signup" component={SignUp} />
+              <Route path="/cources" component={AddCouce} />
               <Route path="/" component={Main} />
             </Switch>
           </>

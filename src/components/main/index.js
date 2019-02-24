@@ -37,7 +37,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { statuses, cources, students } = this.state;
+    // const { statuses, cources, students } = this.state;
     return (
       <>
         {/* <div>Cources</div>
