@@ -9,6 +9,7 @@ export default function AddStatusForm(props) {
           <Label>Add new statuse</Label>
           <Input
             type="text"
+            placeholder="Enter new status"
             value={props.value}
             onChange={props.handleChange}
           />

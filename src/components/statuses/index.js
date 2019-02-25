@@ -56,6 +56,25 @@ export default class AddStatuse extends Component {
     });
   };
 
+  editStatuse = statuse => {
+    FireManager.editStatuse(statuse)
+      .then(() => {
+        const statusesArr = this.state.statuses;
+        const index = statusesArr.findIndex(el => {
+          if (el.id === statuse.id) {
+            return el;
+          }
+        });
+        statusesArr[index].name = statuse.name;
+        this.setState({
+          statuses: [...index]
+        });
+      })
+      .catch(err => {
+        this.setState({ removeStatuseError: err && err.message });
+      });
+  };
+
   render() {
     const { statuses, newStatuse } = this.state;
 
@@ -78,6 +97,7 @@ export default class AddStatuse extends Component {
               key={statuse.id}
               statuse={statuse}
               removeStatuse={this.removeStatuse}
+              editStatuse={this.editStatuse}
             />
           ))}
         </div>
