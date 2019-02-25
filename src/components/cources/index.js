@@ -3,7 +3,7 @@ import "./style.css";
 import FireManager from "../../firebase/FireManager";
 import { v1 } from "uuid";
 import Cource from "./cource";
-import AddForm from "./form";
+import AddForm from "./addCourceForm";
 
 export default class AddCource extends Component {
   state = {
@@ -61,8 +61,8 @@ export default class AddCource extends Component {
 
     return (
       <>
-        <div id="container">
-          <div className="miniContainer">
+        <div id="containerForm">
+          <div className="miniContainerForm">
             <AddForm
               value={newCource}
               handleChange={this.handleChange}
@@ -70,14 +70,17 @@ export default class AddCource extends Component {
             />
           </div>
         </div>
-        <h1>Current cources</h1>
-        {cources.map(cource => (
-          <Cource
-            key={cource.id}
-            cource={cource}
-            removeCource={this.removeCource}
-          />
-        ))}
+
+        <div className="courceList">
+          <h1>Current cources</h1>
+          {cources.map(cource => (
+            <Cource
+              key={cource.id}
+              cource={cource}
+              removeCource={this.removeCource}
+            />
+          ))}
+        </div>
       </>
     );
   }

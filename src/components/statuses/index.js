@@ -3,7 +3,7 @@ import "./style.css";
 import FireManager from "../../firebase/FireManager";
 import { v1 } from "uuid";
 import Statuse from "./statuse";
-import AddStatusForm from "./addForm";
+import AddStatusForm from "./addStatuseForm";
 
 export default class AddStatuse extends Component {
   state = {
@@ -61,8 +61,8 @@ export default class AddStatuse extends Component {
 
     return (
       <>
-        <div id="container">
-          <div className="miniContainer">
+        <div id="containerFormStatuse">
+          <div className="miniContainerFormStatuse">
             <AddStatusForm
               value={newStatuse}
               handleChange={this.handleChange}
@@ -70,14 +70,17 @@ export default class AddStatuse extends Component {
             />
           </div>
         </div>
-        <h1>All statuses</h1>
-        {statuses.map(statuse => (
-          <Statuse
-            key={statuse.id}
-            statuse={statuse}
-            removeStatuse={this.removeStatuse}
-          />
-        ))}
+
+        <div className="statuseList">
+          <h1>All statuses</h1>
+          {statuses.map(statuse => (
+            <Statuse
+              key={statuse.id}
+              statuse={statuse}
+              removeStatuse={this.removeStatuse}
+            />
+          ))}
+        </div>
       </>
     );
   }

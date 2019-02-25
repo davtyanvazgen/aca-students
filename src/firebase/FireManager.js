@@ -9,7 +9,7 @@ export default class FireManager {
       .set(cource);
   }
 
-  //REMOVE COURCE
+  //REMOVE COURCES
   static removeCource(cource) {
     return firestore()
       .collection("cources")
@@ -23,7 +23,9 @@ export default class FireManager {
     return studentsRef.get();
   }
 
-  //ADD NEW COURCE
+  /////////////////////////////////////////////////////////////////////////////////
+
+  //ADD NEW STATUSE
   static addStatuse(statuse) {
     return firestore()
       .collection("statuses")
@@ -31,7 +33,7 @@ export default class FireManager {
       .set(statuse);
   }
 
-  //REMOVE COURCE
+  //REMOVE STATUSE
   static removeStatuse(statuse) {
     return firestore()
       .collection("statuses")
@@ -39,16 +41,13 @@ export default class FireManager {
       .delete();
   }
 
-  //GET ALL COURCES
+  //GET ALL STATUSES
   static getStatuses() {
     const studentsRef = firestore().collection("statuses");
     return studentsRef.get();
   }
 
-  // static getStatuses() {
-  //   const studentsRef = firestore().collection("statuses");
-  //   return studentsRef.get();
-  // }
+  /////////////////////////////////////////////////////////////////////////////////
 
   static getStudents() {
     const studentsRef = firestore().collection("students");

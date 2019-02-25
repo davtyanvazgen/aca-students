@@ -3,10 +3,10 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function AddStatusForm(props) {
   return (
-    <div className="miniContainer">
+    <>
       <Form>
         <FormGroup>
-          <Label for="examplePassword">Add new statuse</Label>
+          <Label>Add new statuse</Label>
           <Input
             type="text"
             value={props.value}
@@ -17,6 +17,6 @@ export default function AddStatusForm(props) {
           Add
         </Button>
       </Form>
-    </div>
+    </>
   );
 }

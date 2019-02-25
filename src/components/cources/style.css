@@ -1,13 +1,18 @@
-#container {
-  width: 350px;
-  margin: 80px auto;
+#containerForm {
   border: 1px solid grey;
-  border-radius: 5px;
-  background-color: #f4f4f4;
-}
-
-.miniContainer {
   width: 300px;
   margin: 20px auto;
-  border: "1px solid red";
+  border-radius: 5px;
+  background-color: #e9da10;
+}
+
+.miniContainerForm {
+  width: 250px;
+  margin: 20px auto;
+}
+
+.courceList {
+  /* border: 1px solid red; */
+  width: 300px;
+  margin: 20px auto;
 }

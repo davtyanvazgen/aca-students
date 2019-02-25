@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "reactstrap";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
 export default function Cource(props) {
   const handleRemove = cource => {
@@ -10,16 +10,21 @@ export default function Cource(props) {
 
   return (
     <div>
-      <Alert key={cource.id} color="warning">
-        {cource.name}
-        <button
-          onClick={() => {
-            handleRemove(cource);
-          }}
-        >
-          Delete
-        </button>
-      </Alert>
+      <ListGroup>
+        <ListGroupItem key={cource.id} color="success">
+          {cource.name}
+          <Button
+            className="float-right"
+            size="sm"
+            color="danger"
+            onClick={() => {
+              handleRemove(cource);
+            }}
+          >
+            Delete
+          </Button>
+        </ListGroupItem>
+      </ListGroup>
     </div>
   );
 }

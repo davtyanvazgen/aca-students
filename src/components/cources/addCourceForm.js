@@ -3,10 +3,10 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 export default function AddForm(props) {
   return (
-    <div className="miniContainer">
+    <>
       <Form>
         <FormGroup>
-          <Label for="examplePassword">Add new cource</Label>
+          <Label>Add new cource</Label>
           <Input
             type="text"
             value={props.value}
@@ -17,6 +17,6 @@ export default function AddForm(props) {
           Add
         </Button>
       </Form>
-    </div>
+    </>
   );
 }
