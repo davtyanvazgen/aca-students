@@ -40,8 +40,7 @@ export default function Statuse(props) {
     <div>
       <ListGroup>
         <ListGroupItem key={statuse.id} color="warning">
-          {statuse.name}
-
+          {!isOpen && <>{statuse.name}</>}
           <Button
             className="float-right"
             size="sm"
@@ -68,6 +67,7 @@ export default function Statuse(props) {
             <div style={{ marginTop: "10px" }}>
               <InputGroup>
                 <Input
+                  autoFocus
                   className="form-control-sm"
                   type="text"
                   placeholder="Update status"
