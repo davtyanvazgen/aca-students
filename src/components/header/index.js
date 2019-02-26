@@ -13,13 +13,13 @@ export default function Header() {
         <Nav className="ml-auto" navbar>
           <ButtonGroup>
             <Link to="/signin">
-              <Button outline color="light" className="mr-1">
+              <Button size="sm" outline color="light" className="mr-1">
                 Sign in
               </Button>
             </Link>
 
             <Link to="/signup">
-              <Button outline color="light">
+              <Button size="sm" outline color="light">
                 Sign up
               </Button>
             </Link>
