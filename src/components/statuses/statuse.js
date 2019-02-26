@@ -10,7 +10,7 @@ import {
 
 export default function Statuse(props) {
   const { statuse } = props;
-  const [newStatuse, setNewStatuse] = useState("");
+  const [newStatuse, setNewStatuse] = useState(`${statuse.name}`);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleEditStatusInp = e => {
@@ -19,7 +19,6 @@ export default function Statuse(props) {
 
   const toggle = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
-    setNewStatuse("");
   };
 
   const handleRemove = statuse => {
@@ -32,7 +31,6 @@ export default function Statuse(props) {
       id: statuse.id
     };
     props.editStatuse(editStatus);
-    setNewStatuse("");
     setIsOpen(false);
   };
 
@@ -40,18 +38,21 @@ export default function Statuse(props) {
     <div>
       <ListGroup>
         <ListGroupItem key={statuse.id} color="warning">
-          {!isOpen && <>{statuse.name}</>}
-          <Button
-            className="float-right"
-            size="sm"
-            color="danger"
-            onClick={() => {
-              handleRemove(statuse);
-            }}
-          >
-            Delete
-          </Button>
-
+          {!isOpen && (
+            <>
+              {statuse.name}
+              <Button
+                className="float-right"
+                size="sm"
+                color="danger"
+                onClick={() => {
+                  handleRemove(statuse);
+                }}
+              >
+                Delete
+              </Button>
+            </>
+          )}
           {!isOpen && (
             <Button
               className="float-right mr-1"

@@ -9,7 +9,9 @@ export default class AddCource extends Component {
   state = {
     newCource: "",
     cources: [],
-    getCourcesError: ""
+    getCourcesError: "",
+    addCourceError: "",
+    removeCourceError: ""
   };
 
   componentDidMount() {
@@ -26,7 +28,9 @@ export default class AddCource extends Component {
     this.setState({ newCource: event.target.value });
   };
 
-  addNewCource = () => {
+  addNewCource = e => {
+    e.preventDefault();
+
     const newCource = {
       name: this.state.newCource,
       id: v1()
@@ -46,14 +50,17 @@ export default class AddCource extends Component {
   };
 
   removeCource = cource => {
-    FireManager.removeCource(cource).catch(err => {
-      this.setState({ removeCourceError: err && err.message });
-    });
-    const oldCources = this.state.cources;
-    const newCources = oldCources.filter(el => el.id !== cource.id);
-    this.setState({
-      cources: newCources
-    });
+    FireManager.removeCource(cource)
+      .then(() => {
+        const oldCources = this.state.cources;
+        const newCources = oldCources.filter(el => el.id !== cource.id);
+        this.setState({
+          cources: newCources
+        });
+      })
+      .catch(err => {
+        this.setState({ removeCourceError: err && err.message });
+      });
   };
 
   render() {
