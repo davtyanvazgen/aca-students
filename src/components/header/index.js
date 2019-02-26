@@ -3,7 +3,6 @@ import { Link, NavLink as RRNavLink } from "react-router-dom";
 import { Button, ButtonGroup, Navbar, Nav, NavLink } from "reactstrap";
 import './style.css'
 
-
 export default function Header() {
   return (
     <div >
@@ -25,6 +24,12 @@ export default function Header() {
                   <Link to="/statuses">
                     <Button size="sm" outline color="light" className="mr-1">
                       Statuses
+                    </Button>
+                  </Link>
+
+                  <Link to="/registration">
+                    <Button size="sm" outline color="light">
+                      RegFormnp
                     </Button>
                   </Link>
 
