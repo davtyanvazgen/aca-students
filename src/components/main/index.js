@@ -27,13 +27,13 @@ class Main extends React.Component {
         this.setState({ getStudentsError: err.message });
       });
 
-    FireManager.getStatuses()
-      .then(querySnapshot => {
-        this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
-      })
-      .catch(err => {
-        this.setState({ getStudentsError: err.message });
-      });
+    // FireManager.getStatuses()
+    //   .then(querySnapshot => {
+    //     this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ getStudentsError: err.message });
+    //   });
   }
 
   render() {

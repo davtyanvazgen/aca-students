@@ -62,4 +62,13 @@ export default class FireManager {
     const studentsRef = firestore().collection("students");
     return studentsRef.get();
   }
+
+  ////////////////add student///////////
+
+  static addStudent(student) {
+    return firestore()
+      .collection("students")
+      .doc(student.id)
+      .set(student);
+  }
 }
