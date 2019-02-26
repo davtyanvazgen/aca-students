@@ -32,6 +32,11 @@ export default class AddStatuse extends Component {
       name: this.state.newStatuse,
       id: v1()
     };
+    
+    if (!newStatuse.name.trim())
+      {this.setState({ newStatuse: "" });
+      return
+    }
     FireManager.addStatuse(newStatuse)
       .then(() => {
         const statuses = this.state.statuses;

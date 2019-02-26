@@ -35,6 +35,10 @@ export default class AddCource extends Component {
       name: this.state.newCource,
       id: v1()
     };
+    if (!newCource.name.trim())
+      {this.setState({ newCource: "" });
+      return
+    }
     FireManager.addCource(newCource)
       .then(() => {
         const cources = this.state.cources;
