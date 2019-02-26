@@ -1,32 +1,30 @@
-import React, { Component } from "react";
-import { Alert } from "reactstrap";
-import FireManager from "../../firebase/FireManager";
+import React from "react";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
-class Cource extends Component {
-  removeCource = () => {
-    const {cource} = this.props;
-    const {cources} = this.props.state;
-    const{ changeState }= this.props;
-  
-   let  indexOfcourse = cources.findIndex(i => i.name === cource.name);
-   cources.splice(indexOfcourse,1);
-   changeState(cources)
-    FireManager.removeCource(cource).then(()=>this.setState());
+export default function Cource(props) {
+  const handleRemove = cource => {
+    props.removeCource(cource);
   };
 
-  render() {
-    const { cource } = this.props;
+  const { cource } = props;
 
-    return (
-      <div>
-        {/* revise key */}
-        <Alert key={cource.name} color="warning">
+  return (
+    <div>
+      <ListGroup>
+        <ListGroupItem key={cource.id} color="success">
           {cource.name}
-          <button onClick={this.removeCource}>Delete</button>
-        </Alert>
-      </div>
-    );
-  }
+          <Button
+            className="float-right"
+            size="sm"
+            color="danger"
+            onClick={() => {
+              handleRemove(cource);
+            }}
+          >
+            Delete
+          </Button>
+        </ListGroupItem>
+      </ListGroup>
+    </div>
+  );
 }
-
-export default Cource;

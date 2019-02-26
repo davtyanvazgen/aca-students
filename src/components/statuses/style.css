@@ -1,17 +1,17 @@
-#containerForm {
+#containerFormStatuse {
   border: 1px solid grey;
   width: 300px;
   margin: 20px auto;
   border-radius: 5px;
-  background-color: #e9da10;
+  background-color: #68dab8;
 }
 
-.miniContainerForm {
+.miniContainerFormStatuse {
   width: 250px;
   margin: 20px auto;
 }
 
-.courceList {
+.statuseList {
   /* border: 1px solid red; */
   width: 300px;
   margin: 20px auto;
