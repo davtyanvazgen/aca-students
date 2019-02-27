@@ -69,7 +69,7 @@ export default class StudentItem extends Component {
                     <div className="col-10 border border-secondary">
                         Course: <Dropdown isOpen={this.state.dropdownOpenCource} toggle={this.toggleCource}>
                             <DropdownToggle caret>
-                                {this.props.student.cource}
+                                {this.props.student.courceName}
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem header>Choose Cource</DropdownItem>
@@ -81,7 +81,7 @@ export default class StudentItem extends Component {
                         </Dropdown>
                         Status: <Dropdown isOpen={this.state.dropdownOpenStatus} toggle={this.toggleStatus}>
                         <DropdownToggle caret>
-                            {this.props.student.status}
+                            {this.props.student.statusName}
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem header>Choose Status</DropdownItem>
