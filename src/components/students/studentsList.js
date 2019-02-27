@@ -1,16 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
+import { Button } from 'react-bootstrap/';
+import { Card } from 'react-bootstrap/'
+import { ListGroup } from 'react-bootstrap/'
+import StudentItem from "./studentItem"
 
-class StudentsList extends Component {
-  state = {};
-  render() {
+function StudentsList(props) {
+
     return (
-      <>
-        {this.props.students.map(student => (
-          <div key={student.id}>{student.name}</div>
-        ))}
-      </>
+        <>
+            {props.students.map(student => (
+                <StudentItem student={ student }/>
+            ))}
+        </>
+
     );
-  }
 }
 
 export default StudentsList;

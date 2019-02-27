@@ -1,5 +1,7 @@
 import React from "react";
 import FireManager from "../../firebase/FireManager";
+import CourcesButton from "./courcesButtonGroup"
+import StatusesButton from "./statusesButtonGroup"
 import StudentsList from "../students/studentsList";
 
 class Main extends React.Component {
@@ -27,34 +29,42 @@ class Main extends React.Component {
         this.setState({ getStudentsError: err.message });
       });
 
-    // FireManager.getStatuses()
-    //   .then(querySnapshot => {
-    //     this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ getStudentsError: err.message });
-    //   });
+     FireManager.getStatuses()
+       .then(querySnapshot => {
+         this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
+       })
+       .catch(err => {
+         this.setState({ getStudentsError: err.message });
+       });
   }
 
+  studentList =  () => {
+    this.state.students.map(student => (
+        <div key={student.id}>{student.name}</div>
+    ))
+  }
+
+
   render() {
-    // const { statuses, cources, students } = this.state;
+
+    const { students, statuses, cources } = this.state;
     return (
-      <>
-        {/* <div>Cources</div>
-        {cources.map(cource => (
-          <div>{cource.name}</div>
-        ))} */}
-        {/* <div>Statuses</div>
-        {statuses.map(status => (
-          <div>{status.name}</div>
-        ))} */}
-        <StudentsList students={this.state.students} />
-        {/* <div>Students</div>
-        {students.map(student => (
-          <div>{student.name}</div>
-        ))} */}
-      </>
-    );
+
+        <div className="container border border-primary">
+          <div className="row">
+            <div className="col-12 border border-primary">
+                <CourcesButton cources = { cources }/>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-2 border border-primary">
+                <StatusesButton statuses = { statuses }/>
+            </div>
+            <div className="col-10 border border-primary">
+                <StudentsList students={ students }/>
+            </div>
+          </div>
+        </div> )
   }
 }
 

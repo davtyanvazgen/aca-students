@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 export default function AddStatusForm(props) {
   return (
     <>
-      <Form>
+      <Form onSubmit={props.addNewStatuse}>
         <FormGroup>
           <Label>Add new statuse</Label>
           <Input
@@ -14,7 +14,7 @@ export default function AddStatusForm(props) {
             onChange={props.handleChange}
           />
         </FormGroup>
-        <Button color="success" block onClick={props.addNewStatuse}>
+        <Button type="submit" color="success" block>
           Add
         </Button>
       </Form>

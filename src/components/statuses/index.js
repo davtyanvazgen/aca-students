@@ -26,7 +26,8 @@ export default class AddStatuse extends Component {
     this.setState({ newStatuse: event.target.value });
   };
 
-  addNewStatuse = () => {
+  addNewStatuse = e => {
+    e.preventDefault();
     const newStatuse = {
       name: this.state.newStatuse,
       id: v1()
