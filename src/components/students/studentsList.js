@@ -9,7 +9,7 @@ function StudentsList(props) {
     return (
         <>
             {props.students.map(student => (
-                <StudentItem student={ student }/>
+                <StudentItem key={ student.id } student={ student }/>
             ))}
         </>
 

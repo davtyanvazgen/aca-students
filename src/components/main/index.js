@@ -60,7 +60,7 @@ class Main extends React.Component {
             <div className="col-2 border border-primary">
                 <StatusesButton statuses = { statuses }/>
             </div>
-            <div className="col-10 border border-primary">
+            <div className="col-10 row container border border-primary">
                 <StudentsList students={ students }/>
             </div>
           </div>
