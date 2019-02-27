@@ -7,6 +7,8 @@ import SignUp from "./components/authentication/signup";
 import Main from "./components/main";
 import AddCouce from "./components/cources/index";
 import AddStatuse from "./components/statuses";
+//import RegistrationForm from './components/authentication/registrationForm/addRegForm'
+import AddStudent from "./components/authentication/registrationForm";
 
 class App extends Component {
   render() {
@@ -16,6 +18,7 @@ class App extends Component {
           <>
             <Header />
             <Switch>
+               <Route path="/registration" component={AddStudent}/>
               <Route path="/signin" component={SignIn} />
               <Route path="/signup" component={SignUp} />
               <Route path="/cources" component={AddCouce} />
