@@ -18,12 +18,14 @@ export default function RegistrationForm(props) {
    const defaultStatus = allStatuses.find(el =>el.name === "apply");
     console.log(defaultStatus);
    let student = {
-    fullName:fullName.value,
-     phone:phone.value,
-     email:email.value,
-     status:defaultStatus.id,
-     cource:selectedCource.id,
-     id:v1()
+        fullName:fullName.value,
+         phone:phone.value,
+         email:email.value,
+           statusName: defaultStatus.name,
+           courceName: selectedCource.name,
+         status:defaultStatus.id,
+         cource:selectedCource.id,
+         id:v1()
    }
 
    console.log("student = ",student);
