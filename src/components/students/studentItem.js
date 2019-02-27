@@ -14,12 +14,13 @@ export default class StudentItem extends Component {
         this.toggleStatus = this.toggleStatus.bind(this);
 
         this.state = {
-            cources: [],
+            allCources: [],
             getCourcesError: "",
             isHidden: true,
             dropdownOpenCource: false,
-            dropdownOpenStatus: false
-
+            dropdownOpenStatus: false,
+            allStatuses:[],
+    
         }
     }
 
@@ -39,11 +40,21 @@ export default class StudentItem extends Component {
     componentDidMount() {
         FireManager.getCources()
             .then(querySnapshot => {
-                this.setState({ cources: querySnapshot.docs.map(doc => doc.data()) });
+                this.setState({ allCources: querySnapshot.docs.map(doc => doc.data()) });
             })
             .catch(err => {
                 this.setState({ getCourcesError: err.message });
             });
+            
+            FireManager.getStatuses()
+            .then(querySnapshot => {
+                this.setState({ allStatuses: querySnapshot.docs.map(doc => doc.data()) });
+            })
+            .catch(err => {
+                this.setState({ getCourcesError: err.message });
+            });
+
+
 
     }
 
@@ -56,8 +67,11 @@ export default class StudentItem extends Component {
             isHidden: !this.state.isHidden
         })
     }
-
+    handleStatusChange = (e)=>{
+        debugger;
+    }
     render () {
+        const {allStatuses, allCources} = this.state;
         return (
             <Card className="col-12 container" key={this.props.student.id} bg="primary" text="white">
                 <div className="row">
@@ -73,23 +87,22 @@ export default class StudentItem extends Component {
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem header>Choose Cource</DropdownItem>
-                                <DropdownItem>Some Action</DropdownItem>
-                                <DropdownItem>Foo Action</DropdownItem>
-                                <DropdownItem>Bar Action</DropdownItem>
-                                <DropdownItem>Quo Action</DropdownItem>
+                                {allCources.map(cource=>(
+                                    <DropdownItem key = {cource.id} onClick = {this.handleStatusChange}>{cource.name}</DropdownItem>
+                                ))}
+
                             </DropdownMenu>
                         </Dropdown>
                         Status: <Dropdown isOpen={this.state.dropdownOpenStatus} toggle={this.toggleStatus}>
                         <DropdownToggle caret>
                             {this.props.student.statusName}
                         </DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem header>Choose Status</DropdownItem>
-                            <DropdownItem>Some Action</DropdownItem>
-                            <DropdownItem>Foo Action</DropdownItem>
-                            <DropdownItem>Bar Action</DropdownItem>
-                            <DropdownItem>Quo Action</DropdownItem>
-                        </DropdownMenu>
+                        <DropdownMenu >
+                                <DropdownItem header>Choose Status</DropdownItem>
+                                {allStatuses.map(status=>(
+                                    <DropdownItem key = {status.id} name = {status.name}>{status.name}</DropdownItem>
+                                ))}
+                            </DropdownMenu>
                     </Dropdown>
                         <Button variant="info" onClick={this.toggleHidden.bind(this)}>More Information</Button>
                         {!this.state.isHidden && <ListGroup>

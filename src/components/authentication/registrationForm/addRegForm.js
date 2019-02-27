@@ -7,7 +7,8 @@ import { v1 } from "uuid";
 
 export default function RegistrationForm(props) {
 
- const fullName = useFormInput('');
+ const name = useFormInput('');
+ const surname = useFormInput('');
  const phone = useFormInput('');
  const email = useFormInput('');
  const selectedCource = props.selectValue;
@@ -18,10 +19,12 @@ export default function RegistrationForm(props) {
    const defaultStatus = allStatuses.find(el =>el.name === "apply");
     console.log(defaultStatus);
    let student = {
-    fullName:fullName.value,
+    fullName:name.value +' '+surname.value,
      phone:phone.value,
      email:email.value,
      status:defaultStatus.id,
+     statusName:defaultStatus.name,
+     courceName:selectedCource.name,
      cource:selectedCource.id,
      id:v1()
    }
@@ -42,12 +45,20 @@ export default function RegistrationForm(props) {
       <div id="container">
         <div className="miniContainer">
           <Form>
-            <FormGroup>
-              <Label>FullName</Label>
+          <FormGroup>
+              <Label>Name</Label>
               <Input
-                {...fullName}
+                {...name}
                 type="text"
-                name="firstName"
+                name="name"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>Surname</Label>
+              <Input
+                {...surname}
+                type="text"
+                name="surname"
               />
             </FormGroup>
             
