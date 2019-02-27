@@ -6,7 +6,7 @@ export default class SelectForm extends Component {
       newCource: "",
       cources: [],
       getCourcesError: "",
-      selectValue:{}
+      selectValue:{},
     };
   
     componentDidMount() {
@@ -21,6 +21,16 @@ export default class SelectForm extends Component {
         .catch(err => {
           this.setState({ getCourcesError: err.message });
         });
+
+      FireManager.getStatuses()
+        .then(querySnapshot => {
+          this.props.changeAllStatuses (querySnapshot.docs.map(doc => doc.data()));
+          console.log('1 selectForm did mounting',querySnapshot.docs.map(doc => doc.data()))
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
+    
     }
 
      handleSelectChange = (e) =>{

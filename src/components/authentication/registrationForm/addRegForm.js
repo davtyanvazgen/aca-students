@@ -6,24 +6,36 @@ import FireManager from "../../../firebase/FireManager";
 import { v1 } from "uuid";
 
 export default function RegistrationForm(props) {
- const name = useFormInput('');
- const surname = useFormInput('');
+
+ const fullName = useFormInput('');
  const phone = useFormInput('');
  const email = useFormInput('');
  const selectedCource = props.selectValue;
+ const allStatuses = props.allStatuses;
 
   function handeleCreateStudent() {
+    console.log(allStatuses);
+   const defaultStatus = allStatuses.find(el =>el.name === "apply");
+    console.log(defaultStatus);
    let student = {
-     name:name.value,
-     surname:surname.value,
+    fullName:fullName.value,
      phone:phone.value,
      email:email.value,
-     statusId: 1111,
-     courceId:selectedCource.id,
+     status:defaultStatus.id,
+     cource:selectedCource.id,
      id:v1()
    }
-   console.log(student);
-   FireManager.addStudent(student);
+
+   console.log("student = ",student);
+  
+   FireManager.addStudent(student).then(()=>{
+    alert("done!");
+    
+   }
+
+   ).catch(err=>{
+     console.log(err.message)
+   })
  }
   return (
     <>
@@ -31,23 +43,14 @@ export default function RegistrationForm(props) {
         <div className="miniContainer">
           <Form>
             <FormGroup>
-              <Label>Name</Label>
+              <Label>FullName</Label>
               <Input
-                {...name}
+                {...fullName}
                 type="text"
                 name="firstName"
               />
             </FormGroup>
-
-            <FormGroup>
-              <Label>Surname</Label>
-              <Input
-                {...surname}
-                type="text"
-                name="surName"
-              />
-            </FormGroup>
-
+            
             <FormGroup>
               <Label for="exampleEmail">Email address</Label>
               <Input
@@ -69,7 +72,11 @@ export default function RegistrationForm(props) {
 
             <FormGroup>
               <Label>Select lesson</Label><br/>
-              <SelectForm changeSelectValue = {props.changeSelectValue}  selectValue = {props.selectValue} changeAllCources = {props.changeAllCources} allCources = {props.allCources}/>
+              <SelectForm 
+                changeSelectValue = {props.changeSelectValue} 
+                selectValue = {props.selectValue} 
+                changeAllStatuses = {props.changeAllStatuses} 
+                allStatuses = {props.allStatuses}/>
             </FormGroup>
 
             <Button color="success" block onClick = {handeleCreateStudent}>
