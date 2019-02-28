@@ -18,7 +18,7 @@ class AddStudent extends Component {
         this.setState({
           allStatuses:value
         })
-        console.log('2 state allStatuse',this.state.allStatuses)
+       
     }
 
     render() {

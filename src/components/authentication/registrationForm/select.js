@@ -25,7 +25,6 @@ export default class SelectForm extends Component {
       FireManager.getStatuses()
         .then(querySnapshot => {
           this.props.changeAllStatuses (querySnapshot.docs.map(doc => doc.data()));
-          console.log('1 selectForm did mounting',querySnapshot.docs.map(doc => doc.data()))
         })
         .catch(err => {
           console.log(err.message);
