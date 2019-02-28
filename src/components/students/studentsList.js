@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
+// import { Button } from 'react-bootstrap/';
+// import { Card } from 'react-bootstrap/'
+// import { ListGroup } from 'react-bootstrap/'
+import StudentItem from "./studentItem"
 
 function StudentsList(props) {
-  const [showStudents, setShowStudents] = useState(props.allStudents);
-  // const [checkSubmit, setCheckSubmit] = useState(true);
+    return (
+        <>
+            {props.allStudents.map(student => (
+                <StudentItem key={ student.id } student={ student }
+                    
+                />
+            ))}
+        </>
 
-  useEffect(() => {
-    if (props.withStatusStudents.length) {
-      setShowStudents(props.withStatusStudents);
-    } else {
-      setShowStudents(props.allStudents);
-    }
-  });
-
-  return (
-    <div>
-      {showStudents.map(student => (
-        <div key={student.id}>{student.fullName}</div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default StudentsList;

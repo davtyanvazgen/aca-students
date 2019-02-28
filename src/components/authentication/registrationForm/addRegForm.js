@@ -6,7 +6,8 @@ import FireManager from "../../../firebase/FireManager";
 import { v1 } from "uuid";
 
 export default function RegistrationForm(props) {
-  const fullName = useFormInput("");
+  const name = useFormInput("");
+  const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
   const selectedCource = props.selectValue;
@@ -17,12 +18,12 @@ export default function RegistrationForm(props) {
     const defaultStatus = allStatuses.find(el => el.name === "apply");
     console.log(defaultStatus);
     let student = {
-      fullName: fullName.value,
+      fullName: name.value + " " + surname.value,
       phone: phone.value,
       email: email.value,
       status: defaultStatus.id,
-      courceName: selectedCource.name,
       statusName: defaultStatus.name,
+      courceName: selectedCource.name,
       cource: selectedCource.id,
       id: v1()
     };
@@ -43,8 +44,12 @@ export default function RegistrationForm(props) {
         <div className="miniContainer">
           <Form>
             <FormGroup>
-              <Label>FullName</Label>
-              <Input {...fullName} type="text" name="firstName" />
+              <Label>Name</Label>
+              <Input {...name} type="text" name="name" />
+            </FormGroup>
+            <FormGroup>
+              <Label>Surname</Label>
+              <Input {...surname} type="text" name="surname" />
             </FormGroup>
 
             <FormGroup>
