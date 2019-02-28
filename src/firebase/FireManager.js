@@ -57,6 +57,14 @@ export default class FireManager {
       .update({ ...statuse });
   }
 
+  //EDIT STUDENT INFORMATION
+  static editStudentInformation(student) {
+    return firestore()
+      .collection("students")
+      .doc(student.id)
+      .update({ ...student });
+  }
+
   /////////////////////////////////////////////////////////////////////////////////
   static getStudents() {
     const studentsRef = firestore().collection("students");
