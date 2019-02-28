@@ -1,10 +1,14 @@
 import React from "react";
 import FireManager from "../../firebase/FireManager";
 import StudentsList from "../students/studentsList";
+import AllCources from "./allCources";
+import AllStatuses from "./allStatuses";
 
 class Main extends React.Component {
   state = {
     students: [],
+    withStatusStudents: [],
+    studentsStatus: [],
     getStudentsError: "",
     statuses: [],
     cources: []
@@ -27,33 +31,45 @@ class Main extends React.Component {
         this.setState({ getStudentsError: err.message });
       });
 
-    // FireManager.getStatuses()
-    //   .then(querySnapshot => {
-    //     this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ getStudentsError: err.message });
-    //   });
+    FireManager.getStatuses()
+      .then(querySnapshot => {
+        this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
+      })
+      .catch(err => {
+        this.setState({ getStudentsError: err.message });
+      });
   }
 
+  //show students with selected status
+  statuseStudents = statuse => {
+    const withStatusStudents = [];
+    this.state.students.find(student => {
+      if (statuse.id === student.status) {
+        withStatusStudents.push(student);
+        this.setState({ withStatusStudents: withStatusStudents });
+      } else {
+        return false;
+      }
+    });
+  };
+
   render() {
-    // const { statuses, cources, students } = this.state;
+    const { statuses, cources, students, withStatusStudents } = this.state;
     return (
-      <>
-        {/* <div>Cources</div>
-        {cources.map(cource => (
-          <div>{cource.name}</div>
-        ))} */}
-        {/* <div>Statuses</div>
-        {statuses.map(status => (
-          <div>{status.name}</div>
-        ))} */}
-        <StudentsList students={this.state.students} />
-        {/* <div>Students</div>
-        {students.map(student => (
-          <div>{student.name}</div>
-        ))} */}
-      </>
+      <div>
+        <AllCources cources={cources} />
+        <AllStatuses
+          checkSubmit={this.state.checkSubmit}
+          statuses={statuses}
+          students={students}
+          statuseStudents={this.statuseStudents}
+        />
+
+        <StudentsList
+          allStudents={students}
+          withStatusStudents={withStatusStudents}
+        />
+      </div>
     );
   }
 }

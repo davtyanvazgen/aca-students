@@ -4,27 +4,31 @@ import RegistrationForm from "./addRegForm";
 
 class AddStudent extends Component {
   state = {
-    allCources: [],
+    allStatuses: [],
     selectValue: {}
   };
+
   changeSelectValue = value => {
     this.setState({
       selectValue: value
     });
   };
-  // changeAllCources = (value)=>{
-  //     this.setState({
-  //         allCources:value
-  //     })
-  // }
+
+  changeAllStatuses = value => {
+    this.setState({
+      allStatuses: value
+    });
+    console.log("2 state allStatuse", this.state.allStatuses);
+  };
+
   render() {
     return (
       <div>
         <RegistrationForm
           selectValue={this.state.selectValue}
           changeSelectValue={this.changeSelectValue}
-          allCources={this.state.allCources}
-          changeallCources={this.changeallCources}
+          changeAllStatuses={this.changeAllStatuses}
+          allStatuses={this.state.allStatuses}
         />
       </div>
     );

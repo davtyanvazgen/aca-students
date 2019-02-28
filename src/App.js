@@ -18,7 +18,7 @@ class App extends Component {
           <>
             <Header />
             <Switch>
-               <Route path="/registration" component={AddStudent}/>
+              <Route path="/registration" component={AddStudent} />
               <Route path="/signin" component={SignIn} />
               <Route path="/signup" component={SignUp} />
               <Route path="/cources" component={AddCouce} />
