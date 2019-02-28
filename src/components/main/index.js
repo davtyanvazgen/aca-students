@@ -3,8 +3,6 @@ import FireManager from "../../firebase/FireManager";
 import CourcesButton from "./courcesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentsList from "../students/studentsList";
-import AllCources from "./allCources";
-import AllStatuses from "./allStatuses";
 
 class Main extends React.PureComponent {
   state = {
@@ -15,7 +13,7 @@ class Main extends React.PureComponent {
     statuses: [],
     cources: [],
     selectedCource: [],
-    selectedStatus: "",
+    selectedStatus: [],
     showStudentsArr: []
   };
 
@@ -45,42 +43,27 @@ class Main extends React.PureComponent {
       });
   }
 
-  statuseStudents = status => {
-    this.filteredStudents();
-    let { selectedStatus } = this.state;
-    if (!selectedStatus || selectedStatus !== status.id) {
-      selectedStatus = status.id;
-      this.setState({
-        selectedStatus
-      });
-    } else {
-      selectedStatus = "";
-      this.setState({
-        selectedStatus
-      });
-    }
-  };
-
   filteredStudents = () => {
-    let { selectedCource, selectedStatus, students, allStudents } = this.state;
-    let filters = selectedStatus
-      ? [...selectedCource, selectedStatus]
+    let { selectedCource, selectedStatus, students } = this.state;
+    let filters = selectedStatus.length
+      ? [...selectedCource, selectedStatus[0]]
       : [...selectedCource];
+    console.log(filters);
     let resultArr = [];
     console.log("resultArr skzbum", resultArr);
-    if (!selectedStatus && selectedCource.length) {
+    if (!selectedStatus.length && selectedCource.length) {
       resultArr = students.filter(
         student => filters.indexOf(student.cource) !== -1
       );
       console.log("chka ka", resultArr);
     }
-    if (selectedStatus && !selectedCource.length) {
+    if (selectedStatus.length && !selectedCource.length) {
       resultArr = students.filter(
         student => filters.indexOf(student.status) !== -1
       );
       console.log("ka chka", resultArr);
     }
-    if (selectedStatus && selectedCource.length) {
+    if (selectedStatus.length && selectedCource.length) {
       resultArr = students.filter(
         student =>
           filters.indexOf(student.status) !== -1 &&
@@ -88,7 +71,7 @@ class Main extends React.PureComponent {
       );
       console.log("erkusn el ka", resultArr);
     }
-    if (!selectedStatus && !selectedCource.length) {
+    if (!selectedStatus.length && !selectedCource.length) {
       resultArr = students;
       console.log("wochmek chka");
     }
@@ -99,45 +82,49 @@ class Main extends React.PureComponent {
   };
 
   courceStudents = cource => {
-    const temporaryArrForCource = [];
     const { selectedCource } = this.state;
     if (selectedCource.indexOf(cource.id) === -1) {
       selectedCource.push(cource.id);
       this.setState({
         selectedCource
       });
+      console.log("sexmwac curser@ this strateum", this.state.selectedCource);
     } else {
       selectedCource.splice(selectedCource.indexOf(cource.id), 1);
       this.setState({
         selectedCource
       });
+      console.log(
+        "sexmwac curser@ this strateum,2 qeys",
+        this.state.selectedCource
+      );
     }
-
-    const { withCourcesStudents } = this.state;
-
-    if (cource)
-      this.state.students.find(student => {
-        if (cource.id === student.cource) {
-          temporaryArrForCource.push(student);
-        }
-        this.setState({
-          withCourcesStudents: withCourcesStudents.concat(temporaryArrForCource)
-        });
-      });
     this.filteredStudents();
   };
 
-  //show students with selected status
-  statuseStudents = statuse => {
-    const withStatusStudents = [];
-    this.state.students.find(student => {
-      if (statuse.id === student.status) {
-        withStatusStudents.push(student);
-        this.setState({ withStatusStudents: withStatusStudents });
-      } else {
-        return false;
+  statuseStudents = status => {
+    let { selectedStatus } = this.state;
+    if (!selectedStatus.length || selectedStatus.indexOf(status.id) === -1) {
+      if (selectedStatus.length) {
+        selectedStatus.pop();
       }
-    });
+      selectedStatus.push(status.id);
+      this.setState({
+        selectedStatus
+      });
+
+      console.log(
+        "status arr arajin qeysum sttat =",
+        this.state.selectedStatus
+      );
+    } else {
+      selectedStatus.pop();
+      this.setState({
+        selectedStatus
+      });
+      console.log("status arr 2222 qeysum sttat = ", this.state.selectedStatus);
+    }
+    this.filteredStudents();
   };
 
   render() {
@@ -151,7 +138,6 @@ class Main extends React.PureComponent {
     } = this.state;
     return (
       <div className="container border border-primary">
-        <button onClick={this.filteredStudents}>aaaaaaa</button>
         <div className="row">
           <div className="col-12 border border-primary">
             <CourcesButton
@@ -164,8 +150,8 @@ class Main extends React.PureComponent {
           <div className="col-2 border border-primary">
             <StatusesButton
               statuses={statuses}
-              students={students}
               statuseStudents={this.statuseStudents}
+              filteredStudents={this.filteredStudents}
             />
           </div>
           <div className="col-10 row container border border-primary">
