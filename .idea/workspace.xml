@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="478d7fd7-6017-458d-8062-b70c77e07451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/students/editInfoStudent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authentication/registrationForm/addRegForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authentication/registrationForm/addRegForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/courcesButtonGroup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/main/statusesButtonGroup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/statuses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/students/studentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/studentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/students/studentsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/studentsList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/FireManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/FireManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/fireConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase/fireConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -80,8 +68,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/students/studentsList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+            <state relative-caret-position="240">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -89,10 +80,46 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/students/studentItem.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+            <state relative-caret-position="209">
+              <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/students/courcesButtonGroup.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+              <folding>
+                <element signature="e#1#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/students/statusesButtonGroup.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="89" selection-start-line="5" selection-start-column="89" selection-end-line="5" selection-end-column="89" />
+              <folding>
+                <element signature="e#1#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/students/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="125" column="12" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
+              <folding>
+                <element signature="e#1#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -130,14 +157,16 @@
         <option value="$PROJECT_DIR$/src/components/header/buttonGroup.js" />
         <option value="$PROJECT_DIR$/src/components/authentication/signin/styles.css" />
         <option value="$PROJECT_DIR$/src/components/authentication/signin/index.js" />
-        <option value="$PROJECT_DIR$/src/components/students/index.js" />
         <option value="$PROJECT_DIR$/src/components/header/index.js" />
         <option value="$PROJECT_DIR$/src/components/main/statusesButtonGroup.js" />
         <option value="$PROJECT_DIR$/src/components/main/courcesButtonGroup.js" />
         <option value="$PROJECT_DIR$/src/components/main/index.js" />
         <option value="$PROJECT_DIR$/src/components/students/studentsList.js" />
-        <option value="$PROJECT_DIR$/src/components/students/studentItem.js" />
         <option value="$PROJECT_DIR$/src/components/authentication/registrationForm/addRegForm.js" />
+        <option value="$PROJECT_DIR$/src/components/students/index.js" />
+        <option value="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" />
+        <option value="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" />
+        <option value="$PROJECT_DIR$/src/components/students/studentItem.js" />
       </list>
     </option>
   </component>
@@ -181,28 +210,7 @@
               <item name="aca-students" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="authentication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="authentication" type="462c0819:PsiDirectoryNode" />
-              <item name="registrationForm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="students" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="firebase" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -267,10 +275,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25190000" />
+    <option name="totallyTimeSpent" value="30004000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="705" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
@@ -398,9 +407,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/index.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/authentication/registrationForm/addRegForm.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
@@ -464,13 +470,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/studentsList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/firebase/FireManager.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -478,10 +477,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/courcesButtonGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#1#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/statusesButtonGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="89" selection-start-line="5" selection-start-column="89" selection-end-line="5" selection-end-column="89" />
+          <folding>
+            <element signature="e#1#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="125" column="12" selection-start-line="125" selection-start-column="12" selection-end-line="125" selection-end-column="12" />
+          <folding>
+            <element signature="e#1#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/studentsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/students/studentItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="94" column="37" selection-start-line="94" selection-start-column="37" selection-end-line="94" selection-end-column="37" />
+        <state relative-caret-position="209">
+          <caret line="66" column="36" lean-forward="true" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
