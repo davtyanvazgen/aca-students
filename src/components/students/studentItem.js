@@ -1,17 +1,21 @@
-import React, { Component } from "react"
-import {Card} from "react-bootstrap";
-import {ListGroup} from "react-bootstrap";
-import {Button} from "react-bootstrap";
-import {Image} from "react-bootstrap";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import FireManager from "../../firebase/FireManager"
+import React, { Component } from "react";
+import { Button, ListGroup, Image, Card } from "react-bootstrap";
+import {
+ Dropdown,
+ DropdownToggle,
+ DropdownMenu,
+ DropdownItem
+} from "reactstrap";
+
+import FireManager from "../../firebase/FireManager";
+import EditStudentModal from "./editInfoStudent";
 
 
 export default class StudentItem extends Component {
     constructor(props){
         super(props);
-        this.toggleCource = this.toggleCource.bind(this);
-        this.toggleStatus = this.toggleStatus.bind(this);
+        // this.toggleCource = this.toggleCource.bind(this);
+        // this.toggleStatus = this.toggleStatus.bind(this);
 
         this.state = {
             allCources: [],
@@ -20,22 +24,10 @@ export default class StudentItem extends Component {
             dropdownOpenCource: false,
             dropdownOpenStatus: false,
             allStatuses:[],
-    
+            selectedCource:this.props.student.courceName,
+            selectedStatuse:this.props.student.statusName
         }
     }
-
-    toggleCource() {
-        this.setState({
-            dropdownOpenCource: !this.state.dropdownOpenCource
-        });
-    }
-
-    toggleStatus() {
-        this.setState({
-            dropdownOpenStatus: !this.state.dropdownOpenStatus
-        });
-    }
-
 
     componentDidMount() {
         FireManager.getCources()
@@ -53,25 +45,51 @@ export default class StudentItem extends Component {
             .catch(err => {
                 this.setState({ getCourcesError: err.message });
             });
-
-
-
     }
 
-    getCourseById (){
-        console.log(this.state.cources, this.state.getCourcesError)
-    }
+    // getCourseById (){
+    //     console.log(this.state.cources, this.state.getCourcesError)
+    // }
 
     toggleHidden () {
         this.setState({
             isHidden: !this.state.isHidden
         })
     }
-    handleStatusChange = (e)=>{
+    handleSelectCourceChange = (e)=>{
+        let {student} = this.props;
+        let selectedCource = this.state.allCources.filter(cource=>(cource.name === e.target.value));
         debugger;
+        student.cource = selectedCource[0].id;
+        student.courceName = selectedCource[0].name;
+       
+        FireManager.changeCources(student).then(
+            this.setState({
+                selectedCource:e.target.value
+            })
+        ).catch(err=>{
+            console.log(err.message)
+        }) 
+    }
+
+    handleSelectStatusChange = (e)=>{
+        let {student} = this.props;
+        let selectedStatuse = this.state.allStatuses.filter(status=>(status.name === e.target.value));
+        debugger;
+        student.status = selectedStatuse[0].id;
+        student.statusName = selectedStatuse[0].name;
+
+        FireManager.changeCources(student).then(
+            this.setState({
+                selectedStatuse:e.target.value
+            })
+        ).catch(err=>{
+            console.log(err.message)
+        }) 
     }
     render () {
-        const {allStatuses, allCources} = this.state;
+        const {allStatuses, allCources, selectedCource, selectedStatuse} = this.state;
+        let modalClose = () => this.setState({ modalShow: false });
         return (
             <Card className="col-12 container" key={this.props.student.id} bg="primary" text="white">
                 <div className="row">
@@ -81,37 +99,38 @@ export default class StudentItem extends Component {
                            variant="top"
                            src="https://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/man-student.png"/>
                     <div className="col-10 border border-secondary">
-                        Course: <Dropdown isOpen={this.state.dropdownOpenCource} toggle={this.toggleCource}>
-                            <DropdownToggle caret>
-                                {this.props.student.courceName}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem header>Choose Cource</DropdownItem>
-                                {allCources.map(cource=>(
-                                    <DropdownItem key = {cource.id} onClick = {this.handleStatusChange}>{cource.name}</DropdownItem>
-                                ))}
+                        
+                        <select onChange = {this.handleSelectCourceChange} value = {selectedCource}>
+                            {allCources.map(cource => (
+                                <option key = {cource.id} value = {cource.name}>{cource.name}</option>
+                            ))}
+                        </select>
 
-                            </DropdownMenu>
-                        </Dropdown>
-                        Status: <Dropdown isOpen={this.state.dropdownOpenStatus} toggle={this.toggleStatus}>
-                        <DropdownToggle caret>
-                            {this.props.student.statusName}
-                        </DropdownToggle>
-                        <DropdownMenu >
-                                <DropdownItem header>Choose Status</DropdownItem>
-                                {allStatuses.map(status=>(
-                                    <DropdownItem key = {status.id} name = {status.name}>{status.name}</DropdownItem>
-                                ))}
-                            </DropdownMenu>
-                    </Dropdown>
-                        <Button variant="info" onClick={this.toggleHidden.bind(this)}>More Information</Button>
+                        <select onChange = {this.handleSelectStatusChange} value = {selectedStatuse}>
+                            {allStatuses.map(status => (
+                                <option key = {status.id} value = {status.name}>{status.name}</option>
+                            ))}
+                        </select>
+    
+                        <Button variant="info" onClick = {this.toggleHidden.bind(this)}>More Information</Button>
                         {!this.state.isHidden && <ListGroup>
                                 <ListGroup.Item disabled>E-mail: {this.props.student.email}</ListGroup.Item>
                                 <ListGroup.Item disabled>Phone: {this.props.student.phone} </ListGroup.Item>
                             </ListGroup> }
                     </div>
                 </div>
+                <Button
+                    variant="warning"
+                    onClick={() => this.setState({ modalShow: true })}
+                >
+                    Edit information
+                </Button>
 
+                <EditStudentModal
+                    show={this.state.modalShow}
+                    onHide={modalClose}
+                    student={this.props.student}
+                />              
                 <div className="row">
                     <div className="col-12 border border-secondary">
                         {`${this.props.student.fullName}`.toUpperCase()}
