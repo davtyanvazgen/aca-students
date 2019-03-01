@@ -46,6 +46,7 @@ class Main extends React.PureComponent {
         FireManager.getStatuses();
     }
     filteredStudents = () => {
+        debugger;
         let { selectedCource ,selectedStatus, students} = this.state;
         let filters = selectedStatus.length?[...selectedCource,selectedStatus[0]]:[...selectedCource];
 
@@ -114,9 +115,8 @@ class Main extends React.PureComponent {
 
     repeatFiltering = () => {
         this.filteredStudents();
-        this.componentDidMount();
-        this.componentWillMount();
     }
+
 
     render() {
         const { statuses, cources, withCourcesStudents,withStatusStudents,showStudentsArr } = this.state;
@@ -125,7 +125,7 @@ class Main extends React.PureComponent {
                 <div className="row">
                     <div className="col-12 border border-primary">
                         <CourcesButton
-                            cources = { cources }
+                            cources = { this.props.cources }
                             courceStudents = { this.courceStudents }
                             filteredStudents = {this.filteredStudents}
                         />
@@ -134,7 +134,7 @@ class Main extends React.PureComponent {
                 <div className="row">
                     <div className="col-2 border border-primary">
                         <StatusesButton
-                            statuses = { statuses }
+                            statuses = { this.props.statuses }
                             statuseStudents = {this.statuseStudents}
                             filteredStudents = {this.filteredStudents}
                         />
@@ -147,7 +147,7 @@ class Main extends React.PureComponent {
                             filteredStudents = { this.filteredStudents }
                             repeatFiltering = {this.repeatFiltering}
                             statuses = { statuses }
-                            cources = { cources }
+                            cources = { this.props.cources }
                         />
                     </div>
                 </div>
