@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import SelectForm from "./select";
 import FireManager from "../../../firebase/FireManager";
 import { v1 } from "uuid";
+import { Link } from "react-router-dom";
 
 export default function RegistrationForm(props) {
   const name = useFormInput("");
@@ -78,9 +79,11 @@ export default function RegistrationForm(props) {
               />
             </FormGroup>
 
-            <Button color="success" block onClick={handeleCreateStudent}>
-              Registration
-            </Button>
+            <Link to="/">
+              <Button color="success" block onClick={handeleCreateStudent}>
+                Registration
+              </Button>
+            </Link>
           </Form>
         </div>
       </div>

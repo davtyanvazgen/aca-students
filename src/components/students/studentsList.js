@@ -8,7 +8,12 @@ function StudentsList(props) {
   return (
     <>
       {props.allStudents.map(student => (
-        <StudentItem key={student.id} student={student} />
+        <StudentItem
+          key={student.id}
+          student={student}
+          allCources={props.cources}
+          allStatuses={props.statuses}
+        />
       ))}
     </>
   );

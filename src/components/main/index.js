@@ -156,6 +156,8 @@ class Main extends React.PureComponent {
           </div>
           <div className="col-10 row container border border-primary">
             <StudentsList
+              cources={cources}
+              statuses={statuses}
               allStudents={showStudentsArr}
               withStatusStudents={withStatusStudents}
               withCourcesStudents={withCourcesStudents}
