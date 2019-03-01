@@ -14,7 +14,8 @@ class Main extends React.PureComponent {
     cources: [],
     selectedCource: [],
     selectedStatus: [],
-    showStudentsArr: []
+    showStudentsArr: [],
+    forSmbat: ""
   };
 
   componentDidMount() {
