@@ -6,9 +6,13 @@ function StudentsList(props) {
     return (
         <>
             {props.allStudents.map(student => (
-                <StudentItem key={ student.id } 
+                <StudentItem
+                    key={ student.id }
                     student= { student } 
                     repeatFiltering = {props.repeatFiltering}
+                    allCources =  { props.cources }
+                    allStatuses = { props.statuses }
+
                 />
             ))}
         </>

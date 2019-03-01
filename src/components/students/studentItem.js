@@ -6,18 +6,18 @@ export default class StudentItem extends PureComponent {
     constructor(props){
         super(props);
         this.state = {
-            allCources: [],
+            allCources: props.allCources,
             getCourcesError: "",
             isHidden: true,
             dropdownOpenCource: false,
             dropdownOpenStatus: false,
-            allStatuses:[],
+            allStatuses:props.allStatuses,
             selectedCource:this.props.student.courceName,
             selectedStatuse:this.props.student.statusName
         }
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         FireManager.getCources()
             .then(querySnapshot => {
                 this.setState({ allCources: querySnapshot.docs.map(doc => doc.data()) });
@@ -34,7 +34,7 @@ export default class StudentItem extends PureComponent {
                 this.setState({ getCourcesError: err.message });
             });
 
-    }
+    }*/
 
     componentWillUnmount() {
         console.log('studentsitem unmounting')
@@ -61,7 +61,6 @@ export default class StudentItem extends PureComponent {
         ).catch(err=>{
             console.log(err.message)
         })
-
         this.props.repeatFiltering();
     }
 

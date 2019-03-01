@@ -1,4 +1,3 @@
-
 import React from "react";
 import FireManager from "../../firebase/FireManager";
 import CourcesButton from "./courcesButtonGroup"
@@ -144,6 +143,8 @@ class Main extends React.PureComponent {
                             withCourcesStudents={withCourcesStudents}
                             filteredStudents = { this.filteredStudents }
                             repeatFiltering = {this.repeatFiltering}
+                            statuses = { statuses }
+                            cources = { cources }
                         />
                     </div>
                 </div>
