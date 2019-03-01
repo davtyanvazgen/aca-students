@@ -53,7 +53,6 @@ export default class StudentItem extends PureComponent {
         let selectedCource = this.state.allCources.filter(cource=>(cource.name === e.target.value));
         student.cource = selectedCource[0].id;
         student.courceName = selectedCource[0].name;
-
         FireManager.changeCources(student).then(
             this.setState({
                 selectedCource:e.target.value

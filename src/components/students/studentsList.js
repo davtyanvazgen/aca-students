@@ -2,17 +2,15 @@ import React from "react";
 import StudentItem from "./studentItem"
 
 function StudentsList(props) {
-    
     return (
         <>
             {props.allStudents.map(student => (
                 <StudentItem
                     key={ student.id }
-                    student= { student } 
+                    student= { student }
                     repeatFiltering = {props.repeatFiltering}
                     allCources =  { props.cources }
                     allStatuses = { props.statuses }
-
                 />
             ))}
         </>

@@ -95,7 +95,7 @@ class Main extends React.PureComponent {
     }
     statuseStudents = (status) => {
         let { selectedStatus } = this.state;
-        if (!selectedStatus.length || selectedStatus.indexOf(status.id) === -1) {
+        if (status !== "all") {
             if (selectedStatus.length) {
                 selectedStatus.pop();
             }
@@ -111,10 +111,13 @@ class Main extends React.PureComponent {
         }
         this.filteredStudents();
     }
+
     repeatFiltering = () => {
         this.filteredStudents();
         this.componentDidMount();
+        this.componentWillMount();
     }
+
     render() {
         const { statuses, cources, withCourcesStudents,withStatusStudents,showStudentsArr } = this.state;
         return (
