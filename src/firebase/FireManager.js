@@ -1,5 +1,6 @@
 import { firestore } from "firebase";
 
+
 export default class FireManager {
   //ADD NEW COURCE
   static addCource(cource) {
@@ -57,9 +58,30 @@ export default class FireManager {
       .update({ ...statuse });
   }
 
+//EDIT STUDENT iNFORMATION
+static editStudentInformation(student) {
+  return firestore()
+    .collection("students")
+    .doc(student.id)
+    .update({ ...student });
+}
+  static  changeCources(obj) {
+    return firestore()
+      .collection("students")
+      .doc(obj.id)
+      .update({ ...obj});
+  }
+  ////////////change status//////////
+  static  changeStatuses(obj) {
+    return firestore()
+      .collection("statuses")
+      .doc(obj.id)
+      .update({ ...obj});
+  }
   /////////////////////////////////////////////////////////////////////////////////
   static getStudents() {
-    const studentsRef = firestore().collection("students");
+    const studentsRef = firestore()
+    .collection("students");
     return studentsRef.get();
   }
 

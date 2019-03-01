@@ -1,6 +1,8 @@
 import firebase from "firebase";
 import "firebase/firestore";
 
+
+
 const config = {
   apiKey: "AIzaSyBeHc7nH2J4ZJykUeEfSnWcFOghyI8tHGc",
   authDomain: "aca-students.firebaseapp.com",

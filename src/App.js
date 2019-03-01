@@ -4,10 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/header/index";
 import SignIn from "./components/authentication/signin";
 import SignUp from "./components/authentication/signup";
-import Main from "./components/main";
+import Main from "./components/students";
 import AddCouce from "./components/cources/index";
 import AddStatuse from "./components/statuses";
-//import RegistrationForm from './components/authentication/registrationForm/addRegForm'
 import AddStudent from "./components/authentication/registrationForm";
 
 class App extends Component {

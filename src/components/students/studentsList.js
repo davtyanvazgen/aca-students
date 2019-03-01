@@ -1,15 +1,14 @@
-import React,{useState,useEffect} from "react";
-// import { Button } from 'react-bootstrap/';
-// import { Card } from 'react-bootstrap/'
-// import { ListGroup } from 'react-bootstrap/'
+import React from "react";
 import StudentItem from "./studentItem"
 
 function StudentsList(props) {
+    
     return (
         <>
             {props.allStudents.map(student => (
-                <StudentItem key={ student.id } student={ student }
-                    
+                <StudentItem key={ student.id } 
+                    student= { student } 
+                    repeatFiltering = {props.repeatFiltering}
                 />
             ))}
         </>

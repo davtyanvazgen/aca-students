@@ -33,7 +33,6 @@ export default function RegistrationForm(props) {
   
    FireManager.addStudent(student).then(()=>{
     alert("done!");
-    
    }
 
    ).catch(err=>{

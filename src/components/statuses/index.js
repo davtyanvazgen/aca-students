@@ -52,6 +52,10 @@ export default class AddStatuse extends Component {
   };
 
   removeStatuse = statuse => {
+    if (statuse.name.toLocaleLowerCase() === 'apply') {
+      alert(" This is the default status. Unable to delete.");
+      return
+    }
     FireManager.removeStatuse(statuse).catch(err => {
       this.setState({ removeStatuseError: err && err.message });
     });
@@ -66,11 +70,7 @@ export default class AddStatuse extends Component {
     FireManager.editStatuse(statuse)
       .then(() => {
         const statusesArr = this.state.statuses;
-        const index = statusesArr.findIndex(el => {
-          if (el.id === statuse.id) {
-            return el;
-          }
-        });
+        const index = statusesArr.findIndex(el => (el.id === statuse.id));
         statusesArr[index].name = statuse.name;
         this.setState({
           statuses: [...index]
