@@ -1,5 +1,5 @@
 import React from "react";
-import StudentItem from "./studentItem"
+import StudentItem from "../../containers/studentItem"
 
 function StudentsList(props) {
     return (

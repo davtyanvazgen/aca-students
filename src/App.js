@@ -4,14 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/authentication/signin";
 import Main from "./containers/Main";
 import AddStudent from "./components/authentication/registrationForm";
-import { v1 } from "uuid";
 
 class App extends Component {
-  constructor(props) {
-      super(props);
+  state = {
+    isLogedIn:false
   }
-
-
   render() {
     return (
         <div>
@@ -24,10 +21,10 @@ class App extends Component {
                 <Route
                     path="/signin"
                     component={SignIn} />
-                <Route
+               {this.state.isLogedIn &&  <Route
                     path="/"
-                    component= { Main }
-                />
+                    component= { AddStudent }
+                />}
               </Switch>
             </>
           </Router>

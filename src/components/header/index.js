@@ -26,13 +26,6 @@ export default function Header() {
                       Statuses
                     </Button>
                   </Link>
-
-                  <Link to="/registration">
-                    <Button size="sm" outline color="light">
-                      RegFormnp
-                    </Button>
-                  </Link>
-
                   <Link to="/cources">
                     <Button size="sm" outline color="light">
                       Cources
@@ -49,13 +42,6 @@ export default function Header() {
                     Sign in
                   </Button>
                 </Link>
-
-                <Link to="/signup">
-                  <Button size="sm" outline color="light">
-                    Sign up
-                  </Button>
-                </Link>
-                
               </ButtonGroup>
             </Nav>
           </div>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch ,Redirect} from "react-router-dom";
 import Header from "../components/header/index";
 import AddCource from "../components/cources/index";
 import AddStatuse from "../components/statuses";
@@ -173,7 +173,7 @@ class Main extends Component {
                                 }
                             />
                             <Route
-                                path="/"
+                                 exact path="/"
                                 component= { () =>
                                     <Students
                                         statuses={ this.state.statuses }
@@ -182,7 +182,19 @@ class Main extends Component {
                                     />
                                 }
                             />
+                            <Route
+                                 exact path="/students"
+                                component= { () =>
+                                    <Students
+                                        statuses={ this.state.statuses }
+                                        cources={ this.state.cources }
+                                        students={ this.state.students }
+                                    />
+                                }
+                            />
+                            <Redirect to = '/students'/>
                         </Switch>
+
                     </>
                 </Router>
             </div>
