@@ -82,6 +82,7 @@ export default class StudentItem extends PureComponent {
                 modalShow = { modalShow }
                 setModalShow = { this.setModalShow }
                 modalClose = { this.setModalClose }
+                removeStudent={this.props.removeStudent}
             />
         )
     }

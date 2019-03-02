@@ -144,6 +144,20 @@ class Main extends Component {
             });
     };
 
+    removeStudent = student => {
+        FireManager.removeStudent(student)
+            .then(() => {
+                const oldStudents = this.state.students;
+                const newStudents = oldStudents.filter(el => el.id !== student.id);
+                this.setState({
+                    students: newStudents
+                });
+            })
+            .catch(err => {
+                this.setState({ removeStudentError: err && err.message });
+            });
+    };
+
     render() {
         return (
             <div>
@@ -179,6 +193,7 @@ class Main extends Component {
                                         statuses={ this.state.statuses }
                                         cources={ this.state.cources }
                                         students={ this.state.students }
+                                        removeStudent={this.removeStudent}
                                     />
                                 }
                             />
@@ -189,6 +204,7 @@ class Main extends Component {
                                         statuses={ this.state.statuses }
                                         cources={ this.state.cources }
                                         students={ this.state.students }
+                                        removeStudent={this.removeStudent}
                                     />
                                 }
                             />

@@ -40,6 +40,13 @@ export default  function StudentCard (props){
                     Edit information
                 </Button>
 
+            <Button
+                variant="warning"
+                onClick={() => props.removeStudent(props.student)}
+            >
+                delete
+            </Button>
+
                 <EditStudentModal
                     show={props.modalShow}
                     onHide={props.modalClose}

@@ -111,6 +111,7 @@ class Students extends React.PureComponent {
                             repeatFiltering = {this.repeatFiltering}
                             statuses = { this.props.statuses }
                             cources = { this.props.cources }
+                            removeStudent={this.props.removeStudent}
                         />
                     </div>
                 </div>

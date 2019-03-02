@@ -21,10 +21,10 @@ class App extends Component {
                 <Route
                     path="/signin"
                     component={SignIn} />
-               {this.state.isLogedIn &&  <Route
+                <Route
                     path="/"
-                    component= { AddStudent }
-                />}
+                    component= { Main }
+                />
               </Switch>
             </>
           </Router>

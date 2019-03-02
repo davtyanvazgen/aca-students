@@ -95,6 +95,13 @@ static editStudentInformation(student) {
       .set(student);
   }
 
+  static removeStudent(student) {
+    return firestore()
+        .collection("students")
+        .doc(student.id)
+        .delete();
+  }
+
 
 //////////login/////////////////
 static adminLogIn(email, password){

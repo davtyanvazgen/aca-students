@@ -11,6 +11,7 @@ function StudentsList(props) {
                     repeatFiltering = {props.repeatFiltering}
                     allCources =  { props.cources }
                     allStatuses = { props.statuses }
+                    removeStudent={props.removeStudent}
                 />
             ))}
         </>
