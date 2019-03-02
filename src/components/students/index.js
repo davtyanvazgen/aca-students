@@ -9,45 +9,15 @@ class Main extends React.PureComponent {
         withStatusStudents:[],
         withCourcesStudents:[],
         getStudentsError: "",
-        statuses: [],
-        cources: [],
         selectedCource:[],
         selectedStatus:[],
         showStudentsArr:[]
     };
 
-    componentDidMount() {
-        FireManager.getStudents()
-            .then(querySnapshot => {
-                this.setState({ students: querySnapshot.docs.map(doc => doc.data()) });
-            })
-            .catch(err => {
-                this.setState({ getStudentsError: err.message });
-            });
-        FireManager.getCources()
-            .then(querySnapshot => {
-                this.setState({ cources: querySnapshot.docs.map(doc => doc.data()) });
-            })
-            .catch(err => {
-                this.setState({ getStudentsError: err.message });
-            });
-        FireManager.getStatuses()
-            .then(querySnapshot => {
-                this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
-            })
-            .catch(err => {
-                this.setState({ getStudentsError: err.message });
-            });
-    }
-    componentWillMount(){
-        console.log('Main js unmounting')
-        FireManager.getStudents();
-        FireManager.getCources();
-        FireManager.getStatuses();
-    }
     filteredStudents = () => {
         debugger;
-        let { selectedCource ,selectedStatus, students} = this.state;
+        let { selectedCource ,selectedStatus } = this.state;
+        let { students } = this.props;
         let filters = selectedStatus.length?[...selectedCource,selectedStatus[0]]:[...selectedCource];
 
         let resultArr = [];
@@ -119,7 +89,7 @@ class Main extends React.PureComponent {
 
 
     render() {
-        const { statuses, cources, withCourcesStudents,withStatusStudents,showStudentsArr } = this.state;
+        const { withCourcesStudents,withStatusStudents,showStudentsArr } = this.state;
         return (
             <div className="container border border-primary">
                 <div className="row">
@@ -146,7 +116,7 @@ class Main extends React.PureComponent {
                             withCourcesStudents={withCourcesStudents}
                             filteredStudents = { this.filteredStudents }
                             repeatFiltering = {this.repeatFiltering}
-                            statuses = { statuses }
+                            statuses = { this.props.statuses }
                             cources = { this.props.cources }
                         />
                     </div>

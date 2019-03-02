@@ -14,12 +14,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cources: [],
-      getCourcesError: "",
-      newCource: "",
-      newStatuse: "",
-      statuses: [],
-      getStatuseError: ""
+        cources: [],
+        getCourcesError: "",
+        newCource: "",
+        newStatuse: "",
+        statuses: [],
+        getStatuseError: "",
+        students: [],
+        getStudentsError: ""
     }
   }
 
@@ -40,6 +42,13 @@ class App extends Component {
         })
         .catch(err => {
           this.setState({ getStatusesError: err.message });
+        });
+    FireManager.getStudents()
+        .then(querySnapshot => {
+            this.setState({ students: querySnapshot.docs.map(doc => doc.data()) });
+        })
+        .catch(err => {
+            this.setState({ getStudentsError: err.message });
         });
   }
 
@@ -180,6 +189,7 @@ class App extends Component {
                         <Main
                             statuses={ this.state.statuses }
                             cources={ this.state.cources }
+                            students={ this.state.students }
                         />
                     }
                 />
