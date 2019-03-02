@@ -1,25 +1,20 @@
 import React from "react";
-import FireManager from "../../firebase/FireManager";
 import CourcesButton from "./courcesButtonGroup"
 import StatusesButton from "./statusesButtonGroup"
 import StudentsList from "../students/studentsList";
 class Main extends React.PureComponent {
     state = {
-        students: [],
         withStatusStudents:[],
         withCourcesStudents:[],
-        getStudentsError: "",
         selectedCource:[],
         selectedStatus:[],
-        showStudentsArr:[]
+        showStudentsArr: this.props.students
     };
 
     filteredStudents = () => {
-        debugger;
         let { selectedCource ,selectedStatus } = this.state;
         let { students } = this.props;
         let filters = selectedStatus.length?[...selectedCource,selectedStatus[0]]:[...selectedCource];
-
         let resultArr = [];
 
         if (!selectedStatus.length && selectedCource.length) {
@@ -121,7 +116,8 @@ class Main extends React.PureComponent {
                         />
                     </div>
                 </div>
-            </div> )
+            </div>
+        )
     }
 }
 export default Main;

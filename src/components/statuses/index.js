@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./style.css";
-import { v1 } from "uuid";
 import Statuse from "./statuse";
 import AddStatusForm from "./addStatuseForm";
 

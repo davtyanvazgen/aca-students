@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./style.css";
-import FireManager from "../../firebase/FireManager";
-import { v1 } from "uuid";
 import Cource from "./cource";
 import AddForm from "./addCourceForm";
 

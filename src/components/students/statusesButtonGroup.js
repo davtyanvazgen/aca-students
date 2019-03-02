@@ -6,7 +6,7 @@ export default function StatusesButton(props) {
             <ToggleButtonGroup className="btn-group-vertical" type="radio" name="statuses">
                     <ToggleButton variant="danger" value={"all"} onChange={ () => { props.statuseStudents("all") }}>All statuses</ToggleButton>
                 {props.statuses.map(status => (
-                    <ToggleButton variant="danger" value={ status.name } key={ status.id } id = { status.id } onChange={ () => { props.statuseStudents(status) }}>
+                    <ToggleButton variant="danger"  value={ status.name } key={ status.id } id = { status.id } onChange={ () => { props.statuseStudents(status) }}>
                         { status.name }
                     </ToggleButton>
                 ))}

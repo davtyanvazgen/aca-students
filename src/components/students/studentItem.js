@@ -17,27 +17,7 @@ export default class StudentItem extends PureComponent {
         }
     }
 
-    /*componentDidMount() {
-        FireManager.getCources()
-            .then(querySnapshot => {
-                this.setState({ allCources: querySnapshot.docs.map(doc => doc.data()) });
-            })
-            .catch(err => {
-                this.setState({ getCourcesError: err.message });
-            });
-
-        FireManager.getStatuses()
-            .then(querySnapshot => {
-                this.setState({ allStatuses: querySnapshot.docs.map(doc => doc.data()) });
-            })
-            .catch(err => {
-                this.setState({ getCourcesError: err.message });
-            });
-
-    }*/
-
     componentWillUnmount() {
-        console.log('studentsitem unmounting')
         FireManager.getCources();
         FireManager.getStatuses();
     }
