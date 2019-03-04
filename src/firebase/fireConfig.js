@@ -12,11 +12,7 @@ const config = {
   messagingSenderId: "15753998893"
 };
 
-export function initFirebase() {
-  // Initialize Firebase
+const initFirebase = () => {
   firebase.initializeApp(config);
-
-  // Initialize Cloud Firestore through Firebase
-  // firebase.firestore().settings({timestampsInSnapshots: true});
 }
-export default { initFirebase };
+export default initFirebase;

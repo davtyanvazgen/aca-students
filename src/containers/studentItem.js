@@ -6,21 +6,14 @@ export default class StudentItem extends PureComponent {
     constructor(props){
         super(props);
         this.state = {
-            allCources: props.allCources,
-            getCourcesError: "",
             isHidden: true,
             dropdownOpenCource: false,
             dropdownOpenStatus: false,
-            allStatuses:props.allStatuses,
             selectedCource:this.props.student.courceName,
             selectedStatuse:this.props.student.statusName
         }
     }
 
-    componentWillUnmount() {
-        FireManager.getCources();
-        FireManager.getStatuses();
-    }
 
     toggleHidden  = () => {
         this.setState({
@@ -70,8 +63,8 @@ export default class StudentItem extends PureComponent {
         const { student } = this.props;
         return (
             <StudentCard  
-                allCources  = { allCources }
-                allStatuses = { allStatuses }
+                allCources  = { this.props.allCources }
+                allStatuses = { this.props.allStatuses }
                 selectedCource = { selectedCource }
                 selectedStatuse = { selectedStatuse }
                 student = { student }

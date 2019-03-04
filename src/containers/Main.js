@@ -167,35 +167,15 @@ class Main extends Component {
                         <Switch>
                             <Route
                                 path="/cources"
-                                component= { () =>
-                                    <AddCource
-                                        addNewCource={this.addNewCource}
-                                        removeCource = { this.removeCource }
-                                        cources={ this.state.cources }
-                                    />
-                                }
+                                component={ AddCource }
                             />
                             <Route
                                 path="/statuses"
-                                component={ () =>
-                                    <AddStatuse
-                                        statuses={this.state.statuses}
-                                        addNewStatuse={this.addNewStatuse}
-                                        removeStatuse={ this.removeStatuse }
-                                        editStatuse={ this.editStatuse }
-                                    />
-                                }
+                                component={ AddStatuse }
                             />
                             <Route
                                  exact path="/"
-                                component= { () =>
-                                    <Students
-                                        statuses={ this.state.statuses }
-                                        cources={ this.state.cources }
-                                        students={ this.state.students }
-                                        removeStudent={this.removeStudent}
-                                    />
-                                }
+                                component= { Students }
                             />
                             <Route
                                  exact path="/students"

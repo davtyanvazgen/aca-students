@@ -1,5 +1,8 @@
 import React from "react";
 import StudentItem from "../../containers/studentItem"
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
 
 function StudentsList(props) {
     return (
@@ -19,4 +22,10 @@ function StudentsList(props) {
     );
 }
 
-export default StudentsList;
+export default compose(
+    firestoreConnect(() => ['statuses', 'cources']), // or { collection: 'todos' }
+    connect((state, props) => ({
+        statuses: state.firestore.ordered.statuses,
+        cources: state.firestore.ordered.cources
+    }))
+)(StudentsList)

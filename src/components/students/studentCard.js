@@ -15,13 +15,13 @@ export default  function StudentCard (props){
                            <div className="col-10 border border-secondary">
 
                                <select onChange = {props.handleSelectCourceChange} value = {selectedCource}>
-                                   {allCources.map(cource => (
+                                   {allCources && allCources.map(cource => (
                                        <option key = {cource.id} value = {cource.name}>{cource.name}</option>
                                    ))}
                                </select>
 
                                <select onChange = {props.handleSelectStatusChange} value = {selectedStatuse}>
-                                   {allStatuses.map(status => (
+                                   {allStatuses && allStatuses.map(status => (
                                        <option key = {status.id} value = {status.name}>{status.name}</option>
                                    ))}
                                </select>

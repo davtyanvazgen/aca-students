@@ -2,31 +2,39 @@ import React, { Component } from "react";
 import "./style.css";
 import Cource from "./cource";
 import AddForm from "./addCourceForm";
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
 
-export default class AddCource extends Component {
+class AddCource extends Component {
 
-  render() {
-    return (
-      <>
-        <div id="containerForm">
-          <div className="miniContainerForm">
-            <AddForm
-                addNewCource={this.props.addNewCource}
-            />
-          </div>
-        </div>
+    render() {
+        return(
+            <>
+                <div id="containerForm">
+                    <div className="miniContainerForm">
+                        <AddForm
 
-        <div className="courceList">
-          <h1>Current cources</h1>
-          {this.props.cources.map(cource => (
-            <Cource
-              key={cource.id}
-              cource={cource}
-              removeCource={this.props.removeCource}
-            />
-          ))}
-        </div>
-      </>
-    );
-  }
+                        />
+                    </div>
+                </div>
+                <div className="courceList">
+                    <h1>Current cources</h1>
+                    {this.props.cources && this.props.cources.map(cource => (
+                        <Cource
+                            key={cource.id}
+                            cource={cource}
+                        />
+                        ))}
+                </div>
+            </>
+        )
+    }
 }
+
+export default compose(
+    firestoreConnect(() => ['cources']), // or { collection: 'todos' }
+    connect((state, props) => ({
+        cources: state.firestore.ordered.cources
+    }))
+)(AddCource)

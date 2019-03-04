@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./style.css";
 import Statuse from "./statuse";
 import AddStatusForm from "./addStatuseForm";
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
 
-export default class AddStatuse extends Component {
+class AddStatuse extends Component {
 
   render() {
     return (
@@ -18,7 +21,7 @@ export default class AddStatuse extends Component {
 
         <div className="statuseList">
           <h1>All statuses</h1>
-          {this.props.statuses.map(statuse => (
+          {this.props.statuses && this.props.statuses.map(statuse => (
             <Statuse
               key={statuse.id}
               statuse={statuse}
@@ -31,3 +34,10 @@ export default class AddStatuse extends Component {
     );
   }
 }
+
+export default compose(
+    firestoreConnect(() => ['statuses']), // or { collection: 'todos' }
+    connect((state, props) => ({
+        statuses: state.firestore.ordered.statuses
+    }))
+)(AddStatuse)

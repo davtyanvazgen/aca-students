@@ -1,0 +1,8 @@
+export function firestoreReducer(state = [], action){
+    if(action.type === "FETCH_FIRESTORE_COURCES"){
+        state= state.concat([action.playload])
+    }
+
+    return state;
+}
+
