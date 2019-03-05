@@ -1,23 +1,48 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { withFirestore } from "react-redux-firebase";
+import { v1 } from "uuid";
 
-export default function AddStatusForm(props) {
-
-  const [value, setValue] = useState("");
+const AddStatuseForm = ({ firestore }) => {
+  const [name, setName] = useState("");
+  const [err, setErr] = useState("");
 
   function handleChange(e) {
-    setValue(e.target.value);
+    setName(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newStatuse = {
+      id: v1(),
+      name
+    };
+
+    if (!newStatuse.name.trim()) {
+      setName("");
+      return;
+    }
+
+    firestore
+      .collection("statuses")
+      .doc(newStatuse.id)
+      .set(newStatuse)
+      .catch(err => {
+        setErr(err.message);
+      });
+
+    setName("");
   }
 
   return (
     <>
-      <Form onSubmit={(e) => props.addNewStatuse(e, value)}>
+      <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Add new statuse</Label>
           <Input
             type="text"
             placeholder="Enter new status"
-            value={value}
+            value={name}
             onChange={handleChange}
           />
         </FormGroup>
@@ -27,4 +52,6 @@ export default function AddStatusForm(props) {
       </Form>
     </>
   );
-}
+};
+
+export default withFirestore(AddStatuseForm);

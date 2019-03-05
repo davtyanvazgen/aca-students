@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { Input } from "reactstrap";
 
 export default function EditStudent(props) {
-    return (
-        <Modal
+  return (
+    <Modal
       {...props.modalProps}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -33,5 +33,5 @@ export default function EditStudent(props) {
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
-    )
+  );
 }

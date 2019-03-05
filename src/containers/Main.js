@@ -27,26 +27,23 @@ class Main extends Component {
     };
   }
 
-  static getCourcesFB() {
-    return this.state.cources;
-  }
-
   componentDidMount() {
-    FireManager.getCources()
-      .then(querySnapshot => {
-        this.setState({ cources: querySnapshot.docs.map(doc => doc.data()) });
-      })
-      .catch(err => {
-        this.setState({ getCourcesError: err.message });
-      });
+    // FireManager.getCources()
+    //   .then(querySnapshot => {
+    //     this.setState({ cources: querySnapshot.docs.map(doc => doc.data()) });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ getCourcesError: err.message });
+    //   });
 
-    FireManager.getStatuses()
-      .then(querySnapshot => {
-        this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
-      })
-      .catch(err => {
-        this.setState({ getStatusesError: err.message });
-      });
+    // FireManager.getStatuses()
+    //   .then(querySnapshot => {
+    //     this.setState({ statuses: querySnapshot.docs.map(doc => doc.data()) });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ getStatusesError: err.message });
+    //   });
+
     FireManager.getStudents()
       .then(querySnapshot => {
         this.setState({ students: querySnapshot.docs.map(doc => doc.data()) });
@@ -56,44 +53,44 @@ class Main extends Component {
       });
   }
 
-  addNewCource = (e, value) => {
-    e.preventDefault();
+  // addNewCource = (e, value) => {
+  //   e.preventDefault();
 
-    const newCource = {
-      name: value,
-      id: v1()
-    };
-    if (!newCource.name.trim()) {
-      this.setState({ newCource: "" });
-      return;
-    }
-    FireManager.addCource(newCource)
-      .then(() => {
-        const cources = this.state.cources;
-        this.setState({
-          cources: [...cources, newCource]
-        });
-      })
-      .catch(err => {
-        this.setState({ addCourceError: err && err.message });
-      });
+  //   const newCource = {
+  //     name: value,
+  //     id: v1()
+  //   };
+  //   if (!newCource.name.trim()) {
+  //     this.setState({ newCource: "" });
+  //     return;
+  //   }
+  //   FireManager.addCource(newCource)
+  //     .then(() => {
+  //       const cources = this.state.cources;
+  //       this.setState({
+  //         cources: [...cources, newCource]
+  //       });
+  //     })
+  //     .catch(err => {
+  //       this.setState({ addCourceError: err && err.message });
+  //     });
 
-    this.setState({ newCource: "" });
-  };
+  //   this.setState({ newCource: "" });
+  // };
 
-  removeCource = cource => {
-    FireManager.removeCource(cource)
-      .then(() => {
-        const oldCources = this.state.cources;
-        const newCources = oldCources.filter(el => el.id !== cource.id);
-        this.setState({
-          cources: newCources
-        });
-      })
-      .catch(err => {
-        this.setState({ removeCourceError: err && err.message });
-      });
-  };
+  // removeCource = cource => {
+  //   FireManager.removeCource(cource)
+  //     .then(() => {
+  //       const oldCources = this.state.cources;
+  //       const newCources = oldCources.filter(el => el.id !== cource.id);
+  //       this.setState({
+  //         cources: newCources
+  //       });
+  //     })
+  //     .catch(err => {
+  //       this.setState({ removeCourceError: err && err.message });
+  //     });
+  // };
 
   addNewStatuse = (e, value) => {
     e.preventDefault();
@@ -170,41 +167,9 @@ class Main extends Component {
           <>
             <Header />
             <Switch>
-              <Route
-                path="/cources"
-                component={() => (
-                  <AddCource
-                    addNewCource={this.addNewCource}
-                    removeCource={this.removeCource}
-                    cources={this.state.cources}
-                    students={this.state.students}
-                    removeStudent={this.removeStudent}
-                  />
-                )}
-              />
-              <Route
-                path="/statuses"
-                component={() => (
-                  <AddStatuse
-                    statuses={this.state.statuses}
-                    addNewStatuse={this.addNewStatuse}
-                    removeStatuse={this.removeStatuse}
-                    editStatuse={this.editStatuse}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/"
-                component={() => (
-                  <Students
-                    statuses={this.state.statuses}
-                    cources={this.state.cources}
-                    students={this.state.students}
-                    removeStudent={this.removeStudent}
-                  />
-                )}
-              />
+              <Route path="/cources" component={AddCource} />
+              <Route path="/statuses" component={AddStatuse} />
+              <Route exact path="/" component={Students} />
               <Route
                 exact
                 path="/students"
@@ -225,5 +190,4 @@ class Main extends Component {
     );
   }
 }
-
 export default Main;

@@ -28,22 +28,24 @@ export default function StudentCard(props) {
             onChange={props.handleSelectCourceChange}
             value={selectedCource}
           >
-            {allCources.map(cource => (
-              <option key={cource.id} value={cource.name}>
-                {cource.name}
-              </option>
-            ))}
+            {allCources &&
+              allCources.map(cource => (
+                <option key={cource.id} value={cource.name}>
+                  {cource.name}
+                </option>
+              ))}
           </select>
 
           <select
             onChange={props.handleSelectStatusChange}
             value={selectedStatuse}
           >
-            {allStatuses.map(status => (
-              <option key={status.id} value={status.name}>
-                {status.name}
-              </option>
-            ))}
+            {allStatuses &&
+              allStatuses.map(status => (
+                <option key={status.id} value={status.name}>
+                  {status.name}
+                </option>
+              ))}
           </select>
 
           <Button variant="info" onClick={props.toggleHidden}>

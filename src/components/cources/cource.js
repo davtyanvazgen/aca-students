@@ -1,27 +1,13 @@
 import React from "react";
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
+import { withFirestore } from "react-redux-firebase";
 
-export default function Cource(props) {
-  const { cource, students } = props;
-
+const Cource = ({ cource, firestore }) => {
   const handleRemove = cource => {
-    let studentsCount = 0;
-    let studentsForDelete = [];
-
-    students.map(student => {
-      if (student.cource === cource.id) {
-        studentsCount = studentsCount + 1;
-        studentsForDelete.push(student);
-      }
-    });
-
-    props.removeCource(cource);
-
-    studentsForDelete.map(student => {
-      props.removeStudent(student);
-    });
-
-    console.log(studentsCount, studentsForDelete);
+    firestore
+      .collection("cources")
+      .doc(cource.id)
+      .delete();
   };
 
   return (
@@ -43,4 +29,6 @@ export default function Cource(props) {
       </ListGroup>
     </div>
   );
-}
+};
+
+export default withFirestore(Cource);

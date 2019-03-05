@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withFirestore } from "react-redux-firebase";
 import {
   ListGroup,
   ListGroupItem,
@@ -8,30 +9,37 @@ import {
   InputGroupAddon
 } from "reactstrap";
 
-export default function Statuse(props) {
-  const { statuse } = props;
-  const [newStatuse, setNewStatuse] = useState(`${statuse.name}`);
+const Statuse = ({ statuse, firestore }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [newStatuse, setNewStatuse] = useState(statuse.name);
 
-  const handleEditStatusInp = e => {
+  const handleRemove = statuse => {
+    firestore
+      .collection("statuses")
+      .doc(statuse.id)
+      .delete();
+  };
+
+  const handleEditStatuse = e => {
     setNewStatuse(e.target.value);
   };
 
-  const toggle = () => {
-    isOpen === false ? setIsOpen(true) : setIsOpen(false);
-  };
-
-  const handleRemove = statuse => {
-    props.removeStatuse(statuse);
-  };
-
-  const handleEdit = newStatuse => {
+  const confirmEditStatuse = newStatuse => {
     const editStatus = {
       name: newStatuse,
       id: statuse.id
     };
-    props.editStatuse(editStatus);
+
+    firestore
+      .collection("statuses")
+      .doc(statuse.id)
+      .update({ ...editStatus });
     setIsOpen(false);
+  };
+
+  const toggle = () => {
+    isOpen === false ? setIsOpen(true) : setIsOpen(false);
+    setNewStatuse(statuse.name);
   };
 
   return (
@@ -73,7 +81,7 @@ export default function Statuse(props) {
                   type="text"
                   placeholder="Update status"
                   value={newStatuse}
-                  onChange={handleEditStatusInp}
+                  onChange={handleEditStatuse}
                 />
                 <InputGroupAddon addonType="append">
                   <Button onClick={toggle} size="sm" color="primary">
@@ -86,7 +94,7 @@ export default function Statuse(props) {
                     size="sm"
                     color="warning"
                     onClick={() => {
-                      handleEdit(newStatuse);
+                      confirmEditStatuse(newStatuse);
                     }}
                   >
                     Yes
@@ -99,4 +107,6 @@ export default function Statuse(props) {
       </ListGroup>
     </div>
   );
-}
+};
+
+export default withFirestore(Statuse);
