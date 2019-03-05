@@ -4,5 +4,6 @@ import { firestoreReducer } from 'redux-firestore' // <- needed if using firesto
 
 // Add firebase to reducers
 export default combineReducers({
+    firebase: firebaseReducer,
     firestore: firestoreReducer // <- needed if using firestore
 })

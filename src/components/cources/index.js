@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Cource from "./cource";
-import AddForm from "./addCourceForm";
+import AddCourceForm from "./addCourceForm";
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
@@ -13,9 +13,7 @@ class AddCource extends Component {
             <>
                 <div id="containerForm">
                     <div className="miniContainerForm">
-                        <AddForm
-
-                        />
+                        <AddCourceForm/>
                     </div>
                 </div>
                 <div className="courceList">

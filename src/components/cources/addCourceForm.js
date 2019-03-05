@@ -4,7 +4,7 @@ import { withFirestore } from 'react-redux-firebase'
 import { v1 } from "uuid"
 
 
-function AddForm({ firestore }) {
+const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
   const [err, setErr] = useState("");
   function handleChange(e) {
@@ -17,11 +17,13 @@ function AddForm({ firestore }) {
       id: v1(),
       name
     }
-
+    if(!newCource.name.trim()){
+      setName("")
+    }
     firestore.collection("cources")
         .doc(newCource.id)
-        .set(newCource).then( () => {  setName("") } ).catch( (err) => {setErr(err.message)} );
-
+        .set(newCource).catch( (err) => {console.log(err)} );
+    setName("");
   }
 
   return (
@@ -46,4 +48,4 @@ function AddForm({ firestore }) {
 }
 
 
-export default withFirestore(AddForm)
+export default withFirestore(AddCourceForm)

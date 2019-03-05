@@ -1,17 +1,14 @@
 import React from "react";
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
 import { withFirestore } from 'react-redux-firebase'
-import {firestore} from "firebase";
 
-function Cource(props) {
-  const handleRemove = cource => {
-    firestore()
-        .collection("cources")
+const Cource = ({cource, firestore}) => {
+
+  const handleRemove = (cource) => {
+    firestore.collection("cources")
         .doc(cource.id)
         .delete();
   };
-
-  const { cource } = props;
 
   return (
     <div>
