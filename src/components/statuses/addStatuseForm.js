@@ -13,24 +13,21 @@ const AddStatuseForm = ({ firestore }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     const newStatuse = {
       id: v1(),
       name
     };
-
     if (!newStatuse.name.trim()) {
       setName("");
-      return;
     }
-
     firestore
       .collection("statuses")
       .doc(newStatuse.id)
       .set(newStatuse)
       .catch(err => {
-        setErr(err.message);
+        console.log(err);
       });
-
     setName("");
   }
 

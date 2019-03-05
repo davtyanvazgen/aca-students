@@ -10,20 +10,17 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import firebase from "firebase";
 
+const store = createReduxStore();
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true
 };
-
-const store = createReduxStore();
-
 const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance
 };
-
 const App = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
@@ -39,5 +36,4 @@ const App = () => (
     </ReactReduxFirebaseProvider>
   </Provider>
 );
-
 export default App;

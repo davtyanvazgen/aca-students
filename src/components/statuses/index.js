@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import Statuse from "./statuse";
-import AddStatusForm from "./addStatuseForm";
+import AddStatuseForm from "./addStatuseForm";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -12,7 +12,7 @@ class AddStatuse extends Component {
       <>
         <div id="containerFormStatuse">
           <div className="miniContainerFormStatuse">
-            <AddStatusForm />
+            <AddStatuseForm />
           </div>
         </div>
 

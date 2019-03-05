@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { withFirestore } from "react-redux-firebase";
 import {
   ListGroup,
   ListGroupItem,
@@ -8,22 +7,20 @@ import {
   InputGroup,
   InputGroupAddon
 } from "reactstrap";
+import { withFirestore } from "react-redux-firebase";
 
 const Statuse = ({ statuse, firestore }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newStatuse, setNewStatuse] = useState(statuse.name);
-
   const handleRemove = statuse => {
     firestore
       .collection("statuses")
       .doc(statuse.id)
       .delete();
   };
-
   const handleEditStatuse = e => {
     setNewStatuse(e.target.value);
   };
-
   const confirmEditStatuse = newStatuse => {
     const editStatus = {
       name: newStatuse,

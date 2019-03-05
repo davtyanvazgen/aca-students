@@ -22,15 +22,16 @@ const AddCourceForm = ({ firestore }) => {
       setName("");
       return;
     }
-
+    if (!newCource.name.trim()) {
+      setName("");
+    }
     firestore
       .collection("cources")
       .doc(newCource.id)
       .set(newCource)
       .catch(err => {
-        setErr(err.message);
+        console.log(err);
       });
-
     setName("");
   }
 
