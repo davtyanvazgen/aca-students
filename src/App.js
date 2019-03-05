@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/authentication/signin";
 import Main from "./containers/Main";
-import AddStudent from './components/authentication/registrationForm/addRegForm'
+import RegistrationForm from './components/authentication/registrationForm/'
 import {Provider} from "react-redux";
 import createReduxStore from './store/createReduxStore'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
@@ -29,7 +29,7 @@ const App = () => (
                     <Switch>
                         <Route
                             path="/registration"
-                            component={ AddStudent }
+                            component={ RegistrationForm }
                         />
                         <Route
                             path="/signin"
