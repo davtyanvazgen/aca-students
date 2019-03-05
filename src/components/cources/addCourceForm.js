@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
-
-
 export default function AddForm(props) {
-
   const [value, setValue] = useState("");
 
   function handleChange(e) {
@@ -13,7 +10,7 @@ export default function AddForm(props) {
 
   return (
     <>
-      <Form onSubmit={(e) => props.addNewCource(e, value)}>
+      <Form onSubmit={e => props.addNewCource(e, value)}>
         <FormGroup>
           <Label>Add new cource</Label>
           <Input

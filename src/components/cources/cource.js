@@ -2,11 +2,27 @@ import React from "react";
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
 export default function Cource(props) {
-  const handleRemove = cource => {
-    props.removeCource(cource);
-  };
+  const { cource, students } = props;
 
-  const { cource } = props;
+  const handleRemove = cource => {
+    let studentsCount = 0;
+    let studentsForDelete = [];
+
+    students.map(student => {
+      if (student.cource === cource.id) {
+        studentsCount = studentsCount + 1;
+        studentsForDelete.push(student);
+      }
+    });
+
+    props.removeCource(cource);
+
+    studentsForDelete.map(student => {
+      props.removeStudent(student);
+    });
+
+    console.log(studentsCount, studentsForDelete);
+  };
 
   return (
     <div>

@@ -1,6 +1,5 @@
-import { firestore,  } from "firebase";
-import firebase from 'firebase'
-
+import { firestore } from "firebase";
+import firebase from "firebase";
 
 export default class FireManager {
   //ADD NEW COURCE
@@ -59,30 +58,29 @@ export default class FireManager {
       .update({ ...statuse });
   }
 
-//EDIT STUDENT iNFORMATION
-static editStudentInformation(student) {
-  return firestore()
-    .collection("students")
-    .doc(student.id)
-    .update({ ...student });
-}
-  static  changeCources(obj) {
+  //EDIT STUDENT iNFORMATION
+  static editStudentInformation(student) {
+    return firestore()
+      .collection("students")
+      .doc(student.id)
+      .update({ ...student });
+  }
+  static changeCources(obj) {
     return firestore()
       .collection("students")
       .doc(obj.id)
-      .update({ ...obj});
+      .update({ ...obj });
   }
   ////////////change status//////////
-  static  changeStatuses(obj) {
+  static changeStatuses(obj) {
     return firestore()
       .collection("statuses")
       .doc(obj.id)
-      .update({ ...obj});
+      .update({ ...obj });
   }
   /////////////////////////////////////////////////////////////////////////////////
   static getStudents() {
-    const studentsRef = firestore()
-    .collection("students");
+    const studentsRef = firestore().collection("students");
     return studentsRef.get();
   }
 
@@ -97,29 +95,27 @@ static editStudentInformation(student) {
 
   static removeStudent(student) {
     return firestore()
-        .collection("students")
-        .doc(student.id)
-        .delete();
+      .collection("students")
+      .doc(student.id)
+      .delete();
   }
 
+  //////////login/////////////////
+  static adminLogIn(email, password) {
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
 
-//////////login/////////////////
-static adminLogIn(email, password){
-  return  firebase.auth().signInWithEmailAndPassword(email,password);
-}
-
-static onAuthStateChanged(){
-  return firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      debugger;
-      window.location = '/'
-      // ...
-    } else {
-      debugger;
-      // User is signed out.
-      // ...
-    }
-  });
-}
-
+  static onAuthStateChanged() {
+    return firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        debugger;
+        window.location = "/";
+        // ...
+      } else {
+        debugger;
+        // User is signed out.
+        // ...
+      }
+    });
+  }
 }
