@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Button, ListGroup, Image, Card } from "react-bootstrap";
 import EditStudentModal from "../../containers/editInfoStudent";
-import { withFirestore } from 'react-redux-firebase'
+import {firestoreConnect, withFirestore} from 'react-redux-firebase'
+import {compose} from "redux";
+import {connect} from "react-redux";
 
 
 function StudentCard (props){
-    const {allStatuses, allCources, student, firestore} = props;
+    const {statuses, cources, student, firestore} = props;
     const [selectedCource, setCource] = useState(student.courceName);
     const [selectedStatuse, setStatuse] = useState(student.statusName);
     const [isHidden, setHidden] = useState(false);
@@ -18,9 +20,8 @@ function StudentCard (props){
     }
 
     function handleSelectCourceChange (e){
-        console.log("dffdfdf")
         setCource(e.target.value);
-        let newCource = allCources.filter(cource=>(cource.name === e.target.value));
+        let newCource = cources.filter(cource=>(cource.name === e.target.value));
         firestore.collection("students")
             .doc(student.id)
             .update({
@@ -31,8 +32,7 @@ function StudentCard (props){
 
     function handleSelectStatusChange (e){
         setStatuse(e.target.value);
-        let newStatuse = allStatuses.filter(statuse=>(statuse.name === e.target.value));
-
+        let newStatuse = statuses.filter(statuse=>(statuse.name === e.target.value));
         firestore.collection("students")
             .doc(student.id)
             .update({
@@ -63,13 +63,13 @@ function StudentCard (props){
                 <div className="col-10 border border-secondary">
 
                     <select onChange = {handleSelectCourceChange} value = {selectedCource}>
-                        {allCources && allCources.map(cource => (
+                        {cources && cources.map(cource => (
                             <option key = {cource.id} value = {cource.name}>{cource.name}</option>
                         ))}
                     </select>
 
                     <select onChange = {handleSelectStatusChange} value = {selectedStatuse}>
-                        {allStatuses && allStatuses.map(status => (
+                        {statuses && statuses.map(status => (
                             <option key = {status.id} value = {status.name}>{status.name}</option>
                         ))}
                     </select>
@@ -109,4 +109,10 @@ function StudentCard (props){
     )
 }
 
-export default withFirestore(StudentCard)
+export default compose(
+    firestoreConnect(() => ['statuses', 'cources']),
+    connect((state, props) => ({
+        statuses: state.firestore.ordered.statuses,
+        cources: state.firestore.ordered.cources
+    }))
+)(withFirestore(StudentCard))

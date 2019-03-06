@@ -10,11 +10,11 @@ const getShowStudents = (students, filter, filterArray) => {
         case visibilityFilters.SHOW_ALL:
             return students;
         case visibilityFilters.SHOW_WITH_STATUS:
-            return students.filter();
+            return students.filter(student => (filterArray.indexOf(student.status) !== -1))
         case visibilityFilters.SHOW_WITH_COURCES:
-            return students.filter(student =>(filterArray.indexOf(student.cource) !== -1))
+            return students.filter(student => (filterArray.indexOf(student.cource) !== -1))
         case visibilityFilters.SHOW_WITH_COURCES_AND_STATUS:
-            return students.filter();
+            return students.filter(student => (filterArray.indexOf(student.status) !== -1) && filterArray.indexOf(student.cource) !== -1);
         default:
             throw new Error("Unknown filter " + filter);
     }
@@ -22,9 +22,7 @@ const getShowStudents = (students, filter, filterArray) => {
 
 export default compose(
     firestoreConnect(() => ['students']), // or { collection: 'todos' }
-    connect((state, props) => {
-       console.log(state)
-        return ({
+    connect((state, props) => ({
         students: getShowStudents(state.firestore.ordered.students, state.filter.filter, state.filter.filterArray)
-    })})
+    }))
 )(Students)

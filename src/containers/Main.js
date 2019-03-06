@@ -24,7 +24,7 @@ class Main extends Component {
                         />
                         <Route
                             exact path="/"
-                            component= { Students }
+                            component= { ShowStudents }
                         />
                         <Route
                             exact path="/students"
