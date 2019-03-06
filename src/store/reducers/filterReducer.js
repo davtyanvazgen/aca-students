@@ -1,0 +1,15 @@
+import { visibilityFilters } from "../actions"
+
+const filterReducer = (state="", action) => {
+    switch (action.type) {
+        case "SET_VISIBILITY_FILTER" :
+            return {filter:  action.filter, filterArray: action.filterArray}
+        default:
+            return {
+                filter: visibilityFilters.SHOW_ALL,
+                filterArray: []
+            }
+    }
+}
+
+export default filterReducer;

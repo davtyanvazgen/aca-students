@@ -4,15 +4,12 @@ import Header from "../components/header/index";
 import AddCource from "../components/cources/index";
 import AddStatuse from "../components/statuses";
 import Students from "./Students";
-import FireManager from "../firebase/FireManager";
-import { v1 } from "uuid";
-
+import ShowStudents from "./ShowStudents";
 
 class Main extends Component {
     render() {
         return (
             <div>
-
                 <Router>
                     <>
                     <Header/>
@@ -31,7 +28,7 @@ class Main extends Component {
                         />
                         <Route
                             exact path="/students"
-                            component= { Students }
+                            component= { ShowStudents }
                         />
                         <Redirect to = '/students'/>
                     </Switch>

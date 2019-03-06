@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
-import FireManager from "../firebase/FireManager";
+import { withFirestore } from 'react-redux-firebase';
 import EditStudent from '../components/students/editStudent'
 
-export default function EditStudentModal(props) {
+function EditStudentModal(props) {
   const [fullName, setFullName] = useState(`${props.student.fullName}`);
   const [email, setEmail] = useState(props.student.email);
   const [phone, setPhone] = useState(props.student.phone);
@@ -19,20 +18,14 @@ export default function EditStudentModal(props) {
   };
 
   const editStudent = () => {
-    console.log('editstudent')
-    let editedStudent = props.student;
-    editedStudent.fullName = fullName;
-    editedStudent.phone = phone;
-    editedStudent.email = email;
-
-    FireManager.editStudentInformation(editedStudent)
-      .then(() => {
-        debugger;
-        props.onHide();
-      })
-      .catch(err => {
-        this.setState({ editStudentError: err && err.message });
-      });
+    props.firestore.collection("students")
+        .doc(props.student.id)
+        .update({
+          fullName,
+          phone,
+          email
+        });
+    props.onHide();
   };
 
   return (
@@ -49,3 +42,5 @@ export default function EditStudentModal(props) {
     />
   );
 }
+
+export default withFirestore(EditStudentModal);

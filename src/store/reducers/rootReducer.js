@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import { firebaseReducer } from 'react-redux-firebase'
-import { firestoreReducer } from 'redux-firestore' // <- needed if using firestore
+import { firestoreReducer } from 'redux-firestore'
+import filterReducer from "./filterReducer"
 
-// Add firebase to reducers
+
 export default combineReducers({
     firebase: firebaseReducer,
-    firestore: firestoreReducer // <- needed if using firestore
+    firestore: firestoreReducer,
+    filter: filterReducer
 })

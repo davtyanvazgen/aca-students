@@ -5,6 +5,7 @@ import StudentCard from "../components/students/studentCard";
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
+import { setFilter } from "../store/actions";
 
 class Students extends Component {
     state = {
@@ -12,8 +13,8 @@ class Students extends Component {
         withCourcesStudents:[],
         selectedCource:[],
         selectedStatus:[],
-        showStudentsArr: this.props.students
     };
+
 
     filterStudents = () => {
         let { selectedCource ,selectedStatus } = this.state;
@@ -22,7 +23,7 @@ class Students extends Component {
         let resultArr = [];
 
         if (!selectedStatus.length && selectedCource.length) {
-
+            this.props.filtStudents("SHOW_WITH_COURCES", filters);
             resultArr = students.filter(student =>(filters.indexOf(student.cource) !== -1));
 
         }
@@ -84,6 +85,7 @@ class Students extends Component {
 
 
     render() {
+        console.log(this.props)
         const { withCourcesStudents,withStatusStudents,showStudentsArr } = this.state;
         return (
             <div className="container border border-primary">
@@ -101,7 +103,7 @@ class Students extends Component {
                         />
                     </div>
                     <div className="col-10 row container border border-primary">
-                        {this.state.showStudentsArr && this.state.showStudentsArr.map(student => (
+                        {this.props.students && this.props.students.map(student => (
                             <StudentCard
                                 key={ student.id }
                                 student= { student }
@@ -116,11 +118,16 @@ class Students extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch, filter, filterArray) => ({
+    filtStudents: () => dispatch(setFilter(filter, filterArray))
+})
+
+
 export default compose(
-    firestoreConnect(() => ['students', 'statuses', 'cources']), // or { collection: 'todos' }
+    firestoreConnect(() => ['statuses', 'cources']), // or { collection: 'todos' }
     connect((state, props) => ({
-        students: state.firestore.ordered.students,
         statuses: state.firestore.ordered.statuses,
         cources: state.firestore.ordered.cources
-    }))
+    }), mapDispatchToProps)
 )(Students)

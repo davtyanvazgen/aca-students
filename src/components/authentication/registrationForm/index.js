@@ -7,8 +7,6 @@ import {firestoreConnect} from "react-redux-firebase";
 import {connect} from "react-redux";
 
 function RegistrationForm(props) {
-
-
     const name = useFormInput("");
     const surname = useFormInput("");
     const phone = useFormInput("");
@@ -21,7 +19,6 @@ function RegistrationForm(props) {
 
     function handleChooseCource (e, cource ) {
         e.preventDefault();
-        console.log(cource);
         setCource(cource);
     }
 
@@ -48,6 +45,7 @@ function RegistrationForm(props) {
             return false;
         }
     }
+
     function validation() {
         const validator = require("validator");
         const nameErrors = validator.isAlpha(name.value);
@@ -73,6 +71,7 @@ function RegistrationForm(props) {
         }
         return false;
     }
+
     return (
         <>
             <div id="container"><div className="miniContainer"><Form><FormGroup><Label>Name</Label><Input {...name} type="text" name="name" />
