@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import CourcesButton from "../components/students/courcesButtonGroup"
 import StatusesButton from "../components/students/statusesButtonGroup"
 import StudentCard from "../components/students/studentCard";
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { firestoreConnect } from 'react-redux-firebase'
 import { setFilter } from "../store/actions";
 import { visibilityFilters } from "../store/actions";
 import Input from "reactstrap/es/Input";
@@ -121,16 +118,12 @@ class Students extends Component {
                                 key={ student.id }
                                 student= { student }
                                 repeatFiltering = {this.repeatFiltering}
-                                allCources =  { this.props.cources }
-                                allStatuses = { this.props.statuses }
                                 filterStudents = {this.filterStudents}
                             />)) : this.state.serchedStudents && this.state.serchedStudents.map(student => (
                             <StudentCard
                                 key={ student.id }
                                 student= { student }
                                 repeatFiltering = {this.repeatFiltering}
-                                allCources =  { this.props.cources }
-                                allStatuses = { this.props.statuses }
                                 filterStudents = {this.filterStudents}
                             />))
                         }
@@ -142,10 +135,4 @@ class Students extends Component {
 }
 
 
-export default compose(
-    firestoreConnect(() => ['statuses', 'cources']), // or { collection: 'todos' }
-    connect((state, props) => ({
-        statuses: state.firestore.ordered.statuses,
-        cources: state.firestore.ordered.cources
-    }))
-)(Students)
+export default Students;
