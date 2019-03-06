@@ -86,20 +86,6 @@ export default class FireManager {
 
   ////////////////add student///////////
 
-  static addStudent(student) {
-    return firestore()
-      .collection("students")
-      .doc(student.id)
-      .set(student);
-  }
-
-  static removeStudent(student) {
-    return firestore()
-      .collection("students")
-      .doc(student.id)
-      .delete();
-  }
-
   //////////login/////////////////
   static adminLogIn(email, password) {
     return firebase.auth().signInWithEmailAndPassword(email, password);

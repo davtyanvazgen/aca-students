@@ -1,9 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import CourcesButton from "../components/students/courcesButtonGroup";
 import StatusesButton from "../components/students/statusesButtonGroup";
-import StudentsList from "../components/students/studentsList";
+import StudentCard from "../components/students/studentCard";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
-class Students extends React.PureComponent {
+class Students extends Component {
   state = {
     withStatusStudents: [],
     withCourcesStudents: [],
@@ -44,10 +47,6 @@ class Students extends React.PureComponent {
     this.setState({
       showStudentsArr: resultArr
     });
-  };
-  toggleButton = () => {
-    console.log(this);
-    debugger;
   };
   courceStudents = cource => {
     const { selectedCource } = this.state;
@@ -98,31 +97,35 @@ class Students extends React.PureComponent {
       <div className="container border border-primary">
         <div className="row">
           <div className="col-12 border border-primary">
-            <CourcesButton
-              cources={this.props.cources}
-              courceStudents={this.courceStudents}
-            />
+            <CourcesButton courceStudents={this.courceStudents} />
           </div>
         </div>
         <div className="row">
           <div className="col-2 border border-primary">
-            <StatusesButton
-              statuses={this.props.statuses}
-              statuseStudents={this.statuseStudents}
-            />
+            <StatusesButton statuseStudents={this.statuseStudents} />
           </div>
           <div className="col-10 row container border border-primary">
-            <StudentsList
-              allStudents={showStudentsArr}
-              withStatusStudents={withStatusStudents}
-              withCourcesStudents={withCourcesStudents}
-              repeatFiltering={this.repeatFiltering}
-              removeStudent={this.props.removeStudent}
-            />
+            {this.state.showStudentsArr &&
+              this.state.showStudentsArr.map(student => (
+                <StudentCard
+                  key={student.id}
+                  student={student}
+                  repeatFiltering={this.repeatFiltering}
+                  allCources={this.props.cources}
+                  allStatuses={this.props.statuses}
+                />
+              ))}
           </div>
         </div>
       </div>
     );
   }
 }
-export default Students;
+export default compose(
+  firestoreConnect(() => ["students", "statuses", "cources"]), // or { collection: 'todos' }
+  connect((state, props) => ({
+    students: state.firestore.ordered.students,
+    statuses: state.firestore.ordered.statuses,
+    cources: state.firestore.ordered.cources
+  }))
+)(Students);
