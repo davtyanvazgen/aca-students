@@ -33,7 +33,6 @@ const Statuse = ({ statuse, firestore }) => {
       .update({ ...editStatus });
     setIsOpen(false);
   };
-
   const toggle = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
     setNewStatuse(statuse.name);

@@ -6,22 +6,16 @@ import { v1 } from "uuid";
 const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
   const [err, setErr] = useState("");
-
   function handleChange(e) {
     setName(e.target.value);
   }
-
   function handleSubmit(e) {
     e.preventDefault();
+
     const newCource = {
       id: v1(),
       name
     };
-
-    if (!newCource.name.trim()) {
-      setName("");
-      return;
-    }
     if (!newCource.name.trim()) {
       setName("");
     }

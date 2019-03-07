@@ -21,7 +21,7 @@ class Main extends Component {
             <Switch>
               <Route path="/cources" component={AddCource} />
               <Route path="/statuses" component={AddStatuse} />
-              <Route exact path="/" component={Students} />
+              <Route exact path="/" component={ShowStudents} />
               <Route exact path="/students" component={ShowStudents} />
               <Redirect to="/students" />
             </Switch>
