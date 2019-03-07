@@ -9,7 +9,7 @@ import Header from "../components/header/index";
 import AddCource from "../components/cources/index";
 import AddStatuse from "../components/statuses";
 import Students from "./Students";
-import FireManager from "../firebase/FireManager";
+import ShowStudents from "./ShowStudents";
 
 class Main extends Component {
   render() {
@@ -22,7 +22,7 @@ class Main extends Component {
               <Route path="/cources" component={AddCource} />
               <Route path="/statuses" component={AddStatuse} />
               <Route exact path="/" component={Students} />
-              <Route exact path="/students" component={Students} />
+              <Route exact path="/students" component={ShowStudents} />
               <Redirect to="/students" />
             </Switch>
           </>

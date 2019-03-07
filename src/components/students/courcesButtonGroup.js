@@ -16,7 +16,6 @@ function CourcesButton(props) {
                     </ToggleButton>
                     ))}
             </ToggleButtonGroup>
-
         </ButtonToolbar>
     )
 }
@@ -27,4 +26,3 @@ export default compose(
         cources: state.firestore.ordered.cources
     }))
 )(CourcesButton)
-

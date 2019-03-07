@@ -5,14 +5,15 @@ import StudentCard from "../components/students/studentCard";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { setFilter } from "../store/actions";
+import { visibilityFilters } from "../store/actions";
 
 class Students extends Component {
   state = {
     withStatusStudents: [],
     withCourcesStudents: [],
     selectedCource: [],
-    selectedStatus: [],
-    showStudentsArr: this.props.students
+    selectedStatus: []
   };
 
   filterStudents = () => {
@@ -24,6 +25,9 @@ class Students extends Component {
     let resultArr = [];
 
     if (!selectedStatus.length && selectedCource.length) {
+      this.props.dispatch(
+        setFilter(visibilityFilters.SHOW_WITH_COURCES, filters)
+      );
       resultArr = students.filter(
         student => filters.indexOf(student.cource) !== -1
       );
@@ -105,8 +109,8 @@ class Students extends Component {
             <StatusesButton statuseStudents={this.statuseStudents} />
           </div>
           <div className="col-10 row container border border-primary">
-            {this.state.showStudentsArr &&
-              this.state.showStudentsArr.map(student => (
+            {this.props.students &&
+              this.props.students.map(student => (
                 <StudentCard
                   key={student.id}
                   student={student}
@@ -121,10 +125,10 @@ class Students extends Component {
     );
   }
 }
+
 export default compose(
-  firestoreConnect(() => ["students", "statuses", "cources"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["statuses", "cources"]), // or { collection: 'todos' }
   connect((state, props) => ({
-    students: state.firestore.ordered.students,
     statuses: state.firestore.ordered.statuses,
     cources: state.firestore.ordered.cources
   }))
