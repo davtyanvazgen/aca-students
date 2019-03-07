@@ -8,7 +8,7 @@ import {
 import Header from "../components/header/index";
 import AddCource from "../components/cources/index";
 import AddStatuse from "../components/statuses";
-import Students from "./Students";
+// import Students from "./Students";
 import ShowStudents from "./ShowStudents";
 
 class Main extends Component {

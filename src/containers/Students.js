@@ -103,11 +103,11 @@ class Students extends Component {
   };
 
   render() {
-    const {
-      withCourcesStudents,
-      withStatusStudents,
-      showStudentsArr
-    } = this.state;
+    // const {
+    //   withCourcesStudents,
+    //   withStatusStudents,
+    //   showStudentsArr
+    // } = this.state;
     return (
       <div className="container border border-primary">
         <div className="row">

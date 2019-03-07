@@ -5,7 +5,6 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const getShowStudents = (students, filter, filterArray) => {
-  console.log("hihihihi");
   switch (filter) {
     case visibilityFilters.SHOW_ALL:
       return students;

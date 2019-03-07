@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/authentication/signin";
@@ -11,16 +11,19 @@ import { createFirestoreInstance } from "redux-firestore";
 import firebase from "firebase";
 
 const store = createReduxStore();
+
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true
 };
+
 const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance
 };
+
 const App = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
