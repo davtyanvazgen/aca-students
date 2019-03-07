@@ -5,29 +5,31 @@ import { v1 } from "uuid";
 
 const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [err, setErr] = useState("");
-  function handleChange(e) {
-    setName(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
+  const [addCourceError, setAddCourceError] = useState("");
 
-    const newCource = {
-      id: v1(),
-      name
-    };
-    if (!newCource.name.trim()) {
+  const handleChange = e => {
+    setName(e.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (name.trim()) {
+      const newCource = {
+        id: v1(),
+        name
+      };
+
+      firestore
+        .collection("cources")
+        .doc(newCource.id)
+        .set(newCource)
+        .catch(err => {
+          setAddCourceError(err);
+        });
+
       setName("");
     }
-    firestore
-      .collection("cources")
-      .doc(newCource.id)
-      .set(newCource)
-      .catch(err => {
-        console.log(err);
-      });
-    setName("");
-  }
+  };
 
   return (
     <>

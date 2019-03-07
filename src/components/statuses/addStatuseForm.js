@@ -5,7 +5,7 @@ import { v1 } from "uuid";
 
 const AddStatuseForm = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [err, setErr] = useState("");
+  const [addStatusError, setAddStatusError] = useState("");
 
   function handleChange(e) {
     setName(e.target.value);
@@ -14,21 +14,22 @@ const AddStatuseForm = ({ firestore }) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newStatuse = {
-      id: v1(),
-      name
-    };
-    if (!newStatuse.name.trim()) {
+    if (name.trim()) {
+      const newStatuse = {
+        id: v1(),
+        name
+      };
+
+      firestore
+        .collection("statuses")
+        .doc(newStatuse.id)
+        .set(newStatuse)
+        .catch(err => {
+          setAddStatusError(err);
+        });
+
       setName("");
     }
-    firestore
-      .collection("statuses")
-      .doc(newStatuse.id)
-      .set(newStatuse)
-      .catch(err => {
-        console.log(err);
-      });
-    setName("");
   }
 
   return (

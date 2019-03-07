@@ -12,12 +12,17 @@ import { withFirestore } from "react-redux-firebase";
 const Statuse = ({ statuse, firestore }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newStatuse, setNewStatuse] = useState(statuse.name);
+  const [deleteStatusError, setDeleteStatusError] = useState("");
+  const [editStatusError, setEditStatusError] = useState("");
 
   const handleRemove = statuse => {
     firestore
       .collection("statuses")
       .doc(statuse.id)
-      .delete();
+      .delete()
+      .catch(err => {
+        setDeleteStatusError(err);
+      });
   };
 
   const handleEditStatuse = e => {
@@ -30,13 +35,15 @@ const Statuse = ({ statuse, firestore }) => {
         name: newStatuse,
         id: statuse.id
       };
+
       firestore
         .collection("statuses")
         .doc(statuse.id)
-        .update({ ...editStatus });
+        .update({ ...editStatus })
+        .catch(err => {
+          setEditStatusError(err);
+        });
       setIsOpen(false);
-    } else {
-      return false;
     }
   };
 
