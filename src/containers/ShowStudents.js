@@ -28,7 +28,7 @@ const getShowStudents = (students, filter, filterArray) => {
 };
 
 export default compose(
-  firestoreConnect(() => ["students"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["students"]),
   connect((state, props) => ({
     students: getShowStudents(
       state.firestore.ordered.students,

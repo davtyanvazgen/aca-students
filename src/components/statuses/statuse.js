@@ -12,27 +12,34 @@ import { withFirestore } from "react-redux-firebase";
 const Statuse = ({ statuse, firestore }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newStatuse, setNewStatuse] = useState(statuse.name);
+
   const handleRemove = statuse => {
     firestore
       .collection("statuses")
       .doc(statuse.id)
       .delete();
   };
+
   const handleEditStatuse = e => {
     setNewStatuse(e.target.value);
   };
-  const confirmEditStatuse = newStatuse => {
-    const editStatus = {
-      name: newStatuse,
-      id: statuse.id
-    };
 
-    firestore
-      .collection("statuses")
-      .doc(statuse.id)
-      .update({ ...editStatus });
-    setIsOpen(false);
+  const confirmEditStatuse = newStatuse => {
+    if (newStatuse.trim()) {
+      const editStatus = {
+        name: newStatuse,
+        id: statuse.id
+      };
+      firestore
+        .collection("statuses")
+        .doc(statuse.id)
+        .update({ ...editStatus });
+      setIsOpen(false);
+    } else {
+      return false;
+    }
   };
+
   const toggle = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
     setNewStatuse(statuse.name);
