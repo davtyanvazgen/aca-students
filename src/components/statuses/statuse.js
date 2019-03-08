@@ -1,30 +1,52 @@
 import React, { useState } from "react";
-import { ListGroup, ListGroupItem, Button, Input, InputGroup, InputGroupAddon} from "reactstrap";
-import { withFirestore } from 'react-redux-firebase'
+import {
+  ListGroup,
+  ListGroupItem,
+  Button,
+  Input,
+  InputGroup,
+  InputGroupAddon
+} from "reactstrap";
+import { withFirestore } from "react-redux-firebase";
 
-
-const Statuse = ({statuse, firestore}) => {
+const Statuse = ({ statuse, firestore }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newStatuse, setNewStatuse] = useState(statuse.name);
+  const [deleteStatusError, setDeleteStatusError] = useState("");
+  const [editStatusError, setEditStatusError] = useState("");
+
   const handleRemove = statuse => {
-    firestore.collection("statuses")
-        .doc(statuse.id)
-        .delete();
+    firestore
+      .collection("statuses")
+      .doc(statuse.id)
+      .delete()
+      .catch(err => {
+        setDeleteStatusError(err);
+      });
   };
+
   const handleEditStatuse = e => {
     setNewStatuse(e.target.value);
   };
-  const confirmEditStatuse = newStatuse => {
-    const editStatus = {
-      name: newStatuse,
-      id: statuse.id
-    };
 
-    firestore.collection("statuses")
+  const confirmEditStatuse = newStatuse => {
+    if (newStatuse.trim()) {
+      const editStatus = {
+        name: newStatuse,
+        id: statuse.id
+      };
+
+      firestore
+        .collection("statuses")
         .doc(statuse.id)
-        .update({ ...editStatus });
-    setIsOpen(false);
+        .update({ ...editStatus })
+        .catch(err => {
+          setEditStatusError(err);
+        });
+      setIsOpen(false);
+    }
   };
+
   const toggle = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
     setNewStatuse(statuse.name);
@@ -95,6 +117,6 @@ const Statuse = ({statuse, firestore}) => {
       </ListGroup>
     </div>
   );
-}
+};
 
-export default withFirestore(Statuse)
+export default withFirestore(Statuse);

@@ -1,32 +1,35 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { withFirestore } from 'react-redux-firebase'
-import { v1 } from "uuid"
-
+import { withFirestore } from "react-redux-firebase";
+import { v1 } from "uuid";
 
 const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [err, setErr] = useState("");
-  function handleChange(e) {
+  const [addCourceError, setAddCourceError] = useState("");
+
+  const handleChange = e => {
     setName(e.target.value);
-  }
-  function handleSubmit(e){
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
-    if(name.trim()){
+    if (name.trim()) {
       const newCource = {
         id: v1(),
         name
       };
 
-      firestore.collection("cources")
-          .doc(newCource.id)
-          .set(newCource)
-          .catch((err) => {
+      firestore
+        .collection("cources")
+        .doc(newCource.id)
+        .set(newCource)
+        .catch(err => {
+          setAddCourceError(err);
+        });
 
-          });
       setName("");
     }
-  }
+  };
 
   return (
     <>
@@ -47,7 +50,6 @@ const AddCourceForm = ({ firestore }) => {
       </Form>
     </>
   );
-}
+};
 
-
-export default withFirestore(AddCourceForm)
+export default withFirestore(AddCourceForm);

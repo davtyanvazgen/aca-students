@@ -1,118 +1,136 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { Button, ListGroup, Image, Card } from "react-bootstrap";
 import EditStudentModal from "../../containers/editInfoStudent";
-import {firestoreConnect, withFirestore} from 'react-redux-firebase'
-import {compose} from "redux";
-import {connect} from "react-redux";
+import { firestoreConnect, withFirestore } from "react-redux-firebase";
+import { compose } from "redux";
+import { connect } from "react-redux";
 
+function StudentCard(props) {
+  const { statuses, cources, student, firestore } = props;
+  const [selectedCource, setCource] = useState(student.courceName);
+  const [selectedStatuse, setStatuse] = useState(student.statusName);
+  const [isHidden, setHidden] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
-function StudentCard (props){
-    const {statuses, cources, student, firestore} = props;
-    const [selectedCource, setCource] = useState(student.courceName);
-    const [selectedStatuse, setStatuse] = useState(student.statusName);
-    const [isHidden, setHidden] = useState(false);
-    const [modalShow, setModalShow] = useState(false);
+  function handleRemove() {
+    firestore
+      .collection("students")
+      .doc(student.id)
+      .delete();
+  }
 
-    function handleRemove() {
-        firestore.collection("students")
-            .doc(student.id)
-            .delete();
-    }
+  function handleSelectCourceChange(e) {
+    setCource(e.target.value);
+    let newCource = cources.filter(cource => cource.name === e.target.value);
+    firestore
+      .collection("students")
+      .doc(student.id)
+      .update({
+        cource: newCource[0].id,
+        courceName: newCource[0].name
+      });
+  }
 
-    function handleSelectCourceChange (e){
-        setCource(e.target.value);
-        let newCource = cources.filter(cource=>(cource.name === e.target.value));
-        firestore.collection("students")
-            .doc(student.id)
-            .update({
-                cource: newCource[0].id,
-                courceName: newCource[0].name,
-            });
-    }
+  function handleSelectStatusChange(e) {
+    setStatuse(e.target.value);
+    let newStatuse = statuses.filter(
+      statuse => statuse.name === e.target.value
+    );
+    firestore
+      .collection("students")
+      .doc(student.id)
+      .update({
+        status: newStatuse[0].id,
+        statusName: newStatuse[0].name
+      });
+  }
 
-    function handleSelectStatusChange (e){
-        setStatuse(e.target.value);
-        let newStatuse = statuses.filter(statuse=>(statuse.name === e.target.value));
-        firestore.collection("students")
-            .doc(student.id)
-            .update({
-                status: newStatuse[0].id,
-                statusName: newStatuse[0].name,
-            });
-    }
+  function toggleHidden() {
+    setHidden(!isHidden);
+  }
 
-    function toggleHidden() {
-        setHidden(!isHidden);
-    }
+  function handleEdit() {
+    setModalShow(true);
+  }
+  function handleOnHide() {
+    setModalShow(false);
+  }
 
-    function handleEdit() {
-        setModalShow(true);
-    }
-    function handleOnHide() {
-        setModalShow(false);
-    }
+  return (
+    <Card
+      className="col-12 container"
+      key={student.id}
+      bg="primary"
+      text="white"
+    >
+      <div className="row">
+        <Image
+          className="col-2 border border-secondary"
+          style={{
+            width: "70px",
+            height: "100%" + "" + "",
+            paddingLeft: "0px",
+            paddingRight: "0px"
+          }}
+          variant="top"
+          src="https://www.nastol.com.ua/download.php?img=201801/1920x1200/nastol.com.ua-265532.jpg"
+        />
+        <div className="col-10 border border-secondary">
+          <select onChange={handleSelectCourceChange} value={selectedCource}>
+            {cources &&
+              cources.map(cource => (
+                <option key={cource.id} value={cource.name}>
+                  {cource.name}
+                </option>
+              ))}
+          </select>
 
-    return(
-        <Card className="col-12 container" key={student.id} bg="primary" text="white">
-            <div className="row">
-                <Image className="col-2 border border-secondary" style={{width: "70px", height: "100%" +
-                        "" +
-                        "", paddingLeft: "0px", paddingRight: "0px"}}
-                       variant="top"
-                       src="https://www.nastol.com.ua/download.php?img=201801/1920x1200/nastol.com.ua-265532.jpg"/>
-                <div className="col-10 border border-secondary">
+          <select onChange={handleSelectStatusChange} value={selectedStatuse}>
+            {statuses &&
+              statuses.map(status => (
+                <option key={status.id} value={status.name}>
+                  {status.name}
+                </option>
+              ))}
+          </select>
 
-                    <select onChange = {handleSelectCourceChange} value = {selectedCource}>
-                        {cources && cources.map(cource => (
-                            <option key = {cource.id} value = {cource.name}>{cource.name}</option>
-                        ))}
-                    </select>
+          <Button variant="info" onClick={toggleHidden}>
+            More Information
+          </Button>
+          {isHidden && (
+            <ListGroup>
+              <ListGroup.Item disabled>E-mail: {student.email}</ListGroup.Item>
+              <ListGroup.Item disabled>Phone: {student.phone} </ListGroup.Item>
+            </ListGroup>
+          )}
+        </div>
+      </div>
+      <Button variant="warning" onClick={handleEdit}>
+        Edit information
+      </Button>
 
-                    <select onChange = {handleSelectStatusChange} value = {selectedStatuse}>
-                        {statuses && statuses.map(status => (
-                            <option key = {status.id} value = {status.name}>{status.name}</option>
-                        ))}
-                    </select>
+      <Button variant="warning" onClick={handleRemove}>
+        delete
+      </Button>
 
-                    <Button variant="info" onClick = {toggleHidden}>More Information</Button>
-                    {isHidden && <ListGroup>
-                        <ListGroup.Item disabled>E-mail: {student.email}</ListGroup.Item>
-                        <ListGroup.Item disabled>Phone: {student.phone} </ListGroup.Item>
-                    </ListGroup> }
-                </div>
-            </div>
-            <Button
-                variant="warning"
-                onClick={handleEdit}
-            >
-                Edit information
-            </Button>
-
-            <Button
-                variant="warning"
-                onClick={handleRemove}
-            >
-                delete
-            </Button>
-
-            <EditStudentModal
-                show={modalShow}
-                onHide={handleOnHide}
-                student={student}
-            />
-            <div className="row">
-                <div className="col-12 border border-secondary">
-                    {`${student.fullName}`.toUpperCase()}
-                </div>
-            </div>
-        </Card>
-    )
+      <EditStudentModal
+        show={modalShow}
+        onHide={handleOnHide}
+        student={student}
+      />
+      <div className="row">
+        <div className="col-12 border border-secondary">
+          {`${student.fullName}`.toUpperCase()}
+        </div>
+      </div>
+    </Card>
+  );
 }
 
 export default compose(
-    firestoreConnect(() => ['statuses', 'cources']),
-    connect((state, props) => ({
-        statuses: state.firestore.ordered.statuses,
-        cources: state.firestore.ordered.cources
-    }))
-)(withFirestore(StudentCard))
+  firestoreConnect(() => ["statuses", "cources"]),
+  connect((state, props) => ({
+    statuses: state.firestore.ordered.statuses,
+    cources: state.firestore.ordered.cources
+  }))
+)(withFirestore(StudentCard));

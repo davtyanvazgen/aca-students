@@ -1,12 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { withFirestore } from 'react-redux-firebase'
-import { v1 } from "uuid"
+import { withFirestore } from "react-redux-firebase";
+import { v1 } from "uuid";
 
-
-const AddStatuseForm = ({firestore}) => {
+const AddStatuseForm = ({ firestore }) => {
   const [name, setName] = useState("");
-  const [err, setErr] = useState("");
+  const [addStatusError, setAddStatusError] = useState("");
 
   function handleChange(e) {
     setName(e.target.value);
@@ -15,17 +14,22 @@ const AddStatuseForm = ({firestore}) => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newStatuse = {
-      id: v1(),
-      name
-    }
-    if(!newStatuse.name.trim()){
-      setName("")
-    }
-    firestore.collection("statuses")
+    if (name.trim()) {
+      const newStatuse = {
+        id: v1(),
+        name
+      };
+
+      firestore
+        .collection("statuses")
         .doc(newStatuse.id)
-        .set(newStatuse).catch( (err) => {console.log(err)} );
-    setName("");
+        .set(newStatuse)
+        .catch(err => {
+          setAddStatusError(err);
+        });
+
+      setName("");
+    }
   }
 
   return (
@@ -46,6 +50,6 @@ const AddStatuseForm = ({firestore}) => {
       </Form>
     </>
   );
-}
+};
 
-export default withFirestore(AddStatuseForm)
+export default withFirestore(AddStatuseForm);
