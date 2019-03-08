@@ -25,6 +25,11 @@ function RegistrationForm(props) {
   function handeleCreateStudent() {
     const checkValidForm = validation();
     const id = v1();
+
+    const date = new Date();
+    const registerDate = `${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()}`;
+
     if (checkValidForm) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
       let student = {
@@ -35,7 +40,8 @@ function RegistrationForm(props) {
         statusName: defaultStatus.name,
         courceName: selectedCource.name,
         cource: selectedCource.id,
-        id: id
+        id: id,
+        date: registerDate
       };
 
       props.firestore
@@ -147,6 +153,7 @@ function RegistrationForm(props) {
     };
   }
 }
+
 export default compose(
   firestoreConnect(() => ["statuses", "cources"]), // or { collection: 'todos' }
   connect((state, props) => ({

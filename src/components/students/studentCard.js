@@ -120,7 +120,7 @@ function StudentCard(props) {
       />
       <div className="row">
         <div className="col-12 border border-secondary">
-          {`${student.fullName}`.toUpperCase()}
+          {`${student.fullName.toUpperCase()} registrated on  ${student.date}`}
         </div>
       </div>
     </Card>

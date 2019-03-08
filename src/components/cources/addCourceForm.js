@@ -5,17 +5,22 @@ import { v1 } from "uuid";
 
 const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
+  const [longName, setLongName] = useState("");
   const [addCourceError, setAddCourceError] = useState("");
 
-  const handleChange = e => {
+  const handleChangeName = e => {
     setName(e.target.value);
   };
+  function handleChangeLongName(e) {
+    setLongName(e.target.value);
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
     if (name.trim()) {
       const newCource = {
         id: v1(),
+        longName: longName.trim(),
         name
       };
 
@@ -28,6 +33,7 @@ const AddCourceForm = ({ firestore }) => {
         });
 
       setName("");
+      setLongName("");
     }
   };
 
@@ -35,12 +41,19 @@ const AddCourceForm = ({ firestore }) => {
     <>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label>Add new cource</Label>
+          <Label>Cource`s short name</Label>
           <Input
             type="text"
             placeholder="Enter new cource"
             value={name}
-            onChange={handleChange}
+            onChange={handleChangeName}
+          />
+          <Label>Cource`s long name</Label>
+          <Input
+            type="text"
+            placeholder="Enter long name of status"
+            value={longName}
+            onChange={handleChangeLongName}
           />
         </FormGroup>
 

@@ -20,7 +20,11 @@ class AddStatuse extends Component {
           <h1>All statuses</h1>
           {this.props.statuses &&
             this.props.statuses.map(statuse => (
-              <Statuse key={statuse.id} statuse={statuse} />
+              <Statuse
+                key={statuse.id}
+                statuse={statuse}
+                students={this.props.students}
+              />
             ))}
         </div>
       </>
@@ -29,8 +33,9 @@ class AddStatuse extends Component {
 }
 
 export default compose(
-  firestoreConnect(() => ["statuses"]),
+  firestoreConnect(() => ["statuses", "students"]),
   connect((state, props) => ({
-    statuses: state.firestore.ordered.statuses
+    statuses: state.firestore.ordered.statuses,
+    students: state.firestore.ordered.students
   }))
 )(AddStatuse);
