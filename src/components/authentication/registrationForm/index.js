@@ -27,8 +27,8 @@ function RegistrationForm(props) {
     const id = v1();
 
     const date = new Date();
-    const registerDate = `${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()}`;
+    const registerDate = `(${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()})`;
 
     if (checkValidForm) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
