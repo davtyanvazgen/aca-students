@@ -12,18 +12,20 @@ const AddCourceForm = ({ firestore }) => {
   }
   function handleSubmit(e){
     e.preventDefault();
+    if(name.trim()){
+      const newCource = {
+        id: v1(),
+        name
+      };
 
-    const newCource = {
-      id: v1(),
-      name
+      firestore.collection("cources")
+          .doc(newCource.id)
+          .set(newCource)
+          .catch((err) => {
+
+          });
+      setName("");
     }
-    if(!newCource.name.trim()){
-      setName("")
-    }
-    firestore.collection("cources")
-        .doc(newCource.id)
-        .set(newCource).catch( (err) => {console.log(err)} );
-    setName("");
   }
 
   return (

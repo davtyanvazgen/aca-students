@@ -11,27 +11,32 @@ class Students extends Component {
         selectedCource:[],
         selectedStatus:[],
         serchedStudents: this.props.students,
-        isSearch: false
+        isSearch: false,
+        searchValue: "",
     };
 
-    handleSearch = (e) => {
-        if(e.target.value === ""){
+    handleSearch = (value = this.state.searchValue) => {
+        if(value === ""){
             this.setState({
                 isSearch: false
             });
             return
         }
+        this.setState({
+            searchValue: value,
+        });
+
         let {students} = this.props;
-        let value = e.target.value;
+        let tempValue = value;
         let resultArr = [];
         for(let i = 0; i < students.length; i++){
             let counter = 0;
-            for(let j = 0; j < value.length; j++){
-                if(students[i].fullName[j] === value[j]){
+            for(let j = 0; j < tempValue.length; j++){
+                if(students[i].fullName[j] === tempValue[j]){
                     counter ++;
                 }
             }
-            if(counter === value.length){
+            if(counter === tempValue.length){
                 resultArr.push(students[i]);
             }
         }
@@ -57,6 +62,7 @@ class Students extends Component {
         if (!selectedStatus.length && !selectedCource.length) {
             this.props.dispatch(setFilter(visibilityFilters.SHOW_ALL, filters));
         }
+        this.handleSearch();
     };
 
     courceStudents = (cource) => {
@@ -103,7 +109,7 @@ class Students extends Component {
                         <CourcesButton
                             courceStudents = { this.courceStudents }
                         />
-                        <Input onChange={this.handleSearch}></Input>
+                        <Input onChange={(e)=>this.handleSearch(e.target.value)}></Input>
                     </div>
                 </div>
                 <div className="row">
