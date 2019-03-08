@@ -93,10 +93,6 @@ function RegistrationForm(props) {
       knowledgeErrors = true;
     }
 
-    // knowledge === "--choose--" || knowledge.trim() === ""
-    //   ? setKnowledgeValidationErrors("choose your level SUKA")
-    //   : setKnowledgeValidationErrors("");
-
     if (
       nameErrors &&
       surNameErrors &&
