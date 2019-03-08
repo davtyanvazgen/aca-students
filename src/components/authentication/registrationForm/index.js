@@ -12,14 +12,23 @@ function RegistrationForm(props) {
   const phone = useFormInput("");
   const email = useFormInput("");
   const [selectedCource, setCource] = useState("");
+  const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
   const [emailValidationErrors, setEmailValidationErrors] = useState("");
   const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
+  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
+    ""
+  );
+
+  function hanldeSelectKnowledge(e) {
+    setKnowledge(e.target.value);
+  }
 
   function handleChooseCource(e, cource) {
     e.preventDefault();
     setCource(cource);
+    console.log(typeof knowledge);
   }
 
   function handeleCreateStudent() {
@@ -41,7 +50,8 @@ function RegistrationForm(props) {
         courceName: selectedCource.name,
         cource: selectedCource.id,
         id: id,
-        date: registerDate
+        date: registerDate,
+        knowledge
       };
 
       props.firestore
@@ -73,9 +83,30 @@ function RegistrationForm(props) {
     !phoneErrors
       ? setPhoneValidationErrors("Wrong number")
       : setPhoneValidationErrors("");
-    if (nameErrors && surNameErrors && emailErrors && phoneErrors) {
+
+    let knowledgeErrors;
+    if (knowledge === "--choose--" || knowledge.trim() === "") {
+      setKnowledgeValidationErrors("choose your level SUKA");
+      knowledgeErrors = false;
+    } else {
+      setKnowledgeValidationErrors("");
+      knowledgeErrors = true;
+    }
+
+    // knowledge === "--choose--" || knowledge.trim() === ""
+    //   ? setKnowledgeValidationErrors("choose your level SUKA")
+    //   : setKnowledgeValidationErrors("");
+
+    if (
+      nameErrors &&
+      surNameErrors &&
+      emailErrors &&
+      phoneErrors &&
+      knowledgeErrors
+    ) {
       return true;
     }
+
     return false;
   }
 
@@ -133,6 +164,26 @@ function RegistrationForm(props) {
                   </button>
                 ))}
             </FormGroup>
+
+            <FormGroup>
+              <Label>It knowledge Level</Label>
+              <Input
+                type="select"
+                name="select"
+                id="select"
+                onChange={hanldeSelectKnowledge}
+              >
+                <option>--choose--</option>
+                <option>Beginner</option>
+                <option>junior</option>
+                <option>middle</option>
+                <option>Senior</option>option>
+              </Input>
+              {knowledgeValidationErrors && (
+                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+              )}
+            </FormGroup>
+
             <Button color="success" block onClick={handeleCreateStudent}>
               Registration
             </Button>
@@ -155,7 +206,7 @@ function RegistrationForm(props) {
 }
 
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["statuses", "cources"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
     cources: state.firestore.ordered.cources

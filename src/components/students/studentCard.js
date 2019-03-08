@@ -101,6 +101,9 @@ function StudentCard(props) {
             <ListGroup>
               <ListGroup.Item disabled>E-mail: {student.email}</ListGroup.Item>
               <ListGroup.Item disabled>Phone: {student.phone} </ListGroup.Item>
+              <ListGroup.Item disabled>
+                knowledge: {student.knowledge}{" "}
+              </ListGroup.Item>
             </ListGroup>
           )}
         </div>
