@@ -56,6 +56,8 @@ function StudentCard(props) {
     setModalShow(false);
   }
 
+  console.log("lodash counter ", modalShow);
+
   return (
     <Card
       className="col-12 container"

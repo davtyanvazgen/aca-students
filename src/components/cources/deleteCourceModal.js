@@ -3,9 +3,32 @@ import { Modal, Button } from "react-bootstrap";
 
 export default class DeleteCourceModal extends React.Component {
   render() {
+    const {
+      studentsSameCource,
+      cource,
+      handleRemove,
+      onHide,
+      show
+    } = this.props;
+
+    const body = studentsSameCource.length ? (
+      <>
+        <h4>
+          There are {studentsSameCource.length} Students with {cource.name}
+        </h4>
+        <p>
+          if you delete this course you will remove {studentsSameCource.length}{" "}
+          students
+        </p>
+      </>
+    ) : (
+      <h6>Do you want to delete this cource ?</h6>
+    );
+
     return (
       <Modal
-        {...this.props}
+        onHide={onHide}
+        show={show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -15,25 +38,10 @@ export default class DeleteCourceModal extends React.Component {
             Are You Sure
           </Modal.Title>
         </Modal.Header>
-        {this.props.studentsSameCource.length ? (
-          <Modal.Body>
-            <h4>
-              There are {this.props.studentsSameCource.length} Students with{" "}
-              {this.props.cource.name}
-            </h4>
-            <p>
-              if you delete this course you will remove{" "}
-              {this.props.studentsSameCource.length} students
-            </p>
-          </Modal.Body>
-        ) : (
-          <Modal.Body>
-            <h6>Do you want to delete this cource ?</h6>
-          </Modal.Body>
-        )}
+        <Modal.Body>{body}</Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-          <Button variant="danger" onClick={this.props.handleRemove}>
+          <Button onClick={onHide}>Close</Button>
+          <Button variant="danger" onClick={handleRemove}>
             Delete
           </Button>
         </Modal.Footer>

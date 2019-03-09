@@ -21,13 +21,11 @@ const Statuse = ({ statuse, firestore, students }) => {
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
 
   const areYouSure = statuse => {
-    const studentsForDelete = [];
+    // const studentsForDelete = [];
 
-    students.map(student => {
-      if (student.status === statuse.id) {
-        studentsForDelete.push(student);
-      }
-    });
+    const studentsForDelete = students.filter(
+      student => student.status === statuse.id
+    );
     setStudentsSameStatus(studentsForDelete);
     setModalShow(true);
   };

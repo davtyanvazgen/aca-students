@@ -3,9 +3,21 @@ import { Button, Modal } from "react-bootstrap";
 import { Input } from "reactstrap";
 
 export default function EditStudent(props) {
+  const {
+    fullName,
+    handleFullnameInput,
+    email,
+    handleEmailInput,
+    handlePhoneInput,
+    phone,
+    editStudent,
+    onHide,
+    show
+  } = props;
   return (
     <Modal
-      {...props.modalProps}
+      onHide={onHide}
+      show={show}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -17,20 +29,20 @@ export default function EditStudent(props) {
       </Modal.Header>
       <Modal.Body>
         <h5>Edit Fullname</h5>
-        <Input value={props.fullName} onChange={props.handleFullnameInput} />
+        <Input value={fullName} onChange={handleFullnameInput} />
         <br />
         <h5>Edit Email</h5>
-        <Input value={props.email} onChange={props.handleEmailInput} />
+        <Input value={email} onChange={handleEmailInput} />
         <br />
         <h5>Edit Phone number</h5>
-        <Input value={props.phone} onChange={props.handlePhoneInput} />
+        <Input value={phone} onChange={handlePhoneInput} />
         <br />
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="warning" onClick={props.editStudent}>
+        <Button variant="warning" onClick={editStudent}>
           Edit
         </Button>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -86,7 +86,7 @@ function RegistrationForm(props) {
 
     let knowledgeErrors;
     if (knowledge === "--choose--" || knowledge.trim() === "") {
-      setKnowledgeValidationErrors("choose your level SUKA");
+      setKnowledgeValidationErrors("choose your level ");
       knowledgeErrors = false;
     } else {
       setKnowledgeValidationErrors("");

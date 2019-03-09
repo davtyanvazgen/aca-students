@@ -10,13 +10,9 @@ const Cource = ({ cource, students, firestore }) => {
   const [studentsSameCource, setStudentsSameCource] = useState([]);
 
   const areYouSure = cource => {
-    const studentsForDelete = [];
-
-    students.map(student => {
-      if (student.cource === cource.id) {
-        studentsForDelete.push(student);
-      }
-    });
+    const studentsForDelete = students.filter(
+      student => student.cource === cource.id
+    );
     setStudentsSameCource(studentsForDelete);
     setModalShow(true);
   };

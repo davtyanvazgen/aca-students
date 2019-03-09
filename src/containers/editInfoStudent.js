@@ -26,6 +26,7 @@ function EditStudentModal(props) {
         phone,
         email
       });
+
     props.onHide();
   };
 
@@ -39,7 +40,8 @@ function EditStudentModal(props) {
       handlePhoneInput={handlePhoneInput}
       editStudent={editStudent}
       onHide={props.onHide}
-      modalProps={props}
+      show={props.show}
+      // modalProps={props}
     />
   );
 }
