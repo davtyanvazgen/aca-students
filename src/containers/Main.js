@@ -8,16 +8,21 @@ import {
 import Header from "../components/header/index";
 import AddCource from "../components/cources/index";
 import AddStatuse from "../components/statuses";
-// import Students from "./Students";
 import ShowStudents from "./ShowStudents";
+import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import {connect} from "react-redux";
+import { compose } from "redux";
 
-class Main extends Component {
-  render() {
-    return (
+const Main = ({auth}) => {
+  return  !isLoaded(auth)
+      ?  (<div className="lds-hourglass"></div>)
+  : isEmpty(auth)
+      ?  (<span>Not Authed</span>)
+  :  (
       <div>
         <Router>
           <>
-            <Header />
+            <Header/>
             <Switch>
               <Route path="/cources" component={AddCource} />
               <Route path="/statuses" component={AddStatuse} />
@@ -27,9 +32,10 @@ class Main extends Component {
             </Switch>
           </>
         </Router>
-      </div>
-    );
-  }
+      </div>)
 }
 
-export default Main;
+export default compose(
+    firebaseConnect(), // withFirebase can also be used
+    connect(({ firebase: { auth } }) => ({ auth }))
+)(Main)

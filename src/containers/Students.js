@@ -11,62 +11,34 @@ class Students extends Component {
     selectedCource:"",
     selectedCources:[],
     selectedStatus:[],
-    searchedStudents: this.props.students,
     searchValue: "",
+    visibilityFilters: "",
   };
 
-  // componentDidMount() {
-  //   this.handleSearch();
-  // }
-
-  handleSearch = (value = this.state.searchValue) => {
-    if(value === ""){
-      this.setState({
-        searchedStudents: "",
-      })
-      return
-    }
+  filterStudents = (value = this.state.searchValue) => {
     this.setState({
       searchValue: value,
     });
-
-    let {students} = this.props;
-    let tempValue = value;
-    let resultArr = [];
-    for(let i = 0; i < students.length; i++){
-      let counter = 0;
-      for(let j = 0; j < tempValue.length; j++){
-        if(students[i].fullName[j] === tempValue[j]){
-          counter ++;
-        }
-      }
-      if(counter === tempValue.length){
-        resultArr.push(students[i]);
-      }
-    }
-    this.setState({
-      searchedStudents: resultArr,
-    })
-  };
-
-  filterStudents = () => {
-    debugger;
     let { selectedCources ,selectedStatus } = this.state;
     let filters = selectedStatus.length ? [...selectedCources,selectedStatus[0]] : [...selectedCources];
 
     if (!selectedStatus.length && selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES, filters));
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES, filters, value));
+      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
     }
     if (selectedStatus.length && !selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_STATUS, filters));
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_STATUS, filters, value));
+      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
     }
     if (selectedStatus.length && selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES_AND_STATUS, filters));
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES_AND_STATUS, filters, value));
+      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
     }
     if (!selectedStatus.length && !selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_ALL, filters));
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_ALL, filters, value));
+      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
     }
-    this.handleSearch();
+    //this.handleSearch();
   };
 
   courceStudents = (cource = this.state.selectedCource) => {
@@ -116,7 +88,7 @@ class Students extends Component {
               <CourcesButton
                   courceStudents = { this.courceStudents }
               />
-              <Input onChange={(e)=>this.handleSearch(e.target.value)}></Input>
+              <Input onChange={(e)=>this.filterStudents(e.target.value)}></Input>
             </div>
           </div>
           <div className="row">
@@ -126,15 +98,7 @@ class Students extends Component {
               />
             </div>
             <div className="col-10 row container border border-primary">
-              {this.state.searchedStudents
-                  ? this.state.searchedStudents.map(student => (
-                  <StudentCard
-                      key={ student.id }
-                      student= { student }
-                      repeatFiltering = {this.repeatFiltering}
-                      filterStudents = {this.filterStudents}
-                  />))
-                  : this.props.students && this.props.students.map(student => (
+              {this.props.students && this.props.students.map(student => (
                   <StudentCard
                       key={ student.id }
                       student= { student }

@@ -1,7 +1,8 @@
-export const setFilter = (filter, filterArray) => ({
+export const setFilter = (filter, filterArray, searchValue) => ({
   type: "SET_VISIBILITY_FILTER",
   filter,
-  filterArray
+  filterArray,
+  searchValue
 });
 
 export const visibilityFilters = {
