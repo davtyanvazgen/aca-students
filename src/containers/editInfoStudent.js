@@ -41,7 +41,6 @@ function EditStudentModal(props) {
       editStudent={editStudent}
       onHide={props.onHide}
       show={props.show}
-      // modalProps={props}
     />
   );
 }

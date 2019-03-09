@@ -5,12 +5,14 @@ import { v1 } from "uuid";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
+import { validateEmail, validateName } from "../../../utils/validate";
 
 function RegistrationForm(props) {
   const name = useFormInput("");
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
+  const [selectedCourceId,setSelectedCourceId] = useState('')
   const [selectedCource, setCource] = useState("");
   const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
@@ -23,23 +25,34 @@ function RegistrationForm(props) {
 
   function hanldeSelectKnowledge(e) {
     setKnowledge(e.target.value);
+    console.log(selectedCource.name);
   }
 
-  function handleChooseCource(e, cource) {
-    e.preventDefault();
-    setCource(cource);
-    console.log(typeof knowledge);
+  function hanldeSelectLesson(e,cource) {
+    debugger;
+    let asd = e.target.value;
+    setCource(e.target.value);
   }
 
   function handeleCreateStudent() {
-    const checkValidForm = validation();
+    // const checkValidForm = validation();
     const id = v1();
 
     const date = new Date();
     const registerDate = `(${date.getDate()}/${date.getMonth() +
       1}/${date.getFullYear()})`;
 
-    if (checkValidForm) {
+    if(!validateEmail(email.value)){
+        setEmailValidationErrors('Invalid email');
+        return false;
+    }  
+
+    if(!validateName(name.value)){
+      setNameValidationError('Name must contain only letters')
+      return false;
+    }
+
+    if (validation()) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
       let student = {
         fullName: name.value + " " + surname.value,
@@ -48,11 +61,12 @@ function RegistrationForm(props) {
         status: defaultStatus.id,
         statusName: defaultStatus.name,
         courceName: selectedCource.name,
-        cource: selectedCource.id,
+        cource: selectedCourceId,
         id: id,
         date: registerDate,
         knowledge
       };
+      debugger;
 
       props.firestore
         .collection("students")
@@ -144,21 +158,27 @@ function RegistrationForm(props) {
                 <p style={{ color: "red" }}>{phoneValidationErrors}</p>
               )}
             </FormGroup>
+
             <FormGroup>
-              <Label>Select lesson</Label>
-              <br />
-              {props.cources &&
-                props.cources.map(cource => (
-                  <button
-                    key={cource.id}
-                    value={cource}
-                    onClick={e => {
-                      handleChooseCource(e, cource);
-                    }}
-                  >
-                    {cource.name}
-                  </button>
-                ))}
+              <Label>Select Lesson</Label>
+              <Input
+                type="select"
+                name="select"
+                id="select"
+                onChange={hanldeSelectLesson}
+              >
+                <option>--choose Lesson--</option>
+                {props.cources &&
+                  props.cources.map(cource => (
+                    <option key={cource.id} value={cource.name}>
+                      {cource.name}
+                    </option>
+                  ))}
+              </Input>
+
+              {knowledgeValidationErrors && (
+                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+              )}
             </FormGroup>
 
             <FormGroup>
