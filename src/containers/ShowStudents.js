@@ -4,23 +4,24 @@ import { visibilityFilters } from "../store/actions";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const getShowStudents = (students, filter, filterArray) => {
+const getShowStudents = (students, filter, selectedCources, selectedStatuses) => {
+  let filters = selectedStatuses.length ? [...selectedCources,selectedStatuses[0]] : [...selectedCources];
   switch (filter) {
     case visibilityFilters.SHOW_ALL:
       return students;
     case visibilityFilters.SHOW_WITH_STATUS:
       return students.filter(
-        student => filterArray.indexOf(student.status) !== -1
+        student => filters.indexOf(student.status) !== -1
       );
     case visibilityFilters.SHOW_WITH_COURCES:
       return students.filter(
-        student => filterArray.indexOf(student.cource) !== -1
+        student => filters.indexOf(student.cource) !== -1
       );
     case visibilityFilters.SHOW_WITH_COURCES_AND_STATUS:
       return students.filter(
         student =>
-          filterArray.indexOf(student.status) !== -1 &&
-          filterArray.indexOf(student.cource) !== -1
+            filters.indexOf(student.status) !== -1 &&
+            filters.indexOf(student.cource) !== -1
       );
     default:
       throw new Error("Unknown filter " + filter);
@@ -52,10 +53,14 @@ const searchStudents = (students, searchValue) => {
 export default compose(
   firestoreConnect(() => ["students"]),
   connect((state, props) => ({
+    selectedStatuses: state.filter.selectedStatuses,
+    selectedCources: state.filter.selectedCources,
+    searchValue: state.filter.searchValue,
     students: searchStudents(getShowStudents(
-      state.firestore.ordered.students,
-      state.filter.filter,
-      state.filter.filterArray
+        state.firestore.ordered.students,
+        state.filter.filter,
+        state.filter.selectedCources,
+        state.filter.selectedStatuses
     ), state.filter.searchValue)
   }))
 )(Students);

@@ -9,36 +9,54 @@ import Input from "reactstrap/es/Input";
 class Students extends Component {
   state = {
     selectedCource:"",
-    selectedCources:[],
-    selectedStatus:[],
+    selectedStatus:"",
     searchValue: "",
-    visibilityFilters: "",
   };
 
-  filterStudents = (value = this.state.searchValue) => {
+  filterStudents = (value = this.state.searchValue , cource = this.state.selectedCource, status = this.state.selectedStatus) => {
+    console.log(this.props);
     this.setState({
       searchValue: value,
     });
-    let { selectedCources ,selectedStatus } = this.state;
-    let filters = selectedStatus.length ? [...selectedCources,selectedStatus[0]] : [...selectedCources];
 
-    if (!selectedStatus.length && selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES, filters, value));
-      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
+    this.setState({
+      selectedCource: cource,
+    })
+
+    this.setState({
+      selectedStatus: status,
+    })
+
+    let selectedCources = this.props.selectedCources;
+    if (selectedCources.indexOf(cource.id) === -1 && cource) {
+      selectedCources.push(cource.id);
+    } else {
+      selectedCources.splice(selectedCources.indexOf(cource.id),1);
     }
-    if (selectedStatus.length && !selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_STATUS, filters, value));
-      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
+
+    let  selectedStatuses = this.props.selectedStatuses;
+    if (status !== "all") {
+      if (selectedStatuses.length) {
+        selectedStatuses.pop();
+      }
+      selectedStatuses.push(status.id);
+    } else {
+      selectedStatuses.pop();
     }
-    if (selectedStatus.length && selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES_AND_STATUS, filters, value));
-      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
+
+
+    if (!selectedStatuses.length && selectedCources.length) {
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES, selectedStatuses, selectedCources, value));
     }
-    if (!selectedStatus.length && !selectedCources.length) {
-      this.props.dispatch(setFilter(visibilityFilters.SHOW_ALL, filters, value));
-      this.setState({visibilityFilters: visibilityFilters.SHOW_WITH_COURCES});
+    if (selectedStatuses.length && !selectedCources.length) {
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_STATUS, selectedStatuses, selectedCources, value));
     }
-    //this.handleSearch();
+    if (selectedStatuses.length && selectedCources.length) {
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES_AND_STATUS, selectedStatuses, selectedCources, value));
+    }
+    if (!selectedStatuses.length && !selectedCources.length) {
+      this.props.dispatch(setFilter(visibilityFilters.SHOW_ALL, selectedStatuses, selectedCources, value));
+    }
   };
 
   courceStudents = (cource = this.state.selectedCource) => {
@@ -86,7 +104,7 @@ class Students extends Component {
           <div className="row">
             <div className="col-12 border border-primary">
               <CourcesButton
-                  courceStudents = { this.courceStudents }
+                  courceStudents = { this.filterStudents }
               />
               <Input onChange={(e)=>this.filterStudents(e.target.value)}></Input>
             </div>
@@ -94,7 +112,7 @@ class Students extends Component {
           <div className="row">
             <div className="col-2 border border-primary">
               <StatusesButton
-                  statuseStudents = {this.statuseStudents}
+                  statuseStudents = { this.filterStudents }
               />
             </div>
             <div className="col-10 row container border border-primary">
@@ -102,7 +120,6 @@ class Students extends Component {
                   <StudentCard
                       key={ student.id }
                       student= { student }
-                      repeatFiltering = {this.repeatFiltering}
                       filterStudents = {this.filterStudents}
                   />))
               }

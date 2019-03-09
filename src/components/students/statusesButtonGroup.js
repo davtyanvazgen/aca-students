@@ -15,6 +15,7 @@ function StatusesButton(props) {
         className="btn-group-vertical"
         type="radio"
         name="statuses"
+        defaultValue={props.selectedStatuses}
       >
         <ToggleButton
           variant="danger"
@@ -33,7 +34,7 @@ function StatusesButton(props) {
               key={status.id}
               id={status.id}
               onChange={() => {
-                props.statuseStudents(status);
+                props.statuseStudents(undefined, undefined, status);
               }}
             >
               {status.name}
@@ -47,6 +48,8 @@ function StatusesButton(props) {
 export default compose(
   firestoreConnect(() => ["statuses"]), // or { collection: 'todos' }
   connect((state, props) => ({
-    statuses: state.firestore.ordered.statuses
+      statuses: state.firestore.ordered.statuses,
+      selectedStatuses: state.filter.selectedStatuses
+
   }))
 )(StatusesButton);

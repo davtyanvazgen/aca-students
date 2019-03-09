@@ -1,7 +1,8 @@
-export const setFilter = (filter, filterArray, searchValue) => ({
+export const setFilter = (filter, selectedStatuses, selectedCources, searchValue) => ({
   type: "SET_VISIBILITY_FILTER",
   filter,
-  filterArray,
+  selectedStatuses,
+  selectedCources,
   searchValue
 });
 

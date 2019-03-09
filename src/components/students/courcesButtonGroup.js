@@ -9,19 +9,19 @@ import { firestoreConnect } from "react-redux-firebase";
 function CourcesButton(props) {
     return (
         <ButtonToolbar style={{ margin: "auto", padding: "10px 25%" }}>
-            <ToggleButtonGroup type="checkbox" defaultValue={props.filter}>
+            <ToggleButtonGroup type="checkbox" defaultValue={props.selectedCources}>
                 {props.cources &&
-                props.cources.map(cources => (
+                props.cources.map(cource => (
                     <ToggleButton
                         variant="primary"
-                        value={cources.id}
-                        key={cources.id}
-                        id={cources.id}
+                        value={cource.id}
+                        key={cource.id}
+                        id={cource.id}
                         onChange={() => {
-                            props.courceStudents(cources);
+                            props.courceStudents(undefined, cource);
                         }}
                     >
-                        {cources.name}
+                        {cource.name}
                     </ToggleButton>
                 ))}
             </ToggleButtonGroup>
@@ -33,6 +33,6 @@ export default compose(
     firestoreConnect(() => ["cources"]), // or { collection: 'todos' }
     connect((state, props) => ({
         cources: state.firestore.ordered.cources,
-        filter: state.filter.filterArray
+        selectedCources: state.filter.selectedCources
     }))
 )(CourcesButton);
