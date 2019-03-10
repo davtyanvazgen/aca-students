@@ -21,8 +21,6 @@ const Statuse = ({ statuse, firestore, students }) => {
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
 
   const areYouSure = statuse => {
-    // const studentsForDelete = [];
-
     const studentsForDelete = students.filter(
       student => student.status === statuse.id
     );

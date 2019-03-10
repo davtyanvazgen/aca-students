@@ -30,7 +30,7 @@ function CourcesButton(props) {
 }
 
 export default compose(
-  firestoreConnect(() => ["cources"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["cources"]),
   connect((state, props) => ({
     cources: state.firestore.ordered.cources
   }))

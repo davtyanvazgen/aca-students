@@ -45,7 +45,7 @@ function StatusesButton(props) {
 }
 
 export default compose(
-  firestoreConnect(() => ["statuses"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["statuses"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses
   }))

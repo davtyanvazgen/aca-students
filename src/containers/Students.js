@@ -5,6 +5,7 @@ import StudentCard from "../components/students/studentCard";
 import { setFilter } from "../store/actions";
 import { visibilityFilters } from "../store/actions";
 import Input from "reactstrap/es/Input";
+import { Container, Row, Col } from "reactstrap";
 
 class Students extends Component {
   state = {
@@ -103,46 +104,48 @@ class Students extends Component {
   };
 
   render() {
-    // const {
-    //   withCourcesStudents,
-    //   withStatusStudents,
-    //   showStudentsArr
-    // } = this.state;
     return (
-      <div className="container border border-primary">
-        <div className="row">
-          <div className="col-12 border border-primary">
-            <CourcesButton courceStudents={this.courceStudents} />
-            <Input onChange={this.handleSearch} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-2 border border-primary">
-            <StatusesButton statuseStudents={this.statuseStudents} />
-          </div>
-          <div className="col-10 row container border border-primary">
-            {!this.state.isSearch
-              ? this.props.students &&
-                this.props.students.map(student => (
-                  <StudentCard
-                    key={student.id}
-                    student={student}
-                    repeatFiltering={this.repeatFiltering}
-                    filterStudents={this.filterStudents}
-                  />
-                ))
-              : this.state.serchedStudents &&
-                this.state.serchedStudents.map(student => (
-                  <StudentCard
-                    key={student.id}
-                    student={student}
-                    repeatFiltering={this.repeatFiltering}
-                    filterStudents={this.filterStudents}
-                  />
-                ))}
-          </div>
-        </div>
-      </div>
+      <>
+        <Container>
+          <Row style={{ border: "2px solid red" }}>
+            <Col
+              style={{ border: "2px solid black" }}
+              sm={{ size: 10, offset: 2 }}
+            >
+              <CourcesButton courceStudents={this.courceStudents} />
+              <Input onChange={this.handleSearch} />
+            </Col>
+          </Row>
+
+          <Row style={{ border: "2px solid yellow" }}>
+            <Col sm={{ size: 2 }} style={{ border: "2px solid green" }}>
+              <StatusesButton statuseStudents={this.statuseStudents} />
+            </Col>
+
+            <Col sm={{ size: 10 }} style={{ border: "2px solid green" }}>
+              {!this.state.isSearch
+                ? this.props.students &&
+                  this.props.students.map(student => (
+                    <StudentCard
+                      key={student.id}
+                      student={student}
+                      repeatFiltering={this.repeatFiltering}
+                      filterStudents={this.filterStudents}
+                    />
+                  ))
+                : this.state.serchedStudents &&
+                  this.state.serchedStudents.map(student => (
+                    <StudentCard
+                      key={student.id}
+                      student={student}
+                      repeatFiltering={this.repeatFiltering}
+                      filterStudents={this.filterStudents}
+                    />
+                  ))}
+            </Col>
+          </Row>
+        </Container>
+      </>
     );
   }
 }

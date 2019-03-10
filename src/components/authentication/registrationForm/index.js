@@ -12,8 +12,8 @@ function RegistrationForm(props) {
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
-  const [selectedCourceId,setSelectedCourceId] = useState('')
-  const [selectedCource, setCource] = useState("");
+  const [selectedCourceId, setSelectedCourceId] = useState("");
+  const [selectedCource, setSelectedCource] = useState("");
   const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
@@ -22,35 +22,27 @@ function RegistrationForm(props) {
   const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
     ""
   );
+  const [
+    selectCourceValidationErrors,
+    setSelectCourceValidationErrors
+  ] = useState("");
 
   function hanldeSelectKnowledge(e) {
     setKnowledge(e.target.value);
-    console.log(selectedCource.name);
   }
 
-  function hanldeSelectLesson(e,cource) {
-    debugger;
-    let asd = e.target.value;
-    setCource(e.target.value);
+  function hanldeSelectLesson(e) {
+    let cource = JSON.parse(e.target.value);
+    setSelectedCource(cource.name);
+    setSelectedCourceId(cource.id);
   }
 
   function handeleCreateStudent() {
-    // const checkValidForm = validation();
     const id = v1();
 
     const date = new Date();
     const registerDate = `(${date.getDate()}/${date.getMonth() +
       1}/${date.getFullYear()})`;
-
-    if(!validateEmail(email.value)){
-        setEmailValidationErrors('Invalid email');
-        return false;
-    }  
-
-    if(!validateName(name.value)){
-      setNameValidationError('Name must contain only letters')
-      return false;
-    }
 
     if (validation()) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
@@ -60,13 +52,12 @@ function RegistrationForm(props) {
         email: email.value,
         status: defaultStatus.id,
         statusName: defaultStatus.name,
-        courceName: selectedCource.name,
+        courceName: selectedCource,
         cource: selectedCourceId,
         id: id,
         date: registerDate,
         knowledge
       };
-      debugger;
 
       props.firestore
         .collection("students")
@@ -99,7 +90,7 @@ function RegistrationForm(props) {
       : setPhoneValidationErrors("");
 
     let knowledgeErrors;
-    if (knowledge === "--choose--" || knowledge.trim() === "") {
+    if (!knowledge) {
       setKnowledgeValidationErrors("choose your level ");
       knowledgeErrors = false;
     } else {
@@ -107,12 +98,22 @@ function RegistrationForm(props) {
       knowledgeErrors = true;
     }
 
+    let courceErrors;
+    if (!selectedCource) {
+      setSelectCourceValidationErrors("choose Lesson");
+      courceErrors = false;
+    } else {
+      setSelectCourceValidationErrors("");
+      courceErrors = true;
+    }
+
     if (
       nameErrors &&
       surNameErrors &&
       emailErrors &&
       phoneErrors &&
-      knowledgeErrors
+      knowledgeErrors &&
+      courceErrors
     ) {
       return true;
     }
@@ -167,17 +168,19 @@ function RegistrationForm(props) {
                 id="select"
                 onChange={hanldeSelectLesson}
               >
-                <option>--choose Lesson--</option>
+                <option selected disabled>
+                  --choose Lesson--
+                </option>
                 {props.cources &&
                   props.cources.map(cource => (
-                    <option key={cource.id} value={cource.name}>
+                    <option key={cource.id} value={JSON.stringify(cource)}>
                       {cource.name}
                     </option>
                   ))}
               </Input>
 
-              {knowledgeValidationErrors && (
-                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+              {selectCourceValidationErrors && (
+                <p style={{ color: "red" }}>{selectCourceValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -189,7 +192,9 @@ function RegistrationForm(props) {
                 id="select"
                 onChange={hanldeSelectKnowledge}
               >
-                <option>--choose--</option>
+                <option selected disabled>
+                  --choose--
+                </option>
                 <option>Beginner</option>
                 <option>junior</option>
                 <option>middle</option>

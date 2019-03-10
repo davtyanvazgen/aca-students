@@ -48,6 +48,17 @@ export function validateName(name) {
   return validator.isAlpha(name);
 }
 
-export function validateEmail(email) {
-  return validator.isEmail(email);
+// export function validateEmail(email) {
+//   return validator.isEmail(email);
+// }
+
+export function validateSurName(surname) {
+  return validator.isAlpha(surname);
 }
+
+// export function validatePhone(phone) {
+//   return (
+//     validator.isInt(phone.value) &&
+//     validator.isLength(phone.value, { min: 8, max: 13 })
+//   );
+// }

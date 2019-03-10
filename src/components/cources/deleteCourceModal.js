@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-export default class DeleteCourceModal extends React.Component {
+export default class DeleteCourceModal extends Component {
   render() {
     const {
       studentsSameCource,
