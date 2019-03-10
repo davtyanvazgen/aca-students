@@ -8,7 +8,7 @@ function EditStudentModal(props) {
   const [phone, setPhone] = useState(props.student.phone);
 
   const handleFullnameInput = e => {
-    setFullName(e.target.value);
+    setFullName(e.target.value.toUpperCase());
   };
   const handleEmailInput = e => {
     setEmail(e.target.value);
@@ -26,6 +26,7 @@ function EditStudentModal(props) {
         phone,
         email
       });
+
     props.onHide();
   };
 
@@ -39,7 +40,7 @@ function EditStudentModal(props) {
       handlePhoneInput={handlePhoneInput}
       editStudent={editStudent}
       onHide={props.onHide}
-      modalProps={props}
+      show={props.show}
     />
   );
 }

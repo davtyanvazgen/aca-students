@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 import "../styles/style.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import FireManager from "../../../firebase/FireManager";
 import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { compose } from "redux";
-
 
 function SignIn({ firebase, auth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log( auth, isLoaded(auth), isEmpty(auth));
+  console.log(auth, isLoaded(auth), isEmpty(auth));
   const adminLogIn = function() {
     if (email && password) {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => { window.location = "/"; })
-        .catch((err) => { alert(err.message) });
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location = "/";
+        })
+        .catch(err => {
+          alert(err.message);
+        });
     } else {
       alert("please enter correct email or password");
     }
   };
-
 
   const handleEmail = e => {
     setEmail(e.target.value);
@@ -63,6 +66,6 @@ function SignIn({ firebase, auth }) {
 }
 
 export default compose(
-    firebaseConnect(), // withFirebase can also be used
-    connect(({ firebase: { auth } }) => ({ auth }))
-)(SignIn)
+  firebaseConnect(), // withFirebase can also be used
+  connect(({ firebase: { auth } }) => ({ auth }))
+)(SignIn);

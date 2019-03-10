@@ -17,10 +17,13 @@ class AddCource extends Component {
         </div>
         <div className="courceList">
           <h1>Current cources</h1>
-          {this.props.cources ?
+          {this.props.cources ? (
             this.props.cources.map(cource => (
               <Cource key={cource.id} cource={cource} />
-            )): <div className="loader"></div> }
+            ))
+          ) : (
+            <div className="loader" />
+          )}
         </div>
       </>
     );
@@ -28,8 +31,9 @@ class AddCource extends Component {
 }
 
 export default compose(
-  firestoreConnect(() => ["cources"]),
+  firestoreConnect(() => ["cources", "students"]),
   connect((state, props) => ({
-    cources: state.firestore.ordered.cources
+    cources: state.firestore.ordered.cources,
+    students: state.firestore.ordered.students
   }))
 )(AddCource);

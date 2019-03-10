@@ -4,13 +4,20 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
-import initFirebase from "./firebase/fireConfig";
+import firebase from "firebase/app";
+import "firebase/app";
+import "firebase/firestore";
 
-initFirebase();
+const config = {
+  apiKey: "AIzaSyBeHc7nH2J4ZJykUeEfSnWcFOghyI8tHGc",
+  authDomain: "aca-students.firebaseapp.com",
+  databaseURL: "https://aca-students.firebaseio.com",
+  projectId: "aca-students",
+  storageBucket: "aca-students.appspot.com",
+  messagingSenderId: "15753998893"
+};
 
+firebase.initializeApp(config);
 ReactDOM.render(<App />, document.getElementById("root"));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();

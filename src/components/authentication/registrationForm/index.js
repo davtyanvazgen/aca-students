@@ -11,31 +11,51 @@ function RegistrationForm(props) {
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
-  const [selectedCource, setCource] = useState("");
+  const [selectedCourceId, setSelectedCourceId] = useState("");
+  const [selectedCource, setSelectedCource] = useState("");
+  const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
   const [emailValidationErrors, setEmailValidationErrors] = useState("");
   const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
+  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
+    ""
+  );
+  const [
+    selectCourceValidationErrors,
+    setSelectCourceValidationErrors
+  ] = useState("");
 
-  function handleChooseCource(e, cource) {
-    e.preventDefault();
-    setCource(cource);
+  function hanldeSelectKnowledge(e) {
+    setKnowledge(e.target.value);
+  }
+
+  function hanldeSelectLesson(e) {
+    let cource = JSON.parse(e.target.value);
+    setSelectedCource(cource.name);
+    setSelectedCourceId(cource.id);
   }
 
   function handeleCreateStudent() {
-    const checkValidForm = validation();
     const id = v1();
-    if (checkValidForm) {
+
+    const date = new Date();
+    const registerDate = `(${date.getDate()}/${date.getMonth() +
+      1}/${date.getFullYear()})`;
+
+    if (validation()) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
       let student = {
-        fullName: name.value + " " + surname.value,
+        fullName: name.value.toUpperCase() + " " + surname.value.toUpperCase(),
         phone: phone.value,
         email: email.value,
         status: defaultStatus.id,
         statusName: defaultStatus.name,
-        courceName: selectedCource.name,
-        cource: selectedCource.id,
-        id: id
+        courceName: selectedCource,
+        cource: selectedCourceId,
+        id: id,
+        date: registerDate,
+        knowledge
       };
 
       props.firestore
@@ -67,9 +87,36 @@ function RegistrationForm(props) {
     !phoneErrors
       ? setPhoneValidationErrors("Wrong number")
       : setPhoneValidationErrors("");
-    if (nameErrors && surNameErrors && emailErrors && phoneErrors) {
+
+    let knowledgeErrors;
+    if (!knowledge) {
+      setKnowledgeValidationErrors("choose your level ");
+      knowledgeErrors = false;
+    } else {
+      setKnowledgeValidationErrors("");
+      knowledgeErrors = true;
+    }
+
+    let courceErrors;
+    if (!selectedCource) {
+      setSelectCourceValidationErrors("choose Lesson");
+      courceErrors = false;
+    } else {
+      setSelectCourceValidationErrors("");
+      courceErrors = true;
+    }
+
+    if (
+      nameErrors &&
+      surNameErrors &&
+      emailErrors &&
+      phoneErrors &&
+      knowledgeErrors &&
+      courceErrors
+    ) {
       return true;
     }
+
     return false;
   }
 
@@ -111,22 +158,54 @@ function RegistrationForm(props) {
                 <p style={{ color: "red" }}>{phoneValidationErrors}</p>
               )}
             </FormGroup>
+
             <FormGroup>
-              <Label>Select lesson</Label>
-              <br />
-              {props.cources &&
-                props.cources.map(cource => (
-                  <button
-                    key={cource.id}
-                    value={cource}
-                    onClick={e => {
-                      handleChooseCource(e, cource);
-                    }}
-                  >
-                    {cource.name}
-                  </button>
-                ))}
+              <Label>Select Lesson</Label>
+              <Input
+                type="select"
+                name="select"
+                id="select"
+                defaultValue={1}
+                onChange={hanldeSelectLesson}
+              >
+                <option value={1} disabled>
+                  --choose Lesson--
+                </option>
+                {props.cources &&
+                  props.cources.map(cource => (
+                    <option key={cource.id} value={JSON.stringify(cource)}>
+                      {cource.name}
+                    </option>
+                  ))}
+              </Input>
+
+              {selectCourceValidationErrors && (
+                <p style={{ color: "red" }}>{selectCourceValidationErrors}</p>
+              )}
             </FormGroup>
+
+            <FormGroup>
+              <Label>It knowledge Level</Label>
+              <Input
+                defaultValue={1}
+                type="select"
+                name="select"
+                id="select"
+                onChange={hanldeSelectKnowledge}
+              >
+                <option value={1} disabled>
+                  --choose--
+                </option>
+                <option>Beginner</option>
+                <option>junior</option>
+                <option>middle</option>
+                <option>Senior</option>option>
+              </Input>
+              {knowledgeValidationErrors && (
+                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+              )}
+            </FormGroup>
+
             <Button color="success" block onClick={handeleCreateStudent}>
               Registration
             </Button>
@@ -147,8 +226,9 @@ function RegistrationForm(props) {
     };
   }
 }
+
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]), // or { collection: 'todos' }
+  firestoreConnect(() => ["statuses", "cources"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
     cources: state.firestore.ordered.cources

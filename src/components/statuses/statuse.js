@@ -8,14 +8,37 @@ import {
   InputGroupAddon
 } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
+import DeleteStatusModal from "./deleteStatusModal";
 
-const Statuse = ({ statuse, firestore }) => {
+const Statuse = ({ statuse, firestore, students }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [newStatuse, setNewStatuse] = useState(statuse.name);
+  const [modalShow, setModalShow] = useState(false);
+  const [newName, setNewName] = useState(statuse.name);
+  const [newLongName, setNewLongName] = useState(statuse.longName);
   const [deleteStatusError, setDeleteStatusError] = useState("");
   const [editStatusError, setEditStatusError] = useState("");
+  const [removeStudentError, setRemoveStudentsError] = useState("");
+  const [studentsSameStatus, setStudentsSameStatus] = useState([]);
+
+  const areYouSure = statuse => {
+    const studentsForDelete = students.filter(
+      student => student.status === statuse.id
+    );
+    setStudentsSameStatus(studentsForDelete);
+    setModalShow(true);
+  };
 
   const handleRemove = statuse => {
+    studentsSameStatus.forEach(student => {
+      firestore
+        .collection("students")
+        .doc(student.id)
+        .delete()
+        .catch(err => {
+          setRemoveStudentsError(err);
+        });
+    });
+
     firestore
       .collection("statuses")
       .doc(statuse.id)
@@ -25,14 +48,18 @@ const Statuse = ({ statuse, firestore }) => {
       });
   };
 
-  const handleEditStatuse = e => {
-    setNewStatuse(e.target.value);
+  const handleEditStatusName = e => {
+    setNewName(e.target.value);
+  };
+  const handleEditStatusLongName = e => {
+    setNewLongName(e.target.value);
   };
 
-  const confirmEditStatuse = newStatuse => {
-    if (newStatuse.trim()) {
+  const confirmEditStatuse = newName => {
+    if (newName.trim()) {
       const editStatus = {
-        name: newStatuse,
+        name: newName,
+        longName: newLongName.trim(),
         id: statuse.id
       };
 
@@ -49,22 +76,36 @@ const Statuse = ({ statuse, firestore }) => {
 
   const toggle = () => {
     isOpen === false ? setIsOpen(true) : setIsOpen(false);
-    setNewStatuse(statuse.name);
+    setNewName(statuse.name);
+    setNewLongName(statuse.longName);
+  };
+
+  const modalClose = () => {
+    setStudentsSameStatus([]);
+    setModalShow(false);
   };
 
   return (
     <div>
+      <DeleteStatusModal
+        show={modalShow}
+        onHide={modalClose}
+        studentsSameStatus={studentsSameStatus}
+        statuse={statuse}
+        handleRemove={() => handleRemove(statuse)}
+      />
+
       <ListGroup>
         <ListGroupItem key={statuse.id} color="warning">
           {!isOpen && (
             <>
-              {statuse.name}
+              {`${statuse.name}  |  ${statuse.longName}`}
               <Button
                 className="float-right"
                 size="sm"
                 color="danger"
                 onClick={() => {
-                  handleRemove(statuse);
+                  areYouSure(statuse);
                 }}
               >
                 Delete
@@ -90,8 +131,15 @@ const Statuse = ({ statuse, firestore }) => {
                   className="form-control-sm"
                   type="text"
                   placeholder="Update status"
-                  value={newStatuse}
-                  onChange={handleEditStatuse}
+                  value={newName}
+                  onChange={handleEditStatusName}
+                />
+                <Input
+                  className="form-control-sm"
+                  type="text"
+                  placeholder="Update status"
+                  value={newLongName}
+                  onChange={handleEditStatusLongName}
                 />
                 <InputGroupAddon addonType="append">
                   <Button onClick={toggle} size="sm" color="primary">
@@ -104,7 +152,7 @@ const Statuse = ({ statuse, firestore }) => {
                     size="sm"
                     color="warning"
                     onClick={() => {
-                      confirmEditStatuse(newStatuse);
+                      confirmEditStatuse(newName);
                     }}
                   >
                     Yes
