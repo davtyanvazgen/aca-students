@@ -29,7 +29,7 @@ const Statuse = ({ statuse, firestore, students }) => {
   };
 
   const handleRemove = statuse => {
-    studentsSameStatus.map(student => {
+    studentsSameStatus.forEach(student => {
       firestore
         .collection("students")
         .doc(student.id)

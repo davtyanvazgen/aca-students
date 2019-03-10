@@ -8,7 +8,7 @@ function EditStudentModal(props) {
   const [phone, setPhone] = useState(props.student.phone);
 
   const handleFullnameInput = e => {
-    setFullName(e.target.value);
+    setFullName(e.target.value.toUpperCase());
   };
   const handleEmailInput = e => {
     setEmail(e.target.value);

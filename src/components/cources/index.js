@@ -17,14 +17,13 @@ class AddCource extends Component {
         </div>
         <div className="courceList">
           <h1>Current cources</h1>
-          {this.props.cources &&
+          {this.props.cources ? (
             this.props.cources.map(cource => (
-              <Cource
-                key={cource.id}
-                cource={cource}
-                students={this.props.students}
-              />
-            ))}
+              <Cource key={cource.id} cource={cource} />
+            ))
+          ) : (
+            <div className="loader" />
+          )}
         </div>
       </>
     );

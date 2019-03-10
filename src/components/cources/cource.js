@@ -18,7 +18,7 @@ const Cource = ({ cource, students, firestore }) => {
   };
 
   const handleRemove = cource => {
-    studentsSameCource.map(student => {
+    studentsSameCource.forEach(student => {
       firestore
         .collection("students")
         .doc(student.id)

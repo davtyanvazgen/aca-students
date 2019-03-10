@@ -5,7 +5,6 @@ import { v1 } from "uuid";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
-import { validateEmail, validateName } from "../../../utils/validate";
 
 function RegistrationForm(props) {
   const name = useFormInput("");
@@ -47,7 +46,7 @@ function RegistrationForm(props) {
     if (validation()) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
       let student = {
-        fullName: name.value + " " + surname.value,
+        fullName: name.value.toUpperCase() + " " + surname.value.toUpperCase(),
         phone: phone.value,
         email: email.value,
         status: defaultStatus.id,
@@ -166,9 +165,10 @@ function RegistrationForm(props) {
                 type="select"
                 name="select"
                 id="select"
+                defaultValue={1}
                 onChange={hanldeSelectLesson}
               >
-                <option selected disabled>
+                <option value={1} disabled>
                   --choose Lesson--
                 </option>
                 {props.cources &&
@@ -187,12 +187,13 @@ function RegistrationForm(props) {
             <FormGroup>
               <Label>It knowledge Level</Label>
               <Input
+                defaultValue={1}
                 type="select"
                 name="select"
                 id="select"
                 onChange={hanldeSelectKnowledge}
               >
-                <option selected disabled>
+                <option value={1} disabled>
                   --choose--
                 </option>
                 <option>Beginner</option>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { Button, ListGroup, Image, Card } from "react-bootstrap";
 import EditStudentModal from "../../containers/editInfoStudent";
 import { firestoreConnect, withFirestore } from "react-redux-firebase";
 import { compose } from "redux";
@@ -10,7 +9,6 @@ import {
   Media,
   Row,
   Col,
-  Input,
   Button,
   ButtonDropdown,
   DropdownToggle,
@@ -20,9 +18,6 @@ import {
 
 function StudentCard(props) {
   const { statuses, cources, student, firestore } = props;
-  const [selectedCource, setCource] = useState(student.courceName);
-  const [selectedStatuse, setStatuse] = useState(student.statusName);
-  const [isHidden, setHidden] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
@@ -36,7 +31,6 @@ function StudentCard(props) {
   }
 
   function handleSelectCourceChange(e) {
-    setCource(e.target.value);
     let newCource = cources.filter(cource => cource.name === e.target.value);
     firestore
       .collection("students")
@@ -48,7 +42,6 @@ function StudentCard(props) {
   }
 
   function handleSelectStatusChange(e) {
-    setStatuse(e.target.value);
     let newStatuse = statuses.filter(
       statuse => statuse.name === e.target.value
     );
