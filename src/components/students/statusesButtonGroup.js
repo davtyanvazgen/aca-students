@@ -15,13 +15,13 @@ function StatusesButton(props) {
         className="btn-group-vertical"
         type="radio"
         name="statuses"
-        defaultValue={props.selectedStatuses}
+        defaultValue={props.selectedStatuses[0]}
       >
         <ToggleButton
           variant="danger"
           value={"all"}
           onChange={() => {
-            props.statuseStudents("all");
+            props.statuseStudents(undefined, undefined, "all");
           }}
         >
           All statuses
@@ -30,7 +30,7 @@ function StatusesButton(props) {
           props.statuses.map(status => (
             <ToggleButton
               variant="danger"
-              value={status.name}
+              value={status.id}
               key={status.id}
               id={status.id}
               onChange={() => {

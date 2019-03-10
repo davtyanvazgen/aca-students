@@ -9,7 +9,7 @@ import { firestoreConnect } from "react-redux-firebase";
 function CourcesButton(props) {
     return (
         <ButtonToolbar style={{ margin: "auto", padding: "10px 25%" }}>
-            <ToggleButtonGroup type="checkbox" defaultValue={props.selectedCources}>
+            <ToggleButtonGroup type="checkbox" defaultValue={[...props.selectedCources]}>
                 {props.cources &&
                 props.cources.map(cource => (
                     <ToggleButton

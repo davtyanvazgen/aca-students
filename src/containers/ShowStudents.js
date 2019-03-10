@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
-import Students from "./Students";
+import Students from "../components/students/Students";
 import { visibilityFilters } from "../store/actions";
+import { setFilter } from "../store/actions";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
@@ -50,12 +51,47 @@ const searchStudents = (students, searchValue) => {
   }
 }
 
+const filter = (searchValue, selectedCources, selectedStatuses, dispatch) => {
+  return function (value = searchValue , cource = "", status = "") {
+    if(cource !== "" ){
+      if (selectedCources.indexOf(cource.id) === -1 && cource) {
+        selectedCources.push(cource.id);
+      } else {
+        selectedCources.splice(selectedCources.indexOf(cource.id),1);
+      }
+    }
+
+    if(status !== ""){
+      if (status.name && status !== "all") {
+        if (selectedStatuses.length) {
+          selectedStatuses.pop();
+        }
+        selectedStatuses.push(status.id);
+      } else {
+        selectedStatuses.pop();
+      }
+    }
+
+    if (!selectedStatuses.length && selectedCources.length) {
+      dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES, selectedStatuses, selectedCources, value));
+    }
+    if (selectedStatuses.length && !selectedCources.length) {
+      dispatch(setFilter(visibilityFilters.SHOW_WITH_STATUS, selectedStatuses, selectedCources, value));
+    }
+    if (selectedStatuses.length && selectedCources.length) {
+      dispatch(setFilter(visibilityFilters.SHOW_WITH_COURCES_AND_STATUS, selectedStatuses, selectedCources, value));
+    }
+    if (!selectedStatuses.length && !selectedCources.length) {
+      dispatch(setFilter(visibilityFilters.SHOW_ALL, selectedStatuses, selectedCources, value));
+    }
+  }
+}
+
 export default compose(
   firestoreConnect(() => ["students"]),
   connect((state, props) => ({
-    selectedStatuses: state.filter.selectedStatuses,
-    selectedCources: state.filter.selectedCources,
     searchValue: state.filter.searchValue,
+    filterStudents: filter(state.filter.searchValue, state.filter.selectedCources, state.filter.selectedStatuses, props.dispatch),
     students: searchStudents(getShowStudents(
         state.firestore.ordered.students,
         state.filter.filter,
