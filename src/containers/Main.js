@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,7 +17,7 @@ const Main = ({auth}) => {
   return  !isLoaded(auth)
       ?  (<div className="lds-hourglass"></div>)
   : isEmpty(auth)
-      ?  (<span>Not Authed</span>)
+      ?  (<Redirect to="/signin" />)
   :  (
       <div>
         <Router>
