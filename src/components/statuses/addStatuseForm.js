@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
-import Color from "./colors";
 
 const AddStatuseForm = ({ firestore }) => {
   const [name, setName] = useState("");
@@ -41,7 +40,6 @@ const AddStatuseForm = ({ firestore }) => {
 
   return (
     <>
-      <Color />
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Status`s short name</Label>

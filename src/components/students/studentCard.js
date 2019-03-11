@@ -3,8 +3,10 @@ import EditStudentModal from "../../containers/editInfoStudent";
 import { firestoreConnect, withFirestore } from "react-redux-firebase";
 import { compose } from "redux";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faUserTimes, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import {
-  ListGroup,
   ListGroupItem,
   Media,
   Row,
@@ -15,6 +17,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import { Container } from "react-bootstrap";
 
 function StudentCard(props) {
   const { statuses, cources, student, firestore } = props;
@@ -22,6 +25,14 @@ function StudentCard(props) {
   const [showInfo, setShowInfo] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
   const [isOpenCource, setIsOpenCource] = useState(false);
+
+  const [collapse, setcollapse] = useState(false);
+  // this.toggle = this.toggle.bind(this);
+  // this.state = { collapse: false };
+
+  function toggle() {
+    setcollapse(!collapse);
+  }
 
   function handleRemove() {
     firestore
@@ -74,18 +85,99 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroup>
-        <ListGroupItem color="info">
+      <ListGroupItem>
+        <Row>
+          <Col xs="5" md="2">
+            <Media
+              style={{ width: "100%", borderRadius: "50%" }}
+              object
+              src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
+              alt="Generic placeholder image"
+            />
+          </Col>
+
+          <Col xs="6" md="5" style={{ wordWrap: "break-word" }}>
+            <p>{student.fullName.toUpperCase()}</p>
+            <p>{student.date}</p>
+          </Col>
+
+          <Col xs="10" md="4">
+            <Row>
+              <ButtonDropdown
+                style={{ width: "100%" }}
+                isOpen={isOpenStatus}
+                toggle={toggleStatus}
+              >
+                <DropdownToggle color="warning" caret size="sm">
+                  {student.statusName}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {statuses &&
+                    statuses.map(status => (
+                      <DropdownItem
+                        key={status.id}
+                        value={status.name}
+                        onClick={handleSelectStatusChange}
+                      >
+                        {status.name}
+                      </DropdownItem>
+                    ))}
+                </DropdownMenu>
+              </ButtonDropdown>
+            </Row>
+            <Row>
+              <ButtonDropdown
+                style={{ width: "100%" }}
+                isOpen={isOpenCource}
+                toggle={toggleCource}
+              >
+                <DropdownToggle color="warning" caret size="sm">
+                  {student.courceName}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {cources &&
+                    cources.map(cource => (
+                      <DropdownItem
+                        key={cource.id}
+                        value={cource.name}
+                        onClick={handleSelectCourceChange}
+                      >
+                        {cource.name}
+                      </DropdownItem>
+                    ))}
+                </DropdownMenu>
+              </ButtonDropdown>
+            </Row>
+          </Col>
+
+          <Col xs="1">
+            <Row>
+              <Col xs="6">
+                <FontAwesomeIcon icon="user-times" onClick={handleRemove} />
+              </Col>
+
+              <Col xs="6">
+                <FontAwesomeIcon icon="user-edit" onClick={handleEdit} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Row />
+      </ListGroupItem>
+
+      {/* <ListGroup>
+        <ListGroupItem
+          color="info"
+          onClick={toggle}
+          style={{ marginBottom: "1rem" }}
+        >
           <Row style={{ border: "1px solid white" }}>
             <Col
               sm={{ size: 2 }}
               style={{ border: "1px solid red", paddingLeft: "0px" }}
             >
               <Media
-                style={{
-                  width: "90px",
-                  height: "90px"
-                }}
+                
                 object
                 src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
                 alt="Generic placeholder image"
@@ -176,6 +268,17 @@ function StudentCard(props) {
                   </ListGroupItem>
                 </ListGroup>
               )}
+
+              <Collapse isOpen={collapse}>
+                <Card>
+                  <CardBody>
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life
+                    accusamus terry richardson ad squid. Nihil anim keffiyeh
+                    helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea proident.
+                  </CardBody>
+                </Card>
+              </Collapse>
             </Col>
           </Row>
         </ListGroupItem>
@@ -185,7 +288,7 @@ function StudentCard(props) {
         show={modalShow}
         onHide={handleOnHide}
         student={student}
-      />
+      /> */}
     </>
   );
 }
@@ -197,3 +300,5 @@ export default compose(
     cources: state.firestore.ordered.cources
   }))
 )(withFirestore(StudentCard));
+
+library.add(faUserTimes, faUserEdit);

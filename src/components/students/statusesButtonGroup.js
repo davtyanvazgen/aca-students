@@ -10,8 +10,9 @@ import { firestoreConnect } from "react-redux-firebase";
 
 function StatusesButton(props) {
   return (
-    <ButtonToolbar style={{ margin: "auto", padding: "10px 25%" }}>
+    <ButtonToolbar>
       <ToggleButtonGroup
+        style={{ width: "100%", wordWrap: "break-word" }}
         className="btn-group-vertical"
         type="radio"
         name="statuses"
@@ -29,6 +30,7 @@ function StatusesButton(props) {
         {props.statuses &&
           props.statuses.map(status => (
             <ToggleButton
+              style={{ marginLeft: "0px", width: "100%" }}
               variant="danger"
               value={status.id}
               key={status.id}
@@ -48,8 +50,7 @@ function StatusesButton(props) {
 export default compose(
   firestoreConnect(() => ["statuses"]),
   connect((state, props) => ({
-      statuses: state.firestore.ordered.statuses,
-      selectedStatuses: state.filter.selectedStatuses
-
+    statuses: state.firestore.ordered.statuses,
+    selectedStatuses: state.filter.selectedStatuses
   }))
 )(StatusesButton);

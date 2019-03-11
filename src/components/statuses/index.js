@@ -5,6 +5,7 @@ import AddStatuseForm from "./addStatuseForm";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import Color from "./colors";
 
 class AddStatuse extends Component {
   render() {
@@ -15,6 +16,7 @@ class AddStatuse extends Component {
             <AddStatuseForm />
           </div>
         </div>
+        <Color />
 
         <div className="statuseList">
           <h1>All statuses</h1>
