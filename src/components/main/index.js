@@ -8,7 +8,7 @@ import {
 import Header from "../header/index";
 import AddCource from "../cources/index";
 import AddStatuse from "../statuses";
-import ShowStudents from "../../containers/students";
+import Students from "../../containers/students";
 import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -26,8 +26,8 @@ const Main = ({ auth }) => {
           <Switch>
             <Route path="/cources" component={AddCource} />
             <Route path="/statuses" component={AddStatuse} />
-            <Route exact path="/" component={ShowStudents} />
-            <Route exact path="/students" component={ShowStudents} />
+            <Route exact path="/" component={Students} />
+            <Route exact path="/students" component={Students} />
             <Redirect to="/students" />
           </Switch>
         </>

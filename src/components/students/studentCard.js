@@ -28,6 +28,7 @@ function StudentCard(props) {
   const [isOpenCource, setIsOpenCource] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(statuses.filter(statuse => statuse.name === student.statusName));
 
   function toggle() {
     setcollapse(!collapse);
@@ -55,7 +56,9 @@ function StudentCard(props) {
     let newStatuse = statuses.filter(
       statuse => statuse.name === e.target.value
     );
-    firestore
+    setCurrentStatus(newStatuse);
+
+      firestore
       .collection("students")
       .doc(student.id)
       .update({
@@ -108,12 +111,13 @@ function StudentCard(props) {
           <Col xs="10" md="4">
             <Row>
               <ButtonDropdown
+
                 direction="left"
                 style={{ width: "100%" }}
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
-                <DropdownToggle color="success" caret size="sm">
+                <DropdownToggle className={currentStatus[0].color} caret size="sm">
                   {student.statusName}
                 </DropdownToggle>
                 <DropdownMenu>

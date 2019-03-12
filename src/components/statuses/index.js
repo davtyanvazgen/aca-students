@@ -6,33 +6,54 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import Color from "./colors";
+import {Col, Container, Row} from "reactstrap";
 
-class AddStatuse extends Component {
-  render() {
-    return (
-      <>
-        <div id="containerFormStatuse">
-          <div className="miniContainerFormStatuse">
-            <AddStatuseForm />
-          </div>
-        </div>
-        <Color />
+const AddStatuse = ({statuses, students}) => (
+      <Container>
+          <Row>
+              <Col>
+                  <AddStatuseForm />
+              </Col>
+              <Col>
 
-        <div className="statuseList">
-          <h1>All statuses</h1>
-          {this.props.statuses &&
-            this.props.statuses.map(statuse => (
-              <Statuse
-                key={statuse.id}
-                statuse={statuse}
-                students={this.props.students}
-              />
-            ))}
-        </div>
-      </>
-    );
-  }
-}
+              </Col>
+          </Row>
+          <Row>
+              <Row><h1>All statuses</h1></Row>
+              <Row>
+              {statuses &&
+              statuses.map(statuse => (
+                  <Col  key={statuse.id} xs="12" md="6" lg="4">
+                  <Statuse
+                      key={statuse.id}
+                      statuse={statuse}
+                      students={students}
+                  />
+                  </Col>
+              ))}
+              </Row>
+          </Row>
+      </Container>
+        // <div id="containerFormStatuse">
+        //   <div className="miniContainerFormStatuse">
+        //     <AddStatuseForm />
+        //   </div>
+        // </div>
+        // <Color />
+        //
+        // <div className="statuseList">
+        //   <h1>All statuses</h1>
+        //   {statuses &&
+        //     statuses.map(statuse => (
+        //       <Statuse
+        //         key={statuse.id}
+        //         statuse={statuse}
+        //         students={students}
+        //       />
+        //     ))}
+        // </div>
+
+);
 
 export default compose(
   firestoreConnect(() => ["statuses", "students"]),

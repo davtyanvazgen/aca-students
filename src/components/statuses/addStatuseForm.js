@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {Button, Form, FormGroup, Label, Input, ButtonGroup} from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
-import Color from "./colors";
 
 const AddStatuseForm = ({ firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
   const [addStatusError, setAddStatusError] = useState("");
+  const [rSelected, setSelected] = useState("");
+
+  function onRadioBtnClick(select) {
+    setSelected(select);
+  }
 
   function handleChangeName(e) {
     setName(e.target.value);
@@ -18,12 +22,12 @@ const AddStatuseForm = ({ firestore }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     if (name.trim()) {
       const newStatuse = {
-        id: v1(),
-        longName: longName.trim(),
-        name
+          id: v1(),
+          longName: longName.trim(),
+          name,
+          color: rSelected,
       };
 
       firestore
@@ -41,7 +45,6 @@ const AddStatuseForm = ({ firestore }) => {
 
   return (
     <>
-      <Color />
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Status`s short name</Label>
@@ -59,6 +62,12 @@ const AddStatuseForm = ({ firestore }) => {
             onChange={handleChangeLongName}
           />
         </FormGroup>
+          <ButtonGroup>
+              <Button className="registrationColor" onClick={() => onRadioBtnClick("registrationColor")} active={rSelected === "registrationColor"}>Registr</Button>
+              <Button className="examColor" onClick={() => onRadioBtnClick("examColor")} active={rSelected === "examColor"}>Exam</Button>
+              <Button className="interviewColor" onClick={() => onRadioBtnClick("interviewColor")} active={rSelected === "interviewColor"}>Interview</Button>
+              <Button className="trainingColor" onClick={() => onRadioBtnClick("trainingColor")} active={rSelected === "trainingColor"}>Training</Button>
+          </ButtonGroup>
         <Button type="submit" color="success" block>
           Add
         </Button>

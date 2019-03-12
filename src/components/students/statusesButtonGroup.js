@@ -19,19 +19,19 @@ function StatusesButton(props) {
         defaultValue={props.selectedStatuses[0]}
       >
         <ToggleButton
-          variant="danger"
-          value={"all"}
-          onChange={() => {
-            props.statuseStudents(undefined, undefined, "all");
-          }}
+            className="registrationColor"
+            value={"all"}
+            onChange={() => {
+                props.statuseStudents(undefined, undefined, "all");
+            }}
         >
           All statuses
         </ToggleButton>
         {props.statuses &&
           props.statuses.map(status => (
             <ToggleButton
+                className={status.color}
               style={{ marginLeft: "0px", width: "100%" }}
-              variant="danger"
               value={status.id}
               key={status.id}
               id={status.id}

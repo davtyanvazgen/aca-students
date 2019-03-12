@@ -121,3 +121,79 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(124, 193, 214);
 }
+
+.registrationColor {
+  color: white !important;
+  background-color: #2f3e4e !important;
+  border-color: #27313c !important;
+}
+
+.registrationColor:active {
+  color: white !important;
+  background-color: lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+
+.registrationColor:not(:disabled):not(.disabled).active {
+  color: black !important;
+  background-color:  lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+.examColor {
+  color: white !important;
+  background-color: #8351aa !important;
+  border-color: #8351aa !important;
+}
+
+.examColor:active {
+  color: white !important;
+  background-color: lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+
+.examColor:not(:disabled):not(.disabled).active {
+  color: black !important;
+  background-color:  lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+.interviewColor {
+  color: white !important;
+  background-color: #3e7fb4 !important;
+  border-color: #3e7fb4 !important;
+}
+
+.interviewColor:active {
+  color: white !important;
+  background-color: lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+
+.interviewColor:not(:disabled):not(.disabled).active {
+  color: black !important;
+  background-color:  lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+.trainingColor {
+  color: white !important;
+  background-color: #55a963 !important;
+  border-color: #55a963 !important;
+}
+
+.trainingColor:active {
+  color: white !important;
+  background-color: lightgrey !important;
+  border-color: lightgrey !important;
+}
+
+
+.trainingColor:not(:disabled):not(.disabled).active {
+  color: black !important;
+  background-color:  lightgrey !important;
+  border-color: lightgrey !important;
+}
