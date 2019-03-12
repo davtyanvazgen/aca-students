@@ -3,7 +3,14 @@ import CourcesButton from "./courcesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
 import Input from "reactstrap/es/Input";
-import { Container, Row, Col, ListGroup } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  InputGroup,
+  InputGroupAddon
+} from "reactstrap";
 
 const Students = ({ filterStudents, searchValue, students }) => (
   <>
@@ -13,10 +20,18 @@ const Students = ({ filterStudents, searchValue, students }) => (
           <Container>
             <Row>
               <Col>
-                <Input
-                  value={searchValue}
-                  onChange={e => filterStudents(e.target.value.toUpperCase())}
-                />
+                <InputGroup
+                  style={{
+                    maxWidth: "300px",
+                    margin: "10px auto 0 auto"
+                  }}
+                >
+                  <InputGroupAddon addonType="prepend">Search</InputGroupAddon>
+                  <Input
+                    value={searchValue}
+                    onChange={e => filterStudents(e.target.value.toUpperCase())}
+                  />
+                </InputGroup>
               </Col>
             </Row>
 

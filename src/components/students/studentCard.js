@@ -173,16 +173,19 @@ function StudentCard(props) {
         <Collapse isOpen={collapse}>
           <hr />
           <Row>
-            <Col>
+            <Col xs="12" md="4" style={{ textAlign: "center" }}>
               <span style={{ color: "yellowgreen" }}>Email: </span>
+              <br />
               {student.email}
             </Col>
-            <Col>
+            <Col xs="12" md="2" style={{ textAlign: "center" }}>
               <span style={{ color: "yellowgreen" }}>Phone: </span>
+              <br />
               {student.phone}
             </Col>
-            <Col>
+            <Col xs="12" md="6" style={{ textAlign: "center" }}>
               <span style={{ color: "yellowgreen" }}>Knowledge: </span>
+              <br />
               {student.knowledge}
             </Col>
           </Row>
