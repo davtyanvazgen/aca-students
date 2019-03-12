@@ -1,15 +1,18 @@
 import React from "react";
-import { ButtonToolbar } from "react-bootstrap";
-import { ToggleButton } from "react-bootstrap";
-import { ToggleButtonGroup } from "react-bootstrap";
+import {
+  ButtonToolbar,
+  ToggleButton,
+  ToggleButtonGroup
+} from "react-bootstrap";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 function CourcesButton(props) {
   return (
-    <ButtonToolbar style={{ margin: "auto", padding: "10px 25%" }}>
+    <ButtonToolbar>
       <ToggleButtonGroup
+        style={{ width: "100%", overflow: " auto " }}
         type="checkbox"
         defaultValue={[...props.selectedCources]}
       >

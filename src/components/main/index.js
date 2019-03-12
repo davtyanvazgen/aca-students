@@ -17,7 +17,7 @@ const Main = ({ auth }) => {
   return !isLoaded(auth) ? (
     <div className="lds-hourglass" />
   ) : isEmpty(auth) ? (
-    <span>Not Authed</span>
+    <Redirect to="/signin" />
   ) : (
     <div>
       <Router>

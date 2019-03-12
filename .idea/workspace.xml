@@ -2,45 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="478d7fd7-6017-458d-8062-b70c77e07451" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/cources/deleteCourceModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/statuses/colors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/students/deleteStudentModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authentication/signin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authentication/signin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/authentication/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authentication/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cources/addCourceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/addCourceForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cources/cource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/cource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cources/deleteCourceModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/deleteCourceModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/cources/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cources/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/statuses/addStatuseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/addStatuseForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/statuses/colors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/colors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/statuses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/statuses/statuse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/statuse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/statuses/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/students/Students.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/students/editStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/editStudent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/studentCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/studentCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ShowStudents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/students.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/editInfoStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/editInfoStudent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/FireManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase/fireConfig.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/createReduxStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/createReduxStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/filterReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/filterReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/rootReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Students.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Students.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,33 +31,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/store/actions/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -89,7 +43,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="vs" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -146,11 +100,10 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -181,6 +134,27 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="store" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="actions" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
+              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -247,18 +221,17 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39836000" />
+    <option name="totallyTimeSpent" value="39997000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1361" height="705" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info id="npm" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" visible="true" weight="0.25074628" />
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.25" />
       <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="TypeScript" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="1" visible="true" weight="0.23327896" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="1" visible="true" weight="0.32952693" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" weight="0.32952693" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
@@ -319,13 +292,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/store/actions/authActions.js" />
-    <entry file="file://$PROJECT_DIR$/src/firebase/FireManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="17" lean-forward="true" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/firebase/FireManager.js" />
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -400,36 +367,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/ShowStudents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="60" column="7" lean-forward="true" selection-start-line="60" selection-start-column="7" selection-end-line="60" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/Students.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="49" lean-forward="true" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/ShowStudents.js" />
+    <entry file="file://$PROJECT_DIR$/src/components/students/Students.js" />
+    <entry file="file://$PROJECT_DIR$/src/containers/Main.js" />
     <entry file="file://$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -532,7 +472,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/students.js">
+    <entry file="file://$PROJECT_DIR$/src/containers/Students.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="131" column="28" lean-forward="true" selection-start-line="131" selection-start-column="28" selection-end-line="131" selection-end-column="28" />

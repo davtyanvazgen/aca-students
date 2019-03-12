@@ -3,35 +3,67 @@ import CourcesButton from "./courcesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
 import Input from "reactstrap/es/Input";
-import { Container, Row, Col } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  ListGroup,
+  InputGroup,
+  InputGroupAddon
+} from "reactstrap";
 
 const Students = ({ filterStudents, searchValue, students }) => (
   <>
     <Container>
-      <Row style={{ border: "2px solid red" }}>
-        <Col style={{ border: "2px solid black" }} sm={{ size: 10, offset: 2 }}>
-          <CourcesButton courceStudents={filterStudents} />
-          <Input
-            value={searchValue}
-            onChange={e => filterStudents(e.target.value.toUpperCase())}
-          />
+      <Row>
+        <Col sm={{ size: 11, offset: 1 }}>
+          <Container>
+            <Row>
+              <Col>
+                <InputGroup
+                  style={{
+                    maxWidth: "300px",
+                    margin: "10px auto 0 auto"
+                  }}
+                >
+                  <InputGroupAddon addonType="prepend">Search</InputGroupAddon>
+                  <Input
+                    value={searchValue}
+                    onChange={e => filterStudents(e.target.value.toUpperCase())}
+                  />
+                </InputGroup>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col style={{ margin: "5px auto" }} xs="auto">
+                <CourcesButton courceStudents={filterStudents} />
+              </Col>
+            </Row>
+          </Container>
         </Col>
       </Row>
 
-      <Row style={{ border: "2px solid yellow" }}>
-        <Col sm={{ size: 2 }} style={{ border: "2px solid green" }}>
+      <Row>
+        <Col sm={{ size: 1 }} xs={{ size: 2 }} style={{ padding: "0px " }}>
           <StatusesButton statuseStudents={filterStudents} />
         </Col>
 
-        <Col sm={{ size: 10 }} style={{ border: "2px solid green" }}>
-          {students &&
-            students.map(student => (
-              <StudentCard
-                key={student.id}
-                student={student}
-                filterStudents={filterStudents}
-              />
-            ))}
+        <Col sm={{ size: 11 }} xs={{ size: 10 }}>
+          <Container>
+            <Row>
+              <ListGroup style={{ width: "100%" }}>
+                {students &&
+                  students.map(student => (
+                    <StudentCard
+                      key={student.id}
+                      student={student}
+                      filterStudents={filterStudents}
+                    />
+                  ))}
+              </ListGroup>
+            </Row>
+          </Container>
         </Col>
       </Row>
     </Container>

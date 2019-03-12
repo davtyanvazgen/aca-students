@@ -17,7 +17,7 @@ export default class DeleteStatusModal extends React.Component {
           There are {studentsSameStatus.length} Students with {statuse.name}
         </h4>
         <p>
-          if you delete this course you will remove {studentsSameStatus.length}{" "}
+          if you delete this course you will remove {studentsSameStatus.length}
           students
         </p>
       </>

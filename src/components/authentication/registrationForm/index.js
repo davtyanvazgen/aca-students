@@ -197,9 +197,12 @@ function RegistrationForm(props) {
                   --choose--
                 </option>
                 <option>Beginner</option>
-                <option>junior</option>
-                <option>middle</option>
-                <option>Senior</option>option>
+                <option>Know basics some programming language</option>
+                <option>Know enough some programming language</option>
+                <option>
+                  Good at some programming language and have experience
+                </option>
+                option>
               </Input>
               {knowledgeValidationErrors && (
                 <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
