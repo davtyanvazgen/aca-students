@@ -15,20 +15,17 @@ import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Collapse
 } from "reactstrap";
-import { Container } from "react-bootstrap";
+// import { Collapse } from "react-bootstrap";
 
 function StudentCard(props) {
   const { statuses, cources, student, firestore } = props;
   const [modalShow, setModalShow] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
   const [isOpenCource, setIsOpenCource] = useState(false);
-
   const [collapse, setcollapse] = useState(false);
-  // this.toggle = this.toggle.bind(this);
-  // this.state = { collapse: false };
 
   function toggle() {
     setcollapse(!collapse);
@@ -65,10 +62,6 @@ function StudentCard(props) {
       });
   }
 
-  function toggleMoreInfo() {
-    setShowInfo(!showInfo);
-  }
-
   function toggleStatus() {
     setIsOpenStatus(!isOpenStatus);
   }
@@ -85,18 +78,23 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroupItem>
+      <ListGroupItem style={{ border: "1px solid grey" }}>
         <Row>
           <Col xs="5" md="2">
             <Media
-              style={{ width: "100%", borderRadius: "50%" }}
+              style={{ maxHeight: "80px", borderRadius: "50%" }}
               object
               src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
               alt="Generic placeholder image"
             />
           </Col>
 
-          <Col xs="6" md="5" style={{ wordWrap: "break-word" }}>
+          <Col
+            xs="6"
+            md="5"
+            style={{ wordWrap: "break-word" }}
+            onClick={toggle}
+          >
             <p>{student.fullName.toUpperCase()}</p>
             <p>{student.date}</p>
           </Col>
@@ -104,11 +102,12 @@ function StudentCard(props) {
           <Col xs="10" md="4">
             <Row>
               <ButtonDropdown
+                direction="left"
                 style={{ width: "100%" }}
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
-                <DropdownToggle color="warning" caret size="sm">
+                <DropdownToggle color="success" caret size="sm">
                   {student.statusName}
                 </DropdownToggle>
                 <DropdownMenu>
@@ -127,11 +126,12 @@ function StudentCard(props) {
             </Row>
             <Row>
               <ButtonDropdown
+                direction="left"
                 style={{ width: "100%" }}
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
-                <DropdownToggle color="warning" caret size="sm">
+                <DropdownToggle color="info" caret size="sm">
                   {student.courceName}
                 </DropdownToggle>
                 <DropdownMenu>
@@ -152,143 +152,39 @@ function StudentCard(props) {
 
           <Col xs="1">
             <Row>
-              <Col xs="6">
+              <Col style={{ textAlign: "center" }}>
                 <FontAwesomeIcon icon="user-times" onClick={handleRemove} />
-              </Col>
-
-              <Col xs="6">
+                <hr />
                 <FontAwesomeIcon icon="user-edit" onClick={handleEdit} />
               </Col>
             </Row>
           </Col>
         </Row>
-        <Row />
-      </ListGroupItem>
 
-      {/* <ListGroup>
-        <ListGroupItem
-          color="info"
-          onClick={toggle}
-          style={{ marginBottom: "1rem" }}
-        >
-          <Row style={{ border: "1px solid white" }}>
-            <Col
-              sm={{ size: 2 }}
-              style={{ border: "1px solid red", paddingLeft: "0px" }}
-            >
-              <Media
-                
-                object
-                src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
-                alt="Generic placeholder image"
-              />
+        <Collapse isOpen={collapse}>
+          <hr />
+          <Row>
+            <Col>
+              <span style={{ color: "yellowgreen" }}>Email: </span>
+              {student.email}
             </Col>
-
-            <Col sm={{ size: 10 }} style={{ border: "1px solid blue" }}>
-              <Row>
-                <Col sm={{ size: 9 }} style={{ border: "1px solid blue" }}>
-                  <p>{`${student.fullName.toUpperCase()} ${student.date}`}</p>
-
-                  <ButtonDropdown isOpen={isOpenStatus} toggle={toggleStatus}>
-                    <DropdownToggle color="warning" caret size="sm">
-                      {student.statusName}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      {statuses &&
-                        statuses.map(status => (
-                          <DropdownItem
-                            key={status.id}
-                            value={status.name}
-                            onClick={handleSelectStatusChange}
-                          >
-                            {status.name}
-                          </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                  </ButtonDropdown>
-
-                  <ButtonDropdown isOpen={isOpenCource} toggle={toggleCource}>
-                    <DropdownToggle color="warning" caret size="sm">
-                      {student.courceName}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      {cources &&
-                        cources.map(cource => (
-                          <DropdownItem
-                            key={cource.id}
-                            value={cource.name}
-                            onClick={handleSelectCourceChange}
-                          >
-                            {cource.name}
-                          </DropdownItem>
-                        ))}
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </Col>
-
-                <Col sm={{ size: 3 }} style={{ border: "1px solid red" }}>
-                  <Button
-                    className="float-right "
-                    size="sm"
-                    color="danger"
-                    onClick={handleRemove}
-                    block
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    className="float-right"
-                    size="sm"
-                    color="warning"
-                    onClick={handleEdit}
-                    block
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    className="float-right"
-                    size="sm"
-                    color="success"
-                    block
-                    onClick={toggleMoreInfo}
-                  >
-                    More info
-                  </Button>
-                </Col>
-              </Row>
-
-              {showInfo && (
-                <ListGroup>
-                  <ListGroupItem disabled>
-                    E-mail: {student.email}
-                  </ListGroupItem>
-                  <ListGroupItem disabled>Phone: {student.phone}</ListGroupItem>
-                  <ListGroupItem disabled>
-                    knowledge: {student.knowledge}
-                  </ListGroupItem>
-                </ListGroup>
-              )}
-
-              <Collapse isOpen={collapse}>
-                <Card>
-                  <CardBody>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident.
-                  </CardBody>
-                </Card>
-              </Collapse>
+            <Col>
+              <span style={{ color: "yellowgreen" }}>Phone: </span>
+              {student.phone}
+            </Col>
+            <Col>
+              <span style={{ color: "yellowgreen" }}>Knowledge: </span>
+              {student.knowledge}
             </Col>
           </Row>
-        </ListGroupItem>
-      </ListGroup>
+        </Collapse>
 
-      <EditStudentModal
-        show={modalShow}
-        onHide={handleOnHide}
-        student={student}
-      /> */}
+        <EditStudentModal
+          show={modalShow}
+          onHide={handleOnHide}
+          student={student}
+        />
+      </ListGroupItem>
     </>
   );
 }

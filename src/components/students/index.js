@@ -8,8 +8,8 @@ import { Container, Row, Col, ListGroup } from "reactstrap";
 const Students = ({ filterStudents, searchValue, students }) => (
   <>
     <Container>
-      <Row style={{ border: "2px solid red" }}>
-        <Col style={{ border: "2px solid black" }} sm={{ size: 10, offset: 2 }}>
+      <Row>
+        <Col sm={{ size: 11, offset: 1 }}>
           <Container>
             <Row>
               <Col>
@@ -29,20 +29,12 @@ const Students = ({ filterStudents, searchValue, students }) => (
         </Col>
       </Row>
 
-      <Row style={{ border: "2px solid yellow" }}>
-        <Col
-          sm={{ size: 2 }}
-          xs={{ size: 2 }}
-          style={{ padding: "0px ", border: "2px solid green" }}
-        >
+      <Row>
+        <Col sm={{ size: 1 }} xs={{ size: 2 }} style={{ padding: "0px " }}>
           <StatusesButton statuseStudents={filterStudents} />
         </Col>
 
-        <Col
-          sm={{ size: 10 }}
-          xs={{ size: 10 }}
-          style={{ border: "2px solid green" }}
-        >
+        <Col sm={{ size: 11 }} xs={{ size: 10 }}>
           <Container>
             <Row>
               <ListGroup style={{ width: "100%" }}>

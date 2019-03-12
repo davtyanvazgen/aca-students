@@ -12,7 +12,7 @@ function CourcesButton(props) {
   return (
     <ButtonToolbar>
       <ToggleButtonGroup
-        style={{ width: "100%" }}
+        style={{ width: "100%", overflow: " auto " }}
         type="checkbox"
         defaultValue={[...props.selectedCources]}
       >
