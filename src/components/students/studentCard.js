@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUserTimes, faUserEdit } from "@fortawesome/free-solid-svg-icons";
+import DeleteStudentModal from "./deleteStudentModal";
 import {
   ListGroupItem,
   Media,
@@ -26,6 +27,7 @@ function StudentCard(props) {
   const [isOpenStatus, setIsOpenStatus] = useState(false);
   const [isOpenCource, setIsOpenCource] = useState(false);
   const [collapse, setcollapse] = useState(false);
+  const [modal, setModal] = useState(false);
 
   function toggle() {
     setcollapse(!collapse);
@@ -74,6 +76,10 @@ function StudentCard(props) {
   }
   function handleOnHide() {
     setModalShow(false);
+  }
+
+  function toggleDeleteStudent() {
+    setModal(!modal);
   }
 
   return (
@@ -153,7 +159,10 @@ function StudentCard(props) {
           <Col xs="1">
             <Row>
               <Col style={{ textAlign: "center" }}>
-                <FontAwesomeIcon icon="user-times" onClick={handleRemove} />
+                <FontAwesomeIcon
+                  icon="user-times"
+                  onClick={toggleDeleteStudent}
+                />
                 <hr />
                 <FontAwesomeIcon icon="user-edit" onClick={handleEdit} />
               </Col>
@@ -183,6 +192,12 @@ function StudentCard(props) {
           show={modalShow}
           onHide={handleOnHide}
           student={student}
+        />
+        <DeleteStudentModal
+          toggleDeleteStudent={toggleDeleteStudent}
+          modal={modal}
+          student={student.fullName}
+          handleRemove={handleRemove}
         />
       </ListGroupItem>
     </>
