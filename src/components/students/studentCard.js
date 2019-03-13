@@ -87,7 +87,7 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroupItem style={{ border: "1px solid grey" }}>
+      <ListGroupItem style={{ border: "1px solid grey", borderRight: `3px solid #bee798` }}>
         <Row>
           <Col xs="5" md="2">
             <Media
@@ -141,7 +141,7 @@ function StudentCard(props) {
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
-                <DropdownToggle color="info" caret size="sm">
+                <DropdownToggle style={{ color: "black"}} color="info" caret size="sm">
                   {student.courceName}
                 </DropdownToggle>
                 <DropdownMenu>

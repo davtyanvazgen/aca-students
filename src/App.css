@@ -123,13 +123,13 @@
 }
 
 .registrationColor {
-  color: white !important;
-  background-color: #2f3e4e !important;
-  border-color: #27313c !important;
+  color: black !important;
+  background-color: #dbf489 !important;
+  border-color: #dbf489 !important;
 }
 
 .registrationColor:active {
-  color: white !important;
+  color: black !important;
   background-color: lightgrey !important;
   border-color: lightgrey !important;
 }
@@ -142,13 +142,13 @@
 }
 
 .examColor {
-  color: white !important;
-  background-color: #8351aa !important;
-  border-color: #8351aa !important;
+  color: black !important;
+  background-color: #caed92 !important;
+  border-color: #caed92 !important;
 }
 
 .examColor:active {
-  color: white !important;
+  color: black !important;
   background-color: lightgrey !important;
   border-color: lightgrey !important;
 }
@@ -161,13 +161,13 @@
 }
 
 .interviewColor {
-  color: white !important;
-  background-color: #3e7fb4 !important;
-  border-color: #3e7fb4 !important;
+  color: black !important;
+  background-color: #bee798 !important;
+  border-color: #bee798 !important;
 }
 
 .interviewColor:active {
-  color: white !important;
+  color: black !important;
   background-color: lightgrey !important;
   border-color: lightgrey !important;
 }
@@ -180,13 +180,13 @@
 }
 
 .trainingColor {
-  color: white !important;
-  background-color: #55a963 !important;
-  border-color: #55a963 !important;
+  color: black !important;
+  background-color: #a9e0a5 !important;
+  border-color: #a9e0a5 !important;
 }
 
 .trainingColor:active {
-  color: white !important;
+  color: black !important;
   background-color: lightgrey !important;
   border-color: lightgrey !important;
 }

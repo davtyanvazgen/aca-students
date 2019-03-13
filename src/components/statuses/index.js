@@ -11,12 +11,7 @@ import {Col, Container, Row} from "reactstrap";
 const AddStatuse = ({statuses, students}) => (
       <Container>
           <Row>
-              <Col>
-                  <AddStatuseForm />
-              </Col>
-              <Col>
-
-              </Col>
+              <AddStatuseForm />
           </Row>
           <Row>
               <Row><h1>All statuses</h1></Row>
