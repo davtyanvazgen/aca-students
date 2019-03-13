@@ -19,7 +19,6 @@ import {
   DropdownItem,
   Collapse
 } from "reactstrap";
-// import { Collapse } from "react-bootstrap";
 
 function StudentCard(props) {
   const { statuses, cources, student, firestore } = props;
@@ -86,11 +85,11 @@ function StudentCard(props) {
     <>
       <ListGroupItem style={{ border: "1px solid grey" }}>
         <Row>
-          <Col xs="5" md="2">
+          <Col xs="5" md="2" onClick={toggle}>
             <Media
               style={{ maxHeight: "80px", borderRadius: "50%" }}
               object
-              src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
+              src="http://pa1.narvii.com/6470/09c5d7de4de674f6fb84f72e98b05d684d54d624_hq.gif"
               alt="Generic placeholder image"
             />
           </Col>
@@ -116,7 +115,7 @@ function StudentCard(props) {
                 <DropdownToggle color="success" caret size="sm">
                   {student.statusName}
                 </DropdownToggle>
-                <DropdownMenu>
+                <DropdownMenu style={{ backgroundColor: "yellowgreen" }}>
                   {statuses &&
                     statuses.map(status => (
                       <DropdownItem
@@ -130,7 +129,7 @@ function StudentCard(props) {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row>
+            <Row style={{ marginTop: "7px" }}>
               <ButtonDropdown
                 direction="left"
                 style={{ width: "100%" }}
@@ -174,17 +173,17 @@ function StudentCard(props) {
           <hr />
           <Row>
             <Col xs="12" md="4" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Email: </span>
+              <span style={{ color: "blue" }}>Email: </span>
               <br />
               {student.email}
             </Col>
             <Col xs="12" md="2" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Phone: </span>
+              <span style={{ color: "blue" }}>Phone: </span>
               <br />
               {student.phone}
             </Col>
             <Col xs="12" md="6" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Knowledge: </span>
+              <span style={{ color: "blue" }}>Knowledge: </span>
               <br />
               {student.knowledge}
             </Col>

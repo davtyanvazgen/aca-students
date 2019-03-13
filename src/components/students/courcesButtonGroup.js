@@ -19,7 +19,7 @@ function CourcesButton(props) {
         {props.cources &&
           props.cources.map(cource => (
             <ToggleButton
-              variant="primary"
+              variant="info"
               value={cource.id}
               key={cource.id}
               id={cource.id}

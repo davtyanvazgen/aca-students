@@ -19,8 +19,9 @@ function StatusesButton(props) {
         defaultValue={props.selectedStatuses[0]}
       >
         <ToggleButton
-          variant="danger"
+          variant="success"
           value={"all"}
+          style={{ borderTopRightRadius: "3px" }}
           onChange={() => {
             props.statuseStudents(undefined, undefined, "all");
           }}
@@ -31,7 +32,7 @@ function StatusesButton(props) {
           props.statuses.map(status => (
             <ToggleButton
               style={{ marginLeft: "0px", width: "100%" }}
-              variant="danger"
+              variant="success"
               value={status.id}
               key={status.id}
               id={status.id}

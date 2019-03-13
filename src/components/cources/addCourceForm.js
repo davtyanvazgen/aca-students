@@ -41,17 +41,19 @@ const AddCourceForm = ({ firestore }) => {
     <>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label>Cource`s short name</Label>
+          <h6 style={{ textAlign: "center", borderTop: "1px solid black" }}>
+            Short name
+          </h6>
           <Input
             type="text"
-            placeholder="Enter new cource"
+            placeholder="Enter shoer name"
             value={name}
             onChange={handleChangeName}
           />
-          <Label>Cource`s long name</Label>
+          <h6 style={{ textAlign: "center" }}>Long name</h6>
           <Input
             type="text"
-            placeholder="Enter long name of status"
+            placeholder="Enter long name"
             value={longName}
             onChange={handleChangeLongName}
           />
