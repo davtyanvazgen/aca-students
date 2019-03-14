@@ -12,14 +12,12 @@ import {
   Media,
   Row,
   Col,
-  Button,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Collapse
 } from "reactstrap";
-// import { Collapse } from "react-bootstrap";
 
 function StudentCard(props) {
   const { statuses, cources, student, firestore } = props;
@@ -28,9 +26,11 @@ function StudentCard(props) {
   const [isOpenCource, setIsOpenCource] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState(statuses.filter(statuse => statuse.name === student.statusName));
+  const [currentStatus, setCurrentStatus] = useState(statuses.filter(statuse => statuse.id === student.status));
+  const [currentCource, setCurrentCource] = useState(cources.filter(cource => cource.id === student.cource));
 
-  function toggle() {
+
+    function toggle() {
     setcollapse(!collapse);
   }
 
@@ -43,6 +43,7 @@ function StudentCard(props) {
 
   function handleSelectCourceChange(e) {
     let newCource = cources.filter(cource => cource.name === e.target.value);
+    setCurrentCource(newCource);
     firestore
       .collection("students")
       .doc(student.id)
@@ -87,7 +88,7 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroupItem style={{ border: "1px solid grey", borderRight: `3px solid #bee798` }}>
+      <ListGroupItem style={{ border: "1px solid #cbccce", borderRight: `3px solid #bee798`, backgroundColor: props.background  }}>
         <Row>
           <Col xs="5" md="2">
             <Media
@@ -104,20 +105,18 @@ function StudentCard(props) {
             style={{ wordWrap: "break-word" }}
             onClick={toggle}
           >
-            <p>{student.fullName.toUpperCase()}</p>
-            <p>{student.date}</p>
+            <p style={{marginBottom: "0rem", marginTop: "1rem"}}>{student.fullName.toUpperCase()}</p>
+            <p style={{marginBottom: "0rem"}}>{student.date}</p>
           </Col>
 
           <Col xs="10" md="4">
-            <Row>
+            <Row style={{display: "block", marginTop: "5%"}}>
               <ButtonDropdown
-
                 direction="left"
-                style={{ width: "100%" }}
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
-                <DropdownToggle className={currentStatus[0].color} caret size="sm">
+                <DropdownToggle className="badge badge-pill" style={{backgroundColor: currentStatus[0].color, borderColor: currentStatus[0].color}} caret size="sm">
                   {student.statusName}
                 </DropdownToggle>
                 <DropdownMenu>
@@ -134,14 +133,13 @@ function StudentCard(props) {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row>
+            <Row style={{display: "block"}}>
               <ButtonDropdown
                 direction="left"
-                style={{ width: "100%" }}
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
-                <DropdownToggle style={{ color: "black"}} color="info" caret size="sm">
+                <DropdownToggle className="badge badge-pill"  style={{backgroundColor: currentCource[0].color, borderColor: currentCource[0].color}} caret size="sm">
                   {student.courceName}
                 </DropdownToggle>
                 <DropdownMenu>

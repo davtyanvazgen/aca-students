@@ -119,7 +119,7 @@ const filter = (searchValue, selectedCources, selectedStatuses, dispatch) => {
 };
 
 export default compose(
-    firestoreConnect(() => ["students"]),
+    firestoreConnect(() => ["students", "cources", "statuses"]),
     connect((state, props) => ({
         searchValue: state.filter.searchValue,
         filterStudents: filter(
@@ -136,6 +136,8 @@ export default compose(
                 state.filter.selectedStatuses
             ),
             state.filter.searchValue
-        )
+        ),
+        cources: state.firestore.ordered.cources,
+        statuses: state.firestore.ordered.statuses,
     }))
 )(Students);

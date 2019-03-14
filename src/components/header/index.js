@@ -8,10 +8,6 @@ export default function Header() {
     <div>
       <Navbar color="dark" light expand="md">
         <div className="divWrapper">
-          <NavLink to="/" className="text-light" tag={RRNavLink}>
-            ACA students list
-          </NavLink>
-
           <div>
             <Nav className="ml-auto" navbar>
               <ButtonGroup>
