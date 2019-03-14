@@ -49,7 +49,6 @@ const Cource = ({ cource, students, firestore }) => {
   const editModalClose = () => {
     setModalShowEdit(false);
   };
-
   return (
     <div>
       <Card
@@ -114,6 +113,7 @@ const Cource = ({ cource, students, firestore }) => {
         show={modalShowEdit}
         onHide={editModalClose}
         cource={cource}
+        students={students}
       />
     </div>
   );

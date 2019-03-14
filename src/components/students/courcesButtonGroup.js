@@ -1,42 +1,74 @@
-import React from "react";
-import {
-  ButtonToolbar,
-  ToggleButton,
-  ToggleButtonGroup
-} from "react-bootstrap";
+import React, { useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { Badge, Button } from "reactstrap";
 
-const CourcesButton = props => (
-  <ButtonToolbar>
-    <ToggleButtonGroup
-      style={{ width: "100%", overflow: " auto " }}
-      type="checkbox"
-      defaultValue={[...props.selectedCources]}
-    >
-      {props.cources &&
-        props.cources.map(cource => (
-          <ToggleButton
-            style={{ color: "black" }}
-            variant="info"
-            value={cource.id}
-            key={cource.id}
-            id={cource.id}
-            onChange={() => {
-              props.courceStudents(undefined, cource);
+const CourcesButton = ({
+  selectedCources,
+  cources,
+  courceStudents,
+  students
+}) => {
+  const [rSelected, setSelected] = useState([...selectedCources]);
+  function onCheckboxBtnClick(selected) {
+    let tempArr = rSelected;
+    const index = tempArr.indexOf(selected);
+    if (index < 0) {
+      tempArr.push(selected);
+    } else {
+      tempArr.splice(index, 1);
+    }
+    setSelected(tempArr);
+  }
+
+  function studentSameCource(cource) {
+    let counter = 0;
+    students.forEach(student => {
+      if (student.cource === cource.id) {
+        counter++;
+      }
+    });
+    return counter;
+  }
+  return (
+    <div style={{ width: "100%", overflow: " auto ", display: "flex" }}>
+      {cources &&
+        cources.map(cource => (
+          <Button
+            className="activeButtonColor"
+            style={{
+              marginRight: "2px",
+              marginBottom: "8px",
+              backgroundColor: cource.color,
+              borderColor: cource.color,
+              whiteSpace: "nowrap",
+              textAlign: "center"
             }}
+            id={cource.id}
+            key={cource.id}
+            onClick={() => {
+              onCheckboxBtnClick(cource.id);
+              courceStudents(undefined, cource);
+            }}
+            active={rSelected.includes(cource.id)}
           >
-            {cource.name}
-          </ToggleButton>
+            <span>
+              {cource.name}
+              <Badge color="secondary" style={{ marginLeft: "4px" }}>
+                {students && studentSameCource(cource)}
+              </Badge>
+            </span>
+          </Button>
         ))}
-    </ToggleButtonGroup>
-  </ButtonToolbar>
-);
+    </div>
+  );
+};
 
 export default compose(
-  firestoreConnect(() => ["cources"]),
+  firestoreConnect(() => ["cources", "students"]),
   connect((state, props) => ({
+    students: state.firestore.ordered.students,
     cources: state.firestore.ordered.cources,
     selectedCources: state.filter.selectedCources
   }))

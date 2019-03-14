@@ -27,7 +27,10 @@ function StudentCard(props) {
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(
-    statuses.filter(statuse => statuse.name === student.statusName)
+    statuses.filter(statuse => statuse.id === student.status)
+  );
+  const [currentCource, setCurrentCource] = useState(
+    cources.filter(cource => cource.id === student.cource)
   );
 
   function toggle() {
@@ -43,6 +46,7 @@ function StudentCard(props) {
 
   function handleSelectCourceChange(e) {
     let newCource = cources.filter(cource => cource.name === e.target.value);
+    setCurrentCource(newCource);
     firestore
       .collection("students")
       .doc(student.id)
@@ -88,7 +92,11 @@ function StudentCard(props) {
   return (
     <>
       <ListGroupItem
-        style={{ border: "1px solid grey", borderRight: `3px solid #bee798` }}
+        style={{
+          border: "1px solid #cbccce",
+          borderRight: `3px solid #bee798`,
+          backgroundColor: props.background
+        }}
       >
         <Row>
           <Col xs="5" md="2">
@@ -106,20 +114,25 @@ function StudentCard(props) {
             style={{ wordWrap: "break-word" }}
             onClick={toggle}
           >
-            <p>{student.fullName.toUpperCase()}</p>
-            <p>{student.date}</p>
+            <p style={{ marginBottom: "0rem", marginTop: "1rem" }}>
+              {student.fullName.toUpperCase()}
+            </p>
+            <p style={{ marginBottom: "0rem" }}>{student.date}</p>
           </Col>
 
           <Col xs="10" md="4">
-            <Row>
+            <Row style={{ display: "block", marginTop: "5%" }}>
               <ButtonDropdown
                 direction="left"
-                style={{ width: "100%" }}
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
                 <DropdownToggle
-                  className={currentStatus[0].color}
+                  className="badge badge-pill"
+                  style={{
+                    backgroundColor: currentStatus[0].color,
+                    borderColor: currentStatus[0].color
+                  }}
                   caret
                   size="sm"
                 >
@@ -139,16 +152,18 @@ function StudentCard(props) {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row>
+            <Row style={{ display: "block" }}>
               <ButtonDropdown
                 direction="left"
-                style={{ width: "100%" }}
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
                 <DropdownToggle
-                  style={{ color: "black" }}
-                  color="info"
+                  className="badge badge-pill"
+                  style={{
+                    backgroundColor: currentCource[0].color,
+                    borderColor: currentCource[0].color
+                  }}
                   caret
                   size="sm"
                 >
@@ -188,17 +203,17 @@ function StudentCard(props) {
           <hr />
           <Row>
             <Col xs="12" md="4" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Email: </span>
+              <span style={{ color: "blue" }}>Email: </span>
               <br />
               {student.email}
             </Col>
             <Col xs="12" md="2" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Phone: </span>
+              <span style={{ color: "blue" }}>Phone: </span>
               <br />
               {student.phone}
             </Col>
             <Col xs="12" md="6" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Knowledge: </span>
+              <span style={{ color: "blue" }}>Knowledge: </span>
               <br />
               {student.knowledge}
             </Col>

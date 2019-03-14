@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-export default class DeleteStatusModal extends React.Component {
+export default class DeleteStatusModal extends Component {
   render() {
     const {
       studentsSameStatus,
@@ -14,16 +14,20 @@ export default class DeleteStatusModal extends React.Component {
     const body = studentsSameStatus.length ? (
       <>
         <h4>
-          There are {studentsSameStatus.length} Students with {statuse.name}
+          There are{" "}
+          <span style={{ color: "blue" }}>{studentsSameStatus.length}</span>{" "}
+          Students with <span style={{ color: "blue" }}>{statuse.name}</span>
         </h4>
         <p>
-          if you delete this course you will remove {studentsSameStatus.length}
-          students
+          if you delete this course you will lose
+          <span style={{ color: "blue" }}> {studentsSameStatus.length}</span>
+          friends
         </p>
       </>
     ) : (
-      <h6>Do you want to delete this cource ?</h6>
+      <h6>Do you want to delete this statuse ?</h6>
     );
+
     return (
       <Modal
         onHide={onHide}
@@ -34,7 +38,7 @@ export default class DeleteStatusModal extends React.Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Are You Sure ?
+            Are You Sure <span style={{ color: "green" }}>ZVART jan</span>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>

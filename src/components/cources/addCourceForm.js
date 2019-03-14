@@ -91,29 +91,24 @@ const AddCourceForm = ({ firestore }) => {
         </FormGroup>
       </Form>
 
-      <div style={{ textAlign: "center" }}>
-        <Button
-          size="sm"
-          style={{ backgroundColor: color, minWidth: "220px" }}
-          className="mr-2"
-        >
-          {name ? name : "Short name"}
-        </Button>
+      <Button size="sm" style={{ backgroundColor: color }} className="mr-2">
+        {name ? name : "Short name"}
+      </Button>
 
-        <Button size="sm" style={{ backgroundColor: color, minWidth: "220px" }}>
-          {longName ? longName : "Long name"}
-        </Button>
-      </div>
-      <hr />
+      <Button size="sm" style={{ backgroundColor: color }}>
+        {longName ? longName : "Long name"}
+      </Button>
+
       <Button
+        className="float-right"
         type="submit"
         color="info"
-        block
         size="sm"
         onClick={generateColor}
       >
         Generate color
       </Button>
+      <hr />
 
       <Button
         onClick={handleSubmit}

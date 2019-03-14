@@ -1,51 +1,63 @@
-import React from "react";
-import {
-  ButtonToolbar,
-  ToggleButton,
-  ToggleButtonGroup
-} from "react-bootstrap";
+import React, { useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { Button, Col } from "reactstrap";
 
-function StatusesButton(props) {
+const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
+  const [rSelected, setSelected] = useState(selectedStatuses[0]);
+  function onRadioBtnClick(selected) {
+    setSelected(selected);
+  }
   return (
-    <ButtonToolbar>
-      <ToggleButtonGroup
-        style={{ width: "100%", wordWrap: "break-word" }}
-        className="btn-group-vertical"
-        type="radio"
-        name="statuses"
-        defaultValue={props.selectedStatuses[0]}
-      >
-        <ToggleButton
-          className="registrationColor"
-          value={"all"}
-          onChange={() => {
-            props.statuseStudents(undefined, undefined, "all");
+    <>
+      <Col>
+        <Button
+          style={{
+            marginBottom: "2px",
+            width: "100%",
+            wordWrap: "break-word",
+            textAlign: "center"
           }}
+          color="dark"
+          onClick={() => {
+            onRadioBtnClick("all");
+            statuseStudents(undefined, undefined, "all");
+          }}
+          active={rSelected === "all"}
         >
-          All statuses
-        </ToggleButton>
-        {props.statuses &&
-          props.statuses.map(status => (
-            <ToggleButton
-              className={status.color}
-              style={{ marginLeft: "0px", width: "100%" }}
-              value={status.id}
-              key={status.id}
-              id={status.id}
-              onChange={() => {
-                props.statuseStudents(undefined, undefined, status);
+          Show all
+        </Button>
+      </Col>
+      {statuses &&
+        statuses.map(status => (
+          <Col key={status.id}>
+            <Button
+              className="activeButtonColor"
+              style={{
+                marginBottom: "2px",
+                width: "100%",
+                backgroundColor: status.color,
+                borderColor: status.color,
+                wordWrap: "break-word",
+                textAlign: "center"
               }}
+              color="dark"
+              id={status.id}
+              key={status.id}
+              onClick={() => {
+                onRadioBtnClick(status.id);
+                statuseStudents(undefined, undefined, status);
+              }}
+              active={rSelected === status.id}
             >
               {status.name}
-            </ToggleButton>
-          ))}
-      </ToggleButtonGroup>
-    </ButtonToolbar>
+            </Button>
+          </Col>
+        ))}
+    </>
   );
-}
+};
 
 export default compose(
   firestoreConnect(() => ["statuses"]),
