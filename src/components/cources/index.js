@@ -13,57 +13,59 @@ const AddCource = props => {
   const toggle = () => {
     setCollapse(!collapse);
   };
+
   return (
     <>
       <Container>
-        <Row>
-          <Col style={{ textAlign: "center" }}>
-            <h1>Current cources</h1>
-            <Button color="primary" onClick={toggle}>
-              Add new cource
-            </Button>
-          </Col>
-        </Row>
-
-        <Row style={{ marginTop: "15px" }}>
-          <Collapse isOpen={collapse} style={{ margin: "0 auto" }}>
-            <Col style={{ minWidth: "440px" }}>
-              <AddCourceForm />
+        <Container>
+          <Row>
+            <Col style={{ textAlign: "center" }}>
+              <h1>Current cources</h1>
+              <Button
+                color="primary"
+                onClick={toggle}
+                size="sm"
+                style={{ float: "right" }}
+              >
+                Add new cource
+              </Button>
             </Col>
-          </Collapse>
-        </Row>
+          </Row>
 
-        <Row>
-          {props.cources ? (
-            props.cources.map(cource => (
-              <Col xs="4">
-                <Cource
-                  key={cource.id}
-                  cource={cource}
-                  students={props.students}
-                />
+          <Row style={{ marginTop: "15px" }}>
+            <Collapse isOpen={collapse} style={{ margin: "0 auto" }}>
+              <Col style={{ minWidth: "440px" }}>
+                <AddCourceForm />
               </Col>
-            ))
-          ) : (
-            <div className="loader" />
-          )}
-        </Row>
+            </Collapse>
+          </Row>
+          <hr />
+        </Container>
+
+        <Container style={{ marginTop: "15px" }}>
+          <Row>
+            {props.cources ? (
+              props.cources.map(cource => (
+                <Col
+                  xs="6"
+                  md="4"
+                  lg="3"
+                  key={cource.id}
+                  style={{ marginTop: "20px" }}
+                >
+                  <Cource
+                    key={cource.id}
+                    cource={cource}
+                    students={props.students}
+                  />
+                </Col>
+              ))
+            ) : (
+              <div className="loader" />
+            )}
+          </Row>
+        </Container>
       </Container>
-      {/* <div id="containerForm">
-        <div className="miniContainerForm">
-          <AddCourceForm />
-        </div>
-      </div>
-      <div className="courceList">
-        <h1>Current cources</h1>
-        {props.cources ? (
-          props.cources.map(cource => (
-            <Cource key={cource.id} cource={cource} students={props.students} />
-          ))
-        ) : (
-          <div className="loader" />
-        )}
-      </div> */}
     </>
   );
 };

@@ -12,7 +12,6 @@ import {
   Media,
   Row,
   Col,
-  Button,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -27,6 +26,9 @@ function StudentCard(props) {
   const [isOpenCource, setIsOpenCource] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(
+    statuses.filter(statuse => statuse.name === student.statusName)
+  );
 
   function toggle() {
     setcollapse(!collapse);
@@ -54,6 +56,8 @@ function StudentCard(props) {
     let newStatuse = statuses.filter(
       statuse => statuse.name === e.target.value
     );
+    setCurrentStatus(newStatuse);
+
     firestore
       .collection("students")
       .doc(student.id)
@@ -83,13 +87,15 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroupItem style={{ border: "1px solid grey" }}>
+      <ListGroupItem
+        style={{ border: "1px solid grey", borderRight: `3px solid #bee798` }}
+      >
         <Row>
-          <Col xs="5" md="2" onClick={toggle}>
+          <Col xs="5" md="2">
             <Media
               style={{ maxHeight: "80px", borderRadius: "50%" }}
               object
-              src="http://pa1.narvii.com/6470/09c5d7de4de674f6fb84f72e98b05d684d54d624_hq.gif"
+              src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
               alt="Generic placeholder image"
             />
           </Col>
@@ -112,10 +118,14 @@ function StudentCard(props) {
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
-                <DropdownToggle color="success" caret size="sm">
+                <DropdownToggle
+                  className={currentStatus[0].color}
+                  caret
+                  size="sm"
+                >
                   {student.statusName}
                 </DropdownToggle>
-                <DropdownMenu style={{ backgroundColor: "yellowgreen" }}>
+                <DropdownMenu>
                   {statuses &&
                     statuses.map(status => (
                       <DropdownItem
@@ -129,14 +139,19 @@ function StudentCard(props) {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row style={{ marginTop: "7px" }}>
+            <Row>
               <ButtonDropdown
                 direction="left"
                 style={{ width: "100%" }}
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
-                <DropdownToggle color="info" caret size="sm">
+                <DropdownToggle
+                  style={{ color: "black" }}
+                  color="info"
+                  caret
+                  size="sm"
+                >
                   {student.courceName}
                 </DropdownToggle>
                 <DropdownMenu>
@@ -173,17 +188,17 @@ function StudentCard(props) {
           <hr />
           <Row>
             <Col xs="12" md="4" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Email: </span>
+              <span style={{ color: "yellowgreen" }}>Email: </span>
               <br />
               {student.email}
             </Col>
             <Col xs="12" md="2" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Phone: </span>
+              <span style={{ color: "yellowgreen" }}>Phone: </span>
               <br />
               {student.phone}
             </Col>
             <Col xs="12" md="6" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Knowledge: </span>
+              <span style={{ color: "yellowgreen" }}>Knowledge: </span>
               <br />
               {student.knowledge}
             </Col>

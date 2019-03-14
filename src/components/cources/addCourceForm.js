@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, Col } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 
@@ -7,13 +7,42 @@ const AddCourceForm = ({ firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
   const [addCourceError, setAddCourceError] = useState("");
+  const [color, setColor] = useState("");
 
   const handleChangeName = e => {
     setName(e.target.value);
   };
-  function handleChangeLongName(e) {
+
+  const handleChangeLongName = e => {
     setLongName(e.target.value);
-  }
+  };
+
+  const generateColor = () => {
+    const colors = [
+      "#001f3f",
+      "#0074D9",
+      "#7FDBFF",
+      "#39CCCC",
+      "#3D9970",
+      "#2ECC40",
+      "#01FF70",
+      "#FFDC00",
+      "#FF851B",
+      "#FF4136",
+      "#85144b",
+      "#F012BE",
+      "#B10DC9",
+      "#4a569d",
+      "#ffe47a",
+      "#757F9A",
+      "#d7dde8",
+      "#5C258D",
+      "#71B280",
+      "#8E54E9"
+    ];
+    const random = Math.floor(Math.random() * 20);
+    setColor(colors[random]);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -21,7 +50,8 @@ const AddCourceForm = ({ firestore }) => {
       const newCource = {
         id: v1(),
         longName: longName.trim(),
-        name
+        name,
+        color
       };
 
       firestore
@@ -39,18 +69,19 @@ const AddCourceForm = ({ firestore }) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} style={{ borderTop: "1px solid grey" }}>
         <FormGroup>
-          <h6 style={{ textAlign: "center", borderTop: "1px solid black" }}>
+          <Label style={{ textAlign: "center", margin: "7px auto " }}>
             Short name
-          </h6>
+          </Label>
           <Input
             type="text"
-            placeholder="Enter shoer name"
+            placeholder="Enter short name"
             value={name}
             onChange={handleChangeName}
           />
-          <h6 style={{ textAlign: "center" }}>Long name</h6>
+
+          <Label>Long name</Label>
           <Input
             type="text"
             placeholder="Enter long name"
@@ -58,11 +89,41 @@ const AddCourceForm = ({ firestore }) => {
             onChange={handleChangeLongName}
           />
         </FormGroup>
-
-        <Button type="submit" color="success" block>
-          Add
-        </Button>
       </Form>
+
+      <div style={{ textAlign: "center" }}>
+        <Button
+          size="sm"
+          style={{ backgroundColor: color, minWidth: "220px" }}
+          className="mr-2"
+        >
+          {name ? name : "Short name"}
+        </Button>
+
+        <Button size="sm" style={{ backgroundColor: color, minWidth: "220px" }}>
+          {longName ? longName : "Long name"}
+        </Button>
+      </div>
+      <hr />
+      <Button
+        type="submit"
+        color="info"
+        block
+        size="sm"
+        onClick={generateColor}
+      >
+        Generate color
+      </Button>
+
+      <Button
+        onClick={handleSubmit}
+        type="submit"
+        color="success"
+        block
+        size="sm"
+      >
+        Add
+      </Button>
     </>
   );
 };

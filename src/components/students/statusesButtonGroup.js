@@ -19,9 +19,8 @@ function StatusesButton(props) {
         defaultValue={props.selectedStatuses[0]}
       >
         <ToggleButton
-          variant="success"
+          className="registrationColor"
           value={"all"}
-          style={{ borderTopRightRadius: "3px" }}
           onChange={() => {
             props.statuseStudents(undefined, undefined, "all");
           }}
@@ -31,8 +30,8 @@ function StatusesButton(props) {
         {props.statuses &&
           props.statuses.map(status => (
             <ToggleButton
+              className={status.color}
               style={{ marginLeft: "0px", width: "100%" }}
-              variant="success"
               value={status.id}
               key={status.id}
               id={status.id}
