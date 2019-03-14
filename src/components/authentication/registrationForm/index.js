@@ -18,13 +18,8 @@ function RegistrationForm(props) {
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
   const [emailValidationErrors, setEmailValidationErrors] = useState("");
   const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
-  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
-    ""
-  );
-  const [
-    selectCourceValidationErrors,
-    setSelectCourceValidationErrors
-  ] = useState("");
+  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState("");
+  const [selectCourceValidationErrors, setSelectCourceValidationErrors] = useState("");
 
   function hanldeSelectKnowledge(e) {
     setKnowledge(e.target.value);
@@ -32,7 +27,7 @@ function RegistrationForm(props) {
 
   function hanldeSelectLesson(e) {
     let cource = JSON.parse(e.target.value);
-    setSelectedCource(cource.name);
+    setSelectedCource(cource.longName);
     setSelectedCourceId(cource.id);
   }
 
@@ -50,12 +45,13 @@ function RegistrationForm(props) {
         phone: phone.value,
         email: email.value,
         status: defaultStatus.id,
-        statusName: defaultStatus.name,
+        statusName: defaultStatus.longName,
         courceName: selectedCource,
         cource: selectedCourceId,
         id: id,
         date: registerDate,
-        knowledge
+        knowledge,
+        comment: ""
       };
 
       props.firestore
@@ -174,7 +170,7 @@ function RegistrationForm(props) {
                 {props.cources &&
                   props.cources.map(cource => (
                     <option key={cource.id} value={JSON.stringify(cource)}>
-                      {cource.name}
+                      {cource.longName}
                     </option>
                   ))}
               </Input>

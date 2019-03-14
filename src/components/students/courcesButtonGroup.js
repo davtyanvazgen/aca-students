@@ -34,7 +34,7 @@ const CourcesButton = ({selectedCources, cources, courceStudents, students}) => 
             cources.map(cource => (
                 <Button
                     className="activeButtonColor"
-                    style={{marginRight: "2px", marginBottom: "8px", backgroundColor: cource.color, borderColor: cource.color, whiteSpace: "nowrap", textAlign: "center"}}
+                    style={{margin:"3px 1px 8px 2px", backgroundColor: cource.color, borderColor: cource.color, whiteSpace: "nowrap", textAlign: "center"}}
                     id={cource.id}
                     key={cource.id}
                     onClick={() => {onCheckboxBtnClick(cource.id); courceStudents(undefined, cource) }}

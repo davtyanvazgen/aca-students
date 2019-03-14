@@ -6,6 +6,7 @@ function EditStudentModal(props) {
   const [fullName, setFullName] = useState(`${props.student.fullName}`);
   const [email, setEmail] = useState(props.student.email);
   const [phone, setPhone] = useState(props.student.phone);
+  const [comment, setComment] = useState(props.student.comment);
 
   const handleFullnameInput = e => {
     setFullName(e.target.value.toUpperCase());
@@ -16,6 +17,9 @@ function EditStudentModal(props) {
   const handlePhoneInput = e => {
     setPhone(e.target.value);
   };
+  const handleCommentInput = e => {
+    setComment(e.target.value);
+  };
 
   const editStudent = () => {
     props.firestore
@@ -24,7 +28,8 @@ function EditStudentModal(props) {
       .update({
         fullName,
         phone,
-        email
+        email,
+          comment
       });
 
     props.onHide();
@@ -35,7 +40,9 @@ function EditStudentModal(props) {
       fullName={fullName}
       email={email}
       phone={phone}
+      comment={comment}
       handleEmailInput={handleEmailInput}
+      handleCommentInput={handleCommentInput}
       handleFullnameInput={handleFullnameInput}
       handlePhoneInput={handlePhoneInput}
       editStudent={editStudent}

@@ -3,6 +3,7 @@ import CourcesButton from "./courcesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
 import Input from "reactstrap/es/Input";
+import "./style.css";
 import {
   Container,
   Row,
@@ -12,16 +13,19 @@ import {
   InputGroupAddon
 } from "reactstrap";
 
-const Students = ({ filterStudents, searchValue, students, cources, statuses }) => {
+const Students = ({ filterStudents, searchValue, students, allStudents, cources, statuses }) => {
   let background = "#ffffff";
   if(students && cources && statuses) {
       return (
           <>
-              <Container>
+              <Container className="studentListContainer">
                   <Row>
                       <Col sm={{size: 10, offset: 2}} style={{paddingRight:"0px", paddingLeft:"0px"}}>
                           <Container>
                               <Row>
+                                  <Col>
+                                      <p style={{marginTop: "8px"}}> All students count: {allStudents.length}. (c) Lodash</p>
+                                  </Col>
                                   <Col>
                                       <InputGroup
                                           style={{
@@ -69,6 +73,18 @@ const Students = ({ filterStudents, searchValue, students, cources, statuses }) 
                                           )
                                       })}
                                   </ListGroup>
+                                  <div style={{width: "100%"}}>
+                                      {!students.length &&
+                                        <div>
+                                            <div className="jumbotron">
+                                                <Container>
+                                                    <h1> No students</h1>
+                                                    <p>There is no student at this time.</p>
+                                                </Container>
+                                            </div>
+                                        </div>
+                                      }
+                                  </div>
                               </Row>
                           </Container>
                       </Col>

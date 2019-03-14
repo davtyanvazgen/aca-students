@@ -5,8 +5,9 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import Header from "../header/index";
-import AddCource from "../cources/index";
+import Header from "../header";
+import Footer from "../footer"
+import AddCource from "../cources";
 import AddStatuse from "../statuses";
 import Students from "../../containers/students";
 import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
@@ -30,6 +31,7 @@ const Main = ({ auth }) => {
             <Route exact path="/students" component={Students} />
             <Redirect to="/students" />
           </Switch>
+            <Footer/>
         </>
       </Router>
     </div>

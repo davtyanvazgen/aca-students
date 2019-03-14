@@ -42,20 +42,20 @@ function StudentCard(props) {
   }
 
   function handleSelectCourceChange(e) {
-    let newCource = cources.filter(cource => cource.name === e.target.value);
+    let newCource = cources.filter(cource => cource.longName === e.target.value);
     setCurrentCource(newCource);
     firestore
       .collection("students")
       .doc(student.id)
       .update({
         cource: newCource[0].id,
-        courceName: newCource[0].name
+        courceName: newCource[0].longName
       });
   }
 
   function handleSelectStatusChange(e) {
     let newStatuse = statuses.filter(
-      statuse => statuse.name === e.target.value
+      statuse => statuse.longName === e.target.value
     );
     setCurrentStatus(newStatuse);
 
@@ -64,7 +64,7 @@ function StudentCard(props) {
       .doc(student.id)
       .update({
         status: newStatuse[0].id,
-        statusName: newStatuse[0].name
+        statusName: newStatuse[0].longName
       });
   }
 
@@ -88,7 +88,7 @@ function StudentCard(props) {
 
   return (
     <>
-      <ListGroupItem style={{ border: "1px solid #cbccce", borderRight: `3px solid #bee798`, backgroundColor: props.background  }}>
+      <ListGroupItem style={{ border: "1px solid #cbccce", borderRight: `5px solid ${currentStatus[0].color}`, borderLeft: `5px solid ${currentCource[0].color}` , backgroundColor: props.background  }}>
         <Row>
           <Col xs="5" md="2">
             <Media
@@ -124,10 +124,10 @@ function StudentCard(props) {
                     statuses.map(status => (
                       <DropdownItem
                         key={status.id}
-                        value={status.name}
+                        value={status.longName}
                         onClick={handleSelectStatusChange}
                       >
-                        {status.name}
+                        {status.longName}
                       </DropdownItem>
                     ))}
                 </DropdownMenu>
@@ -147,10 +147,10 @@ function StudentCard(props) {
                     cources.map(cource => (
                       <DropdownItem
                         key={cource.id}
-                        value={cource.name}
+                        value={cource.longName}
                         onClick={handleSelectCourceChange}
                       >
-                        {cource.name}
+                        {cource.longName}
                       </DropdownItem>
                     ))}
                 </DropdownMenu>
@@ -173,24 +173,30 @@ function StudentCard(props) {
         </Row>
 
         <Collapse isOpen={collapse}>
-          <hr />
-          <Row>
-            <Col xs="12" md="4" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Email: </span>
-              <br />
-              {student.email}
-            </Col>
-            <Col xs="12" md="2" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Phone: </span>
-              <br />
-              {student.phone}
-            </Col>
-            <Col xs="12" md="6" style={{ textAlign: "center" }}>
-              <span style={{ color: "yellowgreen" }}>Knowledge: </span>
-              <br />
-              {student.knowledge}
-            </Col>
-          </Row>
+            <hr />
+            <Row>
+              <Col xs="12" md="4" style={{ textAlign: "center" }}>
+                <span style={{ color: "yellowgreen" }}>Email: </span>
+                <br />
+                {student.email}
+              </Col>
+              <Col xs="12" md="2" style={{ textAlign: "center" }}>
+                <span style={{ color: "yellowgreen" }}>Phone: </span>
+                <br />
+                {student.phone}
+              </Col>
+              <Col xs="12" md="6" style={{ textAlign: "center" }}>
+                <span style={{ color: "yellowgreen" }}>Knowledge: </span>
+                <br />
+                {student.knowledge}
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+                <Col style={{ textAlign: "center" }}>
+                    <span style={{ color: "yellowgreen" }}>Comment: </span>{student.comment}
+                </Col>
+            </Row>
         </Collapse>
 
         <EditStudentModal
