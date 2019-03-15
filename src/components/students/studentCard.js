@@ -42,6 +42,11 @@ function StudentCard(props) {
       .collection("students")
       .doc(student.id)
       .delete();
+
+    firestore
+      .collection("deletedStudents")
+      .doc(student.id)
+      .set(student);
   }
 
   function handleSelectCourceChange(e) {
