@@ -74,6 +74,7 @@ const AddStatuseForm = ({ firestore }) => {
                             value={longName}
                             onChange={handleChangeLongName}
                         />
+                        <Button type="submit" style={{display: "none"}}/>
                     </FormGroup>
                 </Form>
                 <Button
@@ -97,7 +98,7 @@ const AddStatuseForm = ({ firestore }) => {
                     {longName ? longName : "Long Status"}
                 </Button>
                 <hr />
-                <Button size="sm" type="submit" color="success" block>
+                <Button size="sm" type="submit" color="success" block onClick={handleSubmit}>
                     Add
                 </Button>
             </Col>

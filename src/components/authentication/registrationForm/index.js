@@ -33,11 +33,7 @@ function RegistrationForm(props) {
 
   function handeleCreateStudent() {
     const id = v1();
-
     const date = new Date();
-    const registerDate = `(${date.getDate()}/${date.getMonth() +
-      1}/${date.getFullYear()})`;
-
     if (validation()) {
       const defaultStatus = props.statuses.find(el => el.name === "apply");
       let student = {
@@ -49,7 +45,7 @@ function RegistrationForm(props) {
         courceName: selectedCource,
         cource: selectedCourceId,
         id: id,
-        date: registerDate,
+        date: date,
         knowledge,
         comment: ""
       };
