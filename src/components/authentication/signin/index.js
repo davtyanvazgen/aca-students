@@ -9,7 +9,8 @@ function SignIn({ firebase, auth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   console.log(auth, isLoaded(auth), isEmpty(auth));
-  const adminLogIn = function() {
+  const adminLogIn = function(e) {
+    e.preventDefault();
     if (email && password) {
       firebase
         .auth()
@@ -35,7 +36,7 @@ function SignIn({ firebase, auth }) {
   return (
     <div id="container">
       <div className="miniContainer">
-        <Form>
+        <Form onSubmit={adminLogIn}>
           <FormGroup>
             <Label for="exampleEmail">Email address</Label>
             <Input
@@ -56,7 +57,7 @@ function SignIn({ firebase, auth }) {
               placeholder="Password"
             />
           </FormGroup>
-          <Button color="success" block onClick={adminLogIn}>
+          <Button color="success" type="submit" block>
             Sign in
           </Button>
         </Form>

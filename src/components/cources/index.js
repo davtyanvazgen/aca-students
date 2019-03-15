@@ -16,7 +16,7 @@ const AddCource = props => {
 
   return (
     <>
-      <Container>
+      <Container className="mainContainer">
         <Container>
           <Row>
             <Col style={{ textAlign: "center" }}>

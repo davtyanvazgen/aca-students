@@ -2,8 +2,12 @@ import React from "react";
 import { Link, NavLink as RRNavLink } from "react-router-dom";
 import { Button, ButtonGroup, Navbar, Nav, NavLink } from "reactstrap";
 import "./style.css";
+import { withFirebase } from "react-redux-firebase";
 
-export default function Header() {
+const Header = ({ firebase }) => {
+  const logout = () => {
+    firebase.logout();
+  };
   return (
     <div>
       <Navbar color="dark" light expand="md">
@@ -34,8 +38,14 @@ export default function Header() {
             <Nav className="ml-auto" navbar>
               <ButtonGroup>
                 <Link to="/signin">
-                  <Button size="sm" outline color="light" className="mr-1">
-                    Sign in
+                  <Button
+                    size="sm"
+                    outline
+                    color="light"
+                    className="mr-1"
+                    onClick={logout}
+                  >
+                    Sign out
                   </Button>
                 </Link>
               </ButtonGroup>
@@ -45,4 +55,6 @@ export default function Header() {
       </Navbar>
     </div>
   );
-}
+};
+
+export default withFirebase(Header);

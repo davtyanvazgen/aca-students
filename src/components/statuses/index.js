@@ -15,7 +15,7 @@ const AddStatuse = ({ statuses, students }) => {
   };
 
   return (
-    <Container>
+    <Container className="mainContainer">
       <Container>
         <Row>
           <Col style={{ textAlign: "center" }}>

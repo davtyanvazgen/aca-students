@@ -139,5 +139,6 @@ export default compose(
         ),
         cources: state.firestore.ordered.cources,
         statuses: state.firestore.ordered.statuses,
+        allStudents: state.firestore.ordered.students
     }))
 )(Students);

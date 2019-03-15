@@ -38,8 +38,7 @@ const CourcesButton = ({
           <Button
             className="activeButtonColor"
             style={{
-              marginRight: "2px",
-              marginBottom: "8px",
+              margin: "3px 1px 8px 2px",
               backgroundColor: cource.color,
               borderColor: cource.color,
               whiteSpace: "nowrap",

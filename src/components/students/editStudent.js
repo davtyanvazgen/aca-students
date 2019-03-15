@@ -5,11 +5,13 @@ import { Input } from "reactstrap";
 export default function EditStudent(props) {
   const {
     fullName,
-    handleFullnameInput,
+    comment,
+    phone,
     email,
+    handleFullnameInput,
     handleEmailInput,
     handlePhoneInput,
-    phone,
+    handleCommentInput,
     editStudent,
     onHide,
     show
@@ -36,6 +38,9 @@ export default function EditStudent(props) {
         <br />
         <h5>Edit Phone number</h5>
         <Input value={phone} onChange={handlePhoneInput} />
+        <br />
+        <h5>Comment about this student</h5>
+        <Input value={comment} onChange={handleCommentInput} />
         <br />
       </Modal.Body>
       <Modal.Footer>
