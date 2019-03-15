@@ -21,7 +21,7 @@ const StatusesButton = ({statuses, selectedStatuses, statuseStudents}) => {
                 </Button>
             </Col>
             {statuses &&
-            statuses.map(status => (
+            statuses.sort(function(a,b){return a.sort - b.sort}).map(status => (
                 <Col key={status.id}>
                     <Button
                         className="activeButtonColor"

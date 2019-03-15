@@ -4,8 +4,17 @@
     <list default="true" id="478d7fd7-6017-458d-8062-b70c77e07451" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cources/addCourceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/addCourceForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cources/cource.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/cource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cources/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cources/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/main/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/statuses/addStatuseForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/addStatuseForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/statuses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/statuses/statuse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/statuses/statuse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/students/studentCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/students/studentCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/students.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/students.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,7 +46,7 @@
         <counts>
           <entry key="css" value="10" />
           <entry key="html" value="1" />
-          <entry key="js" value="93" />
+          <entry key="js" value="123" />
           <entry key="scss" value="2" />
           <entry key="ts" value="1" />
         </counts>
@@ -46,7 +55,7 @@
         <counts>
           <entry key="CSS" value="10" />
           <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="93" />
+          <entry key="JavaScript" value="123" />
           <entry key="SCSS" value="2" />
           <entry key="TypeScript" value="1" />
         </counts>
@@ -54,14 +63,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="343" />
-          <entry key="js" value="3981" />
+          <entry key="js" value="5776" />
           <entry key="scss" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="343" />
-          <entry key="JavaScript" value="3981" />
+          <entry key="JavaScript" value="5776" />
           <entry key="SCSS" value="27" />
         </counts>
       </usages-collector>
@@ -70,10 +79,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/authentication/registrationForm/index.js">
+        <entry file="file://$PROJECT_DIR$/src/components/statuses/addStatuseForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="39" column="24" lean-forward="true" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+            <state relative-caret-position="140">
+              <caret line="59" column="9" lean-forward="true" selection-start-line="57" selection-start-column="10" selection-end-line="59" selection-end-column="9" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -82,22 +91,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/statuses/addStatuseForm.js">
+        <entry file="file://$PROJECT_DIR$/src/components/cources/addCourceForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="71" column="39" lean-forward="true" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/students/studentCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="115" column="130" selection-start-line="115" selection-start-column="130" selection-end-line="115" selection-end-column="130" />
+            <state relative-caret-position="205">
+              <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -151,32 +148,32 @@
         <option value="$PROJECT_DIR$/node_modules/bootstrap/scss/mixins/_buttons.scss" />
         <option value="$PROJECT_DIR$/src/components/statuses/preview.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" />
-        <option value="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" />
         <option value="$PROJECT_DIR$/src/containers/editInfoStudent.js" />
         <option value="$PROJECT_DIR$/src/components/students/editStudent.js" />
         <option value="$PROJECT_DIR$/src/components/header/index.js" />
         <option value="$PROJECT_DIR$/src/components/footer/index.js" />
         <option value="$PROJECT_DIR$/src/components/footer/style.css" />
-        <option value="$PROJECT_DIR$/src/components/main/index.js" />
-        <option value="$PROJECT_DIR$/src/containers/students.js" />
         <option value="$PROJECT_DIR$/src/components/authentication/signin/index.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/components/students/index.js" />
-        <option value="$PROJECT_DIR$/src/components/cources/addCourceForm.js" />
-        <option value="$PROJECT_DIR$/src/components/cources/cource.js" />
         <option value="$PROJECT_DIR$/src/components/cources/deleteCourceModal.js" />
         <option value="$PROJECT_DIR$/src/components/cources/editCourceModal.js" />
         <option value="$PROJECT_DIR$/src/components/students/style.css" />
-        <option value="$PROJECT_DIR$/src/components/cources/index.js" />
         <option value="$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js" />
         <option value="$PROJECT_DIR$/src/components/statuses/editStatusModal.js" />
-        <option value="$PROJECT_DIR$/src/components/statuses/index.js" />
         <option value="$PROJECT_DIR$/src/components/statuses/picker.js" />
-        <option value="$PROJECT_DIR$/src/components/statuses/statuse.js" />
-        <option value="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" />
+        <option value="$PROJECT_DIR$/src/components/main/index.js" />
+        <option value="$PROJECT_DIR$/src/components/students/index.js" />
+        <option value="$PROJECT_DIR$/src/components/cources/index.js" />
+        <option value="$PROJECT_DIR$/src/components/students/courcesButtonGroup.js" />
         <option value="$PROJECT_DIR$/src/components/students/studentCard.js" />
+        <option value="$PROJECT_DIR$/src/containers/students.js" />
+        <option value="$PROJECT_DIR$/src/components/authentication/registrationForm/index.js" />
+        <option value="$PROJECT_DIR$/src/components/statuses/index.js" />
+        <option value="$PROJECT_DIR$/src/components/students/statusesButtonGroup.js" />
+        <option value="$PROJECT_DIR$/src/components/statuses/statuse.js" />
+        <option value="$PROJECT_DIR$/src/components/cources/cource.js" />
         <option value="$PROJECT_DIR$/src/components/statuses/addStatuseForm.js" />
+        <option value="$PROJECT_DIR$/src/components/cources/addCourceForm.js" />
       </list>
     </option>
   </component>
@@ -270,15 +267,7 @@
               <item name="aca-students" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="authentication" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="authentication" type="462c0819:PsiDirectoryNode" />
-              <item name="registrationForm" type="462c0819:PsiDirectoryNode" />
+              <item name="cources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
@@ -286,13 +275,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="statuses" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aca-students" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aca-students" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="students" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -346,7 +328,7 @@
       <workItem from="1552393186176" duration="9451000" />
       <workItem from="1552419475608" duration="17570000" />
       <workItem from="1552497799328" duration="374000" />
-      <workItem from="1552565304945" duration="13390000" />
+      <workItem from="1552565304945" duration="25847000" />
     </task>
     <task id="LOCAL-00001" summary="new">
       <created>1551176357206</created>
@@ -372,7 +354,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81716000" />
+    <option name="totallyTimeSpent" value="94173000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1366" height="705" extended-state="0" />
@@ -537,16 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/statusesButtonGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -570,16 +542,6 @@
           <caret line="47" column="31" lean-forward="true" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/courcesButtonGroup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -618,23 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/students.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/main/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="9" lean-forward="true" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/authentication/signin/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -655,37 +600,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/cources/cource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="122" lean-forward="true" selection-start-line="122" selection-end-line="122" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/cources/addCourceForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="140" column="14" selection-start-line="140" selection-start-column="1" selection-end-line="140" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/students/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="92" column="13" lean-forward="true" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,42 +624,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/cources/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1185">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/statuses/deleteStatusModal.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/statuses/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/statuses/statuse.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -763,20 +651,110 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/authentication/registrationForm/index.js">
+    <entry file="file://$PROJECT_DIR$/src/components/main/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="39" column="24" lean-forward="true" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="24" />
+        <state relative-caret-position="527">
+          <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/courcesButtonGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/students/studentCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="115" column="130" selection-start-line="115" selection-start-column="130" selection-end-line="115" selection-end-column="130" />
+        <state relative-caret-position="209">
+          <caret line="130" column="44" lean-forward="true" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="46" column="48" selection-start-line="46" selection-start-column="48" selection-end-line="46" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/students.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/authentication/registrationForm/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="57" column="19" lean-forward="true" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/students/statusesButtonGroup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="28" column="35" lean-forward="true" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/cources/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="52" column="51" lean-forward="true" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/statuses/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="46" column="38" lean-forward="true" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/cources/cource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="76" column="41" selection-start-line="76" selection-start-column="41" selection-end-line="76" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/statuses/statuse.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="65" column="14" lean-forward="true" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>
@@ -785,8 +763,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/statuses/addStatuseForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="71" column="39" lean-forward="true" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
+        <state relative-caret-position="140">
+          <caret line="59" column="9" lean-forward="true" selection-start-line="57" selection-start-column="10" selection-end-line="59" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/cources/addCourceForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="71" column="32" selection-start-line="71" selection-start-column="32" selection-end-line="71" selection-end-column="32" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
           </folding>

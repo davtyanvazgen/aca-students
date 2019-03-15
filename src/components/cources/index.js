@@ -35,7 +35,7 @@ const AddCource = props => {
                     <Row style={{ marginTop: "15px" }}>
                         <Collapse isOpen={collapse} style={{ margin: "0 auto" }}>
                             <Col style={{ minWidth: "440px" }}>
-                                <AddCourceForm />
+                                <AddCourceForm cources={props.cources}/>
                             </Col>
                         </Collapse>
                     </Row>
@@ -45,7 +45,7 @@ const AddCource = props => {
                 <Container style={{ marginTop: "15px" }}>
                     <Row>
                         {props.cources ? (
-                            props.cources.map(cource => (
+                            props.cources.sort(function(a,b){return a.sort - b.sort}).map(cource => (
                                 <Col
                                     xs="6"
                                     md="4"
@@ -57,6 +57,7 @@ const AddCource = props => {
                                         key={cource.id}
                                         cource={cource}
                                         students={props.students}
+                                        cources={props.cources}
                                     />
                                 </Col>
                             ))

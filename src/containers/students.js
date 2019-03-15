@@ -34,6 +34,7 @@ const getShowStudents = (
 
 const searchStudents = (students, searchValue) => {
     if (students) {
+        students.sort(function(a,b) { return new Date(a.date.toDate()) - new Date(b.date.toDate())});
         if (!searchValue.length) {
             return students;
         }

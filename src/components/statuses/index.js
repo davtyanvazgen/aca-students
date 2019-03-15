@@ -33,7 +33,7 @@ const AddStatuse = ({ statuses, students }) => {
 
                 <Collapse isOpen={collapse}>
                     <Row style={{ marginTop: "15px " }}>
-                        <AddStatuseForm />
+                        <AddStatuseForm statuses={statuses}/>
                     </Row>
                 </Collapse>
                 <hr />
@@ -42,7 +42,7 @@ const AddStatuse = ({ statuses, students }) => {
             <Container>
                 <Row>
                     {statuses ? (
-                        statuses.map(statuse => (
+                        statuses.sort(function(a,b){return a.sort - b.sort}).map(statuse => (
                             <Col
                                 xs="6"
                                 md="4"
@@ -54,6 +54,7 @@ const AddStatuse = ({ statuses, students }) => {
                                     key={statuse.id}
                                     statuse={statuse}
                                     students={students}
+                                    statuses={statuses}
                                 />
                             </Col>
                         ))

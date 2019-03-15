@@ -35,7 +35,7 @@ function RegistrationForm(props) {
     const id = v1();
     const date = new Date();
     if (validation()) {
-      const defaultStatus = props.statuses.find(el => el.name === "apply");
+      const defaultStatus = props.statuses.find(el => el.id === "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5");
       let student = {
         fullName: name.value.toUpperCase() + " " + surname.value.toUpperCase(),
         phone: phone.value,

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Card, CardBody, CardTitle, CardText } from "reactstrap";
+import {Button, Card, CardBody, CardTitle, CardText, Col, Input, Row} from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import DeleteStatusModal from "./deleteStatusModal";
 import EditStatuseModal from "./editStatusModal";
 
-const Statuse = ({ statuse, firestore, students }) => {
+const Statuse = ({ statuses, statuse, firestore, students }) => {
     const [modalShow, setModalShow] = useState(false);
     const [studentsSameStatus, setStudentsSameStatus] = useState([]);
     const [removeStudentError, setRemoveStudentsError] = useState("");
@@ -20,7 +20,59 @@ const Statuse = ({ statuse, firestore, students }) => {
         setModalShow(true);
     };
 
-    const handleRemove = statuse => {
+    const handleSortSelect = (e) => {
+        let sort = parseInt(e.target.value);
+        firestore
+            .collection("statuses")
+            .doc(statuse.id)
+            .update({sort});
+        if(statuse.sort > sort){
+            for(let i=sort; i < statuse.sort; i++){
+                statuses.forEach(el => {
+                    if(el.sort === i){
+                        firestore
+                            .collection("statuses")
+                            .doc(el.id)
+                            .update({sort: i+1});
+                    }
+                })
+            }
+        }
+        if(statuse.sort < sort){
+            for(let i = statuse.sort + 1; i <= sort; i++){
+                statuses.forEach(el => {
+                    if(el.sort === i){
+                        firestore
+                            .collection("statuses")
+                            .doc(el.id)
+                            .update({sort: i-1});
+                    }
+                })
+            }
+        }
+
+
+    };
+
+    const handleRemove = () => {
+        for(let i = statuse.sort + 1; i <= statuses.length; i++){
+            statuses.forEach(el => {
+                if(el.sort === i){
+                    firestore
+                        .collection("statuses")
+                        .doc(el.id)
+                        .update({sort: i-1});
+                }
+            })
+        }
+
+        studentsSameStatus.forEach(student => {
+            firestore
+                .collection("deletedStudents")
+                .doc(student.id)
+                .set(student)
+        });
+
         studentsSameStatus.forEach(student => {
             firestore
                 .collection("students")
@@ -76,30 +128,59 @@ const Statuse = ({ statuse, firestore, students }) => {
                             backgroundColor: statuse.color
                         }}
                     >
-                        <h5 style={{ color: "white" }}>{statuse.longName}</h5>
+                        <Row style={{width: "100%"}}>
+                            <Col xs="10">
+                                <h5 style={{ color: "white" }}>{statuse.longName}</h5>
+                            </Col>
+                            <Col xs="2" style={{padding: "0px 0px"}}>
+                                <Input bsSize="sm"  type="select" value={statuse.sort} onChange={handleSortSelect}>
+                                    {statuses.map(el => (
+                                        <option key={el.id} value={el.sort}>{el.sort}</option>
+                                    ))}
+                                </Input>
+                            </Col>
+                        </Row>
+
                     </CardTitle>
                     <CardText style={{ marginLeft: "10px" }}>
                         Short name: {statuse.name}
                     </CardText>
                     <div style={{ marginTop: "50px" }}>
-                        <Button
-                            size="sm"
-                            color="danger"
-                            className="float-right  mr-2"
-                            onClick={() => {
-                                areYouSure(statuse);
-                            }}
-                        >
-                            Delete
-                        </Button>
-                        <Button
-                            size="sm"
-                            color="success"
-                            className="float-right mr-1"
-                            onClick={() => setModalShowEdit(true)}
-                        >
-                            Edit
-                        </Button>
+                        {statuse.id !== "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5" ?
+                            (
+                                <>
+                                    <Button
+                                        size="sm"
+                                        color="danger"
+                                        className="float-right  mr-2"
+                                        onClick={() => {
+                                            areYouSure(statuse);
+                                        }}
+                                    >
+                                        Delete
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        color="success"
+                                        className="float-right mr-1"
+                                        onClick={() => setModalShowEdit(true)}
+                                    >
+                                        Edit
+                                    </Button>
+                                </>
+                            )
+                            : (
+                                <Button
+                                    size="sm"
+                                    color="success"
+                                    className="float-right mr-1"
+                                    onClick={() => setModalShowEdit(true)}
+                                >
+                                    Edit
+                                </Button>
+                            )
+                        }
+
                     </div>
                 </CardBody>
             </Card>
@@ -109,7 +190,7 @@ const Statuse = ({ statuse, firestore, students }) => {
                 onHide={modalClose}
                 studentsSameStatus={studentsSameStatus}
                 statuse={statuse}
-                handleRemove={() => handleRemove(statuse)}
+                handleRemove={handleRemove}
             />
 
             <EditStatuseModal

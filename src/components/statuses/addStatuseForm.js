@@ -14,11 +14,12 @@ import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 import Picker from "./picker";
 
-const AddStatuseForm = ({ firestore }) => {
+const AddStatuseForm = ({ statuses, firestore }) => {
     const [name, setName] = useState("");
     const [longName, setLongName] = useState("");
     const [addStatusError, setAddStatusError] = useState("");
     const [background, setBackground] = useState("#D21965");
+    const [checkLetters, setCheckLetters] = useState("");
 
     function handleChangeComplete(color) {
         setBackground(color.hex);
@@ -34,12 +35,13 @@ const AddStatuseForm = ({ firestore }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (name.trim()) {
+        if (name.trim() && name.length <= 10) {
             const newStatuse = {
                 id: v1(),
-                longName: longName.trim(),
+                longName: longName.trim() || name,
                 name,
-                color: background
+                color: background,
+                sort: statuses.length + 1
             };
 
             firestore
@@ -52,6 +54,9 @@ const AddStatuseForm = ({ firestore }) => {
 
             setName("");
             setLongName("");
+            setCheckLetters("");
+        } else {
+            setCheckLetters("Maximum length 10 letters.");
         }
     }
 
@@ -60,7 +65,7 @@ const AddStatuseForm = ({ firestore }) => {
             <Col md={{ size: "3", offset: 3 }}>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
-                        <Label>Status`s short name</Label>
+                        {!checkLetters ? (<Label>Status`s short name</Label>) : (<Label style={{color: "red"}}>{checkLetters}</Label>)}
                         <Input
                             type="text"
                             placeholder="Enter short name of status"

@@ -3,11 +3,13 @@ import { Button, Form, FormGroup, Input, Label, Col } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 
-const AddCourceForm = ({ firestore }) => {
+const AddCourceForm = ({ firestore, cources }) => {
     const [name, setName] = useState("");
     const [longName, setLongName] = useState("");
     const [addCourceError, setAddCourceError] = useState("");
     const [color, setColor] = useState("");
+    const [checkLetters, setCheckLetters] = useState("");
+
 
     const handleChangeName = e => {
         setName(e.target.value);
@@ -46,12 +48,13 @@ const AddCourceForm = ({ firestore }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (name.trim()) {
+        if (name.trim()  && name.length <= 10) {
             const newCource = {
                 id: v1(),
-                longName: longName.trim(),
+                longName: longName.trim() || name,
                 name,
-                color
+                color,
+                sort: cources.length + 1
             };
 
             firestore
@@ -62,8 +65,13 @@ const AddCourceForm = ({ firestore }) => {
                     setAddCourceError(err);
                 });
 
+            firestore.collection("cources").orderBy("sort");
+
             setName("");
             setLongName("");
+            setCheckLetters("");
+        } else {
+            setCheckLetters("Maximum length 10 letters.");
         }
     };
 
@@ -71,9 +79,7 @@ const AddCourceForm = ({ firestore }) => {
         <>
             <Form onSubmit={handleSubmit} style={{ borderTop: "1px solid grey" }}>
                 <FormGroup>
-                    <Label style={{ textAlign: "center", margin: "7px auto " }}>
-                        Short name
-                    </Label>
+                    {!checkLetters ? (<Label>Courses`s short name</Label>) : (<Label style={{color: "red"}}>{checkLetters}</Label>)}
                     <Input
                         type="text"
                         placeholder="Enter short name"
