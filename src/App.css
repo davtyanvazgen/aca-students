@@ -109,17 +109,18 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #eaecef;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(124, 214, 164);
+  border-radius: 15%;
+  background: #b3b5ba;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(124, 193, 214);
+  background: #656b71;
 }
 
 
@@ -135,4 +136,8 @@
   color: white !important;
   background-color:  lightgrey !important;
   border-color: lightgrey !important;
+}
+
+.mainContainer{
+  min-height:calc(100vh - 95px);
 }

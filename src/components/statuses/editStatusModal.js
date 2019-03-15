@@ -3,47 +3,47 @@ import { Modal, Button } from "react-bootstrap";
 import { Input, Label, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-function EditCourceModal(props) {
-    const [newName, setNewName] = useState(props.cource.name);
-    const [newLongName, setNewLongName] = useState(props.cource.longName);
-    const [editCourceError, setEditCourceError] = useState("");
+const EditStatuseModal = props => {
+    const [newName, setNewName] = useState(props.statuse.name);
+    const [newLongName, setNewLongName] = useState(props.statuse.longName);
+    const [editStatuseError, setEditStatuseError] = useState("");
 
-    const handleEditCourceName = e => {
+    const handleEditStatuseName = e => {
         setNewName(e.target.value);
     };
 
-    const handleEditCourceLongName = e => {
+    const handleEditStatuseLongName = e => {
         setNewLongName(e.target.value);
     };
 
-    const confirmEditCource = newName => {
+    const confirmEditStatuse = newName => {
         if (newName.trim()) {
-            const editCource = {
+            const editStatuse = {
                 name: newName,
                 longName: newLongName.trim(),
-                id: cource.id
+                id: statuse.id
             };
 
             props.firestore
-                .collection("cources")
-                .doc(cource.id)
-                .update({ ...editCource })
+                .collection("statuses")
+                .doc(statuse.id)
+                .update({ ...editStatuse })
                 .catch(err => {
-                    setEditCourceError(err);
+                    setEditStatuseError(err);
                 });
 
             props.students.forEach(student => {
-                if (student.cource === cource.id) {
+                if (student.status === statuse.id) {
                     props.firestore
                         .collection("students")
                         .doc(student.id)
-                        .update({ courceName: newLongName.trim() });
+                        .update({ statusName: newLongName.trim() });
                 }
             });
         }
     };
 
-    const { cource, onHide, show } = props;
+    const { statuse, onHide, show } = props;
     return (
         <Modal
             onHide={onHide}
@@ -54,42 +54,42 @@ function EditCourceModal(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    <span style={{ color: "green" }}> ZVART Jan </span> let's edit course
+                    <span style={{ color: "green" }}> ZVART Jan </span> let's edit status
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     <FormGroup>
-                        <h5>Long Name</h5>
-                        <Input
-                            bssize="sm"
-                            value={newName}
-                            onChange={handleEditCourceName}
-                        />
-                        <br />
                         <h5>Short Name</h5>
                         <Input
                             bssize="sm"
+                            value={newName}
+                            onChange={handleEditStatuseName}
+                        />
+                        <br />
+                        <h5>Long Name</h5>
+                        <Input
+                            bssize="sm"
                             value={newLongName}
-                            onChange={handleEditCourceLongName}
+                            onChange={handleEditStatuseLongName}
                         />
                     </FormGroup>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
+                <Button onClick={onHide}>Close</Button>
                 <Button
                     variant="warning"
                     onClick={() => {
-                        confirmEditCource(newName);
+                        confirmEditStatuse(newName);
                         onHide();
                     }}
                 >
                     Edit
                 </Button>
-                <Button onClick={onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
-}
+};
 
-export default withFirestore(EditCourceModal);
+export default withFirestore(EditStatuseModal);

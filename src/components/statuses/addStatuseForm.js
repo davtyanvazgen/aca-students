@@ -18,7 +18,7 @@ const AddStatuseForm = ({ firestore }) => {
     const [name, setName] = useState("");
     const [longName, setLongName] = useState("");
     const [addStatusError, setAddStatusError] = useState("");
-    const [background, setBackground] = useState("#23B98C");
+    const [background, setBackground] = useState("#D21965");
 
     function handleChangeComplete(color) {
         setBackground(color.hex);
@@ -57,7 +57,7 @@ const AddStatuseForm = ({ firestore }) => {
 
     return (
         <>
-            <Col>
+            <Col md={{ size: "3", offset: 3 }}>
                 <Form onSubmit={handleSubmit}>
                     <FormGroup>
                         <Label>Status`s short name</Label>
@@ -75,23 +75,40 @@ const AddStatuseForm = ({ firestore }) => {
                             onChange={handleChangeLongName}
                         />
                     </FormGroup>
-
-                    <Button type="submit" color="success" block>
-                        Add
-                    </Button>
                 </Form>
+                <Button
+                    className="mr-2"
+                    size="sm"
+                    style={{
+                        backgroundColor: `${background}`,
+                        border: "none"
+                    }}
+                >
+                    {name ? name : "Short status"}
+                </Button>
+
+                <Button
+                    size="sm"
+                    style={{
+                        backgroundColor: `${background}`,
+                        border: "none"
+                    }}
+                >
+                    {longName ? longName : "Long Status"}
+                </Button>
+                <hr />
+                <Button size="sm" type="submit" color="success" block>
+                    Add
+                </Button>
             </Col>
-            <Col>
-                <Container style={{ border: "1px solid " }}>
-                    <Row>
-                        <Picker
-                            handleChangeComplete={handleChangeComplete}
-                            name={name}
-                            longName={longName}
-                            background={background}
-                        />
-                    </Row>
-                </Container>
+
+            <Col md="3">
+                <Picker
+                    handleChangeComplete={handleChangeComplete}
+                    name={name}
+                    longName={longName}
+                    background={background}
+                />
             </Col>
         </>
     );

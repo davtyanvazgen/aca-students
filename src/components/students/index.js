@@ -18,7 +18,7 @@ const Students = ({ filterStudents, searchValue, students, allStudents, cources,
   if(students && cources && statuses) {
       return (
           <>
-              <Container className="studentListContainer">
+              <Container className="mainContainer">
                   <Row>
                       <Col sm={{size: 10, offset: 2}} style={{paddingRight:"0px", paddingLeft:"0px"}}>
                           <Container>
@@ -94,7 +94,11 @@ const Students = ({ filterStudents, searchValue, students, allStudents, cources,
       )
   } else {
     return (
-      <div className="lds-hourglass" />
+        <>
+            <Container className="mainContainer">
+                <div className="lds-hourglass" />
+            </Container>
+        </>
     )
   }
 };

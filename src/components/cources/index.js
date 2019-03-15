@@ -9,23 +9,25 @@ import { Row, Col, Container, Collapse, Button } from "reactstrap";
 
 const AddCource = props => {
     const [collapse, setCollapse] = useState(false);
+
     const toggle = () => {
         setCollapse(!collapse);
     };
+
     return (
         <>
-            <Container>
+            <Container className="mainContainer">
                 <Container>
                     <Row>
                         <Col style={{ textAlign: "center" }}>
                             <h1>Current cources</h1>
                             <Button
-                                color="primary"
+                                color="info"
                                 onClick={toggle}
                                 size="sm"
                                 style={{ float: "right" }}
                             >
-                                Add new cource
+                                Add new course
                             </Button>
                         </Col>
                     </Row>
