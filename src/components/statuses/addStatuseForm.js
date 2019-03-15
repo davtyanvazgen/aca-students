@@ -33,6 +33,7 @@ const AddStatuseForm = ({ firestore }) => {
   }
 
   function handleSubmit(e) {
+    console.log("asd");
     e.preventDefault();
     if (name.trim()) {
       const newStatuse = {
@@ -97,7 +98,13 @@ const AddStatuseForm = ({ firestore }) => {
           {longName ? longName : "Long Status"}
         </Button>
         <hr />
-        <Button size="sm" type="submit" color="success" block>
+        <Button
+          size="sm"
+          type="submit"
+          color="success"
+          block
+          onClick={handleSubmit}
+        >
           Add
         </Button>
       </Col>
