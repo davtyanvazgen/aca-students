@@ -97,8 +97,36 @@ const Students = ({
                       <div>
                         <div className="jumbotron">
                           <Container>
-                            <h1> No students</h1>
-                            <p>There is no student at this time.</p>
+                            <Row>
+                              <ListGroup style={{ width: "100%" }}>
+                                {students &&
+                                  students.map(student => {
+                                    background === "#ffffff"
+                                      ? (background = "#fbfbfb")
+                                      : (background = "#ffffff");
+                                    return (
+                                      <StudentCard
+                                        background={background}
+                                        key={student.id}
+                                        student={student}
+                                        filterStudents={filterStudents}
+                                      />
+                                    );
+                                  })}
+                              </ListGroup>
+                              <div style={{ width: "100%" }}>
+                                {!students.length && (
+                                  <div>
+                                    <div className="jumbotron">
+                                      <Container>
+                                        <h1> No students</h1>
+                                        <p>There is no student at this time.</p>
+                                      </Container>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            </Row>
                           </Container>
                         </div>
                       </div>
@@ -112,7 +140,13 @@ const Students = ({
       </>
     );
   } else {
-    return <div className="lds-hourglass" />;
+    return (
+      <>
+        <Container className="mainContainer">
+          <div className="lds-hourglass" />
+        </Container>
+      </>
+    );
   }
 };
 

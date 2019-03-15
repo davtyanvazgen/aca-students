@@ -42,6 +42,11 @@ function StudentCard(props) {
       .collection("students")
       .doc(student.id)
       .delete();
+
+    firestore
+      .collection("deletedStudents")
+      .doc(student.id)
+      .set(student);
   }
 
   function handleSelectCourceChange(e) {
@@ -120,7 +125,12 @@ function StudentCard(props) {
             <p style={{ marginBottom: "0rem", marginTop: "1rem" }}>
               {student.fullName.toUpperCase()}
             </p>
-            <p style={{ marginBottom: "0rem" }}>{student.date}</p>
+            <p
+              style={{ marginBottom: "0rem" }}
+            >{`App date: ${student.date
+              .toDate()
+              .getDate()}/${student.date.toDate().getMonth() +
+              1}/${student.date.toDate().getFullYear()}`}</p>
           </Col>
 
           <Col xs="10" md="4">

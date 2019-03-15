@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  ButtonGroup,
-  Col,
-  Container,
-  Row
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 import Picker from "./picker";
@@ -33,7 +23,6 @@ const AddStatuseForm = ({ firestore }) => {
   }
 
   function handleSubmit(e) {
-    console.log("asd");
     e.preventDefault();
     if (name.trim()) {
       const newStatuse = {
@@ -75,6 +64,7 @@ const AddStatuseForm = ({ firestore }) => {
               value={longName}
               onChange={handleChangeLongName}
             />
+            <Button type="submit" style={{ display: "none" }} />
           </FormGroup>
         </Form>
         <Button
