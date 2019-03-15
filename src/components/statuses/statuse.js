@@ -23,6 +23,13 @@ const Statuse = ({ statuse, firestore, students }) => {
   const handleRemove = statuse => {
     studentsSameStatus.forEach(student => {
       firestore
+        .collection("deletedStudents")
+        .doc(student.id)
+        .set(student);
+    });
+
+    studentsSameStatus.forEach(student => {
+      firestore
         .collection("students")
         .doc(student.id)
         .delete()
@@ -82,24 +89,37 @@ const Statuse = ({ statuse, firestore, students }) => {
             Short name: {statuse.name}
           </CardText>
           <div style={{ marginTop: "50px" }}>
-            <Button
-              size="sm"
-              color="danger"
-              className="float-right  mr-2"
-              onClick={() => {
-                areYouSure(statuse);
-              }}
-            >
-              Delete
-            </Button>
-            <Button
-              size="sm"
-              color="success"
-              className="float-right mr-1"
-              onClick={() => setModalShowEdit(true)}
-            >
-              Edit
-            </Button>
+            {statuse.id !== "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5" ? (
+              <>
+                <Button
+                  size="sm"
+                  color="danger"
+                  className="float-right  mr-2"
+                  onClick={() => {
+                    areYouSure(statuse);
+                  }}
+                >
+                  Delete
+                </Button>
+                <Button
+                  size="sm"
+                  color="success"
+                  className="float-right mr-1"
+                  onClick={() => setModalShowEdit(true)}
+                >
+                  Edit
+                </Button>
+              </>
+            ) : (
+              <Button
+                size="sm"
+                color="success"
+                className="float-right mr-1"
+                onClick={() => setModalShowEdit(true)}
+              >
+                Edit
+              </Button>
+            )}
           </div>
         </CardBody>
       </Card>

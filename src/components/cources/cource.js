@@ -22,6 +22,13 @@ const Cource = ({ cource, students, firestore }) => {
   const handleRemove = cource => {
     studentsSameCource.forEach(student => {
       firestore
+        .collection("deletedStudents")
+        .doc(student.id)
+        .set(student);
+    });
+
+    studentsSameCource.forEach(student => {
+      firestore
         .collection("students")
         .doc(student.id)
         .delete()

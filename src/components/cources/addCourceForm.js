@@ -8,6 +8,7 @@ const AddCourceForm = ({ firestore }) => {
   const [longName, setLongName] = useState("");
   const [addCourceError, setAddCourceError] = useState("");
   const [color, setColor] = useState("");
+  const [checkLetters, setCheckLetters] = useState("");
 
   const handleChangeName = e => {
     setName(e.target.value);
@@ -46,10 +47,10 @@ const AddCourceForm = ({ firestore }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (name.trim()) {
+    if (name.trim() && name.length <= 7) {
       const newCource = {
         id: v1(),
-        longName: longName.trim(),
+        longName: longName.trim() ? longName.trim() : name,
         name,
         color
       };
@@ -64,6 +65,9 @@ const AddCourceForm = ({ firestore }) => {
 
       setName("");
       setLongName("");
+      setCheckLetters("");
+    } else {
+      setCheckLetters("Maximum length 7 letters");
     }
   };
 
@@ -71,9 +75,11 @@ const AddCourceForm = ({ firestore }) => {
     <>
       <Form onSubmit={handleSubmit} style={{ borderTop: "1px solid grey" }}>
         <FormGroup>
-          <Label style={{ textAlign: "center", margin: "7px auto " }}>
-            Short name
-          </Label>
+          {!checkLetters ? (
+            <Label>Course`s short name</Label>
+          ) : (
+            <Label style={{ color: "red" }}>{checkLetters}</Label>
+          )}
           <Input
             type="text"
             placeholder="Enter short name"
