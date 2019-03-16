@@ -216,17 +216,17 @@ function StudentCard(props) {
           <hr />
           <Row>
             <Col xs="12" md="4" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Email: </span>
+              <span>Email: </span>
               <br />
               {student.email}
             </Col>
             <Col xs="12" md="2" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Phone: </span>
+              <span>Phone: </span>
               <br />
               {student.phone}
             </Col>
             <Col xs="12" md="6" style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Knowledge: </span>
+              <span>Knowledge: </span>
               <br />
               {student.knowledge}
             </Col>
@@ -234,7 +234,7 @@ function StudentCard(props) {
           <hr />
           <Row>
             <Col style={{ textAlign: "center" }}>
-              <span style={{ color: "blue" }}>Comment: </span>
+              <span>Comment: </span>
               {student.comment}
             </Col>
           </Row>

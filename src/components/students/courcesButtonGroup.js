@@ -34,32 +34,36 @@ const CourcesButton = ({
   return (
     <div style={{ width: "100%", overflow: " auto ", display: "flex" }}>
       {cources &&
-        cources.map(cource => (
-          <Button
-            className="activeButtonColor"
-            style={{
-              margin: "3px 1px 8px 2px",
-              backgroundColor: cource.color,
-              borderColor: cource.color,
-              whiteSpace: "nowrap",
-              textAlign: "center"
-            }}
-            id={cource.id}
-            key={cource.id}
-            onClick={() => {
-              onCheckboxBtnClick(cource.id);
-              courceStudents(undefined, cource);
-            }}
-            active={rSelected.includes(cource.id)}
-          >
-            <span>
-              {cource.name}
-              <Badge color="secondary" style={{ marginLeft: "4px" }}>
-                {students && studentSameCource(cource)}
-              </Badge>
-            </span>
-          </Button>
-        ))}
+        cources
+          .sort(function(a, b) {
+            return a.sort - b.sort;
+          })
+          .map(cource => (
+            <Button
+              className="activeButtonColor"
+              style={{
+                margin: "3px 1px 8px 2px",
+                backgroundColor: cource.color,
+                borderColor: cource.color,
+                whiteSpace: "nowrap",
+                textAlign: "center"
+              }}
+              id={cource.id}
+              key={cource.id}
+              onClick={() => {
+                onCheckboxBtnClick(cource.id);
+                courceStudents(undefined, cource);
+              }}
+              active={rSelected.includes(cource.id)}
+            >
+              <span>
+                {cource.name}
+                <Badge color="secondary" style={{ marginLeft: "4px" }}>
+                  {students && studentSameCource(cource)}
+                </Badge>
+              </span>
+            </Button>
+          ))}
     </div>
   );
 };

@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 
 const Main = ({ auth }) => {
+
   return !isLoaded(auth) ? (
     <div className="lds-hourglass" />
   ) : isEmpty(auth) ? (
@@ -39,6 +40,6 @@ const Main = ({ auth }) => {
 };
 
 export default compose(
-  firebaseConnect(), // withFirebase can also be used
+  firebaseConnect(),
   connect(({ firebase: { auth } }) => ({ auth }))
 )(Main);

@@ -34,10 +34,14 @@ const getShowStudents = (
 
 const searchStudents = (students, searchValue) => {
   if (students) {
+    students.sort(function(a, b) {
+      return new Date(a.date.toDate()) - new Date(b.date.toDate());
+    });
     if (!searchValue.length) {
       return students;
     }
     let resultArr = [];
+    console.log(students);
     for (let i = 0; i < students.length; i++) {
       let counter = 0;
       for (let j = 0; j < searchValue.length; j++) {

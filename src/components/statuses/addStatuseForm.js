@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  ButtonGroup,
+  Col,
+  Container,
+  Row
+} from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 import Picker from "./picker";
 
-const AddStatuseForm = ({ firestore }) => {
+const AddStatuseForm = ({ statuses, firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
   const [addStatusError, setAddStatusError] = useState("");
@@ -25,12 +35,13 @@ const AddStatuseForm = ({ firestore }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (name.trim() && name.length <= 7) {
+    if (name.trim() && name.length <= 10) {
       const newStatuse = {
         id: v1(),
-        longName: longName.trim() ? longName.trim() : name,
+        longName: longName.trim() || name,
         name,
-        color: background
+        color: background,
+        sort: statuses.length + 1
       };
 
       firestore
@@ -45,7 +56,7 @@ const AddStatuseForm = ({ firestore }) => {
       setLongName("");
       setCheckLetters("");
     } else {
-      setCheckLetters("Maximum length 7 letters");
+      setCheckLetters("Maximum length 10 letters.");
     }
   }
 
@@ -59,7 +70,6 @@ const AddStatuseForm = ({ firestore }) => {
             ) : (
               <Label style={{ color: "red" }}>{checkLetters}</Label>
             )}
-
             <Input
               type="text"
               placeholder="Enter short name of status"

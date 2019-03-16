@@ -30,31 +30,35 @@ const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
         </Button>
       </Col>
       {statuses &&
-        statuses.map(status => (
-          <Col key={status.id}>
-            <Button
-              className="activeButtonColor"
-              style={{
-                marginBottom: "2px",
-                width: "100%",
-                backgroundColor: status.color,
-                borderColor: status.color,
-                wordWrap: "break-word",
-                textAlign: "center"
-              }}
-              color="dark"
-              id={status.id}
-              key={status.id}
-              onClick={() => {
-                onRadioBtnClick(status.id);
-                statuseStudents(undefined, undefined, status);
-              }}
-              active={rSelected === status.id}
-            >
-              {status.name}
-            </Button>
-          </Col>
-        ))}
+        statuses
+          .sort(function(a, b) {
+            return a.sort - b.sort;
+          })
+          .map(status => (
+            <Col key={status.id}>
+              <Button
+                className="activeButtonColor"
+                style={{
+                  marginBottom: "2px",
+                  width: "100%",
+                  backgroundColor: status.color,
+                  borderColor: status.color,
+                  wordWrap: "break-word",
+                  textAlign: "center"
+                }}
+                color="dark"
+                id={status.id}
+                key={status.id}
+                onClick={() => {
+                  onRadioBtnClick(status.id);
+                  statuseStudents(undefined, undefined, status);
+                }}
+                active={rSelected === status.id}
+              >
+                {status.name}
+              </Button>
+            </Col>
+          ))}
     </>
   );
 };
