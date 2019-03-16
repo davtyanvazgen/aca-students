@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink as RRNavLink } from "react-router-dom";
-import { Button, ButtonGroup, Navbar, Nav, NavLink } from "reactstrap";
+import { Button, ButtonGroup, Navbar, Nav } from "reactstrap";
 import "./style.css";
 import { withFirebase } from "react-redux-firebase";
 

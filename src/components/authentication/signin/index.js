@@ -5,7 +5,7 @@ import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-function SignIn({ firebase, auth }) {
+const SignIn = ({ firebase, auth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   console.log(auth, isLoaded(auth), isEmpty(auth));
@@ -64,9 +64,9 @@ function SignIn({ firebase, auth }) {
       </div>
     </div>
   );
-}
+};
 
 export default compose(
-  firebaseConnect(), // withFirebase can also be used
+  firebaseConnect(),
   connect(({ firebase: { auth } }) => ({ auth }))
 )(SignIn);

@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 
-function RegistrationForm(props) {
+const RegistrationForm = props => {
   const name = useFormInput("");
   const surname = useFormInput("");
   const phone = useFormInput("");
@@ -227,7 +227,7 @@ function RegistrationForm(props) {
       onChange: handlechange
     };
   }
-}
+};
 
 export default compose(
   firestoreConnect(() => ["statuses", "cources"]),

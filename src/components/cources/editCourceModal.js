@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import { Input, Label, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-function EditCourceModal(props) {
+const EditCourceModal = props => {
   const [newName, setNewName] = useState(props.cource.name);
   const [newLongName, setNewLongName] = useState(props.cource.longName);
   const [editCourceError, setEditCourceError] = useState("");
@@ -90,6 +90,6 @@ function EditCourceModal(props) {
       </Modal.Footer>
     </Modal>
   );
-}
+};
 
 export default withFirestore(EditCourceModal);

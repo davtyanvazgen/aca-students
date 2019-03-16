@@ -19,7 +19,7 @@ import {
   Collapse
 } from "reactstrap";
 
-function StudentCard(props) {
+const StudentCard = props => {
   const { statuses, cources, student, firestore } = props;
   const [modalShow, setModalShow] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
@@ -254,7 +254,7 @@ function StudentCard(props) {
       </ListGroupItem>
     </>
   );
-}
+};
 
 export default compose(
   firestoreConnect(() => ["statuses", "cources"]),

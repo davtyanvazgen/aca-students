@@ -109,7 +109,7 @@ const Cource = ({ cources, cource, students, firestore }) => {
   const editModalClose = () => {
     setModalShowEdit(false);
   };
-  console.log(cource.sort);
+
   return (
     <div>
       <Card
@@ -142,7 +142,7 @@ const Cource = ({ cources, cource, students, firestore }) => {
                 <Input
                   bsSize="sm"
                   type="select"
-                  defaultvalue={cource.sort}
+                  value={cource.sort}
                   onChange={handleSortSelect}
                 >
                   {cources.map(el => (

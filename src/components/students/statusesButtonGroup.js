@@ -6,9 +6,11 @@ import { Button, Col } from "reactstrap";
 
 const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
   const [rSelected, setSelected] = useState(selectedStatuses[0]);
-  function onRadioBtnClick(selected) {
+
+  const onRadioBtnClick = selected => {
     setSelected(selected);
-  }
+  };
+
   return (
     <>
       <Col>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withFirestore } from "react-redux-firebase";
 import EditStudent from "../components/students/editStudent";
 
-function EditStudentModal(props) {
+const EditStudentModal = props => {
   const [fullName, setFullName] = useState(`${props.student.fullName}`);
   const [email, setEmail] = useState(props.student.email);
   const [phone, setPhone] = useState(props.student.phone);
@@ -29,7 +29,7 @@ function EditStudentModal(props) {
         fullName,
         phone,
         email,
-          comment
+        comment
       });
 
     props.onHide();
@@ -50,6 +50,6 @@ function EditStudentModal(props) {
       show={props.show}
     />
   );
-}
+};
 
 export default withFirestore(EditStudentModal);
