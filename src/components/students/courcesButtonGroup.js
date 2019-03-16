@@ -32,7 +32,7 @@ const CourcesButton = ({
     return counter;
   }
   return (
-    <div style={{ width: "100%", overflow: " auto ", display: "flex" }}>
+    <div className="buttons">
       {cources &&
         cources
           .sort(function(a, b) {
@@ -40,13 +40,10 @@ const CourcesButton = ({
           })
           .map(cource => (
             <Button
-              className="activeButtonColor"
+              className="activeButtonColor courseButton"
               style={{
-                margin: "3px 1px 8px 2px",
                 backgroundColor: cource.color,
-                borderColor: cource.color,
-                whiteSpace: "nowrap",
-                textAlign: "center"
+                borderColor: cource.color
               }}
               id={cource.id}
               key={cource.id}
@@ -58,7 +55,7 @@ const CourcesButton = ({
             >
               <span>
                 {cource.name}
-                <Badge color="secondary" style={{ marginLeft: "4px" }}>
+                <Badge className="badge" color="secondary">
                   {students && studentSameCource(cource)}
                 </Badge>
               </span>

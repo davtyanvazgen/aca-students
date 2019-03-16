@@ -96,6 +96,11 @@ const StudentCard = props => {
     setModal(!modal);
   }
 
+  const appData = `App date: ${student.date
+    .toDate()
+    .getDate()}/${student.date.toDate().getMonth() +
+    1}/${student.date.toDate().getFullYear()}`;
+
   return (
     <>
       <ListGroupItem
@@ -109,39 +114,27 @@ const StudentCard = props => {
         <Row>
           <Col xs="5" md="2" onClick={toggle}>
             <Media
-              style={{ maxHeight: "80px", borderRadius: "50%" }}
+              className="media"
               object
               src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
               alt="Generic placeholder image"
             />
           </Col>
 
-          <Col
-            xs="6"
-            md="5"
-            style={{ wordWrap: "break-word" }}
-            onClick={toggle}
-          >
-            <p style={{ marginBottom: "0rem", marginTop: "1rem" }}>
-              {student.fullName.toUpperCase()}
-            </p>
-            <p
-              style={{ marginBottom: "0rem" }}
-            >{`App date: ${student.date
-              .toDate()
-              .getDate()}/${student.date.toDate().getMonth() +
-              1}/${student.date.toDate().getFullYear()}`}</p>
+          <Col xs="6" md="5" className="colwr" onClick={toggle}>
+            <p className="fullname">{student.fullName.toUpperCase()}</p>
+            <p className="registerDate">{appData}</p>
           </Col>
 
           <Col xs="10" md="4">
-            <Row style={{ display: "block", marginTop: "5%" }}>
+            <Row className="dropRow">
               <ButtonDropdown
                 direction="left"
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
                 <DropdownToggle
-                  className="badge badge-pill"
+                  className="badge badge-pill badges"
                   style={{
                     backgroundColor: currentStatus[0].color,
                     borderColor: currentStatus[0].color
@@ -165,14 +158,14 @@ const StudentCard = props => {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row style={{ display: "block" }}>
+            <Row className="blockRow">
               <ButtonDropdown
                 direction="left"
                 isOpen={isOpenCource}
                 toggle={toggleCource}
               >
                 <DropdownToggle
-                  className="badge badge-pill"
+                  className="badge badge-pill badges"
                   style={{
                     backgroundColor: currentCource[0].color,
                     borderColor: currentCource[0].color
@@ -200,7 +193,7 @@ const StudentCard = props => {
 
           <Col xs="1">
             <Row>
-              <Col style={{ textAlign: "center" }}>
+              <Col className="center">
                 <FontAwesomeIcon
                   icon="user-times"
                   onClick={toggleDeleteStudent}
@@ -215,17 +208,17 @@ const StudentCard = props => {
         <Collapse isOpen={collapse}>
           <hr />
           <Row>
-            <Col xs="12" md="4" style={{ textAlign: "center" }}>
+            <Col xs="12" md="4" className="center">
               <span>Email: </span>
               <br />
               {student.email}
             </Col>
-            <Col xs="12" md="2" style={{ textAlign: "center" }}>
+            <Col xs="12" md="2" className="center">
               <span>Phone: </span>
               <br />
               {student.phone}
             </Col>
-            <Col xs="12" md="6" style={{ textAlign: "center" }}>
+            <Col xs="12" md="6" className="center">
               <span>Knowledge: </span>
               <br />
               {student.knowledge}
@@ -233,7 +226,7 @@ const StudentCard = props => {
           </Row>
           <hr />
           <Row>
-            <Col style={{ textAlign: "center" }}>
+            <Col className="center">
               <span>Comment: </span>
               {student.comment}
             </Col>

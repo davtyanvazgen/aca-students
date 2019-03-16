@@ -1,6 +1,6 @@
 import React from "react";
 import { ChromePicker } from "react-color";
-import { Button, Row, Col } from "reactstrap";
+import { Col } from "reactstrap";
 
 export default class Picker extends React.Component {
   render() {

@@ -10,7 +10,6 @@ import {
   Col
 } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
-import firebase from "firebase";
 import DeleteCourceModal from "./deleteCourceModal";
 import EditCourceModal from "./editCourceModal";
 
@@ -114,31 +113,19 @@ const Cource = ({ cources, cource, students, firestore }) => {
     <div>
       <Card
         key={cource.id}
-        style={{
-          borderRadius: "7px",
-          boxShadow: `0 0 15px ${cource.color}`,
-          border: "none"
-        }}
+        id="card"
+        style={{ boxShadow: `0 0 15px ${cource.color}` }}
       >
-        <CardBody
-          style={{
-            padding: "0px 0px 20px 0px",
-            backgroundColor: "#dfebef",
-            borderRadius: "7px"
-          }}
-        >
+        <CardBody id="cardBody">
           <CardTitle
-            style={{
-              borderRadius: "7px 7px 0px 0px",
-              padding: "10px 0 10px 15px",
-              backgroundColor: cource.color
-            }}
+            className="cardTitle"
+            style={{ backgroundColor: cource.color }}
           >
-            <Row style={{ width: "100%" }}>
+            <Row id="roWW">
               <Col xs="10">
-                <h5 style={{ color: "white" }}>{cource.longName}</h5>
+                <h5 id="white">{cource.name}</h5>
               </Col>
-              <Col xs="2" style={{ padding: "0px 0px" }}>
+              <Col xs="2" id="select">
                 <Input
                   bsSize="sm"
                   type="select"
@@ -154,10 +141,10 @@ const Cource = ({ cources, cource, students, firestore }) => {
               </Col>
             </Row>
           </CardTitle>
-          <CardText style={{ marginLeft: "10px" }}>
-            Short name: {cource.name}
+          <CardText id="cardText" style={{ color: `${cource.color}` }}>
+            <strong>{cource.longName}</strong>
           </CardText>
-          <div style={{ marginTop: "50px" }}>
+          <div id="deleteEdit">
             <Button
               size="sm"
               color="danger"
@@ -171,7 +158,7 @@ const Cource = ({ cources, cource, students, firestore }) => {
             <Button
               size="sm"
               color="success"
-              className="float-right mr-1"
+              className="float-right mr-2"
               onClick={() => setModalShowEdit(true)}
             >
               Edit

@@ -1,18 +1,56 @@
-#containerFormStatuse {
-  border: 1px solid grey;
-  width: 300px;
-  margin: 20px auto;
-  border-radius: 5px;
-  background-color: #68dab8;
+.label {
+  color: red;
+}
+#prev {
+  display: none;
 }
 
-.miniContainerFormStatuse {
-  width: 250px;
-  margin: 20px auto;
+.center {
+  text-align: center;
+}
+#addStatusButton {
+  float: right;
+}
+.roww {
+  margin-top: 15px;
 }
 
-.statuseList {
-  /* border: 1px solid red; */
-  width: 300px;
-  margin: 20px auto;
+.martop {
+  margin-top: 15px;
+}
+
+#card {
+  border-radius: 7px;
+  border: none;
+}
+
+#cardBody {
+  padding: 0px 0px 20px 0px;
+  background-color: #dfebef;
+  border-radius: 7px;
+}
+
+.cardTitle {
+  border-radius: 7px 7px 0px 0px;
+  padding: 10px 0 10px 15px;
+}
+
+#roWW {
+  width: 100%;
+}
+
+#white {
+  color: white;
+}
+
+#select {
+  padding: 0px 0px;
+}
+
+#cardText {
+  margin-left: 10px;
+}
+
+#deleteEdit {
+  margin-top: 60px;
 }

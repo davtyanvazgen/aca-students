@@ -18,7 +18,7 @@ const AddStatuseForm = ({ statuses, firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
   const [addStatusError, setAddStatusError] = useState("");
-  const [background, setBackground] = useState("#D21965");
+  const [background, setBackground] = useState("#197FD2");
   const [checkLetters, setCheckLetters] = useState("");
 
   function handleChangeComplete(color) {
@@ -68,7 +68,7 @@ const AddStatuseForm = ({ statuses, firestore }) => {
             {!checkLetters ? (
               <Label>Status`s short name</Label>
             ) : (
-              <Label style={{ color: "red" }}>{checkLetters}</Label>
+              <Label className="label">{checkLetters}</Label>
             )}
             <Input
               type="text"
@@ -83,26 +83,20 @@ const AddStatuseForm = ({ statuses, firestore }) => {
               value={longName}
               onChange={handleChangeLongName}
             />
-            <Button type="submit" style={{ display: "none" }} />
+            <Button id="prev" type="submit" />
           </FormGroup>
         </Form>
         <Button
           className="mr-2"
           size="sm"
-          style={{
-            backgroundColor: `${background}`,
-            border: "none"
-          }}
+          style={{ backgroundColor: `${background}`, border: "none" }}
         >
           {name ? name : "Short status"}
         </Button>
 
         <Button
           size="sm"
-          style={{
-            backgroundColor: `${background}`,
-            border: "none"
-          }}
+          style={{ backgroundColor: `${background}`, border: "none" }}
         >
           {longName ? longName : "Long Status"}
         </Button>

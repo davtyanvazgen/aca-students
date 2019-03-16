@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { Input, Label, Form, FormGroup } from "reactstrap";
+import { Input, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
 const EditCourceModal = props => {
@@ -54,20 +54,20 @@ const EditCourceModal = props => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <span style={{ color: "green" }}> ZVART Jan </span> let's edit course
+          ZVART Jan let's edit course
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <FormGroup>
-            <h5>Long Name</h5>
+            <h5>Short Name</h5>
             <Input
               bssize="sm"
               value={newName}
               onChange={handleEditCourceName}
             />
             <br />
-            <h5>Short Name</h5>
+            <h5>Long Name</h5>
             <Input
               bssize="sm"
               value={newLongName}

@@ -128,21 +128,21 @@ const RegistrationForm = props => {
               <Label>Name</Label>
               <Input {...name} type="text" name="name" />
               {nameValidationError && (
-                <p style={{ color: "red" }}>{nameValidationError}</p>
+                <p className="regError">{nameValidationError}</p>
               )}
             </FormGroup>
             <FormGroup>
               <Label>Surname</Label>
               <Input {...surname} type="text" name="surname" />
               {surNameValidationErrors && (
-                <p style={{ color: "red" }}>{surNameValidationErrors}</p>
+                <p className="regError">{surNameValidationErrors}</p>
               )}
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Email address</Label>
               <Input {...email} type="email" name="email" />
               {emailValidationErrors && (
-                <p style={{ color: "red" }}>{emailValidationErrors}</p>
+                <p className="regError">{emailValidationErrors}</p>
               )}
             </FormGroup>
             <FormGroup>
@@ -154,7 +154,7 @@ const RegistrationForm = props => {
                 name="phone"
               />
               {phoneValidationErrors && (
-                <p style={{ color: "red" }}>{phoneValidationErrors}</p>
+                <p className="regError">{phoneValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -179,7 +179,7 @@ const RegistrationForm = props => {
               </Input>
 
               {selectCourceValidationErrors && (
-                <p style={{ color: "red" }}>{selectCourceValidationErrors}</p>
+                <p className="regError">{selectCourceValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -204,7 +204,7 @@ const RegistrationForm = props => {
                 option>
               </Input>
               {knowledgeValidationErrors && (
-                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+                <p className="regError">{knowledgeValidationErrors}</p>
               )}
             </FormGroup>
 

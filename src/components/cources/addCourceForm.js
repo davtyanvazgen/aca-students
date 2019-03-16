@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, Input, Label, Col } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 
@@ -76,12 +76,12 @@ const AddCourceForm = ({ firestore, cources }) => {
 
   return (
     <>
-      <Form onSubmit={handleSubmit} style={{ borderTop: "1px solid grey" }}>
+      <Form onSubmit={handleSubmit} className="addCourse">
         <FormGroup>
           {!checkLetters ? (
-            <Label>Courses`s short name</Label>
+            <Label>Short name</Label>
           ) : (
-            <Label style={{ color: "red" }}>{checkLetters}</Label>
+            <Label className="label colorLabel">{checkLetters}</Label>
           )}
           <Input
             type="text"

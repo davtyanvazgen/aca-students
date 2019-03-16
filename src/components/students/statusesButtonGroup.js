@@ -15,18 +15,13 @@ const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
     <>
       <Col>
         <Button
-          style={{
-            marginBottom: "2px",
-            width: "100%",
-            wordWrap: "break-word",
-            textAlign: "center"
-          }}
           color="dark"
           onClick={() => {
             onRadioBtnClick("all");
             statuseStudents(undefined, undefined, "all");
           }}
           active={rSelected === "all"}
+          className="statusButton"
         >
           Show all
         </Button>
@@ -39,14 +34,10 @@ const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
           .map(status => (
             <Col key={status.id}>
               <Button
-                className="activeButtonColor"
+                className="activeButtonColor statusButton"
                 style={{
-                  marginBottom: "2px",
-                  width: "100%",
                   backgroundColor: status.color,
-                  borderColor: status.color,
-                  wordWrap: "break-word",
-                  textAlign: "center"
+                  borderColor: status.color
                 }}
                 color="dark"
                 id={status.id}

@@ -1,5 +1,5 @@
 import React from "react";
-import CourcesButton from "./courcesButtonGroup";
+import CourcesButtonGroup from "./courcesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
 import Input from "reactstrap/es/Input";
@@ -27,25 +27,16 @@ const Students = ({
       <>
         <Container className="mainContainer">
           <Row>
-            <Col
-              sm={{ size: 10, offset: 2 }}
-              style={{ paddingRight: "0px", paddingLeft: "0px" }}
-            >
+            <Col sm={{ size: 10, offset: 2 }} className="column">
               <Container>
                 <Row>
                   <Col>
-                    <p style={{ marginTop: "8px" }}>
-                      {" "}
-                      All students count: {allStudents.length}. (c) Lodash
-                    </p>
+                    <h5 className="count">
+                      All students count: <strong>{allStudents.length}</strong>
+                    </h5>
                   </Col>
                   <Col>
-                    <InputGroup
-                      style={{
-                        maxWidth: "300px",
-                        margin: "10px 0 0 auto"
-                      }}
-                    >
+                    <InputGroup className="searchInput">
                       <Input
                         value={searchValue}
                         onChange={e =>
@@ -60,8 +51,8 @@ const Students = ({
                 </Row>
 
                 <Row>
-                  <Col style={{ margin: "5px auto" }} xs="auto">
-                    <CourcesButton courceStudents={filterStudents} />
+                  <Col className="buttonsCol" xs="auto">
+                    <CourcesButtonGroup courceStudents={filterStudents} />
                   </Col>
                 </Row>
               </Container>
@@ -69,14 +60,14 @@ const Students = ({
           </Row>
 
           <Row>
-            <Col xs={{ size: 2 }} style={{ padding: "0px " }}>
+            <Col xs={{ size: 2 }} className="colpadding">
               <StatusesButton statuseStudents={filterStudents} />
             </Col>
 
             <Col xs={{ size: 10 }}>
               <Container>
                 <Row>
-                  <ListGroup style={{ width: "100%" }}>
+                  <ListGroup className="listGroup">
                     {students &&
                       students.map(student => {
                         background === "#ffffff"
@@ -92,13 +83,13 @@ const Students = ({
                         );
                       })}
                   </ListGroup>
-                  <div style={{ width: "100%" }}>
+                  <div className="listGroup">
                     {!students.length && (
                       <div>
                         <div className="jumbotron">
                           <Container>
                             <Row>
-                              <ListGroup style={{ width: "100%" }}>
+                              <ListGroup className="listGroup">
                                 {students &&
                                   students.map(student => {
                                     background === "#ffffff"
@@ -114,7 +105,7 @@ const Students = ({
                                     );
                                   })}
                               </ListGroup>
-                              <div style={{ width: "100%" }}>
+                              <div className="listGroup">
                                 {!students.length && (
                                   <div>
                                     <div className="jumbotron">

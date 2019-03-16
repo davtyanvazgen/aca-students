@@ -19,22 +19,22 @@ const AddCource = props => {
       <Container className="mainContainer">
         <Container>
           <Row>
-            <Col style={{ textAlign: "center" }}>
-              <h1>Current cources</h1>
+            <Col className="centered">
+              <h1>Current courses</h1>
               <Button
+                id="addCourseButton"
                 color="info"
                 onClick={toggle}
                 size="sm"
-                style={{ float: "right" }}
               >
                 Add new course
               </Button>
             </Col>
           </Row>
 
-          <Row style={{ marginTop: "15px" }}>
-            <Collapse isOpen={collapse} style={{ margin: "0 auto" }}>
-              <Col style={{ minWidth: "440px" }}>
+          <Row>
+            <Collapse isOpen={collapse} id="collapse">
+              <Col id="collapseCol">
                 <AddCourceForm cources={props.cources} />
               </Col>
             </Collapse>
@@ -42,7 +42,7 @@ const AddCource = props => {
           <hr />
         </Container>
 
-        <Container style={{ marginTop: "15px" }}>
+        <Container className="martop">
           <Row>
             {props.cources ? (
               props.cources
@@ -50,13 +50,7 @@ const AddCource = props => {
                   return a.sort - b.sort;
                 })
                 .map(cource => (
-                  <Col
-                    xs="6"
-                    md="4"
-                    lg="3"
-                    key={cource.id}
-                    style={{ marginTop: "20px" }}
-                  >
+                  <Col xs="6" md="4" lg="3" key={cource.id} className="martop">
                     <Cource
                       key={cource.id}
                       cource={cource}

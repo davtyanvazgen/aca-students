@@ -14,13 +14,10 @@ export default class DeleteStatusModal extends Component {
     const body = studentsSameStatus.length ? (
       <>
         <h4>
-          There are{" "}
-          <span style={{ color: "blue" }}>{studentsSameStatus.length}</span>{" "}
-          Students with <span style={{ color: "blue" }}>{statuse.name}</span>
+          There are {studentsSameStatus.length} Students with {statuse.name}
         </h4>
         <p>
-          if you delete this course you will lose
-          <span style={{ color: "blue" }}> {studentsSameStatus.length}</span>
+          if you delete this course you will lose {studentsSameStatus.length}{" "}
           friends
         </p>
       </>
@@ -38,7 +35,7 @@ export default class DeleteStatusModal extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Are You Sure <span style={{ color: "green" }}>ZVART jan</span>
+            Are You Sure ZVART jan ?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>

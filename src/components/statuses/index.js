@@ -18,13 +18,13 @@ const AddStatuse = ({ statuses, students }) => {
     <Container className="mainContainer">
       <Container>
         <Row>
-          <Col style={{ textAlign: "center" }}>
+          <Col className="center">
             <h1>Current statuses</h1>
             <Button
+              id="addStatusButton"
               color="info"
               onClick={toggle}
               size="sm"
-              style={{ float: "right" }}
             >
               Add new status
             </Button>
@@ -32,7 +32,7 @@ const AddStatuse = ({ statuses, students }) => {
         </Row>
 
         <Collapse isOpen={collapse}>
-          <Row style={{ marginTop: "15px " }}>
+          <Row>
             <AddStatuseForm statuses={statuses} />
           </Row>
         </Collapse>
@@ -47,13 +47,7 @@ const AddStatuse = ({ statuses, students }) => {
                 return a.sort - b.sort;
               })
               .map(statuse => (
-                <Col
-                  xs="6"
-                  md="4"
-                  lg="3"
-                  key={statuse.id}
-                  style={{ marginTop: "20px" }}
-                >
+                <Col xs="6" md="4" lg="3" key={statuse.id} className="martop">
                   <Statuse
                     key={statuse.id}
                     statuse={statuse}

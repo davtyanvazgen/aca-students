@@ -114,31 +114,19 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
     <div>
       <Card
         key={statuse.id}
-        style={{
-          borderRadius: "7px",
-          boxShadow: `0 0 15px ${statuse.color}`,
-          border: "none"
-        }}
+        id="card"
+        style={{ boxShadow: `0 0 15px ${statuse.color}` }}
       >
-        <CardBody
-          style={{
-            padding: "0px 0px 20px 0px",
-            backgroundColor: "#dfebef",
-            borderRadius: "7px"
-          }}
-        >
+        <CardBody id="cardBody">
           <CardTitle
-            style={{
-              borderRadius: "7px 7px 0px 0px",
-              padding: "10px 0 10px 15px",
-              backgroundColor: statuse.color
-            }}
+            style={{ backgroundColor: statuse.color }}
+            className="cardTitle"
           >
-            <Row style={{ width: "100%" }}>
+            <Row id="roWW">
               <Col xs="10">
-                <h5 style={{ color: "white" }}>{statuse.longName}</h5>
+                <h5 id="white">{statuse.name}</h5>
               </Col>
-              <Col xs="2" style={{ padding: "0px 0px" }}>
+              <Col xs="2" id="select">
                 <Input
                   bsSize="sm"
                   type="select"
@@ -154,10 +142,10 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
               </Col>
             </Row>
           </CardTitle>
-          <CardText style={{ marginLeft: "10px" }}>
-            Short name: {statuse.name}
+          <CardText id="cardText" style={{ color: `${statuse.color}` }}>
+            <strong>{statuse.longName}</strong>
           </CardText>
-          <div style={{ marginTop: "50px" }}>
+          <div id="deleteEdit">
             {statuse.id !== "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5" ? (
               <>
                 <Button
@@ -173,7 +161,7 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
                 <Button
                   size="sm"
                   color="success"
-                  className="float-right mr-1"
+                  className="float-right mr-2"
                   onClick={() => setModalShowEdit(true)}
                 >
                   Edit

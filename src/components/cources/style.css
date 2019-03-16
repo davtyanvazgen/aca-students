@@ -1,17 +1,61 @@
-/* #containerForm {
-  border: 1px solid grey;
-  width: 300px;
-  margin: 20px auto;
-  border-radius: 5px;
-  background-color: #e9da10;
+.addCourse {
+  border-top: 1px solid grey;
 }
 
-.miniContainerForm {
-  width: 250px;
-  margin: 20px auto;
+.label {
+  margin-top: 10px;
+}
+.colorLabel {
+  color: red;
 }
 
-.courceList {
-  width: 300px;
-  margin: 20px auto;
-} */
+#card {
+  border-radius: 7px;
+  border: none;
+}
+
+#cardBody {
+  padding: 0px 0px 20px 0px;
+  background-color: #dfebef;
+  border-radius: 7px;
+}
+
+.cardTitle {
+  border-radius: 7px 7px 0px 0px;
+  padding: 10px 0 10px 15px;
+}
+
+#roWW {
+  width: 100%;
+}
+#white {
+  color: white;
+}
+#select {
+  padding: 0px 0px;
+}
+
+#cardText {
+  margin-left: 10px;
+}
+
+#deleteEdit {
+  margin-top: 60px;
+}
+#addCourseButton {
+  float: right;
+}
+.centered {
+  text-align: center;
+}
+#collapse {
+  margin: 0 auto;
+}
+
+#collapseCol {
+  min-width: 440px;
+}
+
+.martop {
+  margin-top: 15px;
+}
