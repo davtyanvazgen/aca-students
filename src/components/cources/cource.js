@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {Button, Card, CardText, CardBody, CardTitle, Row, Input, Col} from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
-import firebase from "firebase";
 import DeleteCourceModal from "./deleteCourceModal";
 import EditCourceModal from "./editCourceModal";
 
