@@ -8,24 +8,24 @@ import { firestoreConnect } from "react-redux-firebase";
 const getShowStudents = (
   students,
   filter,
-  selectedCources,
+  selectedCourses,
   selectedStatuses
 ) => {
   let filters = selectedStatuses.length
-    ? [...selectedCources, selectedStatuses[0]]
-    : [...selectedCources];
+    ? [...selectedCourses, selectedStatuses[0]]
+    : [...selectedCourses];
   switch (filter) {
     case visibilityFilters.SHOW_ALL:
       return students;
     case visibilityFilters.SHOW_WITH_STATUS:
       return students.filter(student => filters.indexOf(student.status) !== -1);
-    case visibilityFilters.SHOW_WITH_COURCES:
-      return students.filter(student => filters.indexOf(student.cource) !== -1);
-    case visibilityFilters.SHOW_WITH_COURCES_AND_STATUS:
+    case visibilityFilters.SHOW_WITH_COURSES:
+      return students.filter(student => filters.indexOf(student.course) !== -1);
+    case visibilityFilters.SHOW_WITH_COURSES_AND_STATUS:
       return students.filter(
         student =>
           filters.indexOf(student.status) !== -1 &&
-          filters.indexOf(student.cource) !== -1
+          filters.indexOf(student.course) !== -1
       );
     default:
       throw new Error("Unknown filter " + filter);
@@ -57,13 +57,13 @@ const searchStudents = (students, searchValue) => {
   }
 };
 
-const filter = (searchValue, selectedCources, selectedStatuses, dispatch) => {
-  return function(value = searchValue, cource = "", status = "") {
-    if (cource !== "") {
-      if (selectedCources.indexOf(cource.id) === -1 && cource) {
-        selectedCources.push(cource.id);
+const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
+  return function(value = searchValue, course = "", status = "") {
+    if (course !== "") {
+      if (selectedCourses.indexOf(course.id) === -1 && course) {
+        selectedCourses.push(course.id);
       } else {
-        selectedCources.splice(selectedCources.indexOf(cource.id), 1);
+        selectedCourses.splice(selectedCourses.indexOf(course.id), 1);
       }
     }
 
@@ -78,42 +78,42 @@ const filter = (searchValue, selectedCources, selectedStatuses, dispatch) => {
       }
     }
 
-    if (!selectedStatuses.length && selectedCources.length) {
+    if (!selectedStatuses.length && selectedCourses.length) {
       dispatch(
         setFilter(
-          visibilityFilters.SHOW_WITH_COURCES,
+          visibilityFilters.SHOW_WITH_COURSES,
           selectedStatuses,
-          selectedCources,
+          selectedCourses,
           value
         )
       );
     }
-    if (selectedStatuses.length && !selectedCources.length) {
+    if (selectedStatuses.length && !selectedCourses.length) {
       dispatch(
         setFilter(
           visibilityFilters.SHOW_WITH_STATUS,
           selectedStatuses,
-          selectedCources,
+          selectedCourses,
           value
         )
       );
     }
-    if (selectedStatuses.length && selectedCources.length) {
+    if (selectedStatuses.length && selectedCourses.length) {
       dispatch(
         setFilter(
-          visibilityFilters.SHOW_WITH_COURCES_AND_STATUS,
+          visibilityFilters.SHOW_WITH_COURSES_AND_STATUS,
           selectedStatuses,
-          selectedCources,
+          selectedCourses,
           value
         )
       );
     }
-    if (!selectedStatuses.length && !selectedCources.length) {
+    if (!selectedStatuses.length && !selectedCourses.length) {
       dispatch(
         setFilter(
           visibilityFilters.SHOW_ALL,
           selectedStatuses,
-          selectedCources,
+          selectedCourses,
           value
         )
       );
@@ -122,12 +122,12 @@ const filter = (searchValue, selectedCources, selectedStatuses, dispatch) => {
 };
 
 export default compose(
-  firestoreConnect(() => ["students", "cources", "statuses"]),
+  firestoreConnect(() => ["students", "courses", "statuses"]),
   connect((state, props) => ({
     searchValue: state.filter.searchValue,
     filterStudents: filter(
       state.filter.searchValue,
-      state.filter.selectedCources,
+      state.filter.selectedCourses,
       state.filter.selectedStatuses,
       props.dispatch
     ),
@@ -135,12 +135,12 @@ export default compose(
       getShowStudents(
         state.firestore.ordered.students,
         state.filter.filter,
-        state.filter.selectedCources,
+        state.filter.selectedCourses,
         state.filter.selectedStatuses
       ),
       state.filter.searchValue
     ),
-    cources: state.firestore.ordered.cources,
+    courses: state.firestore.ordered.courses,
     statuses: state.firestore.ordered.statuses,
     allStudents: state.firestore.ordered.students
   }))

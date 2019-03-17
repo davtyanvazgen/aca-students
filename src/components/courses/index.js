@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./style.css";
-import Cource from "./cource";
-import AddCourceForm from "./addCourceForm";
+import "../styles/courseAndStatusCard.css";
+import Course from "./course";
+import AddCourseForm from "./addCourseForm";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Row, Col, Container, Collapse, Button } from "reactstrap";
 
-const AddCource = props => {
+const AddCourse = props => {
   const [collapse, setCollapse] = useState(false);
 
   const toggle = () => {
@@ -19,10 +19,10 @@ const AddCource = props => {
       <Container className="mainContainer">
         <Container>
           <Row>
-            <Col className="centered">
+            <Col className="center">
               <h1>Current courses</h1>
               <Button
-                id="addCourseButton"
+                className="addButton"
                 color="info"
                 onClick={toggle}
                 size="sm"
@@ -33,9 +33,9 @@ const AddCource = props => {
           </Row>
 
           <Row>
-            <Collapse isOpen={collapse} id="collapse">
-              <Col id="collapseCol">
-                <AddCourceForm cources={props.cources} />
+            <Collapse isOpen={collapse} className="collapse">
+              <Col className="collapseCol">
+                <AddCourseForm courses={props.courses} />
               </Col>
             </Collapse>
           </Row>
@@ -44,18 +44,18 @@ const AddCource = props => {
 
         <Container className="martop">
           <Row>
-            {props.cources ? (
-              props.cources
+            {props.courses ? (
+              props.courses
                 .sort(function(a, b) {
                   return a.sort - b.sort;
                 })
-                .map(cource => (
-                  <Col xs="6" md="4" lg="3" key={cource.id} className="martop">
-                    <Cource
-                      key={cource.id}
-                      cource={cource}
+                .map(course => (
+                  <Col xs="6" md="4" lg="3" key={course.id} className="martop">
+                    <Course
+                      key={course.id}
+                      course={course}
                       students={props.students}
-                      cources={props.cources}
+                      courses={props.courses}
                     />
                   </Col>
                 ))
@@ -70,9 +70,9 @@ const AddCource = props => {
 };
 
 export default compose(
-  firestoreConnect(() => ["cources", "students"]),
+  firestoreConnect(() => ["courses", "students"]),
   connect((state, props) => ({
-    cources: state.firestore.ordered.cources,
+    courses: state.firestore.ordered.courses,
     students: state.firestore.ordered.students
   }))
-)(AddCource);
+)(AddCourse);

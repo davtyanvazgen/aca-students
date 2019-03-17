@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Button, Col } from "reactstrap";
 
-const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
+const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
   const [rSelected, setSelected] = useState(selectedStatuses[0]);
 
   const onRadioBtnClick = selected => {
@@ -18,7 +18,7 @@ const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
           color="dark"
           onClick={() => {
             onRadioBtnClick("all");
-            statuseStudents(undefined, undefined, "all");
+            statusStudents(undefined, undefined, "all");
           }}
           active={rSelected === "all"}
           className="statusButton"
@@ -44,7 +44,7 @@ const StatusesButton = ({ statuses, selectedStatuses, statuseStudents }) => {
                 key={status.id}
                 onClick={() => {
                   onRadioBtnClick(status.id);
-                  statuseStudents(undefined, undefined, status);
+                  statusStudents(undefined, undefined, status);
                 }}
                 active={rSelected === status.id}
               >

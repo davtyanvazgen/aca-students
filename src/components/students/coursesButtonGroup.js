@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Badge, Button } from "reactstrap";
 
-const CourcesButton = ({
-  selectedCources,
-  cources,
-  courceStudents,
+const CoursesButton = ({
+  selectedCourses,
+  courses,
+  courseStudents,
   students
 }) => {
-  const [rSelected, setSelected] = useState([...selectedCources]);
+  const [rSelected, setSelected] = useState([...selectedCourses]);
   function onCheckboxBtnClick(selected) {
     let tempArr = rSelected;
     const index = tempArr.indexOf(selected);
@@ -22,10 +22,10 @@ const CourcesButton = ({
     setSelected(tempArr);
   }
 
-  function studentSameCource(cource) {
+  function studentSameCourse(course) {
     let counter = 0;
     students.forEach(student => {
-      if (student.cource === cource.id) {
+      if (student.course === course.id) {
         counter++;
       }
     });
@@ -33,30 +33,30 @@ const CourcesButton = ({
   }
   return (
     <div className="buttons">
-      {cources &&
-        cources
+      {courses &&
+        courses
           .sort(function(a, b) {
             return a.sort - b.sort;
           })
-          .map(cource => (
+          .map(course => (
             <Button
               className="activeButtonColor courseButton"
               style={{
-                backgroundColor: cource.color,
-                borderColor: cource.color
+                backgroundColor: course.color,
+                borderColor: course.color
               }}
-              id={cource.id}
-              key={cource.id}
+              id={course.id}
+              key={course.id}
               onClick={() => {
-                onCheckboxBtnClick(cource.id);
-                courceStudents(undefined, cource);
+                onCheckboxBtnClick(course.id);
+                courseStudents(undefined, course);
               }}
-              active={rSelected.includes(cource.id)}
+              active={rSelected.includes(course.id)}
             >
               <span>
-                {cource.name}
-                <Badge className="badge" color="secondary">
-                  {students && studentSameCource(cource)}
+                {course.name}
+                <Badge className="courseCount" color="secondary">
+                  {students && studentSameCourse(course)}
                 </Badge>
               </span>
             </Button>
@@ -66,10 +66,10 @@ const CourcesButton = ({
 };
 
 export default compose(
-  firestoreConnect(() => ["cources", "students"]),
+  firestoreConnect(() => ["courses", "students"]),
   connect((state, props) => ({
     students: state.firestore.ordered.students,
-    cources: state.firestore.ordered.cources,
-    selectedCources: state.filter.selectedCources
+    courses: state.firestore.ordered.courses,
+    selectedCourses: state.filter.selectedCourses
   }))
-)(CourcesButton);
+)(CoursesButton);

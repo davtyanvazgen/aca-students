@@ -5,7 +5,7 @@ export default class DeleteStatusModal extends Component {
   render() {
     const {
       studentsSameStatus,
-      statuse,
+      status,
       handleRemove,
       onHide,
       show
@@ -14,7 +14,7 @@ export default class DeleteStatusModal extends Component {
     const body = studentsSameStatus.length ? (
       <>
         <h4>
-          There are {studentsSameStatus.length} Students with {statuse.name}
+          There are {studentsSameStatus.length} Students with {status.name}
         </h4>
         <p>
           if you delete this course you will lose {studentsSameStatus.length}{" "}
@@ -22,7 +22,7 @@ export default class DeleteStatusModal extends Component {
         </p>
       </>
     ) : (
-      <h6>Do you want to delete this statuse ?</h6>
+      <h6>Do you want to delete this status ?</h6>
     );
 
     return (

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./style.css";
-import Statuse from "./statuse";
-import AddStatuseForm from "./addStatuseForm";
+import "../styles/courseAndStatusCard.css";
+import Status from "./status";
+import AddStatusForm from "./addStatusForm";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Col, Container, Row, Collapse, Button } from "reactstrap";
 
-const AddStatuse = ({ statuses, students }) => {
+const AddStatus = ({ statuses, students }) => {
   const [collapse, setCollapse] = useState(false);
 
   const toggle = () => {
@@ -21,7 +21,7 @@ const AddStatuse = ({ statuses, students }) => {
           <Col className="center">
             <h1>Current statuses</h1>
             <Button
-              id="addStatusButton"
+              className="addButton"
               color="info"
               onClick={toggle}
               size="sm"
@@ -33,7 +33,7 @@ const AddStatuse = ({ statuses, students }) => {
 
         <Collapse isOpen={collapse}>
           <Row>
-            <AddStatuseForm statuses={statuses} />
+            <AddStatusForm statuses={statuses} />
           </Row>
         </Collapse>
         <hr />
@@ -46,11 +46,11 @@ const AddStatuse = ({ statuses, students }) => {
               .sort(function(a, b) {
                 return a.sort - b.sort;
               })
-              .map(statuse => (
-                <Col xs="6" md="4" lg="3" key={statuse.id} className="martop">
-                  <Statuse
-                    key={statuse.id}
-                    statuse={statuse}
+              .map(status => (
+                <Col xs="6" md="4" lg="3" key={status.id} className="martop">
+                  <Status
+                    key={status.id}
+                    status={status}
                     students={students}
                     statuses={statuses}
                   />
@@ -71,4 +71,4 @@ export default compose(
     statuses: state.firestore.ordered.statuses,
     students: state.firestore.ordered.students
   }))
-)(AddStatuse);
+)(AddStatus);

@@ -11,9 +11,9 @@ import {
 } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import DeleteStatusModal from "./deleteStatusModal";
-import EditStatuseModal from "./editStatusModal";
+import EditStatusModal from "./editStatusModal";
 
-const Statuse = ({ statuses, statuse, firestore, students }) => {
+const Status = ({ statuses, status, firestore, students }) => {
   const [modalShow, setModalShow] = useState(false);
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
   const [removeStudentError, setRemoveStudentsError] = useState("");
@@ -21,9 +21,9 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
   const [modalShowEdit, setModalShowEdit] = useState(false);
   const [editStatusError, setEditStatusError] = useState("");
 
-  const areYouSure = statuse => {
+  const areYouSure = status => {
     const studentsForDelete = students.filter(
-      student => student.status === statuse.id
+      student => student.status === status.id
     );
     setStudentsSameStatus(studentsForDelete);
     setModalShow(true);
@@ -33,10 +33,10 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
     let sort = parseInt(e.target.value);
     firestore
       .collection("statuses")
-      .doc(statuse.id)
+      .doc(status.id)
       .update({ sort });
-    if (statuse.sort > sort) {
-      for (let i = sort; i < statuse.sort; i++) {
+    if (status.sort > sort) {
+      for (let i = sort; i < status.sort; i++) {
         statuses.forEach(el => {
           if (el.sort === i) {
             firestore
@@ -47,8 +47,8 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
         });
       }
     }
-    if (statuse.sort < sort) {
-      for (let i = statuse.sort + 1; i <= sort; i++) {
+    if (status.sort < sort) {
+      for (let i = status.sort + 1; i <= sort; i++) {
         statuses.forEach(el => {
           if (el.sort === i) {
             firestore
@@ -62,7 +62,7 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
   };
 
   const handleRemove = () => {
-    for (let i = statuse.sort + 1; i <= statuses.length; i++) {
+    for (let i = status.sort + 1; i <= statuses.length; i++) {
       statuses.forEach(el => {
         if (el.sort === i) {
           firestore
@@ -92,7 +92,7 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
 
     firestore
       .collection("statuses")
-      .doc(statuse.id)
+      .doc(status.id)
       .delete()
       .catch(err => {
         setDeleteStatusError(err);
@@ -113,24 +113,25 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
   return (
     <div>
       <Card
-        key={statuse.id}
-        id="card"
-        style={{ boxShadow: `0 0 15px ${statuse.color}` }}
+        key={status.id}
+        className="card"
+        style={{ boxShadow: `0 0 15px ${status.color}` }}
       >
-        <CardBody id="cardBody">
+        <CardBody className="cardBody">
           <CardTitle
-            style={{ backgroundColor: statuse.color }}
+            style={{ backgroundColor: status.color }}
             className="cardTitle"
           >
-            <Row id="roWW">
+            <Row className="roWW">
               <Col xs="10">
-                <h5 id="white">{statuse.name}</h5>
+                <h5 className="white">{status.name}</h5>
               </Col>
-              <Col xs="2" id="select">
+              <Col xs="2" className="select">
                 <Input
+                  className="select selectSize"
                   bsSize="sm"
                   type="select"
-                  value={statuse.sort}
+                  value={status.sort}
                   onChange={handleSortSelect}
                 >
                   {statuses.map(el => (
@@ -142,18 +143,18 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
               </Col>
             </Row>
           </CardTitle>
-          <CardText id="cardText" style={{ color: `${statuse.color}` }}>
-            <strong>{statuse.longName}</strong>
+          <CardText className="cardText" style={{ color: `${status.color}` }}>
+            <strong>{status.longName}</strong>
           </CardText>
-          <div id="deleteEdit">
-            {statuse.id !== "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5" ? (
+          <div className="deleteEdit">
+            {status.id !== "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5" ? (
               <>
                 <Button
                   size="sm"
                   color="danger"
                   className="float-right  mr-2"
                   onClick={() => {
-                    areYouSure(statuse);
+                    areYouSure(status);
                   }}
                 >
                   Delete
@@ -185,18 +186,18 @@ const Statuse = ({ statuses, statuse, firestore, students }) => {
         show={modalShow}
         onHide={modalClose}
         studentsSameStatus={studentsSameStatus}
-        statuse={statuse}
+        status={status}
         handleRemove={handleRemove}
       />
 
-      <EditStatuseModal
+      <EditStatusModal
         show={modalShowEdit}
         onHide={editModalClose}
-        statuse={statuse}
+        status={status}
         students={students}
       />
     </div>
   );
 };
 
-export default withFirestore(Statuse);
+export default withFirestore(Status);

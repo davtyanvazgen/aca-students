@@ -3,47 +3,47 @@ import { Modal, Button } from "react-bootstrap";
 import { Input, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-const EditCourceModal = props => {
-  const [newName, setNewName] = useState(props.cource.name);
-  const [newLongName, setNewLongName] = useState(props.cource.longName);
-  const [editCourceError, setEditCourceError] = useState("");
+const EditCourseModal = props => {
+  const [newName, setNewName] = useState(props.course.name);
+  const [newLongName, setNewLongName] = useState(props.course.longName);
+  const [editCourseError, setEditCourseError] = useState("");
 
-  const handleEditCourceName = e => {
+  const handleEditCourseName = e => {
     setNewName(e.target.value);
   };
 
-  const handleEditCourceLongName = e => {
+  const handleEditCourseLongName = e => {
     setNewLongName(e.target.value);
   };
 
-  const confirmEditCource = newName => {
+  const confirmEditCourse = newName => {
     if (newName.trim()) {
-      const editCource = {
+      const editCourse = {
         name: newName,
         longName: newLongName.trim(),
-        id: cource.id
+        id: course.id
       };
 
       props.firestore
-        .collection("cources")
-        .doc(cource.id)
-        .update({ ...editCource })
+        .collection("courses")
+        .doc(course.id)
+        .update({ ...editCourse })
         .catch(err => {
-          setEditCourceError(err);
+          setEditCourseError(err);
         });
 
       props.students.forEach(student => {
-        if (student.cource === cource.id) {
+        if (student.course === course.id) {
           props.firestore
             .collection("students")
             .doc(student.id)
-            .update({ courceName: newLongName.trim() });
+            .update({ courseName: newLongName.trim() });
         }
       });
     }
   };
 
-  const { cource, onHide, show } = props;
+  const { course, onHide, show } = props;
   return (
     <Modal
       onHide={onHide}
@@ -64,14 +64,14 @@ const EditCourceModal = props => {
             <Input
               bssize="sm"
               value={newName}
-              onChange={handleEditCourceName}
+              onChange={handleEditCourseName}
             />
             <br />
             <h5>Long Name</h5>
             <Input
               bssize="sm"
               value={newLongName}
-              onChange={handleEditCourceLongName}
+              onChange={handleEditCourseLongName}
             />
           </FormGroup>
         </Form>
@@ -80,7 +80,7 @@ const EditCourceModal = props => {
         <Button
           variant="warning"
           onClick={() => {
-            confirmEditCource(newName);
+            confirmEditCourse(newName);
             onHide();
           }}
         >
@@ -92,4 +92,4 @@ const EditCourceModal = props => {
   );
 };
 
-export default withFirestore(EditCourceModal);
+export default withFirestore(EditCourseModal);

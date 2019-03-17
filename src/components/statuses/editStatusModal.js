@@ -3,37 +3,37 @@ import { Modal, Button } from "react-bootstrap";
 import { Input, Label, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-const EditStatuseModal = props => {
-  const [newName, setNewName] = useState(props.statuse.name);
-  const [newLongName, setNewLongName] = useState(props.statuse.longName);
-  const [editStatuseError, setEditStatuseError] = useState("");
+const EditStatusModal = props => {
+  const [newName, setNewName] = useState(props.status.name);
+  const [newLongName, setNewLongName] = useState(props.status.longName);
+  const [editStatusError, setEditStatusError] = useState("");
 
-  const handleEditStatuseName = e => {
+  const handleEditStatusName = e => {
     setNewName(e.target.value);
   };
 
-  const handleEditStatuseLongName = e => {
+  const handleEditStatusLongName = e => {
     setNewLongName(e.target.value);
   };
 
-  const confirmEditStatuse = newName => {
+  const confirmEditStatus = newName => {
     if (newName.trim()) {
-      const editStatuse = {
+      const editStatus = {
         name: newName,
         longName: newLongName.trim(),
-        id: statuse.id
+        id: status.id
       };
 
       props.firestore
         .collection("statuses")
-        .doc(statuse.id)
-        .update({ ...editStatuse })
+        .doc(status.id)
+        .update({ ...editStatus })
         .catch(err => {
-          setEditStatuseError(err);
+          setEditStatusError(err);
         });
 
       props.students.forEach(student => {
-        if (student.status === statuse.id) {
+        if (student.status === status.id) {
           props.firestore
             .collection("students")
             .doc(student.id)
@@ -43,7 +43,7 @@ const EditStatuseModal = props => {
     }
   };
 
-  const { statuse, onHide, show } = props;
+  const { status, onHide, show } = props;
   return (
     <Modal
       onHide={onHide}
@@ -64,14 +64,14 @@ const EditStatuseModal = props => {
             <Input
               bssize="sm"
               value={newName}
-              onChange={handleEditStatuseName}
+              onChange={handleEditStatusName}
             />
             <br />
             <h5>Long Name</h5>
             <Input
               bssize="sm"
               value={newLongName}
-              onChange={handleEditStatuseLongName}
+              onChange={handleEditStatusLongName}
             />
           </FormGroup>
         </Form>
@@ -81,7 +81,7 @@ const EditStatuseModal = props => {
         <Button
           variant="warning"
           onClick={() => {
-            confirmEditStatuse(newName);
+            confirmEditStatus(newName);
             onHide();
           }}
         >
@@ -92,4 +92,4 @@ const EditStatuseModal = props => {
   );
 };
 
-export default withFirestore(EditStatuseModal);
+export default withFirestore(EditStatusModal);

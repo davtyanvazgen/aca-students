@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink as RRNavLink } from "react-router-dom";
 import { Button, ButtonGroup, Navbar, Nav } from "reactstrap";
-import "./style.css";
+import "../styles/header.css";
 import { withFirebase } from "react-redux-firebase";
 
 const Header = ({ firebase }) => {
@@ -26,9 +26,9 @@ const Header = ({ firebase }) => {
                     Statuses
                   </Button>
                 </Link>
-                <Link to="/cources">
+                <Link to="/courses">
                   <Button size="sm" outline color="light">
-                    Cources
+                    Courses
                   </Button>
                 </Link>
               </ButtonGroup>

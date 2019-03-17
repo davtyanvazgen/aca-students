@@ -1,0 +1,73 @@
+.label {
+  color: red;
+  margin-top: 10px;
+}
+#prev {
+  display: none;
+}
+
+.addCourse {
+  border-top: 1px solid grey;
+}
+.center {
+  text-align: center;
+}
+.addButton {
+  float: right;
+}
+
+.roww {
+  margin-top: 15px;
+}
+
+.martop {
+  margin-top: 15px;
+}
+
+.card {
+  border-radius: 7px !important;
+  border: none !important;
+}
+
+.cardBody {
+  padding: 0px 0px 20px 0px !important;
+  background-color: #dfebef !important;
+  border-radius: 7px !important;
+}
+
+.cardTitle {
+  border-radius: 7px 7px 0px 0px;
+  padding: 10px 0 10px 15px;
+}
+
+.roWW {
+  width: 100%;
+}
+
+.white {
+  color: white;
+}
+
+.select {
+  padding: 0px 0px !important;
+}
+.selectSize {
+  min-width: 31px;
+  max-width: 33px;
+}
+
+.cardText {
+  margin-left: 10px;
+}
+
+.deleteEdit {
+  margin-top: 60px;
+}
+
+.collapse {
+  margin: 0 auto;
+}
+
+.collapseCol {
+  min-width: 440px;
+}

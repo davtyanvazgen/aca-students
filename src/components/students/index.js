@@ -1,9 +1,9 @@
 import React from "react";
-import CourcesButtonGroup from "./courcesButtonGroup";
+import CoursesButtonGroup from "./coursesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
 import Input from "reactstrap/es/Input";
-import "./style.css";
+import "../styles/studentsList.css";
 import {
   Container,
   Row,
@@ -18,11 +18,11 @@ const Students = ({
   searchValue,
   students,
   allStudents,
-  cources,
+  courses,
   statuses
 }) => {
   let background = "#ffffff";
-  if (students && cources && statuses) {
+  if (students && courses && statuses) {
     return (
       <>
         <Container className="mainContainer">
@@ -52,7 +52,7 @@ const Students = ({
 
                 <Row>
                   <Col className="buttonsCol" xs="auto">
-                    <CourcesButtonGroup courceStudents={filterStudents} />
+                    <CoursesButtonGroup courseStudents={filterStudents} />
                   </Col>
                 </Row>
               </Container>
@@ -61,7 +61,7 @@ const Students = ({
 
           <Row>
             <Col xs={{ size: 2 }} className="colpadding">
-              <StatusesButton statuseStudents={filterStudents} />
+              <StatusesButton statusStudents={filterStudents} />
             </Col>
 
             <Col xs={{ size: 10 }}>

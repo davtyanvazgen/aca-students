@@ -3,10 +3,10 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 
-const AddCourceForm = ({ firestore, cources }) => {
+const AddCourseForm = ({ firestore, courses }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
-  const [addCourceError, setAddCourceError] = useState("");
+  const [addCourseError, setAddCourseError] = useState("");
   const [color, setColor] = useState("");
   const [checkLetters, setCheckLetters] = useState("");
 
@@ -48,23 +48,23 @@ const AddCourceForm = ({ firestore, cources }) => {
   const handleSubmit = e => {
     e.preventDefault();
     if (name.trim() && name.length <= 10) {
-      const newCource = {
+      const newCourse = {
         id: v1(),
         longName: longName.trim() || name,
         name,
         color,
-        sort: cources.length + 1
+        sort: courses.length + 1
       };
 
       firestore
-        .collection("cources")
-        .doc(newCource.id)
-        .set(newCource)
+        .collection("courses")
+        .doc(newCourse.id)
+        .set(newCourse)
         .catch(err => {
-          setAddCourceError(err);
+          setAddCourseError(err);
         });
 
-      firestore.collection("cources").orderBy("sort");
+      firestore.collection("courses").orderBy("sort");
 
       setName("");
       setLongName("");
@@ -81,7 +81,7 @@ const AddCourceForm = ({ firestore, cources }) => {
           {!checkLetters ? (
             <Label>Short name</Label>
           ) : (
-            <Label className="label colorLabel">{checkLetters}</Label>
+            <Label className="label ">{checkLetters}</Label>
           )}
           <Input
             type="text"
@@ -132,4 +132,4 @@ const AddCourceForm = ({ firestore, cources }) => {
   );
 };
 
-export default withFirestore(AddCourceForm);
+export default withFirestore(AddCourseForm);

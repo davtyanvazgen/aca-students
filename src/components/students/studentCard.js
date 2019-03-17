@@ -20,17 +20,17 @@ import {
 } from "reactstrap";
 
 const StudentCard = props => {
-  const { statuses, cources, student, firestore } = props;
+  const { statuses, courses, student, firestore } = props;
   const [modalShow, setModalShow] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
-  const [isOpenCource, setIsOpenCource] = useState(false);
+  const [isOpenCourse, setIsOpenCourse] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(
-    statuses.filter(statuse => statuse.id === student.status)
+    statuses.filter(status => status.id === student.status)
   );
-  const [currentCource, setCurrentCource] = useState(
-    cources.filter(cource => cource.id === student.cource)
+  const [currentCourse, setCurrentCourse] = useState(
+    courses.filter(course => course.id === student.course)
   );
 
   function toggle() {
@@ -49,40 +49,40 @@ const StudentCard = props => {
       .set(student);
   }
 
-  function handleSelectCourceChange(e) {
-    let newCource = cources.filter(
-      cource => cource.longName === e.target.value
+  function handleSelectCourseChange(e) {
+    let newCourse = courses.filter(
+      course => course.longName === e.target.value
     );
-    setCurrentCource(newCource);
+    setCurrentCourse(newCourse);
     firestore
       .collection("students")
       .doc(student.id)
       .update({
-        cource: newCource[0].id,
-        courceName: newCource[0].longName
+        course: newCourse[0].id,
+        courseName: newCourse[0].longName
       });
   }
 
   function handleSelectStatusChange(e) {
-    let newStatuse = statuses.filter(
-      statuse => statuse.longName === e.target.value
+    let newStatus = statuses.filter(
+      status => status.longName === e.target.value
     );
-    setCurrentStatus(newStatuse);
+    setCurrentStatus(newStatus);
 
     firestore
       .collection("students")
       .doc(student.id)
       .update({
-        status: newStatuse[0].id,
-        statusName: newStatuse[0].longName
+        status: newStatus[0].id,
+        statusName: newStatus[0].longName
       });
   }
 
   function toggleStatus() {
     setIsOpenStatus(!isOpenStatus);
   }
-  function toggleCource() {
-    setIsOpenCource(!isOpenCource);
+  function toggleCourse() {
+    setIsOpenCourse(!isOpenCourse);
   }
 
   function handleEdit() {
@@ -107,7 +107,7 @@ const StudentCard = props => {
         style={{
           border: "1px solid #cbccce",
           borderRight: `5px solid ${currentStatus[0].color}`,
-          borderLeft: `5px solid ${currentCource[0].color}`,
+          borderLeft: `5px solid ${currentCourse[0].color}`,
           backgroundColor: props.background
         }}
       >
@@ -161,29 +161,29 @@ const StudentCard = props => {
             <Row className="blockRow">
               <ButtonDropdown
                 direction="left"
-                isOpen={isOpenCource}
-                toggle={toggleCource}
+                isOpen={isOpenCourse}
+                toggle={toggleCourse}
               >
                 <DropdownToggle
                   className="badge badge-pill badges"
                   style={{
-                    backgroundColor: currentCource[0].color,
-                    borderColor: currentCource[0].color
+                    backgroundColor: currentCourse[0].color,
+                    borderColor: currentCourse[0].color
                   }}
                   caret
                   size="sm"
                 >
-                  {student.courceName}
+                  {student.courseName}
                 </DropdownToggle>
                 <DropdownMenu>
-                  {cources &&
-                    cources.map(cource => (
+                  {courses &&
+                    courses.map(course => (
                       <DropdownItem
-                        key={cource.id}
-                        value={cource.longName}
-                        onClick={handleSelectCourceChange}
+                        key={course.id}
+                        value={course.longName}
+                        onClick={handleSelectCourseChange}
                       >
-                        {cource.longName}
+                        {course.longName}
                       </DropdownItem>
                     ))}
                 </DropdownMenu>
@@ -250,10 +250,10 @@ const StudentCard = props => {
 };
 
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]),
+  firestoreConnect(() => ["statuses", "courses"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
-    cources: state.firestore.ordered.cources
+    courses: state.firestore.ordered.courses
   }))
 )(withFirestore(StudentCard));
 

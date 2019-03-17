@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/style.css";
+import "../../styles/authentication.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { v1 } from "uuid";
 import { compose } from "redux";
@@ -11,8 +11,8 @@ const RegistrationForm = props => {
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
-  const [selectedCourceId, setSelectedCourceId] = useState("");
-  const [selectedCource, setSelectedCource] = useState("");
+  const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
@@ -22,8 +22,8 @@ const RegistrationForm = props => {
     ""
   );
   const [
-    selectCourceValidationErrors,
-    setSelectCourceValidationErrors
+    selectCourseValidationErrors,
+    setSelectCourseValidationErrors
   ] = useState("");
 
   function hanldeSelectKnowledge(e) {
@@ -31,9 +31,9 @@ const RegistrationForm = props => {
   }
 
   function hanldeSelectLesson(e) {
-    let cource = JSON.parse(e.target.value);
-    setSelectedCource(cource.longName);
-    setSelectedCourceId(cource.id);
+    let course = JSON.parse(e.target.value);
+    setSelectedCourse(course.longName);
+    setSelectedCourseId(course.id);
   }
 
   function handeleCreateStudent() {
@@ -49,8 +49,8 @@ const RegistrationForm = props => {
         email: email.value,
         status: defaultStatus.id,
         statusName: defaultStatus.longName,
-        courceName: selectedCource,
-        cource: selectedCourceId,
+        courseName: selectedCourse,
+        course: selectedCourseId,
         id: id,
         date: date,
         knowledge,
@@ -96,13 +96,13 @@ const RegistrationForm = props => {
       knowledgeErrors = true;
     }
 
-    let courceErrors;
-    if (!selectedCource) {
-      setSelectCourceValidationErrors("choose Lesson");
-      courceErrors = false;
+    let courseErrors;
+    if (!selectedCourse) {
+      setSelectCourseValidationErrors("choose Lesson");
+      courseErrors = false;
     } else {
-      setSelectCourceValidationErrors("");
-      courceErrors = true;
+      setSelectCourseValidationErrors("");
+      courseErrors = true;
     }
 
     if (
@@ -111,7 +111,7 @@ const RegistrationForm = props => {
       emailErrors &&
       phoneErrors &&
       knowledgeErrors &&
-      courceErrors
+      courseErrors
     ) {
       return true;
     }
@@ -170,16 +170,16 @@ const RegistrationForm = props => {
                 <option value={1} disabled>
                   --choose Lesson--
                 </option>
-                {props.cources &&
-                  props.cources.map(cource => (
-                    <option key={cource.id} value={JSON.stringify(cource)}>
-                      {cource.longName}
+                {props.courses &&
+                  props.courses.map(course => (
+                    <option key={course.id} value={JSON.stringify(course)}>
+                      {course.longName}
                     </option>
                   ))}
               </Input>
 
-              {selectCourceValidationErrors && (
-                <p className="regError">{selectCourceValidationErrors}</p>
+              {selectCourseValidationErrors && (
+                <p className="regError">{selectCourseValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -230,9 +230,9 @@ const RegistrationForm = props => {
 };
 
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]),
+  firestoreConnect(() => ["statuses", "courses"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
-    cources: state.firestore.ordered.cources
+    courses: state.firestore.ordered.courses
   }))
 )(RegistrationForm);

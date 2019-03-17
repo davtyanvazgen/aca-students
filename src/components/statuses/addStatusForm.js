@@ -14,7 +14,7 @@ import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 import Picker from "./picker";
 
-const AddStatuseForm = ({ statuses, firestore }) => {
+const AddStatusForm = ({ statuses, firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
   const [addStatusError, setAddStatusError] = useState("");
@@ -36,7 +36,7 @@ const AddStatuseForm = ({ statuses, firestore }) => {
   function handleSubmit(e) {
     e.preventDefault();
     if (name.trim() && name.length <= 10) {
-      const newStatuse = {
+      const newStatus = {
         id: v1(),
         longName: longName.trim() || name,
         name,
@@ -46,8 +46,8 @@ const AddStatuseForm = ({ statuses, firestore }) => {
 
       firestore
         .collection("statuses")
-        .doc(newStatuse.id)
-        .set(newStatuse)
+        .doc(newStatus.id)
+        .set(newStatus)
         .catch(err => {
           setAddStatusError(err);
         });
@@ -66,7 +66,7 @@ const AddStatuseForm = ({ statuses, firestore }) => {
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             {!checkLetters ? (
-              <Label>Status`s short name</Label>
+              <Label>Short name</Label>
             ) : (
               <Label className="label">{checkLetters}</Label>
             )}
@@ -76,7 +76,7 @@ const AddStatuseForm = ({ statuses, firestore }) => {
               value={name}
               onChange={handleChangeName}
             />
-            <Label>Status`s short long name</Label>
+            <Label>Long name</Label>
             <Input
               type="text"
               placeholder="Enter long name of status"
@@ -124,4 +124,4 @@ const AddStatuseForm = ({ statuses, firestore }) => {
   );
 };
 
-export default withFirestore(AddStatuseForm);
+export default withFirestore(AddStatusForm);

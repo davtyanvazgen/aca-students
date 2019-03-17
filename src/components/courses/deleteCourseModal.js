@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-export default class DeleteCourceModal extends Component {
+export default class DeleteCourseModal extends Component {
   render() {
     const {
-      studentsSameCource,
-      cource,
+      studentsSameCourse,
+      course,
       handleRemove,
       onHide,
       show
     } = this.props;
 
-    const body = studentsSameCource.length ? (
+    const body = studentsSameCourse.length ? (
       <>
         <h4>
-          There are {studentsSameCource.length} Students with {cource.name}
+          There are {studentsSameCourse.length} Students with {course.name}
         </h4>
         <p>
-          if you delete this course you will lose {studentsSameCource.length}
+          if you delete this course you will lose {studentsSameCourse.length}
           friends
         </p>
       </>
     ) : (
-      <h6>Do you want to delete this cource ?</h6>
+      <h6>Do you want to delete this course ?</h6>
     );
 
     return (

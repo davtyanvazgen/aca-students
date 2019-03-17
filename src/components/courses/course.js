@@ -10,48 +10,48 @@ import {
   Col
 } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
-import DeleteCourceModal from "./deleteCourceModal";
-import EditCourceModal from "./editCourceModal";
+import DeleteCourseModal from "./deleteCourseModal";
+import EditCourseModal from "./editCourseModal";
 
-const Cource = ({ cources, cource, students, firestore }) => {
+const Course = ({ courses, course, students, firestore }) => {
   const [modalShow, setModalShow] = useState(false);
-  const [studentsSameCource, setStudentsSameCource] = useState([]);
+  const [studentsSameCourse, setStudentsSameCourse] = useState([]);
   const [removeStudentsError, setRemoveStudentsError] = useState("");
-  const [removaCourceError, setRemovaCourceError] = useState("");
+  const [removaCourseError, setRemovaCourseError] = useState("");
   const [modalShowEdit, setModalShowEdit] = useState(false);
 
-  const areYouSure = cource => {
+  const areYouSure = course => {
     const studentsForDelete = students.filter(
-      student => student.cource === cource.id
+      student => student.course === course.id
     );
-    setStudentsSameCource(studentsForDelete);
+    setStudentsSameCourse(studentsForDelete);
     setModalShow(true);
   };
 
   const handleSortSelect = e => {
     let sort = parseInt(e.target.value);
     firestore
-      .collection("cources")
-      .doc(cource.id)
+      .collection("courses")
+      .doc(course.id)
       .update({ sort });
-    if (cource.sort > sort) {
-      for (let i = sort; i < cource.sort; i++) {
-        cources.forEach(el => {
+    if (course.sort > sort) {
+      for (let i = sort; i < course.sort; i++) {
+        courses.forEach(el => {
           if (el.sort === i) {
             firestore
-              .collection("cources")
+              .collection("courses")
               .doc(el.id)
               .update({ sort: i + 1 });
           }
         });
       }
     }
-    if (cource.sort < sort) {
-      for (let i = cource.sort + 1; i <= sort; i++) {
-        cources.forEach(el => {
+    if (course.sort < sort) {
+      for (let i = course.sort + 1; i <= sort; i++) {
+        courses.forEach(el => {
           if (el.sort === i) {
             firestore
-              .collection("cources")
+              .collection("courses")
               .doc(el.id)
               .update({ sort: i - 1 });
           }
@@ -61,25 +61,25 @@ const Cource = ({ cources, cource, students, firestore }) => {
   };
 
   const handleRemove = () => {
-    for (let i = cource.sort + 1; i <= cources.length; i++) {
-      cources.forEach(el => {
+    for (let i = course.sort + 1; i <= courses.length; i++) {
+      courses.forEach(el => {
         if (el.sort === i) {
           firestore
-            .collection("cources")
+            .collection("courses")
             .doc(el.id)
             .update({ sort: i - 1 });
         }
       });
     }
 
-    studentsSameCource.forEach(student => {
+    studentsSameCourse.forEach(student => {
       firestore
         .collection("deletedStudents")
         .doc(student.id)
         .set(student);
     });
 
-    studentsSameCource.forEach(student => {
+    studentsSameCourse.forEach(student => {
       firestore
         .collection("students")
         .doc(student.id)
@@ -90,18 +90,18 @@ const Cource = ({ cources, cource, students, firestore }) => {
     });
 
     firestore
-      .collection("cources")
-      .doc(cource.id)
+      .collection("courses")
+      .doc(course.id)
       .delete()
       .catch(err => {
-        setRemovaCourceError(err);
+        setRemovaCourseError(err);
       });
 
     setModalShow(false);
   };
 
   const modalClose = () => {
-    setStudentsSameCource([]);
+    setStudentsSameCourse([]);
     setModalShow(false);
   };
 
@@ -112,27 +112,28 @@ const Cource = ({ cources, cource, students, firestore }) => {
   return (
     <div>
       <Card
-        key={cource.id}
-        id="card"
-        style={{ boxShadow: `0 0 15px ${cource.color}` }}
+        key={course.id}
+        className="card"
+        style={{ boxShadow: `0 0 15px ${course.color}` }}
       >
-        <CardBody id="cardBody">
+        <CardBody className="cardBody">
           <CardTitle
             className="cardTitle"
-            style={{ backgroundColor: cource.color }}
+            style={{ backgroundColor: course.color }}
           >
-            <Row id="roWW">
+            <Row className="roWW">
               <Col xs="10">
-                <h5 id="white">{cource.name}</h5>
+                <h5 className="white">{course.name}</h5>
               </Col>
-              <Col xs="2" id="select">
+              <Col xs="2" className="select">
                 <Input
+                  className="select selectSize"
                   bsSize="sm"
                   type="select"
-                  value={cource.sort}
+                  value={course.sort}
                   onChange={handleSortSelect}
                 >
-                  {cources.map(el => (
+                  {courses.map(el => (
                     <option key={el.id} value={el.sort}>
                       {el.sort}
                     </option>
@@ -141,16 +142,16 @@ const Cource = ({ cources, cource, students, firestore }) => {
               </Col>
             </Row>
           </CardTitle>
-          <CardText id="cardText" style={{ color: `${cource.color}` }}>
-            <strong>{cource.longName}</strong>
+          <CardText className="cardText" style={{ color: `${course.color}` }}>
+            <strong>{course.longName}</strong>
           </CardText>
-          <div id="deleteEdit">
+          <div className="deleteEdit">
             <Button
               size="sm"
               color="danger"
               className="float-right  mr-2"
               onClick={() => {
-                areYouSure(cource);
+                areYouSure(course);
               }}
             >
               Delete
@@ -167,22 +168,22 @@ const Cource = ({ cources, cource, students, firestore }) => {
         </CardBody>
       </Card>
 
-      <DeleteCourceModal
+      <DeleteCourseModal
         show={modalShow}
         onHide={modalClose}
-        studentsSameCource={studentsSameCource}
-        cource={cource}
+        studentsSameCourse={studentsSameCourse}
+        course={course}
         handleRemove={handleRemove}
       />
 
-      <EditCourceModal
+      <EditCourseModal
         show={modalShowEdit}
         onHide={editModalClose}
-        cource={cource}
+        course={course}
         students={students}
       />
     </div>
   );
 };
 
-export default withFirestore(Cource);
+export default withFirestore(Course);
