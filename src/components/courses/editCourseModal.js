@@ -1,49 +1,49 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { Input, Label, Form, FormGroup } from "reactstrap";
+import { Input, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-const EditStatusModal = props => {
-  const [newName, setNewName] = useState(props.status.name);
-  const [newLongName, setNewLongName] = useState(props.status.longName);
-  const [editStatusError, setEditStatusError] = useState("");
+const EditCourseModal = props => {
+  const [newName, setNewName] = useState(props.course.name);
+  const [newLongName, setNewLongName] = useState(props.course.longName);
+  const [editCourseError, setEditCourseError] = useState("");
 
-  const handleEditStatusName = e => {
+  const handleEditCourseName = e => {
     setNewName(e.target.value);
   };
 
-  const handleEditStatusLongName = e => {
+  const handleEditCourseLongName = e => {
     setNewLongName(e.target.value);
   };
 
-  const confirmEditStatus = newName => {
+  const confirmEditCourse = newName => {
     if (newName.trim()) {
-      const editStatus = {
+      const editCourse = {
         name: newName,
         longName: newLongName.trim(),
-        id: status.id
+        id: course.id
       };
 
       props.firestore
-        .collection("statuses")
-        .doc(status.id)
-        .update({ ...editStatus })
+        .collection("courses")
+        .doc(course.id)
+        .update({ ...editCourse })
         .catch(err => {
-          setEditStatusError(err);
+          setEditCourseError(err);
         });
 
       props.students.forEach(student => {
-        if (student.status === status.id) {
+        if (student.course === course.id) {
           props.firestore
             .collection("students")
             .doc(student.id)
-            .update({ statusName: newLongName.trim() });
+            .update({ courseName: newLongName.trim() });
         }
       });
     }
   };
 
-  const { status, onHide, show } = props;
+  const { course, onHide, show } = props;
   return (
     <Modal
       onHide={onHide}
@@ -54,7 +54,7 @@ const EditStatusModal = props => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          ZVART Jan let's edit status
+          ZVART Jan let's edit course
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -64,32 +64,32 @@ const EditStatusModal = props => {
             <Input
               bssize="sm"
               value={newName}
-              onChange={handleEditStatusName}
+              onChange={handleEditCourseName}
             />
             <br />
             <h5>Long Name</h5>
             <Input
               bssize="sm"
               value={newLongName}
-              onChange={handleEditStatusLongName}
+              onChange={handleEditCourseLongName}
             />
           </FormGroup>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
         <Button
           variant="warning"
           onClick={() => {
-            confirmEditStatus(newName);
+            confirmEditCourse(newName);
             onHide();
           }}
         >
           Edit
         </Button>
+        <Button onClick={onHide}>Close</Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default withFirestore(EditStatusModal);
+export default withFirestore(EditCourseModal);

@@ -1,0 +1,85 @@
+.buttons {
+  width: 100%;
+  overflow: auto;
+  display: flex;
+}
+
+.courseButton {
+  margin: 3px 1px 8px 2px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.badges {
+  margin-top: 4px;
+}
+
+.courseCount {
+  margin-left: 7px;
+}
+
+.searchInput {
+  max-width: 300px;
+  margin: 10px 0 0 auto;
+}
+.buttonsCol {
+  margin: 15px auto;
+}
+
+.colpadding {
+  padding: 0px;
+}
+
+.listGroup {
+  width: 100%;
+}
+
+.column {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.count {
+  padding-top: 19px;
+  color: rgb(75, 1, 97);
+}
+
+.statusButton {
+  margin-bottom: 2px;
+  width: 100%;
+  word-wrap: break-word;
+  text-align: center;
+  min-width: 60px;
+}
+
+.media {
+  max-height: 80px;
+  border-radius: 50%;
+}
+
+.colwr {
+  word-wrap: break-word;
+}
+
+.fullname {
+  margin-bottom: 0rem;
+  margin-top: 1rem;
+  font-family: cursive;
+}
+
+.registerDate {
+  margin-bottom: 0rem;
+  font-size: 14px;
+}
+
+.dropRow {
+  display: block;
+  margin-top: 5%;
+}
+.blockRow {
+  display: block;
+}
+
+.center {
+  text-align: center;
+}

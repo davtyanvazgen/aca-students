@@ -19,18 +19,21 @@ import {
   Collapse
 } from "reactstrap";
 
-function StudentCard(props) {
-  const { statuses, cources, student, firestore } = props;
+const StudentCard = props => {
+  const { statuses, courses, student, firestore } = props;
   const [modalShow, setModalShow] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
-  const [isOpenCource, setIsOpenCource] = useState(false);
+  const [isOpenCourse, setIsOpenCourse] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState(statuses.filter(statuse => statuse.id === student.status));
-  const [currentCource, setCurrentCource] = useState(cources.filter(cource => cource.id === student.cource));
+  const [currentStatus, setCurrentStatus] = useState(
+    statuses.filter(status => status.id === student.status)
+  );
+  const [currentCourse, setCurrentCourse] = useState(
+    courses.filter(course => course.id === student.course)
+  );
 
-
-    function toggle() {
+  function toggle() {
     setcollapse(!collapse);
   }
 
@@ -41,45 +44,45 @@ function StudentCard(props) {
       .delete();
 
     firestore
-        .collection("deletedStudents")
-        .doc(student.id)
-        .set(student);
-
+      .collection("deletedStudents")
+      .doc(student.id)
+      .set(student);
   }
 
-  function handleSelectCourceChange(e) {
-    let newCource = cources.filter(cource => cource.longName === e.target.value);
-    setCurrentCource(newCource);
+  function handleSelectCourseChange(e) {
+    let newCourse = courses.filter(
+      course => course.longName === e.target.value
+    );
+    setCurrentCourse(newCourse);
     firestore
       .collection("students")
       .doc(student.id)
       .update({
-        cource: newCource[0].id,
-        courceName: newCource[0].longName
+        course: newCourse[0].id,
+        courseName: newCourse[0].longName
       });
   }
 
   function handleSelectStatusChange(e) {
-    let newStatuse = statuses.filter(
-      statuse => statuse.longName === e.target.value
+    let newStatus = statuses.filter(
+      status => status.longName === e.target.value
     );
-    setCurrentStatus(newStatuse);
+    setCurrentStatus(newStatus);
 
-      firestore
+    firestore
       .collection("students")
       .doc(student.id)
       .update({
-        status: newStatuse[0].id,
-        statusName: newStatuse[0].longName
+        status: newStatus[0].id,
+        statusName: newStatus[0].longName
       });
-
   }
 
   function toggleStatus() {
     setIsOpenStatus(!isOpenStatus);
   }
-  function toggleCource() {
-    setIsOpenCource(!isOpenCource);
+  function toggleCourse() {
+    setIsOpenCourse(!isOpenCourse);
   }
 
   function handleEdit() {
@@ -93,37 +96,52 @@ function StudentCard(props) {
     setModal(!modal);
   }
 
+  const appData = `App date: ${student.date
+    .toDate()
+    .getDate()}/${student.date.toDate().getMonth() +
+    1}/${student.date.toDate().getFullYear()}`;
+
   return (
     <>
-      <ListGroupItem style={{ border: "1px solid #cbccce", borderRight: `5px solid ${currentStatus[0].color}`, borderLeft: `5px solid ${currentCource[0].color}` , backgroundColor: props.background  }}>
+      <ListGroupItem
+        style={{
+          border: "1px solid #cbccce",
+          borderRight: `5px solid ${currentStatus[0].color}`,
+          borderLeft: `5px solid ${currentCourse[0].color}`,
+          backgroundColor: props.background
+        }}
+      >
         <Row>
-          <Col xs="5" md="2">
+          <Col xs="5" md="2" onClick={toggle}>
             <Media
-              style={{ maxHeight: "80px", borderRadius: "50%" }}
+              className="media"
               object
               src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
               alt="Generic placeholder image"
             />
           </Col>
 
-          <Col
-            xs="6"
-            md="5"
-            style={{ wordWrap: "break-word" }}
-            onClick={toggle}
-          >
-            <p style={{marginBottom: "0rem", marginTop: "1rem"}}>{student.fullName.toUpperCase()}</p>
-            <p style={{marginBottom: "0rem"}}>{`App date: ${student.date.toDate().getDate()}/${student.date.toDate().getMonth() + 1}/${student.date.toDate().getFullYear()}`}</p>
+          <Col xs="6" md="5" className="colwr" onClick={toggle}>
+            <p className="fullname">{student.fullName.toUpperCase()}</p>
+            <p className="registerDate">{appData}</p>
           </Col>
 
           <Col xs="10" md="4">
-            <Row style={{display: "block", marginTop: "5%"}}>
+            <Row className="dropRow">
               <ButtonDropdown
                 direction="left"
                 isOpen={isOpenStatus}
                 toggle={toggleStatus}
               >
-                <DropdownToggle className="badge badge-pill" style={{backgroundColor: currentStatus[0].color, borderColor: currentStatus[0].color}} caret size="sm">
+                <DropdownToggle
+                  className="badge badge-pill badges"
+                  style={{
+                    backgroundColor: currentStatus[0].color,
+                    borderColor: currentStatus[0].color
+                  }}
+                  caret
+                  size="sm"
+                >
                   {student.statusName}
                 </DropdownToggle>
                 <DropdownMenu>
@@ -140,24 +158,32 @@ function StudentCard(props) {
                 </DropdownMenu>
               </ButtonDropdown>
             </Row>
-            <Row style={{display: "block"}}>
+            <Row className="blockRow">
               <ButtonDropdown
                 direction="left"
-                isOpen={isOpenCource}
-                toggle={toggleCource}
+                isOpen={isOpenCourse}
+                toggle={toggleCourse}
               >
-                <DropdownToggle className="badge badge-pill"  style={{backgroundColor: currentCource[0].color, borderColor: currentCource[0].color}} caret size="sm">
-                  {student.courceName}
+                <DropdownToggle
+                  className="badge badge-pill badges"
+                  style={{
+                    backgroundColor: currentCourse[0].color,
+                    borderColor: currentCourse[0].color
+                  }}
+                  caret
+                  size="sm"
+                >
+                  {student.courseName}
                 </DropdownToggle>
                 <DropdownMenu>
-                  {cources &&
-                    cources.map(cource => (
+                  {courses &&
+                    courses.map(course => (
                       <DropdownItem
-                        key={cource.id}
-                        value={cource.longName}
-                        onClick={handleSelectCourceChange}
+                        key={course.id}
+                        value={course.longName}
+                        onClick={handleSelectCourseChange}
                       >
-                        {cource.longName}
+                        {course.longName}
                       </DropdownItem>
                     ))}
                 </DropdownMenu>
@@ -167,7 +193,7 @@ function StudentCard(props) {
 
           <Col xs="1">
             <Row>
-              <Col style={{ textAlign: "center" }}>
+              <Col className="center">
                 <FontAwesomeIcon
                   icon="user-times"
                   onClick={toggleDeleteStudent}
@@ -180,30 +206,31 @@ function StudentCard(props) {
         </Row>
 
         <Collapse isOpen={collapse}>
-            <hr />
-            <Row>
-              <Col xs="12" md="4" style={{ textAlign: "center" }}>
-                <span>Email: </span>
-                <br />
-                {student.email}
-              </Col>
-              <Col xs="12" md="2" style={{ textAlign: "center" }}>
-                <span>Phone: </span>
-                <br />
-                {student.phone}
-              </Col>
-              <Col xs="12" md="6" style={{ textAlign: "center" }}>
-                <span>Knowledge: </span>
-                <br />
-                {student.knowledge}
-              </Col>
-            </Row>
-            <hr />
-            <Row>
-                <Col style={{ textAlign: "center" }}>
-                    <span>Comment: </span>{student.comment}
-                </Col>
-            </Row>
+          <hr />
+          <Row>
+            <Col xs="12" md="4" className="center">
+              <span>Email: </span>
+              <br />
+              {student.email}
+            </Col>
+            <Col xs="12" md="2" className="center">
+              <span>Phone: </span>
+              <br />
+              {student.phone}
+            </Col>
+            <Col xs="12" md="6" className="center">
+              <span>Knowledge: </span>
+              <br />
+              {student.knowledge}
+            </Col>
+          </Row>
+          <hr />
+          <Row>
+            <Col className="center">
+              <span>Comment: </span>
+              {student.comment}
+            </Col>
+          </Row>
         </Collapse>
 
         <EditStudentModal
@@ -220,13 +247,13 @@ function StudentCard(props) {
       </ListGroupItem>
     </>
   );
-}
+};
 
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]),
+  firestoreConnect(() => ["statuses", "courses"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
-    cources: state.firestore.ordered.cources
+    courses: state.firestore.ordered.courses
   }))
 )(withFirestore(StudentCard));
 

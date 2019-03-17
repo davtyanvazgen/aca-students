@@ -9,7 +9,7 @@ function EditStudentModal(props) {
   const [comment, setComment] = useState(props.student.comment);
 
   const handleFullnameInput = e => {
-    setFullName(e.target.value.toUpperCase());
+    setFullName(e.target.value);
   };
   const handleEmailInput = e => {
     setEmail(e.target.value);

@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, NavLink as RRNavLink } from "react-router-dom";
-import { Button, ButtonGroup, Navbar, Nav, NavLink } from "reactstrap";
-import "./style.css";
-import {withFirebase} from "react-redux-firebase";
+import { Button, ButtonGroup, Navbar, Nav } from "reactstrap";
+import "../styles/header.css";
+import { withFirebase } from "react-redux-firebase";
 
-const Header = ({firebase}) => {
+const Header = ({ firebase }) => {
   const logout = () => {
     firebase.logout();
   };
@@ -26,9 +26,9 @@ const Header = ({firebase}) => {
                     Statuses
                   </Button>
                 </Link>
-                <Link to="/cources">
+                <Link to="/courses">
                   <Button size="sm" outline color="light">
-                    Cources
+                    Courses
                   </Button>
                 </Link>
               </ButtonGroup>
@@ -38,7 +38,13 @@ const Header = ({firebase}) => {
             <Nav className="ml-auto" navbar>
               <ButtonGroup>
                 <Link to="/signin">
-                  <Button size="sm" outline color="light" className="mr-1" onClick={logout}>
+                  <Button
+                    size="sm"
+                    outline
+                    color="light"
+                    className="mr-1"
+                    onClick={logout}
+                  >
                     Sign out
                   </Button>
                 </Link>
@@ -49,7 +55,6 @@ const Header = ({firebase}) => {
       </Navbar>
     </div>
   );
-}
-
+};
 
 export default withFirebase(Header);

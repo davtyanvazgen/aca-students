@@ -1,49 +1,56 @@
 import React, { useState } from "react";
-import "../styles/style.css";
+import "../../styles/authentication.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { v1 } from "uuid";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
 
-function RegistrationForm(props) {
+const RegistrationForm = props => {
   const name = useFormInput("");
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
-  const [selectedCourceId, setSelectedCourceId] = useState("");
-  const [selectedCource, setSelectedCource] = useState("");
+  const [selectedCourseId, setSelectedCourseId] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("");
   const [knowledge, setKnowledge] = useState("");
   const [nameValidationError, setNameValidationError] = useState("");
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
   const [emailValidationErrors, setEmailValidationErrors] = useState("");
   const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
-  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState("");
-  const [selectCourceValidationErrors, setSelectCourceValidationErrors] = useState("");
+  const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
+    ""
+  );
+  const [
+    selectCourseValidationErrors,
+    setSelectCourseValidationErrors
+  ] = useState("");
 
   function hanldeSelectKnowledge(e) {
     setKnowledge(e.target.value);
   }
 
   function hanldeSelectLesson(e) {
-    let cource = JSON.parse(e.target.value);
-    setSelectedCource(cource.longName);
-    setSelectedCourceId(cource.id);
+    let course = JSON.parse(e.target.value);
+    setSelectedCourse(course.longName);
+    setSelectedCourseId(course.id);
   }
 
   function handeleCreateStudent() {
     const id = v1();
     const date = new Date();
     if (validation()) {
-      const defaultStatus = props.statuses.find(el => el.id === "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5");
+      const defaultStatus = props.statuses.find(
+        el => el.id === "fc4a5a70-4739-11e9-8e2b-71e4e6f455b5"
+      );
       let student = {
         fullName: name.value.toUpperCase() + " " + surname.value.toUpperCase(),
         phone: phone.value,
         email: email.value,
         status: defaultStatus.id,
         statusName: defaultStatus.longName,
-        courceName: selectedCource,
-        cource: selectedCourceId,
+        courseName: selectedCourse,
+        course: selectedCourseId,
         id: id,
         date: date,
         knowledge,
@@ -89,13 +96,13 @@ function RegistrationForm(props) {
       knowledgeErrors = true;
     }
 
-    let courceErrors;
-    if (!selectedCource) {
-      setSelectCourceValidationErrors("choose Lesson");
-      courceErrors = false;
+    let courseErrors;
+    if (!selectedCourse) {
+      setSelectCourseValidationErrors("choose Lesson");
+      courseErrors = false;
     } else {
-      setSelectCourceValidationErrors("");
-      courceErrors = true;
+      setSelectCourseValidationErrors("");
+      courseErrors = true;
     }
 
     if (
@@ -104,7 +111,7 @@ function RegistrationForm(props) {
       emailErrors &&
       phoneErrors &&
       knowledgeErrors &&
-      courceErrors
+      courseErrors
     ) {
       return true;
     }
@@ -121,21 +128,21 @@ function RegistrationForm(props) {
               <Label>Name</Label>
               <Input {...name} type="text" name="name" />
               {nameValidationError && (
-                <p style={{ color: "red" }}>{nameValidationError}</p>
+                <p className="regError">{nameValidationError}</p>
               )}
             </FormGroup>
             <FormGroup>
               <Label>Surname</Label>
               <Input {...surname} type="text" name="surname" />
               {surNameValidationErrors && (
-                <p style={{ color: "red" }}>{surNameValidationErrors}</p>
+                <p className="regError">{surNameValidationErrors}</p>
               )}
             </FormGroup>
             <FormGroup>
               <Label for="exampleEmail">Email address</Label>
               <Input {...email} type="email" name="email" />
               {emailValidationErrors && (
-                <p style={{ color: "red" }}>{emailValidationErrors}</p>
+                <p className="regError">{emailValidationErrors}</p>
               )}
             </FormGroup>
             <FormGroup>
@@ -147,7 +154,7 @@ function RegistrationForm(props) {
                 name="phone"
               />
               {phoneValidationErrors && (
-                <p style={{ color: "red" }}>{phoneValidationErrors}</p>
+                <p className="regError">{phoneValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -163,16 +170,16 @@ function RegistrationForm(props) {
                 <option value={1} disabled>
                   --choose Lesson--
                 </option>
-                {props.cources &&
-                  props.cources.map(cource => (
-                    <option key={cource.id} value={JSON.stringify(cource)}>
-                      {cource.longName}
+                {props.courses &&
+                  props.courses.map(course => (
+                    <option key={course.id} value={JSON.stringify(course)}>
+                      {course.longName}
                     </option>
                   ))}
               </Input>
 
-              {selectCourceValidationErrors && (
-                <p style={{ color: "red" }}>{selectCourceValidationErrors}</p>
+              {selectCourseValidationErrors && (
+                <p className="regError">{selectCourseValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -197,7 +204,7 @@ function RegistrationForm(props) {
                 option>
               </Input>
               {knowledgeValidationErrors && (
-                <p style={{ color: "red" }}>{knowledgeValidationErrors}</p>
+                <p className="regError">{knowledgeValidationErrors}</p>
               )}
             </FormGroup>
 
@@ -220,12 +227,12 @@ function RegistrationForm(props) {
       onChange: handlechange
     };
   }
-}
+};
 
 export default compose(
-  firestoreConnect(() => ["statuses", "cources"]),
+  firestoreConnect(() => ["statuses", "courses"]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
-    cources: state.firestore.ordered.cources
+    courses: state.firestore.ordered.courses
   }))
 )(RegistrationForm);

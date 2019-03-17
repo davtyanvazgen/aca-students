@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/style.css";
+import "../../styles/authentication.css";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { connect } from "react-redux";
