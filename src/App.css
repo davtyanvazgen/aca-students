@@ -33,10 +33,6 @@
 }
 
 .lds-hourglass {
-  position: absolute;
-  display: block;
-  top: 50%;
-  right: 50%;
   width: 64px;
   height: 64px;
 }
@@ -71,7 +67,7 @@
 .loader {
   position: inherit;
   display: block;
-
+  margin: 50px auto;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid blue;

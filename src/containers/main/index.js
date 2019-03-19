@@ -5,14 +5,14 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
-import Header from "../header";
-import Footer from "../footer";
-import AddCourse from "../courses";
-import AddStatus from "../statuses";
-import Students from "../../containers/students";
-import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
+import AddCourse from "../../components/courses";
+import AddStatus from "../../components/statuses";
+import Students from "../students/students";
+import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase/index";
 import { connect } from "react-redux";
-import { compose } from "redux";
+import { compose } from "redux/index";
 
 const Main = ({ auth }) => {
   return !isLoaded(auth) ? (

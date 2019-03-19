@@ -5,6 +5,7 @@ import { v1 } from "uuid";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
+import Success from "./success"
 
 const RegistrationForm = props => {
     const name = useFormInput("");
@@ -19,13 +20,13 @@ const RegistrationForm = props => {
     const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
     const [emailValidationErrors, setEmailValidationErrors] = useState("");
     const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
-    const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
-        ""
-    );
-    const [
-        selectCourseValidationErrors,
-        setSelectCourseValidationErrors
-    ] = useState("");
+    const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState("");
+    const [selectCourseValidationErrors, setSelectCourseValidationErrors] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const toggleSuccess = () => {
+        setOpen(!open);
+    };
 
     function hanldeSelectKnowledge(e) {
         setKnowledge(e.target.value);
@@ -242,11 +243,13 @@ const RegistrationForm = props => {
                             <p className = 'clip'>{pathImage}</p>
                         </FormGroup>
 
-                        <Button color="success" block onClick={handeleCreateStudent}>
+                        <Button color="success" block onClick={()=> { handeleCreateStudent(); toggleSuccess()}}>
                             Registration
                         </Button>
+
                     </Form>
                 </div>
+                <Success open={open} toggleSuccess={toggleSuccess} />
             </div>
         </>
     );

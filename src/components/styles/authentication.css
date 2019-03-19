@@ -46,3 +46,11 @@
   text-overflow: ellipsis; /* Добавляем многоточие */
   font-size:1.25em
 }
+
+#regModal {
+  min-width: 800px ;
+  min-height: 800px ;
+}
+#regModalBody {
+  width: 100% ;
+}

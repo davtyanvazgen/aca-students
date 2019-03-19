@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import Students from "../components/students/index";
-import { visibilityFilters } from "../store/actions";
-import { setFilter } from "../store/actions";
+import Students from "../../components/students";
+import { visibilityFilters } from "../../store/actions";
+import { setFilter } from "../../store/actions";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 

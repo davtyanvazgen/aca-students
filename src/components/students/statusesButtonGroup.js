@@ -26,7 +26,7 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
           Show all
         </Button>
       </Col>
-      {statuses &&
+      {statuses.length ?
         statuses.map(status => (
             <Col key={status.id}>
               <Button
@@ -47,7 +47,9 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
                 {status.name}
               </Button>
             </Col>
-          ))}
+        ))
+          : null
+      }
     </>
   );
 };

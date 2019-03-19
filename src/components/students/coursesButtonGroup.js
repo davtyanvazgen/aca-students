@@ -33,7 +33,7 @@ const CoursesButton = ({
   }
   return (
     <div className="buttons">
-      {courses &&
+      {courses.length ?
         courses.map(course => (
             <Button
               className="activeButtonColor courseButton"
@@ -56,7 +56,9 @@ const CoursesButton = ({
                 </Badge>
               </span>
             </Button>
-          ))}
+          ))
+          : null
+      }
     </div>
   );
 };
