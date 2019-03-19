@@ -27,11 +27,7 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
         </Button>
       </Col>
       {statuses &&
-        statuses
-          .sort(function(a, b) {
-            return a.sort - b.sort;
-          })
-          .map(status => (
+        statuses.map(status => (
             <Col key={status.id}>
               <Button
                 className="activeButtonColor statusButton"
@@ -57,7 +53,10 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
 };
 
 export default compose(
-  firestoreConnect(() => ["statuses"]),
+  firestoreConnect(() => [
+      {collection: "students", orderBy: "date"},
+      {collection: "statuses", orderBy: "sort"},
+  ]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
     selectedStatuses: state.filter.selectedStatuses

@@ -34,9 +34,6 @@ const getShowStudents = (
 
 const searchStudents = (students, searchValue) => {
   if (students) {
-    students.sort(function(a, b) {
-      return new Date(a.date.toDate()) - new Date(b.date.toDate());
-    });
     if (!searchValue.length) {
       return students;
     }
@@ -122,7 +119,11 @@ const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
 };
 
 export default compose(
-  firestoreConnect(() => ["students", "courses", "statuses"]),
+  firestoreConnect(() => [
+      {collection: "students", orderBy: "date"},
+      {collection: "courses", orderBy: "sort"},
+      {collection: "statuses", orderBy: "sort"},
+      ]),
   connect((state, props) => ({
     searchValue: state.filter.searchValue,
     filterStudents: filter(
@@ -142,6 +143,7 @@ export default compose(
     ),
     courses: state.firestore.ordered.courses,
     statuses: state.firestore.ordered.statuses,
-    allStudents: state.firestore.ordered.students
+    allStudents: state.firestore.ordered.students,
+    background: "#ffffff"
   }))
 )(Students);

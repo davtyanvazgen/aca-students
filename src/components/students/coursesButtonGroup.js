@@ -34,11 +34,7 @@ const CoursesButton = ({
   return (
     <div className="buttons">
       {courses &&
-        courses
-          .sort(function(a, b) {
-            return a.sort - b.sort;
-          })
-          .map(course => (
+        courses.map(course => (
             <Button
               className="activeButtonColor courseButton"
               style={{
@@ -66,7 +62,10 @@ const CoursesButton = ({
 };
 
 export default compose(
-  firestoreConnect(() => ["courses", "students"]),
+  firestoreConnect(() => [
+      {collection: "students", orderBy: "date"},
+      {collection: "courses", orderBy: "sort"},
+  ]),
   connect((state, props) => ({
     students: state.firestore.ordered.students,
     courses: state.firestore.ordered.courses,
