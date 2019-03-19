@@ -17,21 +17,19 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 const Students = ({
-                      filterStudents,
-                      searchValue,
-                      students,
-                      allStudents,
-                      courses,
-                      statuses,
-                      background
+        filterStudents,
+        searchValue,
+        students,
+        allStudents,
+        courses,
+        statuses,
+        background,
+        page,
+        onPageClick
+
 }) => {
-  const [page, setPage] = useState(1);
 
   const pages = [];
-
-    function onPageClick(p){
-      setPage(p)
-    }
   if (students && courses && statuses) {
       for(let i = 0; i < Math.ceil(students.length/10); i ++){
           pages.push(i);
@@ -102,7 +100,7 @@ const Students = ({
                     {students && students.length > 10 && (
                         <Row>
                           <FontAwesomeIcon icon='arrow-left'/>
-                            {pages.map(p => <div key={p} onClick={()=>onPageClick(p+1)}>{p+1}</div>)}
+                            {pages.map(p => <div key={p} onClick={()=> onPageClick(p+1)}>{p+1}</div>)}
                             <FontAwesomeIcon icon='arrow-right'/>
                         </Row>)
                     }
@@ -137,4 +135,4 @@ const Students = ({
 };
 
 export default Students;
-                    library.add(faArrowLeft, faArrowRight);
+library.add(faArrowLeft, faArrowRight);

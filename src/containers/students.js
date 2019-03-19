@@ -7,10 +7,11 @@ import { firestoreConnect } from "react-redux-firebase";
 
 const getShowStudents = (
   students,
-  filter,
-  selectedCourses,
-  selectedStatuses
+  filter = "SHOW_ALL",
+  selectedCourses = [],
+  selectedStatuses = []
 ) => {
+  debugger;
   let filters = selectedStatuses.length
     ? [...selectedCourses, selectedStatuses[0]]
     : [...selectedCourses];
@@ -81,7 +82,8 @@ const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
           visibilityFilters.SHOW_WITH_COURSES,
           selectedStatuses,
           selectedCourses,
-          value
+          value,
+            1
         )
       );
     }
@@ -91,7 +93,8 @@ const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
           visibilityFilters.SHOW_WITH_STATUS,
           selectedStatuses,
           selectedCourses,
-          value
+          value,
+            1
         )
       );
     }
@@ -101,7 +104,8 @@ const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
           visibilityFilters.SHOW_WITH_COURSES_AND_STATUS,
           selectedStatuses,
           selectedCourses,
-          value
+          value,
+            1
         )
       );
     }
@@ -111,39 +115,61 @@ const filter = (searchValue, selectedCourses, selectedStatuses, dispatch) => {
           visibilityFilters.SHOW_ALL,
           selectedStatuses,
           selectedCourses,
-          value
+          value,
+            1
         )
       );
     }
   };
 };
 
+function onPageClick(pageValue, filter, searchValue, selectedCourses, selectedStatuses, dispatch){
+    return function(page = pageValue, fil = filter,  search = searchValue, courses = selectedCourses, statuses = selectedStatuses) {
+      dispatch(
+            setFilter(
+                fil,
+                statuses,
+                courses,
+                search,
+                page)
+        );
+    }
+}
+
 export default compose(
-  firestoreConnect(() => [
-      {collection: "students", orderBy: "date"},
-      {collection: "courses", orderBy: "sort"},
-      {collection: "statuses", orderBy: "sort"},
-      ]),
-  connect((state, props) => ({
-    searchValue: state.filter.searchValue,
-    filterStudents: filter(
-      state.filter.searchValue,
-      state.filter.selectedCourses,
-      state.filter.selectedStatuses,
-      props.dispatch
-    ),
-    students: searchStudents(
-      getShowStudents(
-        state.firestore.ordered.students,
-        state.filter.filter,
-        state.filter.selectedCourses,
-        state.filter.selectedStatuses
+    firestoreConnect(() => [
+        {collection: "students", orderBy: "date"},
+        {collection: "courses", orderBy: "sort"},
+        {collection: "statuses", orderBy: "sort"},
+    ]),
+    connect((state, props) => ({
+      searchValue: state.filter.searchValue,
+      filterStudents: filter(
+          state.filter.searchValue,
+          state.filter.selectedCourses,
+          state.filter.selectedStatuses,
+          props.dispatch
       ),
-      state.filter.searchValue
-    ),
-    courses: state.firestore.ordered.courses,
-    statuses: state.firestore.ordered.statuses,
-    allStudents: state.firestore.ordered.students,
-    background: "#ffffff"
+      students: searchStudents(
+          getShowStudents(
+              state.firestore.ordered.students,
+              state.filter.filter,
+              state.filter.selectedCourses,
+              state.filter.selectedStatuses
+          ),
+          state.filter.searchValue
+      ),
+      courses: state.firestore.ordered.courses,
+      statuses: state.firestore.ordered.statuses,
+      allStudents: state.firestore.ordered.students,
+      background: "#ffffff",
+      page: state.filter.pageValue,
+      onPageClick: onPageClick(
+          state.filter.pageValue,
+          state.filter.filter,
+          state.filter.searchValue,
+          state.filter.selectedCourses,
+          state.filter.selectedStatuses,
+          props.dispatch )
   }))
 )(Students);

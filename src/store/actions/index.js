@@ -2,13 +2,15 @@ export const setFilter = (
   filter,
   selectedStatuses,
   selectedCourses,
-  searchValue
+  searchValue,
+  pageValue
 ) => ({
   type: "SET_VISIBILITY_FILTER",
   filter,
   selectedStatuses,
   selectedCourses,
-  searchValue
+  searchValue,
+    pageValue
 });
 
 export const visibilityFilters = {

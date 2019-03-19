@@ -63,18 +63,19 @@ const RegistrationForm = props => {
                 url: 'https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif'
             };
             if (pathImage) {
+                debugger;
                 const ref = props.firebase.storage().ref('studentsAvatar');
                 const file = document.querySelector('#file').files[0];
                 const name = (+new Date()) + '-' + file.name;
                 const metadata = { contentType: file.type };
                 const task = ref.child(name).put(file, metadata);
                 task.then(snapshot => snapshot.ref.getDownloadURL())
-                    .then(url => {student.url = url
+                    .then(  url => {student.url = url
                             props.firestore
                                 .collection("students")
                                 .doc(student.id)
                                 .set(student)
-                                .then(window.location = "/success")
+                                // .then(() => { window.location = "/success"})
                         }
                     ).catch((error) => {
                     console.log(error.message)
