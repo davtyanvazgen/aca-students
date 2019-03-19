@@ -5,6 +5,7 @@ import { v1 } from "uuid";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { connect } from "react-redux";
+import Success from "./success";
 
 const RegistrationForm = props => {
   const name = useFormInput("");
@@ -19,6 +20,7 @@ const RegistrationForm = props => {
   const [surNameValidationErrors, setSurNameValidationErrors] = useState("");
   const [emailValidationErrors, setEmailValidationErrors] = useState("");
   const [phoneValidationErrors, setPhoneValidationErrors] = useState("");
+  const [success, setSuccess] = useState(true);
   const [knowledgeValidationErrors, setKnowledgeValidationErrors] = useState(
     ""
   );
@@ -26,6 +28,11 @@ const RegistrationForm = props => {
     selectCourseValidationErrors,
     setSelectCourseValidationErrors
   ] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const toggleSuccess = () => {
+    setOpen(!open);
+  };
 
   function hanldeSelectKnowledge(e) {
     setKnowledge(e.target.value);
@@ -78,7 +85,8 @@ const RegistrationForm = props => {
               .doc(student.id)
               .set(student)
               .then(() => {
-                window.location = "/success";
+                setSuccess(!success);
+                // window.location = "/success";
               });
           })
           .catch(error => {
@@ -88,7 +96,11 @@ const RegistrationForm = props => {
         props.firestore
           .collection("students")
           .doc(student.id)
-          .set(student);
+          .set(student)
+          .then(() => {
+            setSuccess(!success);
+            // window.location = "/success";
+          });
       }
     } else {
       return false;
@@ -149,113 +161,119 @@ const RegistrationForm = props => {
   }
 
   return (
-    <>
-      <div id="container">
-        <div className="miniContainer">
-          <Form>
-            <FormGroup>
-              <Label>Name</Label>
-              <Input {...name} type="text" name="name" />
-              {nameValidationError && (
-                <p className="regError">{nameValidationError}</p>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <Label>Surname</Label>
-              <Input {...surname} type="text" name="surname" />
-              {surNameValidationErrors && (
-                <p className="regError">{surNameValidationErrors}</p>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleEmail">Email address</Label>
-              <Input {...email} type="email" name="email" />
-              {emailValidationErrors && (
-                <p className="regError">{emailValidationErrors}</p>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <Label for="examplePassword">Phone</Label>
-              <Input
-                {...phone}
-                placeholder="+374-00-00-00-00"
-                type="text"
-                name="phone"
-              />
-              {phoneValidationErrors && (
-                <p className="regError">{phoneValidationErrors}</p>
-              )}
-            </FormGroup>
+    <div id="container">
+      <div className="miniContainer">
+        <Form>
+          <FormGroup>
+            <Label>Name</Label>
+            <Input {...name} type="text" name="name" />
+            {nameValidationError && (
+              <p className="regError">{nameValidationError}</p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label>Surname</Label>
+            <Input {...surname} type="text" name="surname" />
+            {surNameValidationErrors && (
+              <p className="regError">{surNameValidationErrors}</p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleEmail">Email address</Label>
+            <Input {...email} type="email" name="email" />
+            {emailValidationErrors && (
+              <p className="regError">{emailValidationErrors}</p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Phone</Label>
+            <Input
+              {...phone}
+              placeholder="+374-00-00-00-00"
+              type="text"
+              name="phone"
+            />
+            {phoneValidationErrors && (
+              <p className="regError">{phoneValidationErrors}</p>
+            )}
+          </FormGroup>
 
-            <FormGroup>
-              <Label>Select Lesson</Label>
-              <Input
-                type="select"
-                name="select"
-                id="select"
-                defaultValue={1}
-                onChange={hanldeSelectLesson}
-              >
-                <option value={1} disabled>
-                  --choose Lesson--
-                </option>
-                {props.courses &&
-                  props.courses.map(course => (
-                    <option key={course.id} value={JSON.stringify(course)}>
-                      {course.longName}
-                    </option>
-                  ))}
-              </Input>
+          <FormGroup>
+            <Label>Select Lesson</Label>
+            <Input
+              type="select"
+              name="select"
+              id="select"
+              defaultValue={1}
+              onChange={hanldeSelectLesson}
+            >
+              <option value={1} disabled>
+                --choose Lesson--
+              </option>
+              {props.courses &&
+                props.courses.map(course => (
+                  <option key={course.id} value={JSON.stringify(course)}>
+                    {course.longName}
+                  </option>
+                ))}
+            </Input>
 
-              {selectCourseValidationErrors && (
-                <p className="regError">{selectCourseValidationErrors}</p>
-              )}
-            </FormGroup>
+            {selectCourseValidationErrors && (
+              <p className="regError">{selectCourseValidationErrors}</p>
+            )}
+          </FormGroup>
 
-            <FormGroup>
-              <Label>It knowledge Level</Label>
-              <Input
-                defaultValue={1}
-                type="select"
-                name="select"
-                id="select"
-                onChange={hanldeSelectKnowledge}
-              >
-                <option value={1} disabled>
-                  --choose--
-                </option>
-                <option>Beginner</option>
-                <option>Know basics some programming language</option>
-                <option>Know enough some programming language</option>
-                <option>
-                  Good at some programming language and have experience
-                </option>
-                option>
-              </Input>
-              {knowledgeValidationErrors && (
-                <p className="regError">{knowledgeValidationErrors}</p>
-              )}
-            </FormGroup>
-            <FormGroup>
-              <input
-                type="file"
-                name="file"
-                id="file"
-                className="inputfile"
-                accept="image/x-png,image/gif,image/jpeg"
-                onChange={selectImage}
-              />
-              <label htmlFor="file">Choose a file</label>
-              <p className="clip">{pathImage}</p>
-            </FormGroup>
+          <FormGroup>
+            <Label>It knowledge Level</Label>
+            <Input
+              defaultValue={1}
+              type="select"
+              name="select"
+              id="select"
+              onChange={hanldeSelectKnowledge}
+            >
+              <option value={1} disabled>
+                --choose--
+              </option>
+              <option>Beginner</option>
+              <option>Know basics some programming language</option>
+              <option>Know enough some programming language</option>
+              <option>
+                Good at some programming language and have experience
+              </option>
+              option>
+            </Input>
+            {knowledgeValidationErrors && (
+              <p className="regError">{knowledgeValidationErrors}</p>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              className="inputfile"
+              accept="image/x-png,image/gif,image/jpeg"
+              onChange={selectImage}
+            />
+            <label htmlFor="file">Choose a file</label>
+            <p className="clip">{pathImage}</p>
+          </FormGroup>
 
-            <Button color="success" block onClick={handeleCreateStudent}>
-              Registration
-            </Button>
-          </Form>
-        </div>
+          <Button
+            color="success"
+            block
+            onClick={() => {
+              handeleCreateStudent();
+              toggleSuccess();
+            }}
+          >
+            Registration
+          </Button>
+        </Form>
       </div>
-    </>
+      <Success open={open} toggleSuccess={toggleSuccess} />
+    </div>
   );
 
   function useFormInput(initialValue) {
