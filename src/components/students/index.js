@@ -28,10 +28,9 @@ const Students = ({
         onPageClick
 
 }) => {
-
-  const pages = [];
   if (students && courses && statuses) {
-      for(let i = 0; i < Math.ceil(students.length/10); i ++){
+      const pages = [];
+      for(let i = 1; i <= Math.ceil(students.length/10); i ++){
           pages.push(i);
       }
     return (
@@ -79,6 +78,7 @@ const Students = ({
             <Col xs={{ size: 10 }}>
               <Container>
                 <Row>
+
                   <ListGroup className="listGroup">
                     {students &&
                       students.map((student, i) => {
@@ -98,11 +98,13 @@ const Students = ({
                       })}
                   </ListGroup>
                     {students && students.length > 10 && (
-                        <Row>
-                          <FontAwesomeIcon icon='arrow-left'/>
-                            {pages.map(p => <div key={p} onClick={()=> onPageClick(p+1)}>{p+1}</div>)}
-                            <FontAwesomeIcon icon='arrow-right'/>
-                        </Row>)
+                        <ListGroup className="listGroup">
+                            <div className="pagination">
+                                <a className="arrow" onClick={()=> onPageClick(pages[0])}><FontAwesomeIcon icon='arrow-left' /></a>
+                                {pages.map(p =><a className="active" key={p} onClick={()=> onPageClick(p)} ><span key={p} >{p}</span></a>)}
+                                <a className="arrow" onClick={()=> onPageClick(pages[pages.length - 1])}><FontAwesomeIcon icon='arrow-right' /></a>
+                            </div>
+                        </ListGroup>)
                     }
                   <div className="listGroup">
                     {!students.length && (
