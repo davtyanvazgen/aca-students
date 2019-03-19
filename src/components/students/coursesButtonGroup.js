@@ -34,39 +34,38 @@ const CoursesButton = ({
   return (
     <div className="buttons">
       {courses &&
-        courses
-          .sort(function(a, b) {
-            return a.sort - b.sort;
-          })
-          .map(course => (
-            <Button
-              className="activeButtonColor courseButton"
-              style={{
-                backgroundColor: course.color,
-                borderColor: course.color
-              }}
-              id={course.id}
-              key={course.id}
-              onClick={() => {
-                onCheckboxBtnClick(course.id);
-                courseStudents(undefined, course);
-              }}
-              active={rSelected.includes(course.id)}
-            >
-              <span>
-                {course.name}
-                <Badge className="courseCount" color="secondary">
-                  {students && studentSameCourse(course)}
-                </Badge>
-              </span>
-            </Button>
-          ))}
+        courses.map(course => (
+          <Button
+            className="activeButtonColor courseButton"
+            style={{
+              backgroundColor: course.color,
+              borderColor: course.color
+            }}
+            id={course.id}
+            key={course.id}
+            onClick={() => {
+              onCheckboxBtnClick(course.id);
+              courseStudents(undefined, course);
+            }}
+            active={rSelected.includes(course.id)}
+          >
+            <span>
+              {course.name}
+              <Badge className="courseCount" color="secondary">
+                {students && studentSameCourse(course)}
+              </Badge>
+            </span>
+          </Button>
+        ))}
     </div>
   );
 };
 
 export default compose(
-  firestoreConnect(() => ["courses", "students"]),
+  firestoreConnect(() => [
+    { collection: "students", orderBy: "date" },
+    { collection: "courses", orderBy: "sort" }
+  ]),
   connect((state, props) => ({
     students: state.firestore.ordered.students,
     courses: state.firestore.ordered.courses,

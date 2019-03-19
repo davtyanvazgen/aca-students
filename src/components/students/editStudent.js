@@ -2,20 +2,19 @@ import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { Input } from "reactstrap";
 
-export default function EditStudent(props) {
-  const {
-    fullName,
-    comment,
-    phone,
-    email,
-    handleFullnameInput,
-    handleEmailInput,
-    handlePhoneInput,
-    handleCommentInput,
-    editStudent,
-    onHide,
-    show
-  } = props;
+export default function EditStudent({
+  fullName,
+  comment,
+  phone,
+  email,
+  handleFullnameInput,
+  handleEmailInput,
+  handlePhoneInput,
+  handleCommentInput,
+  editStudent,
+  onHide,
+  show
+}) {
   return (
     <Modal
       onHide={onHide}

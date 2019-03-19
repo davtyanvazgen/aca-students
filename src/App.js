@@ -9,6 +9,7 @@ import createReduxStore from "./store/createReduxStore";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import firebase from "firebase";
+import SuccessPage from "./components/authentication/success";
 const store = createReduxStore();
 
 const rrfConfig = {
@@ -26,11 +27,12 @@ const rrfProps = {
 const App = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <div>
+      <div className="bodyColor">
         <Router>
           <Switch>
             <Route path="/registration" component={RegistrationForm} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/success" component={SuccessPage} />
             <Route path="/" component={Main} />
           </Switch>
         </Router>

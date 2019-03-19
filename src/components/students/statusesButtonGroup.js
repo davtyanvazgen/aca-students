@@ -27,37 +27,36 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
         </Button>
       </Col>
       {statuses &&
-        statuses
-          .sort(function(a, b) {
-            return a.sort - b.sort;
-          })
-          .map(status => (
-            <Col key={status.id}>
-              <Button
-                className="activeButtonColor statusButton"
-                style={{
-                  backgroundColor: status.color,
-                  borderColor: status.color
-                }}
-                color="dark"
-                id={status.id}
-                key={status.id}
-                onClick={() => {
-                  onRadioBtnClick(status.id);
-                  statusStudents(undefined, undefined, status);
-                }}
-                active={rSelected === status.id}
-              >
-                {status.name}
-              </Button>
-            </Col>
-          ))}
+        statuses.map(status => (
+          <Col key={status.id}>
+            <Button
+              className="activeButtonColor statusButton"
+              style={{
+                backgroundColor: status.color,
+                borderColor: status.color
+              }}
+              color="dark"
+              id={status.id}
+              key={status.id}
+              onClick={() => {
+                onRadioBtnClick(status.id);
+                statusStudents(undefined, undefined, status);
+              }}
+              active={rSelected === status.id}
+            >
+              {status.name}
+            </Button>
+          </Col>
+        ))}
     </>
   );
 };
 
 export default compose(
-  firestoreConnect(() => ["statuses"]),
+  firestoreConnect(() => [
+    { collection: "students", orderBy: "date" },
+    { collection: "statuses", orderBy: "sort" }
+  ]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
     selectedStatuses: state.filter.selectedStatuses

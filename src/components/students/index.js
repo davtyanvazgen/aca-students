@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CoursesButtonGroup from "./coursesButtonGroup";
 import StatusesButton from "./statusesButtonGroup";
 import StudentCard from "./studentCard";
@@ -12,6 +12,9 @@ import {
   InputGroup,
   InputGroupAddon
 } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Students = ({
   filterStudents,
@@ -19,10 +22,20 @@ const Students = ({
   students,
   allStudents,
   courses,
-  statuses
+  statuses,
+  background
 }) => {
-  let background = "#ffffff";
+  const [page, setPage] = useState(1);
+
+  const pages = [];
+
+  function onPageClick(p) {
+    setPage(p);
+  }
   if (students && courses && statuses) {
+    for (let i = 0; i < Math.ceil(students.length / 10); i++) {
+      pages.push(i);
+    }
     return (
       <>
         <Container className="mainContainer">
@@ -69,55 +82,40 @@ const Students = ({
                 <Row>
                   <ListGroup className="listGroup">
                     {students &&
-                      students.map(student => {
+                      students.map((student, i) => {
                         background === "#ffffff"
                           ? (background = "#fbfbfb")
                           : (background = "#ffffff");
-                        return (
-                          <StudentCard
-                            background={background}
-                            key={student.id}
-                            student={student}
-                            filterStudents={filterStudents}
-                          />
-                        );
+                        if (i < page * 10 && i >= (page - 1) * 10) {
+                          return (
+                            <StudentCard
+                              background={background}
+                              key={student.id}
+                              student={student}
+                              filterStudents={filterStudents}
+                            />
+                          );
+                        }
                       })}
                   </ListGroup>
+                  {students && students.length > 10 && (
+                    <Row>
+                      <FontAwesomeIcon icon="arrow-left" />
+                      {pages.map(p => (
+                        <div key={p} onClick={() => onPageClick(p + 1)}>
+                          {p + 1}
+                        </div>
+                      ))}
+                      <FontAwesomeIcon icon="arrow-right" />
+                    </Row>
+                  )}
                   <div className="listGroup">
                     {!students.length && (
                       <div>
                         <div className="jumbotron">
                           <Container>
-                            <Row>
-                              <ListGroup className="listGroup">
-                                {students &&
-                                  students.map(student => {
-                                    background === "#ffffff"
-                                      ? (background = "#fbfbfb")
-                                      : (background = "#ffffff");
-                                    return (
-                                      <StudentCard
-                                        background={background}
-                                        key={student.id}
-                                        student={student}
-                                        filterStudents={filterStudents}
-                                      />
-                                    );
-                                  })}
-                              </ListGroup>
-                              <div className="listGroup">
-                                {!students.length && (
-                                  <div>
-                                    <div className="jumbotron">
-                                      <Container>
-                                        <h1> No students</h1>
-                                        <p>There is no student at this time.</p>
-                                      </Container>
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            </Row>
+                            <h1> No students</h1>
+                            <p>There is no student at this time.</p>
                           </Container>
                         </div>
                       </div>
@@ -142,3 +140,4 @@ const Students = ({
 };
 
 export default Students;
+library.add(faArrowLeft, faArrowRight);

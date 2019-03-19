@@ -123,18 +123,25 @@
   background: #656b71;
 }
 
+
+
 .activeButtonColor:active {
   color: white !important;
-  background-color: lightgrey !important;
-  border-color: lightgrey !important;
+  background-color: #adadad !important;
+  border-color: #adadad !important;
 }
+
 
 .activeButtonColor:not(:disabled):not(.disabled).active {
   color: white !important;
-  background-color: lightgrey !important;
-  border-color: lightgrey !important;
+  background-color:  #adadad !important;
+  border-color: #adadad !important;
 }
 
-.mainContainer {
-  min-height: calc(100vh - 95px);
+.mainContainer{
+  min-height:calc(100vh - 95px);
+}
+
+.bodyColor{
+  background-color: RGB(251,251,251);
 }

@@ -91,5 +91,4 @@ const EditCourseModal = props => {
     </Modal>
   );
 };
-
 export default withFirestore(EditCourseModal);

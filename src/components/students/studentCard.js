@@ -114,10 +114,9 @@ const StudentCard = props => {
         <Row>
           <Col xs="5" md="2" onClick={toggle}>
             <Media
+              style={{ backgroundImage: `url(${student.url})` }}
               className="media"
               object
-              src="https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
-              alt="Generic placeholder image"
             />
           </Col>
 

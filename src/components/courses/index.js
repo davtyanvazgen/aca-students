@@ -70,7 +70,10 @@ const AddCourse = props => {
 };
 
 export default compose(
-  firestoreConnect(() => ["courses", "students"]),
+  firestoreConnect(() => [
+    { collection: "students", orderBy: "date" },
+    { collection: "courses", orderBy: "sort" }
+  ]),
   connect((state, props) => ({
     courses: state.firestore.ordered.courses,
     students: state.firestore.ordered.students

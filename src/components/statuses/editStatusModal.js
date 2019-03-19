@@ -91,5 +91,4 @@ const EditStatusModal = props => {
     </Modal>
   );
 };
-
 export default withFirestore(EditStatusModal);

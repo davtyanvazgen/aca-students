@@ -11,6 +11,7 @@ const RegistrationForm = props => {
   const surname = useFormInput("");
   const phone = useFormInput("");
   const email = useFormInput("");
+  const [pathImage, setpahtImage] = useState("");
   const [selectedCourseId, setSelectedCourseId] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
   const [knowledge, setKnowledge] = useState("");
@@ -36,6 +37,10 @@ const RegistrationForm = props => {
     setSelectedCourseId(course.id);
   }
 
+  function selectImage(e) {
+    let value = e.target.value;
+    setpahtImage(value);
+  }
   function handeleCreateStudent() {
     const id = v1();
     const date = new Date();
@@ -54,13 +59,37 @@ const RegistrationForm = props => {
         id: id,
         date: date,
         knowledge,
-        comment: ""
+        comment: "",
+        url:
+          "https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
       };
-
-      props.firestore
-        .collection("students")
-        .doc(student.id)
-        .set(student);
+      if (pathImage) {
+        const ref = props.firebase.storage().ref("studentsAvatar");
+        const file = document.querySelector("#file").files[0];
+        const name = +new Date() + "-" + file.name;
+        const metadata = { contentType: file.type };
+        const task = ref.child(name).put(file, metadata);
+        task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            student.url = url;
+            props.firestore
+              .collection("students")
+              .doc(student.id)
+              .set(student)
+              .then(() => {
+                window.location = "/success";
+              });
+          })
+          .catch(error => {
+            console.log(error.message);
+          });
+      } else {
+        props.firestore
+          .collection("students")
+          .doc(student.id)
+          .set(student);
+      }
     } else {
       return false;
     }
@@ -206,6 +235,18 @@ const RegistrationForm = props => {
               {knowledgeValidationErrors && (
                 <p className="regError">{knowledgeValidationErrors}</p>
               )}
+            </FormGroup>
+            <FormGroup>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                className="inputfile"
+                accept="image/x-png,image/gif,image/jpeg"
+                onChange={selectImage}
+              />
+              <label htmlFor="file">Choose a file</label>
+              <p className="clip">{pathImage}</p>
             </FormGroup>
 
             <Button color="success" block onClick={handeleCreateStudent}>
