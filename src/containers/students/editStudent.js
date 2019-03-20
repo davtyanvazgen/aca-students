@@ -29,7 +29,7 @@ function EditStudentModal(props) {
         fullName,
         phone,
         email,
-        comment
+          comment
       });
 
     props.onHide();

@@ -48,9 +48,9 @@
 }
 
 #regModal {
-  min-width: 800px !important;
-  min-height: 800px !important;
+  min-width: 800px;
+  min-height: 800px;
 }
 #regModalBody {
-  width: 100% !important;
+  width: 100%;
 }

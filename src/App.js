@@ -32,6 +32,7 @@ const App = () => (
             <Route path="/registration" component={RegistrationForm} />
             <Route path="/signin" component={SignIn} />
             <Route path="/" component={Main} />
+
           </Switch>
         </Router>
       </div>
