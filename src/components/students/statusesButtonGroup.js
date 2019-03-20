@@ -26,7 +26,7 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
           Show all
         </Button>
       </Col>
-      {statuses.length ?
+      { statuses.length ?
         statuses.map(status => (
             <Col key={status.id}>
               <Button
