@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withFirestore } from "react-redux-firebase";
-import EditStudent from "../components/students/editStudent";
+import EditStudent from "../../components/students/editStudent";
 
 function EditStudentModal(props) {
   const [fullName, setFullName] = useState(`${props.student.fullName}`);

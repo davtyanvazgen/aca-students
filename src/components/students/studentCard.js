@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EditStudentModal from "../../containers/editInfoStudent";
+import EditStudentModal from "../../containers/students/editStudent";
 import { firestoreConnect, withFirestore } from "react-redux-firebase";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -194,11 +194,16 @@ const StudentCard = props => {
             <Row>
               <Col className="center">
                 <FontAwesomeIcon
+                  className="editDeleteIcon"
                   icon="user-times"
                   onClick={toggleDeleteStudent}
                 />
                 <hr />
-                <FontAwesomeIcon icon="user-edit" onClick={handleEdit} />
+                <FontAwesomeIcon
+                  className="editDeleteIcon"
+                  icon="user-edit"
+                  onClick={handleEdit}
+                />
               </Col>
             </Row>
           </Col>

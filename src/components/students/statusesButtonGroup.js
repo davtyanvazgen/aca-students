@@ -26,28 +26,29 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
           Show all
         </Button>
       </Col>
-      {statuses &&
-        statuses.map(status => (
-          <Col key={status.id}>
-            <Button
-              className="activeButtonColor statusButton"
-              style={{
-                backgroundColor: status.color,
-                borderColor: status.color
-              }}
-              color="dark"
-              id={status.id}
-              key={status.id}
-              onClick={() => {
-                onRadioBtnClick(status.id);
-                statusStudents(undefined, undefined, status);
-              }}
-              active={rSelected === status.id}
-            >
-              {status.name}
-            </Button>
-          </Col>
-        ))}
+      {statuses.length
+        ? statuses.map(status => (
+            <Col key={status.id}>
+              <Button
+                className="activeButtonColor statusButton"
+                style={{
+                  backgroundColor: status.color,
+                  borderColor: status.color
+                }}
+                color="dark"
+                id={status.id}
+                key={status.id}
+                onClick={() => {
+                  onRadioBtnClick(status.id);
+                  statusStudents(undefined, undefined, status);
+                }}
+                active={rSelected === status.id}
+              >
+                {status.name}
+              </Button>
+            </Col>
+          ))
+        : null}
     </>
   );
 };

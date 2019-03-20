@@ -2,14 +2,13 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./components/authentication/signin";
-import Main from "./components/main";
+import Main from "./containers/main";
 import RegistrationForm from "./components/authentication/registrationForm/";
 import { Provider } from "react-redux";
 import createReduxStore from "./store/createReduxStore";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import firebase from "firebase";
-
 const store = createReduxStore();
 
 const rrfConfig = {

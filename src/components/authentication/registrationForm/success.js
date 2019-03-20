@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../../styles/authentication.css";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import edna from "../../../images/edna.png";

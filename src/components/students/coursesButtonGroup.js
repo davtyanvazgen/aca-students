@@ -33,30 +33,31 @@ const CoursesButton = ({
   }
   return (
     <div className="buttons">
-      {courses &&
-        courses.map(course => (
-          <Button
-            className="activeButtonColor courseButton"
-            style={{
-              backgroundColor: course.color,
-              borderColor: course.color
-            }}
-            id={course.id}
-            key={course.id}
-            onClick={() => {
-              onCheckboxBtnClick(course.id);
-              courseStudents(undefined, course);
-            }}
-            active={rSelected.includes(course.id)}
-          >
-            <span>
-              {course.name}
-              <Badge className="courseCount" color="secondary">
-                {students && studentSameCourse(course)}
-              </Badge>
-            </span>
-          </Button>
-        ))}
+      {courses.length
+        ? courses.map(course => (
+            <Button
+              className="activeButtonColor courseButton"
+              style={{
+                backgroundColor: course.color,
+                borderColor: course.color
+              }}
+              id={course.id}
+              key={course.id}
+              onClick={() => {
+                onCheckboxBtnClick(course.id);
+                courseStudents(undefined, course);
+              }}
+              active={rSelected.includes(course.id)}
+            >
+              <span>
+                {course.name}
+                <Badge className="courseCount" color="secondary">
+                  {students && studentSameCourse(course)}
+                </Badge>
+              </span>
+            </Button>
+          ))
+        : null}
     </div>
   );
 };

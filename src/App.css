@@ -33,10 +33,6 @@
 }
 
 .lds-hourglass {
-  position: absolute;
-  display: block;
-  top: 50%;
-  right: 50%;
   width: 64px;
   height: 64px;
 }
@@ -69,9 +65,9 @@
 }
 
 .loader {
-  /* position: inherit; */
-  /* display: block; */
-
+  position: inherit;
+  display: block;
+  margin: 50px auto;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid blue;
@@ -123,22 +119,25 @@
   background: #656b71;
 }
 
+
+
 .activeButtonColor:active {
   color: white !important;
   background-color: #adadad !important;
   border-color: #adadad !important;
 }
 
+
 .activeButtonColor:not(:disabled):not(.disabled).active {
   color: white !important;
-  background-color: #adadad !important;
+  background-color:  #adadad !important;
   border-color: #adadad !important;
 }
 
-.mainContainer {
-  min-height: calc(100vh - 95px);
+.mainContainer{
+  min-height:calc(100vh - 95px);
 }
 
-.bodyColor {
-  background-color: RGB(251, 251, 251);
+.bodyColor{
+  background-color: RGB(251,251,251);
 }
