@@ -26,8 +26,8 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
           Show all
         </Button>
       </Col>
-      { statuses.length ?
-        statuses.map(status => (
+      {statuses.length
+        ? statuses.map(status => (
             <Col key={status.id}>
               <Button
                 className="activeButtonColor statusButton"
@@ -47,17 +47,16 @@ const StatusesButton = ({ statuses, selectedStatuses, statusStudents }) => {
                 {status.name}
               </Button>
             </Col>
-        ))
-          : null
-      }
+          ))
+        : null}
     </>
   );
 };
 
 export default compose(
   firestoreConnect(() => [
-      {collection: "students", orderBy: "date"},
-      {collection: "statuses", orderBy: "sort"},
+    { collection: "students", orderBy: "date" },
+    { collection: "statuses", orderBy: "sort" }
   ]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,

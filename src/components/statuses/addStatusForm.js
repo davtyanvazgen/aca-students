@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  ButtonGroup,
-  Col,
-  Container,
-  Row
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 import { v1 } from "uuid";
 import Picker from "./picker";
@@ -17,7 +7,6 @@ import Picker from "./picker";
 const AddStatusForm = ({ statuses, firestore }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
-  const [addStatusError, setAddStatusError] = useState("");
   const [background, setBackground] = useState("#197FD2");
   const [checkLetters, setCheckLetters] = useState("");
 
@@ -49,7 +38,7 @@ const AddStatusForm = ({ statuses, firestore }) => {
         .doc(newStatus.id)
         .set(newStatus)
         .catch(err => {
-          setAddStatusError(err);
+          alert(err.message);
         });
 
       setName("");

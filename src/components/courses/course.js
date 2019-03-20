@@ -14,18 +14,63 @@ import DeleteCourseModal from "./deleteCourseModal";
 import EditCourseModal from "./editCourseModal";
 
 const Course = ({ courses, course, students, firestore }) => {
-  const [modalShow, setModalShow] = useState(false);
   const [studentsSameCourse, setStudentsSameCourse] = useState([]);
-  const [removeStudentsError, setRemoveStudentsError] = useState("");
-  const [removaCourseError, setRemovaCourseError] = useState("");
-  const [modalShowEdit, setModalShowEdit] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
-  const areYouSure = course => {
-    const studentsForDelete = students.filter(
-      student => student.course === course.id
-    );
-    setStudentsSameCourse(studentsForDelete);
-    setModalShow(true);
+  const toggleDelete = () => {
+    setStudentsSameCourse([]);
+    setModal(!modal);
+  };
+
+  const toggleEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+
+  const handleRemove = () => {
+    for (let i = course.sort + 1; i <= courses.length; i++) {
+      courses.forEach(el => {
+        if (el.sort === i) {
+          firestore
+            .collection("courses")
+            .doc(el.id)
+            .update({ sort: i - 1 })
+            .catch(err => {
+              alert(err.message);
+            });
+        }
+      });
+    }
+
+    studentsSameCourse.forEach(student => {
+      firestore
+        .collection("deletedStudents")
+        .doc(student.id)
+        .set(student)
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+
+    studentsSameCourse.forEach(student => {
+      firestore
+        .collection("students")
+        .doc(student.id)
+        .delete()
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+
+    firestore
+      .collection("courses")
+      .doc(course.id)
+      .delete()
+      .catch(err => {
+        alert(err.message);
+      });
+
+    setModal(false);
   };
 
   const handleSortSelect = e => {
@@ -33,7 +78,10 @@ const Course = ({ courses, course, students, firestore }) => {
     firestore
       .collection("courses")
       .doc(course.id)
-      .update({ sort });
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
     if (course.sort > sort) {
       for (let i = sort; i < course.sort; i++) {
         courses.forEach(el => {
@@ -41,7 +89,10 @@ const Course = ({ courses, course, students, firestore }) => {
             firestore
               .collection("courses")
               .doc(el.id)
-              .update({ sort: i + 1 });
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -53,60 +104,22 @@ const Course = ({ courses, course, students, firestore }) => {
             firestore
               .collection("courses")
               .doc(el.id)
-              .update({ sort: i - 1 });
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
     }
   };
 
-  const handleRemove = () => {
-    for (let i = course.sort + 1; i <= courses.length; i++) {
-      courses.forEach(el => {
-        if (el.sort === i) {
-          firestore
-            .collection("courses")
-            .doc(el.id)
-            .update({ sort: i - 1 });
-        }
-      });
-    }
-
-    studentsSameCourse.forEach(student => {
-      firestore
-        .collection("deletedStudents")
-        .doc(student.id)
-        .set(student);
-    });
-
-    studentsSameCourse.forEach(student => {
-      firestore
-        .collection("students")
-        .doc(student.id)
-        .delete()
-        .catch(err => {
-          setRemoveStudentsError(err);
-        });
-    });
-
-    firestore
-      .collection("courses")
-      .doc(course.id)
-      .delete()
-      .catch(err => {
-        setRemovaCourseError(err);
-      });
-
-    setModalShow(false);
-  };
-
-  const modalClose = () => {
-    setStudentsSameCourse([]);
-    setModalShow(false);
-  };
-
-  const editModalClose = () => {
-    setModalShowEdit(false);
+  const areYouSure = course => {
+    const studentsForDelete = students.filter(
+      student => student.course === course.id
+    );
+    setStudentsSameCourse(studentsForDelete);
+    setModal(!modal);
   };
 
   return (
@@ -160,7 +173,7 @@ const Course = ({ courses, course, students, firestore }) => {
               size="sm"
               color="success"
               className="float-right mr-2"
-              onClick={() => setModalShowEdit(true)}
+              onClick={() => setModalEdit(!modalEdit)}
             >
               Edit
             </Button>
@@ -169,16 +182,16 @@ const Course = ({ courses, course, students, firestore }) => {
       </Card>
 
       <DeleteCourseModal
-        show={modalShow}
-        onHide={modalClose}
+        modal={modal}
+        toggle={toggleDelete}
         studentsSameCourse={studentsSameCourse}
         course={course}
         handleRemove={handleRemove}
       />
 
       <EditCourseModal
-        show={modalShowEdit}
-        onHide={editModalClose}
+        modal={modalEdit}
+        toggle={toggleEdit}
         course={course}
         students={students}
       />

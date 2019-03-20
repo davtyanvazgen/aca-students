@@ -14,19 +14,71 @@ import DeleteStatusModal from "./deleteStatusModal";
 import EditStatusModal from "./editStatusModal";
 
 const Status = ({ statuses, status, firestore, students }) => {
-  const [modalShow, setModalShow] = useState(false);
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
-  const [removeStudentError, setRemoveStudentsError] = useState("");
-  const [deleteStatusError, setDeleteStatusError] = useState("");
-  const [modalShowEdit, setModalShowEdit] = useState(false);
-  const [editStatusError, setEditStatusError] = useState("");
+  const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
+
+  const toggleDelete = () => {
+    setStudentsSameStatus([]);
+    setModal(!modal);
+  };
+
+  const toggleEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+
+  const handleRemove = () => {
+    for (let i = status.sort + 1; i <= statuses.length; i++) {
+      statuses.forEach(el => {
+        if (el.sort === i) {
+          firestore
+            .collection("statuses")
+            .doc(el.id)
+            .update({ sort: i - 1 })
+            .catch(err => {
+              alert(err.message);
+            });
+        }
+      });
+    }
+
+    studentsSameStatus.forEach(student => {
+      firestore
+        .collection("deletedStudents")
+        .doc(student.id)
+        .set(student)
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+
+    studentsSameStatus.forEach(student => {
+      firestore
+        .collection("students")
+        .doc(student.id)
+        .delete()
+        .catch(err => {
+          alert(err.message);
+        });
+    });
+
+    firestore
+      .collection("statuses")
+      .doc(status.id)
+      .delete()
+      .catch(err => {
+        alert(err.message);
+      });
+
+    setModalEdit(false);
+  };
 
   const areYouSure = status => {
     const studentsForDelete = students.filter(
       student => student.status === status.id
     );
     setStudentsSameStatus(studentsForDelete);
-    setModalShow(true);
+    setModal(true);
   };
 
   const handleSortSelect = e => {
@@ -34,7 +86,10 @@ const Status = ({ statuses, status, firestore, students }) => {
     firestore
       .collection("statuses")
       .doc(status.id)
-      .update({ sort });
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
     if (status.sort > sort) {
       for (let i = sort; i < status.sort; i++) {
         statuses.forEach(el => {
@@ -42,7 +97,10 @@ const Status = ({ statuses, status, firestore, students }) => {
             firestore
               .collection("statuses")
               .doc(el.id)
-              .update({ sort: i + 1 });
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -54,60 +112,14 @@ const Status = ({ statuses, status, firestore, students }) => {
             firestore
               .collection("statuses")
               .doc(el.id)
-              .update({ sort: i - 1 });
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
     }
-  };
-
-  const handleRemove = () => {
-    for (let i = status.sort + 1; i <= statuses.length; i++) {
-      statuses.forEach(el => {
-        if (el.sort === i) {
-          firestore
-            .collection("statuses")
-            .doc(el.id)
-            .update({ sort: i - 1 });
-        }
-      });
-    }
-
-    studentsSameStatus.forEach(student => {
-      firestore
-        .collection("deletedStudents")
-        .doc(student.id)
-        .set(student);
-    });
-
-    studentsSameStatus.forEach(student => {
-      firestore
-        .collection("students")
-        .doc(student.id)
-        .delete()
-        .catch(err => {
-          setRemoveStudentsError(err);
-        });
-    });
-
-    firestore
-      .collection("statuses")
-      .doc(status.id)
-      .delete()
-      .catch(err => {
-        setDeleteStatusError(err);
-      });
-
-    setModalShow(false);
-  };
-
-  const modalClose = () => {
-    setStudentsSameStatus([]);
-    setModalShow(false);
-  };
-
-  const editModalClose = () => {
-    setModalShowEdit(false);
   };
 
   return (
@@ -163,7 +175,7 @@ const Status = ({ statuses, status, firestore, students }) => {
                   size="sm"
                   color="success"
                   className="float-right mr-2"
-                  onClick={() => setModalShowEdit(true)}
+                  onClick={() => setModalEdit(true)}
                 >
                   Edit
                 </Button>
@@ -173,7 +185,7 @@ const Status = ({ statuses, status, firestore, students }) => {
                 size="sm"
                 color="success"
                 className="float-right mr-1"
-                onClick={() => setModalShowEdit(true)}
+                onClick={() => setModalEdit(true)}
               >
                 Edit
               </Button>
@@ -183,16 +195,16 @@ const Status = ({ statuses, status, firestore, students }) => {
       </Card>
 
       <DeleteStatusModal
-        show={modalShow}
-        onHide={modalClose}
+        modal={modal}
+        toggle={toggleDelete}
         studentsSameStatus={studentsSameStatus}
         status={status}
         handleRemove={handleRemove}
       />
 
       <EditStatusModal
-        show={modalShowEdit}
-        onHide={editModalClose}
+        modal={modalEdit}
+        toggle={toggleEdit}
         status={status}
         students={students}
       />

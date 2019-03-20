@@ -44,13 +44,13 @@
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   background: #fc0; /* Цвет фона */
   text-overflow: ellipsis; /* Добавляем многоточие */
-  font-size:1.25em
+  font-size: 1.25em;
 }
 
 #regModal {
-  min-width: 800px ;
-  min-height: 800px ;
+  min-width: 800px;
+  min-height: 800px;
 }
 #regModalBody {
-  width: 100% ;
+  width: 100%;
 }

@@ -1,14 +1,14 @@
-.footerContent{
-    margin: 0 auto;
-    color:white;
+.footerContent {
+  margin: 0 auto;
+  color: white;
 }
 
-.footer{
-    height: 3em;
+.footer {
+  height: 3em;
 }
 
-.divWrapper{
-    width:100%;
-    display:flex;
-    justify-content:space-between
+.divWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

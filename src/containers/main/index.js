@@ -10,9 +10,9 @@ import Footer from "../../components/footer";
 import AddCourse from "../../components/courses";
 import AddStatus from "../../components/statuses";
 import Students from "../students/students";
-import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase/index";
+import { firebaseConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { connect } from "react-redux";
-import { compose } from "redux/index";
+import { compose } from "redux";
 
 const Main = ({ auth }) => {
   return !isLoaded(auth) ? (

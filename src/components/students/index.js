@@ -65,7 +65,6 @@ const Students = ({
                 </Row>
 
                 <Row>
-
                   <Col className="buttonsCol" xs="auto">
                       <CoursesButtonGroup courseStudents={filterStudents}/>
                   </Col>
@@ -82,22 +81,21 @@ const Students = ({
             <Col xs={{ size: 10 }}>
               <Container>
                 <Row>
-
                   <ListGroup className="listGroup">
                     {students &&
                       students.map((student, i) => {
                         background === "#ffffff"
                           ? (background = "#fbfbfb")
                           : (background = "#ffffff");
-                        if(i<page*10 && i>=(page-1)*10){
-                            return (
-                                <StudentCard
-                                    background={background}
-                                    key={student.id}
-                                    student={student}
-                                    filterStudents={filterStudents}
-                                />
-                            );
+                        if (i < page * 10 && i >= (page - 1) * 10) {
+                          return (
+                            <StudentCard
+                              background={background}
+                              key={student.id}
+                              student={student}
+                              filterStudents={filterStudents}
+                            />
+                          );
                         }
                       })}
                   </ListGroup>
@@ -122,14 +120,14 @@ const Students = ({
                     }
                   <div className="listGroup">
                     {!students.length && (
-                        <div>
-                            <div className="jumbotron">
-                                <Container>
-                                    <h1> No students</h1>
-                                    <p>There is no student at this time.</p>
-                                </Container>
-                            </div>
+                      <div>
+                        <div className="jumbotron">
+                          <Container>
+                            <h1> No students</h1>
+                            <p>There is no student at this time.</p>
+                          </Container>
                         </div>
+                      </div>
                     )}
                   </div>
                 </Row>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import "../styles/courseAndStatusCard.css";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 export default class DeleteStatusModal extends Component {
   render() {
@@ -7,18 +8,19 @@ export default class DeleteStatusModal extends Component {
       studentsSameStatus,
       status,
       handleRemove,
-      onHide,
-      show
+      modal,
+      toggle
     } = this.props;
 
     const body = studentsSameStatus.length ? (
       <>
         <h4>
-          There are {studentsSameStatus.length} Students with {status.name}
+          There are <b>{studentsSameStatus.length}</b> Students with{" "}
+          <b>{status.name}</b>
         </h4>
         <p>
-          if you delete this course you will lose {studentsSameStatus.length}{" "}
-          friends
+          if you delete this course you will lose{" "}
+          <b>{studentsSameStatus.length}</b> friends
         </p>
       </>
     ) : (
@@ -26,25 +28,17 @@ export default class DeleteStatusModal extends Component {
     );
 
     return (
-      <Modal
-        onHide={onHide}
-        show={show}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Are You Sure ZVART jan ?
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{body}</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={onHide}>Close</Button>
-          <Button variant="danger" onClick={handleRemove}>
+      <Modal isOpen={modal} toggle={toggle} className="editDeleteModal">
+        <ModalHeader toggle={toggle}>Are You Sure ZVART jan ?</ModalHeader>
+        <ModalBody>{body}</ModalBody>
+        <ModalFooter>
+          <Button color="danger" onClick={handleRemove}>
             Delete
           </Button>
-        </Modal.Footer>
+          <Button color="primary" onClick={toggle}>
+            Close
+          </Button>
+        </ModalFooter>
       </Modal>
     );
   }

@@ -67,8 +67,8 @@ const AddStatus = ({ statuses, students }) => {
 
 export default compose(
   firestoreConnect(() => [
-      {collection: "students", orderBy: "date"},
-      {collection: "statuses", orderBy: "sort"},
+    { collection: "students", orderBy: "date" },
+    { collection: "statuses", orderBy: "sort" }
   ]),
   connect((state, props) => ({
     statuses: state.firestore.ordered.statuses,
