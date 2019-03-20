@@ -6,7 +6,6 @@ import { v1 } from "uuid";
 const AddCourseForm = ({ firestore, courses }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
-  const [addCourseError, setAddCourseError] = useState("");
   const [color, setColor] = useState("");
   const [checkLetters, setCheckLetters] = useState("");
 
@@ -61,7 +60,7 @@ const AddCourseForm = ({ firestore, courses }) => {
         .doc(newCourse.id)
         .set(newCourse)
         .catch(err => {
-          setAddCourseError(err);
+          alert(err.message);
         });
 
       firestore.collection("courses").orderBy("sort");

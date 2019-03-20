@@ -1,6 +1,12 @@
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
-import { Input } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input
+} from "reactstrap";
 
 export default function EditStudent({
   fullName,
@@ -12,23 +18,13 @@ export default function EditStudent({
   handlePhoneInput,
   handleCommentInput,
   editStudent,
-  onHide,
-  show
+  toggle,
+  modal
 }) {
   return (
-    <Modal
-      onHide={onHide}
-      show={show}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Edit Information
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <Modal isOpen={modal} toggle={toggle} className="studentModal">
+      <ModalHeader> Edit Information</ModalHeader>
+      <ModalBody>
         <h5>Edit Fullname</h5>
         <Input value={fullName} onChange={handleFullnameInput} />
         <br />
@@ -41,13 +37,15 @@ export default function EditStudent({
         <h5>Comment about this student</h5>
         <Input value={comment} onChange={handleCommentInput} />
         <br />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="warning" onClick={editStudent}>
+      </ModalBody>
+      <ModalFooter>
+        <Button color="warning" onClick={editStudent}>
           Edit
         </Button>
-        <Button onClick={onHide}>Close</Button>
-      </Modal.Footer>
+        <Button color="primary" onClick={toggle}>
+          Close
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 }

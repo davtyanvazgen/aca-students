@@ -13,52 +13,18 @@ import { withFirestore } from "react-redux-firebase";
 import DeleteStatusModal from "./deleteStatusModal";
 import EditStatusModal from "./editStatusModal";
 
-const Status = ({ statuses, status, firestore, students, firebase }) => {
-  const [modalShow, setModalShow] = useState(false);
+const Status = ({ statuses, status, firestore, students,firebase }) => {
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
-  const [removeStudentError, setRemoveStudentsError] = useState("");
-  const [deleteStatusError, setDeleteStatusError] = useState("");
-  const [modalShowEdit, setModalShowEdit] = useState(false);
-  const [editStatusError, setEditStatusError] = useState("");
+  const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
-  const areYouSure = status => {
-    const studentsForDelete = students.filter(
-      student => student.status === status.id
-    );
-    setStudentsSameStatus(studentsForDelete);
-    setModalShow(true);
+  const toggleDelete = () => {
+    setStudentsSameStatus([]);
+    setModal(!modal);
   };
 
-  const handleSortSelect = e => {
-    let sort = parseInt(e.target.value);
-    firestore
-      .collection("statuses")
-      .doc(status.id)
-      .update({ sort });
-    if (status.sort > sort) {
-      for (let i = sort; i < status.sort; i++) {
-        statuses.forEach(el => {
-          if (el.sort === i) {
-            firestore
-              .collection("statuses")
-              .doc(el.id)
-              .update({ sort: i + 1 });
-          }
-        });
-      }
-    }
-    if (status.sort < sort) {
-      for (let i = status.sort + 1; i <= sort; i++) {
-        statuses.forEach(el => {
-          if (el.sort === i) {
-            firestore
-              .collection("statuses")
-              .doc(el.id)
-              .update({ sort: i - 1 });
-          }
-        });
-      }
-    }
+  const toggleEdit = () => {
+    setModalEdit(!modalEdit);
   };
 
   const handleRemove = () => {
@@ -68,7 +34,10 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
           firestore
             .collection("statuses")
             .doc(el.id)
-            .update({ sort: i - 1 });
+            .update({ sort: i - 1 })
+            .catch(err => {
+              alert(err.message);
+            });
         }
       });
     }
@@ -77,7 +46,10 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
       firestore
         .collection("deletedStudents")
         .doc(student.id)
-        .set(student);
+        .set(student)
+        .catch(err => {
+          alert(err.message);
+        });
     });
 
     studentsSameStatus.forEach(student => {
@@ -92,7 +64,7 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
         .doc(student.id)
         .delete()
         .catch(err => {
-          setRemoveStudentsError(err);
+          alert(err.message);
         });
     });
 
@@ -101,19 +73,59 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
       .doc(status.id)
       .delete()
       .catch(err => {
-        setDeleteStatusError(err);
+        alert(err.message);
       });
 
-    setModalShow(false);
+    setModalEdit(false);
   };
 
-  const modalClose = () => {
-    setStudentsSameStatus([]);
-    setModalShow(false);
+  const areYouSure = status => {
+    const studentsForDelete = students.filter(
+      student => student.status === status.id
+    );
+    setStudentsSameStatus(studentsForDelete);
+    setModal(true);
   };
 
-  const editModalClose = () => {
-    setModalShowEdit(false);
+  const handleSortSelect = e => {
+    let sort = parseInt(e.target.value);
+    firestore
+      .collection("statuses")
+      .doc(status.id)
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
+    if (status.sort > sort) {
+      for (let i = sort; i < status.sort; i++) {
+        statuses.forEach(el => {
+          if (el.sort === i) {
+            firestore
+              .collection("statuses")
+              .doc(el.id)
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
+          }
+        });
+      }
+    }
+    if (status.sort < sort) {
+      for (let i = status.sort + 1; i <= sort; i++) {
+        statuses.forEach(el => {
+          if (el.sort === i) {
+            firestore
+              .collection("statuses")
+              .doc(el.id)
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
+          }
+        });
+      }
+    }
   };
 
   return (
@@ -169,7 +181,7 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
                   size="sm"
                   color="success"
                   className="float-right mr-2"
-                  onClick={() => setModalShowEdit(true)}
+                  onClick={() => setModalEdit(true)}
                 >
                   Edit
                 </Button>
@@ -179,7 +191,7 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
                 size="sm"
                 color="success"
                 className="float-right mr-1"
-                onClick={() => setModalShowEdit(true)}
+                onClick={() => setModalEdit(true)}
               >
                 Edit
               </Button>
@@ -189,16 +201,16 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
       </Card>
 
       <DeleteStatusModal
-        show={modalShow}
-        onHide={modalClose}
+        modal={modal}
+        toggle={toggleDelete}
         studentsSameStatus={studentsSameStatus}
         status={status}
         handleRemove={handleRemove}
       />
 
       <EditStatusModal
-        show={modalShowEdit}
-        onHide={editModalClose}
+        modal={modalEdit}
+        toggle={toggleEdit}
         status={status}
         students={students}
       />

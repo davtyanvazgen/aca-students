@@ -3,20 +3,23 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class DeleteStudentModal extends React.Component {
   render() {
+    const { modal, toggleDeleteStudent, student, handleRemove } = this.props;
     return (
       <div>
         <Modal
-          isOpen={this.props.modal}
-          toggle={this.props.toggleDeleteStudent}
-          className={this.props.className}
+          isOpen={modal}
+          toggle={toggleDeleteStudent}
+          className="studentModal"
         >
           <ModalHeader>Are You Sure</ModalHeader>
-          <ModalBody>You want to delete {this.props.student}</ModalBody>
+          <ModalBody>
+            You want to delete <b>{student}</b>
+          </ModalBody>
           <ModalFooter>
-            <Button color="danger" onClick={this.props.handleRemove}>
+            <Button color="danger" onClick={handleRemove}>
               Delete
             </Button>
-            <Button color="secondary" onClick={this.props.toggleDeleteStudent}>
+            <Button color="secondary" onClick={toggleDeleteStudent}>
               Cancel
             </Button>
           </ModalFooter>

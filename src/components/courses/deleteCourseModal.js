@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 export default class DeleteCourseModal extends Component {
   render() {
@@ -7,18 +7,19 @@ export default class DeleteCourseModal extends Component {
       studentsSameCourse,
       course,
       handleRemove,
-      onHide,
-      show
+      modal,
+      toggle
     } = this.props;
 
     const body = studentsSameCourse.length ? (
       <>
         <h4>
-          There are {studentsSameCourse.length} Students with {course.name}
+          There are <b>{studentsSameCourse.length}</b> Students with{" "}
+          <b>{course.name}</b>
         </h4>
         <p>
-          if you delete this course you will lose {studentsSameCourse.length}
-          friends
+          if you delete this course you will lose{" "}
+          <b>{studentsSameCourse.length}</b> friends
         </p>
       </>
     ) : (
@@ -26,26 +27,20 @@ export default class DeleteCourseModal extends Component {
     );
 
     return (
-      <Modal
-        onHide={onHide}
-        show={show}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Are You Sure ZVART jan ?
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{body}</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={onHide}>Close</Button>
-          <Button variant="danger" onClick={handleRemove}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <div>
+        <Modal isOpen={modal} toggle={toggle} className="editDeleteModal">
+          <ModalHeader toggle={toggle}>Are You Sure ZVART jan ?</ModalHeader>
+          <ModalBody>{body}</ModalBody>
+          <ModalFooter>
+            <Button color="danger" onClick={handleRemove}>
+              Delete
+            </Button>
+            <Button color="primary" onClick={toggle}>
+              Close
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </div>
     );
   }
 }

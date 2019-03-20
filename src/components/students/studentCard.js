@@ -21,7 +21,6 @@ import {
 
 const StudentCard = props => {
   const { statuses, courses, student, firestore } = props;
-  const [modalShow, setModalShow] = useState(false);
   const [isOpenStatus, setIsOpenStatus] = useState(false);
   const [isOpenCourse, setIsOpenCourse] = useState(false);
   const [collapse, setcollapse] = useState(false);
@@ -33,9 +32,15 @@ const StudentCard = props => {
     courses.filter(course => course.id === student.course)
   );
 
+  const [modalEdit, setModalEdit] = useState(false);
+
   function toggle() {
     setcollapse(!collapse);
   }
+
+  const toggleEdit = () => {
+    setModalEdit(!modalEdit);
+  };
 
   function handleRemove() {
    const  storage = props.firebase.storage();
@@ -47,12 +52,18 @@ const StudentCard = props => {
     firestore
       .collection("students")
       .doc(student.id)
-      .delete();
+      .delete()
+      .catch(err => {
+        alert(err.message);
+      });
 
     firestore
       .collection("deletedStudents")
       .doc(student.id)
-      .set(student);
+      .set(student)
+      .catch(err => {
+        alert(err.message);
+      });
   }
 
   function handleSelectCourseChange(e) {
@@ -66,6 +77,9 @@ const StudentCard = props => {
       .update({
         course: newCourse[0].id,
         courseName: newCourse[0].longName
+      })
+      .catch(err => {
+        alert(err.message);
       });
   }
 
@@ -81,6 +95,9 @@ const StudentCard = props => {
       .update({
         status: newStatus[0].id,
         statusName: newStatus[0].longName
+      })
+      .catch(err => {
+        alert(err.message);
       });
   }
 
@@ -89,13 +106,6 @@ const StudentCard = props => {
   }
   function toggleCourse() {
     setIsOpenCourse(!isOpenCourse);
-  }
-
-  function handleEdit() {
-    setModalShow(true);
-  }
-  function handleOnHide() {
-    setModalShow(false);
   }
 
   function toggleDeleteStudent() {
@@ -133,11 +143,7 @@ const StudentCard = props => {
 
           <Col xs="10" md="4">
             <Row className="dropRow">
-              <ButtonDropdown
-                direction="left"
-                isOpen={isOpenStatus}
-                toggle={toggleStatus}
-              >
+              <ButtonDropdown isOpen={isOpenStatus} toggle={toggleStatus}>
                 <DropdownToggle
                   className="badge badge-pill badges"
                   style={{
@@ -164,11 +170,7 @@ const StudentCard = props => {
               </ButtonDropdown>
             </Row>
             <Row className="blockRow">
-              <ButtonDropdown
-                direction="left"
-                isOpen={isOpenCourse}
-                toggle={toggleCourse}
-              >
+              <ButtonDropdown isOpen={isOpenCourse} toggle={toggleCourse}>
                 <DropdownToggle
                   className="badge badge-pill badges"
                   style={{
@@ -208,7 +210,7 @@ const StudentCard = props => {
                 <FontAwesomeIcon
                   className="editDeleteIcon"
                   icon="user-edit"
-                  onClick={handleEdit}
+                  onClick={toggleEdit}
                 />
               </Col>
             </Row>
@@ -244,9 +246,9 @@ const StudentCard = props => {
         </Collapse>
 
         <EditStudentModal
-          show={modalShow}
-          onHide={handleOnHide}
           student={student}
+          toggle={toggleEdit}
+          modal={modalEdit}
         />
         <DeleteStudentModal
           toggleDeleteStudent={toggleDeleteStudent}
