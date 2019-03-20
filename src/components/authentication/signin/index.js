@@ -67,6 +67,6 @@ function SignIn({ firebase, auth }) {
 }
 
 export default compose(
-  firebaseConnect(), // withFirebase can also be used
+  firebaseConnect(),
   connect(({ firebase: { auth } }) => ({ auth }))
 )(SignIn);

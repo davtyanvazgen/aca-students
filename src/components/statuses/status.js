@@ -16,10 +16,7 @@ import EditStatusModal from "./editStatusModal";
 const Status = ({ statuses, status, firestore, students }) => {
   const [modalShow, setModalShow] = useState(false);
   const [studentsSameStatus, setStudentsSameStatus] = useState([]);
-  const [removeStudentError, setRemoveStudentsError] = useState("");
-  const [deleteStatusError, setDeleteStatusError] = useState("");
   const [modalShowEdit, setModalShowEdit] = useState(false);
-  const [editStatusError, setEditStatusError] = useState("");
 
   const areYouSure = status => {
     const studentsForDelete = students.filter(
@@ -34,7 +31,10 @@ const Status = ({ statuses, status, firestore, students }) => {
     firestore
       .collection("statuses")
       .doc(status.id)
-      .update({ sort });
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
     if (status.sort > sort) {
       for (let i = sort; i < status.sort; i++) {
         statuses.forEach(el => {
@@ -42,7 +42,10 @@ const Status = ({ statuses, status, firestore, students }) => {
             firestore
               .collection("statuses")
               .doc(el.id)
-              .update({ sort: i + 1 });
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -54,7 +57,10 @@ const Status = ({ statuses, status, firestore, students }) => {
             firestore
               .collection("statuses")
               .doc(el.id)
-              .update({ sort: i - 1 });
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -68,7 +74,10 @@ const Status = ({ statuses, status, firestore, students }) => {
           firestore
             .collection("statuses")
             .doc(el.id)
-            .update({ sort: i - 1 });
+            .update({ sort: i - 1 })
+            .catch(err => {
+              alert(err.message);
+            });
         }
       });
     }
@@ -77,7 +86,10 @@ const Status = ({ statuses, status, firestore, students }) => {
       firestore
         .collection("deletedStudents")
         .doc(student.id)
-        .set(student);
+        .set(student)
+        .catch(err => {
+          alert(err.message);
+        });
     });
 
     studentsSameStatus.forEach(student => {
@@ -86,7 +98,7 @@ const Status = ({ statuses, status, firestore, students }) => {
         .doc(student.id)
         .delete()
         .catch(err => {
-          setRemoveStudentsError(err);
+          alert(err.message);
         });
     });
 
@@ -95,7 +107,7 @@ const Status = ({ statuses, status, firestore, students }) => {
       .doc(status.id)
       .delete()
       .catch(err => {
-        setDeleteStatusError(err);
+        alert(err.message);
       });
 
     setModalShow(false);

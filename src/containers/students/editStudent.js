@@ -29,7 +29,10 @@ function EditStudentModal(props) {
         fullName,
         phone,
         email,
-          comment
+        comment
+      })
+      .catch(err => {
+        alert(err.message);
       });
 
     props.onHide();

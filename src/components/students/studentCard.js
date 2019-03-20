@@ -41,12 +41,18 @@ const StudentCard = props => {
     firestore
       .collection("students")
       .doc(student.id)
-      .delete();
+      .delete()
+      .catch(err => {
+        alert(err.message);
+      });
 
     firestore
       .collection("deletedStudents")
       .doc(student.id)
-      .set(student);
+      .set(student)
+      .catch(err => {
+        alert(err.message);
+      });
   }
 
   function handleSelectCourseChange(e) {
@@ -60,6 +66,9 @@ const StudentCard = props => {
       .update({
         course: newCourse[0].id,
         courseName: newCourse[0].longName
+      })
+      .catch(err => {
+        alert(err.message);
       });
   }
 
@@ -75,6 +84,9 @@ const StudentCard = props => {
       .update({
         status: newStatus[0].id,
         statusName: newStatus[0].longName
+      })
+      .catch(err => {
+        alert(err.message);
       });
   }
 

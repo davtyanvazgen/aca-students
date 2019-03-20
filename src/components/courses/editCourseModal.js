@@ -6,7 +6,6 @@ import { withFirestore } from "react-redux-firebase";
 const EditCourseModal = props => {
   const [newName, setNewName] = useState(props.course.name);
   const [newLongName, setNewLongName] = useState(props.course.longName);
-  const [editCourseError, setEditCourseError] = useState("");
 
   const handleEditCourseName = e => {
     setNewName(e.target.value);
@@ -29,7 +28,7 @@ const EditCourseModal = props => {
         .doc(course.id)
         .update({ ...editCourse })
         .catch(err => {
-          setEditCourseError(err);
+          alert(err.message);
         });
 
       props.students.forEach(student => {
@@ -37,7 +36,10 @@ const EditCourseModal = props => {
           props.firestore
             .collection("students")
             .doc(student.id)
-            .update({ courseName: newLongName.trim() });
+            .update({ courseName: newLongName.trim() })
+            .catch(err => {
+              alert(err.message);
+            });
         }
       });
     }

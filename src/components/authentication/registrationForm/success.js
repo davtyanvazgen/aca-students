@@ -9,7 +9,7 @@ const Success = props => {
       <Modal isOpen={props.open} id="regModal">
         <ModalBody>
           <>
-            <img id="regModalBody" src={edna} />
+            <img id="regModalBody" src={edna} alt="edna superhero" />
           </>
         </ModalBody>
         <ModalFooter>

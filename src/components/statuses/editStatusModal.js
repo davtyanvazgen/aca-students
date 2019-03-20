@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { Input, Label, Form, FormGroup } from "reactstrap";
+import { Input, Form, FormGroup } from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
 const EditStatusModal = props => {
   const [newName, setNewName] = useState(props.status.name);
   const [newLongName, setNewLongName] = useState(props.status.longName);
-  const [editStatusError, setEditStatusError] = useState("");
 
   const handleEditStatusName = e => {
     setNewName(e.target.value);
@@ -29,7 +28,7 @@ const EditStatusModal = props => {
         .doc(status.id)
         .update({ ...editStatus })
         .catch(err => {
-          setEditStatusError(err);
+          alert(err.message);
         });
 
       props.students.forEach(student => {
@@ -37,7 +36,10 @@ const EditStatusModal = props => {
           props.firestore
             .collection("students")
             .doc(student.id)
-            .update({ statusName: newLongName.trim() });
+            .update({ statusName: newLongName.trim() })
+            .catch(err => {
+              alert(err.message);
+            });
         }
       });
     }

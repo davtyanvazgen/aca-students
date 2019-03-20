@@ -16,8 +16,6 @@ import EditCourseModal from "./editCourseModal";
 const Course = ({ courses, course, students, firestore }) => {
   const [modalShow, setModalShow] = useState(false);
   const [studentsSameCourse, setStudentsSameCourse] = useState([]);
-  const [removeStudentsError, setRemoveStudentsError] = useState("");
-  const [removaCourseError, setRemovaCourseError] = useState("");
   const [modalShowEdit, setModalShowEdit] = useState(false);
 
   const areYouSure = course => {
@@ -33,7 +31,10 @@ const Course = ({ courses, course, students, firestore }) => {
     firestore
       .collection("courses")
       .doc(course.id)
-      .update({ sort });
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
     if (course.sort > sort) {
       for (let i = sort; i < course.sort; i++) {
         courses.forEach(el => {
@@ -41,7 +42,10 @@ const Course = ({ courses, course, students, firestore }) => {
             firestore
               .collection("courses")
               .doc(el.id)
-              .update({ sort: i + 1 });
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -53,7 +57,10 @@ const Course = ({ courses, course, students, firestore }) => {
             firestore
               .collection("courses")
               .doc(el.id)
-              .update({ sort: i - 1 });
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
           }
         });
       }
@@ -67,7 +74,10 @@ const Course = ({ courses, course, students, firestore }) => {
           firestore
             .collection("courses")
             .doc(el.id)
-            .update({ sort: i - 1 });
+            .update({ sort: i - 1 })
+            .catch(err => {
+              alert(err.message);
+            });
         }
       });
     }
@@ -76,7 +86,10 @@ const Course = ({ courses, course, students, firestore }) => {
       firestore
         .collection("deletedStudents")
         .doc(student.id)
-        .set(student);
+        .set(student)
+        .catch(err => {
+          alert(err.message);
+        });
     });
 
     studentsSameCourse.forEach(student => {
@@ -85,7 +98,7 @@ const Course = ({ courses, course, students, firestore }) => {
         .doc(student.id)
         .delete()
         .catch(err => {
-          setRemoveStudentsError(err);
+          alert(err.message);
         });
     });
 
@@ -94,7 +107,7 @@ const Course = ({ courses, course, students, firestore }) => {
       .doc(course.id)
       .delete()
       .catch(err => {
-        setRemovaCourseError(err);
+        alert(err.message);
       });
 
     setModalShow(false);
