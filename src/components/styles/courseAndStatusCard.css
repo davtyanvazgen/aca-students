@@ -71,3 +71,7 @@
 .collapseCol {
   min-width: 440px;
 }
+
+.editDeleteModal {
+  margin-top: 47px !important;
+}

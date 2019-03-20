@@ -35,7 +35,7 @@ function EditStudentModal(props) {
         alert(err.message);
       });
 
-    props.onHide();
+    props.toggle();
   };
 
   return (
@@ -49,8 +49,8 @@ function EditStudentModal(props) {
       handleFullnameInput={handleFullnameInput}
       handlePhoneInput={handlePhoneInput}
       editStudent={editStudent}
-      onHide={props.onHide}
-      show={props.show}
+      toggle={props.toggle}
+      modal={props.modal}
     />
   );
 }

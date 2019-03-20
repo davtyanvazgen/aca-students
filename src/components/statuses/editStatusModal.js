@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
-import { Input, Form, FormGroup } from "reactstrap";
+import {
+  Input,
+  Form,
+  FormGroup,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
+} from "reactstrap";
 import { withFirestore } from "react-redux-firebase";
 
-const EditStatusModal = props => {
-  const [newName, setNewName] = useState(props.status.name);
-  const [newLongName, setNewLongName] = useState(props.status.longName);
+const EditStatusModal = ({ status, toggle, modal, firestore, students }) => {
+  const [newName, setNewName] = useState(status.name);
+  const [newLongName, setNewLongName] = useState(status.longName);
 
   const handleEditStatusName = e => {
     setNewName(e.target.value);
@@ -23,7 +31,7 @@ const EditStatusModal = props => {
         id: status.id
       };
 
-      props.firestore
+      firestore
         .collection("statuses")
         .doc(status.id)
         .update({ ...editStatus })
@@ -31,9 +39,9 @@ const EditStatusModal = props => {
           alert(err.message);
         });
 
-      props.students.forEach(student => {
+      students.forEach(student => {
         if (student.status === status.id) {
-          props.firestore
+          firestore
             .collection("students")
             .doc(student.id)
             .update({ statusName: newLongName.trim() })
@@ -45,21 +53,10 @@ const EditStatusModal = props => {
     }
   };
 
-  const { status, onHide, show } = props;
   return (
-    <Modal
-      onHide={onHide}
-      show={show}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          ZVART Jan let's edit status
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
+    <Modal isOpen={modal} toggle={toggle} className="editDeleteModal">
+      <ModalHeader toggle={toggle}>ZVART Jan let's edit Status</ModalHeader>
+      <ModalBody>
         <Form>
           <FormGroup>
             <h5>Short Name</h5>
@@ -77,19 +74,21 @@ const EditStatusModal = props => {
             />
           </FormGroup>
         </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
+      </ModalBody>
+      <ModalFooter>
         <Button
-          variant="warning"
+          color="warning"
           onClick={() => {
             confirmEditStatus(newName);
-            onHide();
+            toggle();
           }}
         >
           Edit
         </Button>
-      </Modal.Footer>
+        <Button color="primary" onClick={toggle}>
+          Close
+        </Button>
+      </ModalFooter>
     </Modal>
   );
 };

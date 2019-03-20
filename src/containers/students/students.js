@@ -38,7 +38,6 @@ const searchStudents = (students, searchValue) => {
       return students;
     }
     let resultArr = [];
-    console.log(students);
     for (let i = 0; i < students.length; i++) {
       let counter = 0;
       for (let j = 0; j < searchValue.length; j++) {

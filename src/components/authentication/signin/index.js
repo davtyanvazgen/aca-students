@@ -8,7 +8,7 @@ import { compose } from "redux";
 function SignIn({ firebase, auth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  console.log(auth, isLoaded(auth), isEmpty(auth));
+
   const adminLogIn = function(e) {
     e.preventDefault();
     if (email && password) {

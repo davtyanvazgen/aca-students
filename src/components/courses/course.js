@@ -14,57 +14,17 @@ import DeleteCourseModal from "./deleteCourseModal";
 import EditCourseModal from "./editCourseModal";
 
 const Course = ({ courses, course, students, firestore }) => {
-  const [modalShow, setModalShow] = useState(false);
   const [studentsSameCourse, setStudentsSameCourse] = useState([]);
-  const [modalShowEdit, setModalShowEdit] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
 
-  const areYouSure = course => {
-    const studentsForDelete = students.filter(
-      student => student.course === course.id
-    );
-    setStudentsSameCourse(studentsForDelete);
-    setModalShow(true);
+  const toggleDelete = () => {
+    setStudentsSameCourse([]);
+    setModal(!modal);
   };
 
-  const handleSortSelect = e => {
-    let sort = parseInt(e.target.value);
-    firestore
-      .collection("courses")
-      .doc(course.id)
-      .update({ sort })
-      .catch(err => {
-        alert(err.message);
-      });
-    if (course.sort > sort) {
-      for (let i = sort; i < course.sort; i++) {
-        courses.forEach(el => {
-          if (el.sort === i) {
-            firestore
-              .collection("courses")
-              .doc(el.id)
-              .update({ sort: i + 1 })
-              .catch(err => {
-                alert(err.message);
-              });
-          }
-        });
-      }
-    }
-    if (course.sort < sort) {
-      for (let i = course.sort + 1; i <= sort; i++) {
-        courses.forEach(el => {
-          if (el.sort === i) {
-            firestore
-              .collection("courses")
-              .doc(el.id)
-              .update({ sort: i - 1 })
-              .catch(err => {
-                alert(err.message);
-              });
-          }
-        });
-      }
-    }
+  const toggleEdit = () => {
+    setModalEdit(!modalEdit);
   };
 
   const handleRemove = () => {
@@ -110,16 +70,56 @@ const Course = ({ courses, course, students, firestore }) => {
         alert(err.message);
       });
 
-    setModalShow(false);
+    setModal(false);
   };
 
-  const modalClose = () => {
-    setStudentsSameCourse([]);
-    setModalShow(false);
+  const handleSortSelect = e => {
+    let sort = parseInt(e.target.value);
+    firestore
+      .collection("courses")
+      .doc(course.id)
+      .update({ sort })
+      .catch(err => {
+        alert(err.message);
+      });
+    if (course.sort > sort) {
+      for (let i = sort; i < course.sort; i++) {
+        courses.forEach(el => {
+          if (el.sort === i) {
+            firestore
+              .collection("courses")
+              .doc(el.id)
+              .update({ sort: i + 1 })
+              .catch(err => {
+                alert(err.message);
+              });
+          }
+        });
+      }
+    }
+    if (course.sort < sort) {
+      for (let i = course.sort + 1; i <= sort; i++) {
+        courses.forEach(el => {
+          if (el.sort === i) {
+            firestore
+              .collection("courses")
+              .doc(el.id)
+              .update({ sort: i - 1 })
+              .catch(err => {
+                alert(err.message);
+              });
+          }
+        });
+      }
+    }
   };
 
-  const editModalClose = () => {
-    setModalShowEdit(false);
+  const areYouSure = course => {
+    const studentsForDelete = students.filter(
+      student => student.course === course.id
+    );
+    setStudentsSameCourse(studentsForDelete);
+    setModal(!modal);
   };
 
   return (
@@ -173,7 +173,7 @@ const Course = ({ courses, course, students, firestore }) => {
               size="sm"
               color="success"
               className="float-right mr-2"
-              onClick={() => setModalShowEdit(true)}
+              onClick={() => setModalEdit(!modalEdit)}
             >
               Edit
             </Button>
@@ -182,16 +182,16 @@ const Course = ({ courses, course, students, firestore }) => {
       </Card>
 
       <DeleteCourseModal
-        show={modalShow}
-        onHide={modalClose}
+        modal={modal}
+        toggle={toggleDelete}
         studentsSameCourse={studentsSameCourse}
         course={course}
         handleRemove={handleRemove}
       />
 
       <EditCourseModal
-        show={modalShowEdit}
-        onHide={editModalClose}
+        modal={modalEdit}
+        toggle={toggleEdit}
         course={course}
         students={students}
       />
