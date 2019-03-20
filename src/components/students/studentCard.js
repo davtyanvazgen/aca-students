@@ -20,7 +20,7 @@ import {
 } from "reactstrap";
 
 const StudentCard = props => {
-  const { statuses, courses, student, firestore } = props;
+  const { statuses, courses, student, firestore, firebase } = props;
   const [isOpenStatus, setIsOpenStatus] = useState(false);
   const [isOpenCourse, setIsOpenCourse] = useState(false);
   const [collapse, setcollapse] = useState(false);
@@ -43,6 +43,15 @@ const StudentCard = props => {
   };
 
   function handleRemove() {
+    const storage = firebase.storage();
+    const storageRef = storage.ref();
+    storageRef
+      .child(`studentsAvatar/${student.imageName}`)
+      .delete()
+      .then(() => {})
+      .catch(err => {
+        alert(err);
+      });
     firestore
       .collection("students")
       .doc(student.id)
