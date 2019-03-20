@@ -60,7 +60,7 @@ const Course = ({ courses, course, students, firestore, firebase }) => {
         .delete()
         .then(() => {})
         .catch(err => {
-          alert(err);
+          alert(err.message);
         });
       firestore
         .collection("students")
