@@ -45,9 +45,7 @@ const StudentCard = props => {
   function handleRemove() {
    const  storage = props.firebase.storage();
    const  storageRef = storage.ref();
-    storageRef.child(`studentsAvatar/${student.imageName}`).delete().then(function() {
-        }).catch(function(error) {
-})
+    storageRef.child(`studentsAvatar/${student.imageName}`).delete().catch(function(error) {alert(error.message)})
    
     firestore
       .collection("students")

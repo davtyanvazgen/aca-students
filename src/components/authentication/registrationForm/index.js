@@ -66,11 +66,9 @@ const RegistrationForm = props => {
         date: date,
         knowledge,
         comment: "",
-        url:
-          "https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
+        url: "https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
       };
       if (pathImage) {
-        debugger;
         const ref = props.firebase.storage().ref("studentsAvatar");
         const file = document.querySelector("#file").files[0];
         const name = +new Date() + "-" + file.name;
@@ -80,6 +78,7 @@ const RegistrationForm = props => {
           .then(snapshot => snapshot.ref.getDownloadURL())
           .then(url => {
             student.url = url;
+            student.imageName = name;
             props.firestore
               .collection("students")
               .doc(student.id)
