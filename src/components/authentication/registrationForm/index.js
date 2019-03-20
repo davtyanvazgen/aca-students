@@ -71,7 +71,9 @@ const RegistrationForm = props => {
                 const metadata = { contentType: file.type };
                 const task = ref.child(name).put(file, metadata);
                 task.then(snapshot => snapshot.ref.getDownloadURL())
-                    .then(  url => {student.url = url
+                    .then(  url => {
+                        student.url = url;
+                        student.imageName = name;
                             props.firestore
                                 .collection("students")
                                 .doc(student.id)

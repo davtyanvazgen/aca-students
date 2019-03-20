@@ -11,7 +11,7 @@ const getShowStudents = (
   selectedCourses = [],
   selectedStatuses = []
 ) => {
-  debugger;
+  
   let filters = selectedStatuses.length
     ? [...selectedCourses, selectedStatuses[0]]
     : [...selectedCourses];

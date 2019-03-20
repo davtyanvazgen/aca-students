@@ -13,7 +13,7 @@ import { withFirestore } from "react-redux-firebase";
 import DeleteCourseModal from "./deleteCourseModal";
 import EditCourseModal from "./editCourseModal";
 
-const Course = ({ courses, course, students, firestore }) => {
+const Course = ({ courses, course, students, firestore ,firebase }) => {
   const [modalShow, setModalShow] = useState(false);
   const [studentsSameCourse, setStudentsSameCourse] = useState([]);
   const [removeStudentsError, setRemoveStudentsError] = useState("");
@@ -80,6 +80,12 @@ const Course = ({ courses, course, students, firestore }) => {
     });
 
     studentsSameCourse.forEach(student => {
+      const  storage = firebase.storage();
+      const  storageRef = storage.ref();
+      storageRef.child(`studentsAvatar/${student.imageName}`).delete().then(function() {
+        }).catch(function(error) {
+      })
+   
       firestore
         .collection("students")
         .doc(student.id)
