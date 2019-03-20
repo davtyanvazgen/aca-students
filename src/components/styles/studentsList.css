@@ -66,7 +66,6 @@
 .fullname {
   margin-bottom: 0rem;
   margin-top: 1rem;
-  font-family: cursive;
 }
 
 .registerDate {
@@ -92,30 +91,37 @@
   margin: 0 auto;
 }
 
-.pagination a {
-  color: black;
+.pagination button {
+  color: white;
   float: left;
   padding: 3px 10px;
   text-decoration: none;
-  transition: background-color 0.9s;
+  transition: background-color .2s;
   border: 1px solid #ddd;
   border-radius: 50%;
   margin: 10px 4px;
 }
 
-.pagination a.active {
+.pagination button:active {
   background-color: #353a3f;
   color: white;
   border: 1px solid #353a3f;
 }
 
-.pagination a.arrow {
+.pagination button:not(:disabled):not(.disabled).active  {
+  background-color:  #b3b5ba;
+  color: white;
+  border: 1px solid #353a3f;
+}
+
+.pagination button.arrow {
   background-color: #b3b5ba;
   color: white;
   border: 1px solid #b3b5ba;
 }
 
-.pagination a:hover {
+
+.pagination button:hover {
   cursor: pointer;
   background-color: #ddd;
 }
