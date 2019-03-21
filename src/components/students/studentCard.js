@@ -120,11 +120,30 @@ const StudentCard = props => {
     .getDate()}/${student.date.toDate().getMonth() +
     1}/${student.date.toDate().getFullYear()}`;
 
+  function mouseover() {
+    var element = document.getElementById(id);
+    element.style.border = "4px solid #245A81";
+    element.style.backgroundColor = props.background;
+  }
+  function mouseout() {
+    var element = document.getElementById(id);
+    element.removeAttribute("style");
+    element.style.borderRight = `5px solid ${currentStatus[0].color}`;
+    element.style.borderLeft = `5px solid ${currentCourse[0].color}`;
+    element.style.backgroundColor = props.background;
+  }
+  const id = student.id;
   return (
     <>
       <ListGroupItem
+        onMouseOver={() => {
+          mouseover(id);
+        }}
+        onMouseOut={() => {
+          mouseout(id);
+        }}
+        id={`${id}`}
         style={{
-          border: "1px solid #cbccce",
           borderRight: `5px solid ${currentStatus[0].color}`,
           borderLeft: `5px solid ${currentCourse[0].color}`,
           backgroundColor: props.background

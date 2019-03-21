@@ -80,7 +80,7 @@ const Students = ({
             </Col>
 
             <Col xs={{ size: 10 }}>
-              <Container>
+              <Container className="studentsContainer">
                 <Row>
                   <ListGroup className="listGroup">
                     {students &&
@@ -101,43 +101,7 @@ const Students = ({
                         return null;
                       })}
                   </ListGroup>
-                  {students && students.length > 10 && (
-                    <ListGroup className="listGroup">
-                      <div className="pagination">
-                        <Button
-                          className="arrow"
-                          onClick={() => {
-                            onRadioBtnClick(pages[0]);
-                            onPageClick(pages[0]);
-                          }}
-                        >
-                          <FontAwesomeIcon icon="arrow-left" />
-                        </Button>
-                        {pages.map(p => (
-                          <Button
-                            key={p}
-                            color="dark"
-                            onClick={() => {
-                              onRadioBtnClick(p);
-                              onPageClick(p);
-                            }}
-                            active={rSelected === p}
-                          >
-                            <span key={p}> {p} </span>
-                          </Button>
-                        ))}
-                        <Button
-                          className="arrow"
-                          onClick={() => {
-                            onRadioBtnClick(pages[pages.length - 1]);
-                            onPageClick(pages[pages.length - 1]);
-                          }}
-                        >
-                          <FontAwesomeIcon icon="arrow-right" />
-                        </Button>
-                      </div>
-                    </ListGroup>
-                  )}
+
                   <div className="listGroup">
                     {!students.length && (
                       <div>
@@ -152,6 +116,43 @@ const Students = ({
                   </div>
                 </Row>
               </Container>
+              {students && students.length > 10 && (
+                <ListGroup className="listGroup">
+                  <div className="pagination">
+                    <Button
+                      className="arrow"
+                      onClick={() => {
+                        onRadioBtnClick(pages[0]);
+                        onPageClick(pages[0]);
+                      }}
+                    >
+                      <FontAwesomeIcon icon="arrow-left" />
+                    </Button>
+                    {pages.map(p => (
+                      <Button
+                        key={p}
+                        color="dark"
+                        onClick={() => {
+                          onRadioBtnClick(p);
+                          onPageClick(p);
+                        }}
+                        active={rSelected === p}
+                      >
+                        <span key={p}> {p} </span>
+                      </Button>
+                    ))}
+                    <Button
+                      className="arrow"
+                      onClick={() => {
+                        onRadioBtnClick(pages[pages.length - 1]);
+                        onPageClick(pages[pages.length - 1]);
+                      }}
+                    >
+                      <FontAwesomeIcon icon="arrow-right" />
+                    </Button>
+                  </div>
+                </ListGroup>
+              )}
             </Col>
           </Row>
         </Container>

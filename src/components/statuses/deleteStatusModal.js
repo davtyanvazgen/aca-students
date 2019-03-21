@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/courseAndStatusCard.css";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import ednaDes from "../../images/ednaDes.jpg";
 
 export default class DeleteStatusModal extends Component {
   render() {
@@ -29,7 +30,9 @@ export default class DeleteStatusModal extends Component {
 
     return (
       <Modal isOpen={modal} toggle={toggle} className="editDeleteModal">
-        <ModalHeader toggle={toggle}>Are You Sure ZVART jan ?</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          <img src={ednaDes} alt="edna" style={{ width: "100%" }} />
+        </ModalHeader>
         <ModalBody>{body}</ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={handleRemove}>

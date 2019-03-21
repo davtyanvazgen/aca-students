@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import ednaStDel from "../../images/ednaStDel.jpg";
 
 class DeleteStudentModal extends React.Component {
   render() {
@@ -11,7 +12,9 @@ class DeleteStudentModal extends React.Component {
           toggle={toggleDeleteStudent}
           className="studentModal"
         >
-          <ModalHeader>Are You Sure</ModalHeader>
+          <ModalHeader toggle={toggleDeleteStudent}>
+            <img src={ednaStDel} alt="edna" style={{ width: "100%" }} />
+          </ModalHeader>
           <ModalBody>
             You want to delete <b>{student}</b>
           </ModalBody>
@@ -19,7 +22,7 @@ class DeleteStudentModal extends React.Component {
             <Button color="danger" onClick={handleRemove}>
               Delete
             </Button>
-            <Button color="secondary" onClick={toggleDeleteStudent}>
+            <Button color="primary" onClick={toggleDeleteStudent}>
               Cancel
             </Button>
           </ModalFooter>
