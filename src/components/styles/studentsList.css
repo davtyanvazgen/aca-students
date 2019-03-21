@@ -1,11 +1,12 @@
 .buttons {
   width: 100%;
-  overflow: auto;
   display: flex;
+  overflow: auto;
 }
 
 .courseButton {
-  margin: 3px 1px 8px 2px;
+  width: 100px;
+  margin: 3px 1px 3px 1px;
   white-space: nowrap;
   text-align: center;
 }
@@ -94,7 +95,7 @@
 .pagination button {
   color: white;
   float: left;
-  padding: 3px 10px;
+  padding: 3px 12px;
   text-decoration: none;
   transition: background-color .2s;
   border: 1px solid #ddd;

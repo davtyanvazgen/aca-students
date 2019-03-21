@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
+
 const Students = ({
         filterStudents,
         searchValue,
@@ -28,7 +29,6 @@ const Students = ({
         onPageClick,
 }) => {
     const [rSelected, setSelected] = useState(page);
-
     const onRadioBtnClick = selected => {
         setSelected(selected);
     };
@@ -63,7 +63,6 @@ const Students = ({
                     </InputGroup>
                   </Col>
                 </Row>
-
                 <Row>
                   <Col className="buttonsCol" xs="auto">
                       <CoursesButtonGroup courseStudents={filterStudents}/>
@@ -97,6 +96,7 @@ const Students = ({
                             />
                           );
                         }
+                        return null;
                       })}
                   </ListGroup>
                     {students && students.length > 10 && (
@@ -107,6 +107,7 @@ const Students = ({
                                 {pages.map(p =>
                                     <Button
                                     color="dark"
+                                    key={p}
                                     onClick={() => {
                                         onRadioBtnClick(p);
                                         onPageClick(p)
