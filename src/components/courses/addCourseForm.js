@@ -6,7 +6,7 @@ import { v1 } from "uuid";
 const AddCourseForm = ({ firestore, courses }) => {
   const [name, setName] = useState("");
   const [longName, setLongName] = useState("");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("#D219AD");
   const [checkLetters, setCheckLetters] = useState("");
 
   const handleChangeName = e => {

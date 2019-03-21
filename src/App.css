@@ -137,7 +137,3 @@
 .mainContainer{
   min-height:calc(100vh - 95px);
 }
-
-.bodyColor{
-  background-color: RGB(251,251,251);
-}

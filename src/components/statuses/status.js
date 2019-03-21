@@ -58,10 +58,9 @@ const Status = ({ statuses, status, firestore, students, firebase }) => {
       storageRef
         .child(`studentsAvatar/${student.imageName}`)
         .delete()
-        .then(() => {})
-        .catch(err => {
-          alert(err);
-        });
+        .then(function() {})
+        .catch(function(error) {});
+
       firestore
         .collection("students")
         .doc(student.id)

@@ -70,7 +70,6 @@ const RegistrationForm = props => {
           "https://i.pinimg.com/originals/02/f3/87/02f38779c48e8880536a51c309227c8c.gif"
       };
       if (pathImage) {
-        debugger;
         const ref = props.firebase.storage().ref("studentsAvatar");
         const file = document.querySelector("#file").files[0];
         const name = +new Date() + "-" + file.name;
@@ -208,7 +207,7 @@ const RegistrationForm = props => {
                 onChange={hanldeSelectLesson}
               >
                 <option value={1} disabled>
-                  --choose Lesson--
+                  --Choose Lesson--
                 </option>
                 {props.courses &&
                   props.courses.map(course => (
@@ -233,7 +232,7 @@ const RegistrationForm = props => {
                 onChange={hanldeSelectKnowledge}
               >
                 <option value={1} disabled>
-                  --choose--
+                  --Choose knowledge--
                 </option>
                 <option>Beginner</option>
                 <option>Know basics some programming language</option>
@@ -256,7 +255,9 @@ const RegistrationForm = props => {
                 accept="image/x-png,image/gif,image/jpeg"
                 onChange={selectImage}
               />
-              <label htmlFor="file">Choose a file</label>
+              <div className="photo">
+                <label htmlFor="file">Choose a photo</label>
+              </div>
               <p className="clip">{pathImage}</p>
             </FormGroup>
 

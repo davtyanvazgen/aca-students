@@ -80,14 +80,14 @@ const AddStatusForm = ({ statuses, firestore }) => {
           size="sm"
           style={{ backgroundColor: `${background}`, border: "none" }}
         >
-          {name ? name : "Short status"}
+          {name ? name : "Short name"}
         </Button>
 
         <Button
           size="sm"
           style={{ backgroundColor: `${background}`, border: "none" }}
         >
-          {longName ? longName : "Long Status"}
+          {longName ? longName : "Long name"}
         </Button>
         <hr />
         <Button

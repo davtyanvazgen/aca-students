@@ -48,8 +48,9 @@ const StudentCard = props => {
     storageRef
       .child(`studentsAvatar/${student.imageName}`)
       .delete()
-      .then(function() {})
-      .catch(function(error) {});
+      .catch(function(error) {
+        alert(error.message);
+      });
 
     firestore
       .collection("students")

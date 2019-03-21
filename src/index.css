@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url("https://fonts.googleapis.com/css?family=Kreon");
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Josefin Sans";
+  background-color: RGB(251, 251, 251) !important;
+  font-family: "Kreon" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -26,7 +26,7 @@ const rrfProps = {
 const App = () => (
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <div className="bodyColor">
+      <div>
         <Router>
           <Switch>
             <Route path="/registration" component={RegistrationForm} />
