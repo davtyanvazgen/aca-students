@@ -47,6 +47,7 @@ const RegistrationForm = props => {
     let value = e.target.value;
     setpahtImage(value);
   }
+
   function handeleCreateStudent() {
     const id = v1();
     const date = new Date();
@@ -84,6 +85,9 @@ const RegistrationForm = props => {
               .collection("students")
               .doc(student.id)
               .set(student)
+              .then(() => {
+                toggleSuccess();
+              })
               .catch(err => {
                 alert(err.message);
               });
@@ -96,6 +100,9 @@ const RegistrationForm = props => {
           .collection("students")
           .doc(student.id)
           .set(student)
+          .then(() => {
+            toggleSuccess();
+          })
           .catch(err => {
             alert(err.message);
           });
@@ -266,7 +273,6 @@ const RegistrationForm = props => {
               block
               onClick={() => {
                 handeleCreateStudent();
-                toggleSuccess();
               }}
             >
               Registration

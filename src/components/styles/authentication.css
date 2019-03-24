@@ -9,7 +9,6 @@
 .miniContainer {
   width: 300px;
   margin: 20px auto;
-  border: "1px solid red";
 }
 
 .inputfile {
@@ -57,6 +56,10 @@
 }
 #regModalBody {
   width: 100%;
+}
+
+.regError {
+  color: red;
 }
 
 .photo {

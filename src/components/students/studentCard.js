@@ -122,7 +122,7 @@ const StudentCard = props => {
 
   function mouseover() {
     var element = document.getElementById(id);
-    element.style.border = "4px solid #245A81";
+    element.style.border = "2px solid #1680D6";
     element.style.backgroundColor = props.background;
   }
   function mouseout() {
@@ -131,6 +131,7 @@ const StudentCard = props => {
     element.style.borderRight = `5px solid ${currentStatus[0].color}`;
     element.style.borderLeft = `5px solid ${currentCourse[0].color}`;
     element.style.backgroundColor = props.background;
+    element.style.marginTop = "1px";
   }
   const id = student.id;
   return (
@@ -146,15 +147,15 @@ const StudentCard = props => {
         style={{
           borderRight: `5px solid ${currentStatus[0].color}`,
           borderLeft: `5px solid ${currentCourse[0].color}`,
-          backgroundColor: props.background
+          backgroundColor: props.background,
+          marginTop: "1px"
         }}
       >
         <Row>
           <Col xs="5" md="2" onClick={toggle}>
-            <Media
+            <div
               style={{ backgroundImage: `url(${student.url})` }}
               className="media"
-              object
             />
           </Col>
 
