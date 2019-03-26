@@ -135,7 +135,7 @@ const RegistrationForm = props => {
 
     let knowledgeErrors;
     if (!knowledge) {
-      setKnowledgeValidationErrors("choose your level ");
+      setKnowledgeValidationErrors("Choose your level");
       knowledgeErrors = false;
     } else {
       setKnowledgeValidationErrors("");
@@ -144,7 +144,7 @@ const RegistrationForm = props => {
 
     let courseErrors;
     if (!selectedCourse) {
-      setSelectCourseValidationErrors("choose Lesson");
+      setSelectCourseValidationErrors("Choose Lesson");
       courseErrors = false;
     } else {
       setSelectCourseValidationErrors("");
@@ -195,7 +195,7 @@ const RegistrationForm = props => {
               <Label for="examplePassword">Phone</Label>
               <Input
                 {...phone}
-                placeholder="+374-00-00-00-00"
+                placeholder="+374-XX-XX-XX-XX"
                 type="text"
                 name="phone"
               />
@@ -230,7 +230,7 @@ const RegistrationForm = props => {
             </FormGroup>
 
             <FormGroup>
-              <Label>It knowledge Level</Label>
+              <Label>Knowledge Level</Label>
               <Input
                 defaultValue={1}
                 type="select"
@@ -242,8 +242,8 @@ const RegistrationForm = props => {
                   --Choose knowledge--
                 </option>
                 <option>Beginner</option>
-                <option>Know basics some programming language</option>
-                <option>Know enough some programming language</option>
+                <option>Know basics of any programming language</option>
+                <option>Know enough of any programming language</option>
                 <option>
                   Good at some programming language and have experience
                 </option>
@@ -263,7 +263,7 @@ const RegistrationForm = props => {
                 onChange={selectImage}
               />
               <div className="photo">
-                <label htmlFor="file">Choose a photo</label>
+                <label htmlFor="file">Upload image</label>
               </div>
               <p className="clip">{pathImage}</p>
             </FormGroup>

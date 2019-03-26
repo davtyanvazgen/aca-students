@@ -61,14 +61,14 @@ const AddStatusForm = ({ statuses, firestore }) => {
             )}
             <Input
               type="text"
-              placeholder="Enter short name of status"
+              placeholder="Enter short name"
               value={name}
               onChange={handleChangeName}
             />
             <Label>Long name</Label>
             <Input
               type="text"
-              placeholder="Enter long name of status"
+              placeholder="Enter long name"
               value={longName}
               onChange={handleChangeLongName}
             />

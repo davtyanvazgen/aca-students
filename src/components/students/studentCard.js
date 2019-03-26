@@ -24,14 +24,13 @@ const StudentCard = props => {
   const [isOpenCourse, setIsOpenCourse] = useState(false);
   const [collapse, setcollapse] = useState(false);
   const [modal, setModal] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [currentStatus, setCurrentStatus] = useState(
     statuses.filter(status => status.id === student.status)
   );
   const [currentCourse, setCurrentCourse] = useState(
     courses.filter(course => course.id === student.course)
   );
-
-  const [modalEdit, setModalEdit] = useState(false);
 
   function toggle() {
     setcollapse(!collapse);
@@ -81,6 +80,7 @@ const StudentCard = props => {
       .catch(err => {
         alert(err.message);
       });
+    mouseout();
   }
 
   function handleSelectStatusChange(e) {
@@ -99,6 +99,7 @@ const StudentCard = props => {
       .catch(err => {
         alert(err.message);
       });
+    mouseout();
   }
 
   function toggleStatus() {

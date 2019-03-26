@@ -19,6 +19,21 @@ const AddCourseForm = ({ firestore, courses }) => {
 
   const generateColor = () => {
     const colors = [
+      "#F2C94C",
+      "#F2994A",
+      "#EB5757",
+      "#E44D26",
+      "#4AC29A",
+      "#E29587",
+      "#D66D75",
+      "#cbb4d4",
+      "#C33764",
+      "#34e89e",
+      "#6190E8",
+      "#44A08D",
+      "#6f0000",
+      "#237A57",
+      "#093028",
       "#001f3f",
       "#0074D9",
       "#7FDBFF",
