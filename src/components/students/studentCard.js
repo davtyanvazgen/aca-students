@@ -37,10 +37,6 @@ const StudentCard = props => {
     setcollapse(!collapse);
   }
 
-  const toggleEdit = () => {
-    setModalEdit(!modalEdit);
-  };
-
   function handleRemove() {
     const storage = props.firebase.storage();
     const storageRef = storage.ref();
@@ -111,9 +107,13 @@ const StudentCard = props => {
   function toggleCourse() {
     setIsOpenCourse(!isOpenCourse);
   }
-
   function toggleDeleteStudent() {
     setModal(!modal);
+    mouseout(id);
+  }
+  function toggleEdit() {
+    setModalEdit(!modalEdit);
+    mouseout(id);
   }
 
   const appData = `App date: ${student.date
