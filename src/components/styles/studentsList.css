@@ -71,6 +71,7 @@
 .registerDate {
   margin-bottom: 0rem;
   font-size: 14px;
+  color: rgb(62, 16, 122);
 }
 
 .dropRow {
@@ -141,4 +142,8 @@
 .studentsContainer {
   min-height: 500px;
   border: 1px solid #ddd;
+}
+
+.info {
+  color: rgb(14, 16, 168);
 }

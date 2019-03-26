@@ -9,7 +9,6 @@ import { faUserTimes, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import DeleteStudentModal from "./deleteStudentModal";
 import {
   ListGroupItem,
-  Media,
   Row,
   Col,
   ButtonDropdown,
@@ -45,12 +44,14 @@ const StudentCard = props => {
   function handleRemove() {
     const storage = props.firebase.storage();
     const storageRef = storage.ref();
-    storageRef
-      .child(`studentsAvatar/${student.imageName}`)
-      .delete()
-      .catch(function(error) {
-        alert(error.message);
-      });
+    if (student.imageName !== undefined) {
+      storageRef
+        .child(`studentsAvatar/${student.imageName}`)
+        .delete()
+        .catch(function(error) {
+          alert(error.message);
+        });
+    }
 
     firestore
       .collection("students")
@@ -122,7 +123,7 @@ const StudentCard = props => {
 
   function mouseover() {
     var element = document.getElementById(id);
-    element.style.border = "2px solid #1680D6";
+    element.style.border = "2px solid grey";
     element.style.backgroundColor = props.background;
   }
   function mouseout() {
@@ -244,17 +245,17 @@ const StudentCard = props => {
           <hr />
           <Row>
             <Col xs="12" md="4" className="center">
-              <span>Email: </span>
+              <span className="info">Email: </span>
               <br />
               {student.email}
             </Col>
             <Col xs="12" md="2" className="center">
-              <span>Phone: </span>
+              <span className="info">Phone: </span>
               <br />
               {student.phone}
             </Col>
             <Col xs="12" md="6" className="center">
-              <span>Knowledge: </span>
+              <span className="info">Knowledge: </span>
               <br />
               {student.knowledge}
             </Col>
@@ -262,7 +263,7 @@ const StudentCard = props => {
           <hr />
           <Row>
             <Col className="center">
-              <span>Comment: </span>
+              <span className="info">Comment: </span>
               {student.comment}
             </Col>
           </Row>
