@@ -16,7 +16,7 @@ class DeleteStudentModal extends React.Component {
             <img src={ednaStDel} alt="edna" style={{ width: "100%" }} />
           </ModalHeader>
           <ModalBody>
-            You want to delete <b>{student}</b>
+            <b>{student}</b> will be deleted !
           </ModalBody>
           <ModalFooter>
             <Button color="danger" onClick={handleRemove}>
